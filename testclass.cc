@@ -1,4 +1,0 @@
-
-class tempClass {
-    int t;
-};

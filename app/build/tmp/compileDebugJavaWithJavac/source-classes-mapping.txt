@@ -1,0 +1,11 @@
+com/example/quizza/MainActivity.java
+ com.example.quizza.MainActivity
+com/example/quizza/BuildConfig.java
+ com.example.quizza.BuildConfig
+com/example/quizza/signUpPage.java
+ com.example.quizza.signUpPage
+com/example/quizza/loginPage.java
+ com.example.quizza.loginPage
+com/example/quizza/SplashScreen.java
+ com.example.quizza.SplashScreen
+ com.example.quizza.SplashScreen$1

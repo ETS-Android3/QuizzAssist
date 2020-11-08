@@ -5,12 +5,22 @@
     <string name="User">Username</string>
     <string name="Pass">Password</string>
     <string name="login">Sign IN</string>
+    <string name="createdClass">Class Successfully Created!</string>
+    <string name="inviteCode">Your unique invite code is:</string>
     <string name="signup">Sign UP</string>
+    <string name="wordPrivate">Private</string>
+    <string name="wordPublic">Public</string>
+    <string name="className">Enter Class Name</string>
+    <string name="continueToNext">Continue</string>
+    <string name="createClass">Create Class</string>
+    <string name="searchTitle">Search Course</string>
+    <string name="userOption">What would you like to do?</string>
+    <string name="createA_Class">Create a Class</string>
+    <string name="joinA_Class">Join a Class</string>
 
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="logout">Log Out</string>
-
 
 
 </resources>

@@ -14,12 +14,12 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         startActivity(new Intent(getApplicationContext(), loginPage.class));
-//        Button getStartedButton = (Button) findViewById(R.id.getStartedButton);
-//        getStartedButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), loginPage.class));
-//            }
-//        });
+        Button getStartedButton = (Button) findViewById(R.id.getStartedButton);
+        getStartedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), loginPage.class));
+            }
+        });
     }
 }

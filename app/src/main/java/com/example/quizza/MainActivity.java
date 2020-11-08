@@ -11,14 +11,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button mlogout;
+    Button mLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mlogout = (Button) findViewById(R.id.bt_logout);
+        mLogout = (Button) findViewById(R.id.bt_logout);
 
     }
 

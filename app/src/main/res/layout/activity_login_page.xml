@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".loginPage"
-    android:background="@color/splashScreen">
+    android:background="@color/appBackgroundColor">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -32,11 +32,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/bt_login"/>
             android:layout_below="@id/tv_password"
             android:layout_margin="5dp"
             android:layout_centerHorizontal="true"
             android:text="@string/login"
-            android:id="@+id/bt_login"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

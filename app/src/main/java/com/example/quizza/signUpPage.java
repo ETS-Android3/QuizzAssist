@@ -44,10 +44,7 @@ public class signUpPage extends AppCompatActivity {
             }
         });
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
+
 
         fAuth = FirebaseAuth.getInstance();
 

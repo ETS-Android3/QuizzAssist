@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class loginPage extends AppCompatActivity {
 
-    Button bt_login, bt_signup;
+    Button bt_login, signup;
     EditText et_user, et_pass;
     ProgressBar mProgressBar;
     FirebaseAuth fAuth;
@@ -35,13 +35,18 @@ public class loginPage extends AppCompatActivity {
         bt_login = (Button) findViewById(R.id.bt_login);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
 
-        bt_signup= (Button) findViewById(R.id.bt_signup);
-        bt_signup.setOnClickListener(new View.OnClickListener() {
+        signup= (Button) findViewById(R.id.bt_signup);
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), signUpPage.class ));
             }
         });
+
+        if(fAuth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +74,7 @@ public class loginPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(loginPage.this, "Login Succesful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(loginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                         else{

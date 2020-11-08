@@ -2,4 +2,15 @@
     <string name="appName">QuizzAssist</string>
     <string name="appSlogan">Exams Made Easy</string>
     <string name="getStarted">Get Started</string>
+    <string name="User">Username</string>
+    <string name="Pass">Password</string>
+    <string name="login">Sign IN</string>
+    <string name="signup">Sign UP</string>
+
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="logout">Log Out</string>
+
+
+
 </resources>

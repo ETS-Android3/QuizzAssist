@@ -1,17 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginPage">
+    tools:context=".loginPage"
+    android:background="@color/splashScreen">
 
-    <TextView
-        android:id="@+id/textView"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello world"
-        tools:layout_editor_absoluteX="209dp"
-        tools:layout_editor_absoluteY="332dp"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_centerInParent="true">
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:hint="@string/User"
+            android:id="@+id/tv_username"
+            android:background="@drawable/edit_bg"
+            android:layout_margin="5dp"/>
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:hint="@string/Pass"
+            android:id="@+id/tv_password"
+            android:layout_below="@id/tv_username"
+            android:background="@drawable/edit_bg"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_password"
+            android:layout_margin="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/login"
+            android:id="@+id/bt_login"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bt_login"
+            android:layout_margin="2dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/signup"
+            android:id="@+id/bt_signup"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bt_signup"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:id="@+id/progressBar2"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

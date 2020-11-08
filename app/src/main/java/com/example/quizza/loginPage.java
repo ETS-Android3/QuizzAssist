@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,15 +25,19 @@ public class loginPage extends AppCompatActivity {
     EditText et_user, et_pass;
     ProgressBar mProgressBar;
     FirebaseAuth fAuth;
+    RelativeLayout rellay1, rellay2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        rellay1 = (RelativeLayout) findViewById(R.id.relat1);
+        rellay2 = (RelativeLayout) findViewById(R.id.relat2);
         et_user = (EditText) findViewById(R.id.tv_username);
         et_pass = (EditText) findViewById(R.id.tv_password);
         fAuth = FirebaseAuth.getInstance();
+        Handler handler = new Handler();
         bt_login = (Button) findViewById(R.id.bt_login);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
 
@@ -43,10 +49,21 @@ public class loginPage extends AppCompatActivity {
             }
         });
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if(fAuth.getCurrentUser() != null){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+                rellay1.setVisibility(View.VISIBLE);
+                rellay2.setVisibility(View.VISIBLE);
+            }
+        };
+        handler.postDelayed(runnable, 2000);
+
+
+
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override

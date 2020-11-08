@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "475686393015",
+    "firebase_url": "https://quizzassist.firebaseio.com",
+    "project_id": "quizzassist",
+    "storage_bucket": "quizzassist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475686393015:android:faa8ebfc8bb0e252dda932",
+        "android_client_info": {
+          "package_name": "com.example.quizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475686393015-dgiemnah7mdfk7s03h0472fphffactpk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDUd4vE1NV8zBVLBKWW9Ov6VKmKI6PCzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475686393015-dgiemnah7mdfk7s03h0472fphffactpk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

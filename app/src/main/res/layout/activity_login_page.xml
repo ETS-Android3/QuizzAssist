@@ -48,7 +48,8 @@
                 android:background="@drawable/edit_bg"
                 android:layout_margin="10dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"/>
+                android:textColorHint="@color/black"
+                android:inputType="textPassword"/>
 
             <Button
                 android:layout_width="wrap_content"

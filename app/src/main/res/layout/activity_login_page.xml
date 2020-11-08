@@ -31,20 +31,24 @@
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:hint="@string/User"
+                android:padding="10dp"
                 android:id="@+id/tv_username"
                 android:background="@drawable/edit_bg"
                 android:layout_margin="10dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"/>
 
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:hint="@string/Pass"
+                android:padding="10dp"
                 android:id="@+id/tv_password"
                 android:layout_below="@id/tv_username"
                 android:background="@drawable/edit_bg"
                 android:layout_margin="10dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -54,6 +58,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/login"
                 android:id="@+id/bt_login"/>
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

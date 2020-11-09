@@ -1,25 +1,27 @@
+/***
+ * MainAcitivity.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class is strictly to provide developers with a testing unit for application functionality
+ * regarding creating (adding) and deleting courses from their enrolled/owned list, displaying
+ * user information (tests Firebase Database data retrieval), and logout functionality.
+ * Some features may not be fully implemented, but will be updated as collaborative team decisions
+ * have been made.
+ * No known bugs.
+ */
+
+
 package com.example.quizza;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,55 +29,51 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button mlogout, addCourses, deleteCourses;
-    TextView userInfo1, userInfo2, courseDetails;
-    EditText courseInfo;
+    Button logoutButton;
+    Button addCoursesButton;
+    Button deleteCoursesButton;
+    TextView userName;
+    TextView userEmail;
+    TextView courseDetails;
+    EditText userInputtedCourseName;
     FirebaseAuth fAuth;
-    User user1 = null;
-    DatabaseReference mDatabase;
-    //private DatabaseReference mDatabase;
+    User currentUser;
+    DatabaseReference currentDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mlogout = (Button) findViewById(R.id.bt_logout);
-        addCourses = (Button) findViewById(R.id.addCourse);
+        logoutButton = (Button) findViewById(R.id.bt_logout);
+        addCoursesButton = (Button) findViewById(R.id.addCourse);
+        deleteCoursesButton = (Button) findViewById(R.id.deleteCourse);
         courseDetails = (TextView) findViewById(R.id.courseDetails);
-        deleteCourses = (Button) findViewById(R.id.deleteCourse);
-        courseInfo = (EditText) findViewById(R.id.courseInfo);
+        userInputtedCourseName = (EditText) findViewById(R.id.courseInfo);
 
-        userInfo1 = (TextView) findViewById(R.id.userInfo1);
-        userInfo2 = (TextView) findViewById(R.id.userInfo2);
+        userName = (TextView) findViewById(R.id.userInfo1);
+        userEmail = (TextView) findViewById(R.id.userInfo2);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
+        currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        currentDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item_snapshot:snapshot.getChildren()){
-                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                        user1 = item_snapshot.getValue(User.class);
+                for (DataSnapshot item_snapshot:snapshot.getChildren()) {
+                    if (item_snapshot.getKey().equals
+                            (FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        currentUser = item_snapshot.getValue(User.class);
                         MainActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                userInfo1.setText(user1.getName());
-                                userInfo2.setText(fAuth.getInstance().getCurrentUser().getEmail());
+                                userName.setText(currentUser.getName());
+                                userEmail.setText(fAuth.getInstance().getCurrentUser().getEmail());
                             }
                         });
-
                     }
                 }
             }
@@ -86,22 +84,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        addCourses.setOnClickListener(new View.OnClickListener() {
+        addCoursesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String courseName = courseInfo.getText().toString();
-                Integer courseID = 276;
-                if(!(user1 == null)){
-                    Course course1 = new Course(courseName, user1, courseID);
-                    mDatabase = FirebaseDatabase.getInstance().getReference();
-                    mDatabase.child("Courses").push().setValue(course1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                String courseName = userInputtedCourseName.getText().toString();
+                Integer courseID = 276; //testing value
+                if (!(currentUser == null)) {
+                    Course course1 = new Course(courseName, currentUser, courseID);
+                    currentDatabaseReference = FirebaseDatabase.getInstance().getReference();
+                    currentDatabaseReference.child("Courses").push().setValue(course1)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 courseDetails.setText(course1.getCourseName());
-                            }
-                            else{
-                                Toast.makeText(MainActivity.this, "Error occured in adding class", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Error occurred in adding class",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -109,13 +108,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        deleteCourses.setOnClickListener(new View.OnClickListener() {
+        deleteCoursesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
             }
         });
-
-
     }
 
     public void logout(View view){
@@ -123,5 +121,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), loginPage.class));
         finish();
     }
-
 }

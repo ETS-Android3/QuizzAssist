@@ -1,3 +1,11 @@
+/***
+ * Course.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class has been newly created to manage the courses that users of application create.
+ * No known bugs.
+ */
+
 package com.example.quizza;
 
 import java.util.ArrayList;
@@ -9,9 +17,7 @@ public class Course {
     User courseOwner;
     private List<String> userEnrolled = new ArrayList<>();
 
-    public Course(){
-        //required empty constructor
-    }
+    public Course(){}
 
     Course (String course_Name, User course_Owner, Integer course_ID) {
         this.courseID = course_ID;
@@ -25,14 +31,6 @@ public class Course {
 
     public int getCourseID() {
         return this.courseID;
-    }
-
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
     }
 
     public void setCourseOwner(User courseOwner) {
@@ -51,14 +49,7 @@ public class Course {
         return this.courseOwner.getName();
     }
 
-    public Boolean isOwner(User user){
-        if (user == courseOwner){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public boolean isOwner(User user) {
+        return (user == this.courseOwner) ? true : false;
     }
-
-
 }

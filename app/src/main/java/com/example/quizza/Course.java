@@ -13,7 +13,7 @@ public class Course {
         //required empty constructor
     }
 
-    Course (String course_Name, User course_Owner, int course_ID) {
+    Course (String course_Name, User course_Owner, Integer course_ID) {
         this.courseID = course_ID;
         this.courseName = course_Name;
         this.courseOwner = course_Owner;

@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 Integer courseID = 276;
                 if(!(user1 == null)){
                     Course course1 = new Course(courseName, user1, courseID);
-                    mDatabase = FirebaseDatabase.getInstance().getReference("Courses");
-                    mDatabase.setValue(course1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.child("Courses").push().setValue(course1).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
         deleteCourses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
             }
         });

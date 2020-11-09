@@ -13,11 +13,12 @@
         android:layout_centerHorizontal="true">
 
         <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/canvasCustom"
             android:layout_margin="20dp"
             android:background="@color/white"
+            android:src="@drawable/logo"
             android:layout_centerHorizontal="true"/>
 
         <Button

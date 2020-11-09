@@ -10,6 +10,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/joinOrCreate"
+            android:layout_centerInParent="true"
+            android:visibility="invisible">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/createBt"
+                android:text="@string/createA_Class"
+                android:layout_margin="10dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/joinBt"
+                android:layout_below="@+id/createBt"
+                android:text="@string/joinA_Class"
+                android:layout_margin="10dp"/>
+
+
+        </RelativeLayout>
+
         <Button
             android:id="@+id/createOrJoinButton"
             android:layout_width="75dp"
@@ -18,7 +44,7 @@
             android:layout_marginRight="80dp"
             android:layout_marginTop="650dp"
             android:foreground="@drawable/ic_add"
-            android:background="@drawable/circle"></Button>
+            android:background="@drawable/circle"/>
 
         <Button
             android:id="@+id/settingsButton"
@@ -27,7 +53,16 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:foreground="@drawable/ic_settings"
-            android:background="@drawable/circle"></Button>
+            android:background="@drawable/circle"/>
 
     </RelativeLayout>
+
+
+    <Button
+        style="@style/SmallButtons"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:foreground="@drawable/ic_backarrow"
+        android:id="@+id/backBt"
+        android:layout_alignParentTop="true"/>
 </RelativeLayout>

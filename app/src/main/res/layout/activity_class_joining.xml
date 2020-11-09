@@ -1,9 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClassJoining">
+    tools:context=".ClassJoining"
+    android:background="@color/appBackgroundColor">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/joinA_Class"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            android:id="@+id/joinTitle"
+            android:layout_marginBottom="75dp"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/classCode"
+            android:layout_below="@id/joinTitle"
+            android:hint="@string/classCode"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@drawable/edit_bg"
+            android:layout_margin="30dp"
+            android:padding="10dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/joinButton"
+            android:layout_below="@id/classCode"
+            android:text="@string/joinA_Class"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"/>
+
+
+    </RelativeLayout>
+
+    <Button
+        style="@style/SmallButtons"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:foreground="@drawable/ic_backarrow"
+        android:id="@+id/backBt"
+        android:layout_alignParentTop="true"/>
+
+
+
+
+
+</RelativeLayout>

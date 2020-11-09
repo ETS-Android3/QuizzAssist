@@ -18,6 +18,9 @@
     <string name="createA_Class">Create a Class</string>
     <string name="joinA_Class">Join a Class</string>
 
+    <string name="classCode">Please enter the code to join the class</string>
+
+    <string name="Home">Home Page</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="logout">Log Out</string>

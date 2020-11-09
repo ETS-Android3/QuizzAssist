@@ -15,9 +15,7 @@
         <activity android:name=".CreatedClass"></activity>
         <activity android:name=".HomePage" />
         <activity android:name=".ClassJoining" />
-        <activity
-            android:name=".ClassCreation"
-            android:parentActivityName=".CreateOrJoinClass" />
+        <activity android:name =".ClassCreation"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".CreateOrJoinClass" />
         <activity android:name=".signUpPage" />

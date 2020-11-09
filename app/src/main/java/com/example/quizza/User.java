@@ -1,3 +1,17 @@
+/***
+ * Course.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class is used to store user information when an account is created from the sign-up page,
+ * which will then be stored on the Firebase Database. Each user will have a list of courses that
+ * they have created and a list of courses that they have enrolled in (courses that have been
+ * created by other users). This class provides functionality for the genereic expected
+ * methods for a User class, such as setting/retrieving name and email, and retrieving lists of
+ * courses that they are a part of. Passwords are not saved here for security reasons.
+ * No known bugs.
+ */
+
+
 package com.example.quizza;
 
 import java.util.ArrayList;

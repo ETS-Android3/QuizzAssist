@@ -1,3 +1,12 @@
+
+/***
+ * Course.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class has been newly created to manage the courses that users of application create.
+ * No known bugs.
+ */
+
 package com.example.quizza;
 
 import java.util.ArrayList;

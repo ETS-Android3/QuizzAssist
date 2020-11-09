@@ -1,3 +1,16 @@
+/***
+ * loginPage.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class handles the login page of the QuizzAssist application. Functionality such as
+ * linking various buttons and text, providing functionality for said buttons, and storing users
+ * entered information on the Firebase Database. Generic user input checking (currently not very
+ * elaborated).
+ * Features to implement: Better checking for user input (more sophisticated passwords,
+ * valid email checking) UI enhancements (back button border improvement, text font improvements)
+ * No known bugs.
+ */
+
 package com.example.quizza;
 
 import androidx.annotation.NonNull;

@@ -69,7 +69,7 @@ public class loginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = et_user.getText().toString();
-                String password = et_pass.getText().toString();
+                final String password = et_pass.getText().toString();
 
                 if(TextUtils.isEmpty(email)){
                     et_user.setError("Email is Required");

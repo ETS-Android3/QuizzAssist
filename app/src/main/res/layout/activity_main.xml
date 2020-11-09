@@ -30,6 +30,65 @@
             android:text="@string/logout"
             android:onClick="logout" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bt_logout"
+            android:textSize="25sp"
+            android:id="@+id/userInfo1"
+            android:text="User Information"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userInfo1"
+            android:textSize="25sp"
+            android:id="@+id/userInfo2"
+            android:text="User Information"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userInfo2"
+            android:id="@+id/courseInfo"
+            android:hint="Course name to add"
+            android:textColorHint="@color/black"
+            android:textSize="25sp"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/courseInfo"
+            android:layout_margin="10dp"
+            android:id="@+id/addCourse"
+            android:text="Add Course"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/addCourse"
+            android:layout_below="@id/courseInfo"
+            android:layout_margin="10dp"
+            android:id="@+id/deleteCourse"
+            android:text="Delete Course"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/courseDetails"
+            android:layout_below="@id/addCourse"
+            android:textSize="30sp"
+            android:text="CMPT275"
+            android:layout_centerHorizontal="true"/>
+
+
     </RelativeLayout>
 
 

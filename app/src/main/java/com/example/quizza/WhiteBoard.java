@@ -2,6 +2,7 @@ package com.example.quizza;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -34,6 +38,9 @@ public class WhiteBoard extends AppCompatActivity {
     private View WhiteBoard;
     private ImageView imageView;
 
+    private StorageReference mStorageRef;
+    private Uri filePath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,8 @@ public class WhiteBoard extends AppCompatActivity {
         WhiteBoard = findViewById(R.id.WhiteBoard);
         imageView = (ImageView) findViewById(R.id.imageView);
         Button bt_submit = (Button) findViewById(R.id.bt_submit);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
         bt_submit.setOnClickListener(new View.OnClickListener() {
@@ -50,14 +59,17 @@ public class WhiteBoard extends AppCompatActivity {
                 imageView.setImageBitmap(b);
                 WhiteBoard.setBackgroundColor(Color.parseColor("#999999"));
 
-
                 OutputStream fOut = null;
                 Integer counter = 0;
 
                 try {
                     File file = new File(getExternalFilesDir(null), "BigPP" + counter + ".jpg");
+                    Uri myUri = Uri.fromFile(file);
+                    StorageReference riversRef = mStorageRef.child("BigPP" + counter + ".jpg");
+                    riversRef.putFile(myUri);
                     if (!file.exists())
                         file.createNewFile();
+
                     try {
                         fOut = new FileOutputStream(file);
                         b.compress(Bitmap.CompressFormat.PNG, 100, fOut);
@@ -66,6 +78,7 @@ public class WhiteBoard extends AppCompatActivity {
                     }
                 } catch(Exception e){
                 }
+
 
 
             }

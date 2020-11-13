@@ -1631,7 +1631,7 @@ id ALT
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
-id CreateClass
+id CreateClassButton
 id FUNCTION
 id META
 id NO_DEBUG
@@ -1714,6 +1714,7 @@ id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
 id backBt
+id backButton
 id backToLogin
 id barrier
 id baseline
@@ -1743,10 +1744,7 @@ id chip2
 id chip3
 id chip_group
 id chronometer
-id classCode
-id className
-id classSetting_Private
-id classSetting_Public
+id classCodeEditText
 id classSuccessfullyCreatedText
 id clear_text
 id clip_horizontal
@@ -1763,9 +1761,12 @@ id courseDetails
 id courseInfo
 id createBt
 id createClassButton
+id createClassNameEditText
+id createClassPage
 id createOrJoinButton
-id createOrJoinClass
+id createOrJoinClassPage
 id createOrJoinText
+id createdClassPage
 id custom
 id customPanel
 id cut
@@ -1832,6 +1833,7 @@ id hideable
 id home
 id homeAsUp
 id homeBt
+id homePage
 id honorRequest
 id icon
 id icon_group
@@ -1846,10 +1848,10 @@ id inviteCodeHelperText
 id italic
 id item_touch_helper_previous_elevation
 id joinBt
-id joinButton
 id joinClassButton
-id joinOrCreate
-id joinTitle
+id joinClassPage
+id joinClassText
+id joinOrCreateFragment
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -1863,6 +1865,7 @@ id linear
 id listMode
 id list_item
 id logo
+id logoPage
 id masked
 id message
 id middle
@@ -1921,6 +1924,8 @@ id percent
 id pin
 id position
 id postLayout
+id privacySetting_Private
+id privacySetting_Public
 id privateText
 id progressBar
 id progressBar2
@@ -1966,6 +1971,8 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id signUpPage
+id signupTitle
 id sin
 id skipCollapsed
 id slide
@@ -1975,7 +1982,7 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
-id splashScreen
+id splashPage
 id spline
 id split_action_bar
 id spread
@@ -2007,6 +2014,7 @@ id test_checkbox_android_button_tint
 id test_checkbox_app_button_tint
 id test_radiobutton_android_button_tint
 id test_radiobutton_app_button_tint
+id testingPage
 id text
 id text2
 id textEnd
@@ -2044,7 +2052,6 @@ id uniform
 id unlabeled
 id up
 id useLogo
-id userEnteredClassName
 id userInfo1
 id userInfo2
 id view_offset_helper
@@ -2196,7 +2203,6 @@ layout text_view_without_line_height
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
-string Home
 string Pass
 string User
 string abc_action_bar_home_description
@@ -2235,7 +2241,6 @@ string character_counter_overflowed_content_description
 string character_counter_pattern
 string chip_text
 string classCode
-string className
 string clear_text_end_icon_content_description
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
@@ -2255,10 +2260,10 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
-string continueToNext
-string createA_Class
-string createClass
-string createdClass
+string continueToNextButtonText
+string createClassButtonText
+string createClassNameEditTextHint
+string createClassSuccessText
 string default_web_client_id
 string email
 string error_icon_content_description
@@ -2267,18 +2272,16 @@ string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string firebase_database_url
 string gcm_defaultSenderId
-string getStarted
+string getStartedButtonText
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
-string inviteCode
+string inviteCodeHelperText
 string item_view_role_description
-string joinA_Class
 string login
-string logout
 string material_slider_range_end
 string material_slider_range_start
 string mtrl_badge_numberless_content_description
@@ -2325,9 +2328,15 @@ string path_password_strike_through
 string project_id
 string searchTitle
 string search_menu_title
-string signup
+string signUpButtonText
 string status_bar_notification_info_overflow
+string test_addCourseButtonText
+string test_deleteCourseButtonText
+string test_homePageButtonText
+string test_logOutButtonText
 string userOption
+string userOption_CreateClass
+string userOption_joinClass
 string wordPrivate
 string wordPublic
 style AlertDialog_AppCompat
@@ -2558,6 +2567,7 @@ style Buttons
 style CardView
 style CardView_Dark
 style CardView_Light
+style EditTextStandard
 style EmptyTheme
 style GenericText
 style HeaderText
@@ -3027,6 +3037,9 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
+style centerVerticalAndHorizontal
+style matchParentHeightAndWidth
+style wrapHeightAndWidth
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth

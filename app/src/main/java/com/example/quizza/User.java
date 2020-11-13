@@ -11,7 +11,6 @@
  * No known bugs.
  */
 
-
 package com.example.quizza;
 
 import java.util.ArrayList;
@@ -24,14 +23,13 @@ public class User {
     private List<String> enrolledCourses = new ArrayList<>();
 
 
-    public User(){
+    public User() {
         this.name = "Default";
-        this.createdCourses = new ArrayList<>();
+        this.email = "noemail@unspecified.com";
     }
 
-    public User(String name){
+    public User(String name) {
         this.name = name;
-        this.createdCourses = new ArrayList<>();
     }
 
     public User(String userName, String userEmail) {

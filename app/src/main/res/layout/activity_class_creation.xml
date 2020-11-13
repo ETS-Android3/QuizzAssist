@@ -2,88 +2,71 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/appBackgroundColor"
-    tools:context=".ClassCreation">
+    tools:context=".ClassCreation"
 
+    android:id="@+id/createClassPage"
+    style="@style/matchParentHeightAndWidth"
+    android:background="@color/appBackgroundColor">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/wrapHeightAndWidth"
         android:layout_centerInParent="true">
 
-        <TextView
-            android:id="@+id/className"
-            style="@style/GenericText"
-            android:text="@string/className"
-            android:textSize="30sp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_centerHorizontal="true"/>
-
         <EditText
-            android:id="@+id/userEnteredClassName"
-            android:background="@drawable/btn_bg"
-            android:layout_below="@+id/className"
-            android:layout_height="75dp"
-            android:layout_width="250dp"
+            android:id="@+id/createClassNameEditText"
+            style="@style/EditTextStandard"
+            android:layout_marginTop="100dp"
             android:layout_marginBottom="20dp"
-            android:layout_centerHorizontal="true"/>
+            android:hint="@string/createClassNameEditTextHint" />
 
         <RadioButton
-            android:id="@+id/classSetting_Private"
-            android:layout_below="@+id/userEnteredClassName"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:id="@+id/privacySetting_Private"
+            style="@style/wrapHeightAndWidth"
+            android:layout_below="@+id/createClassNameEditText"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="-10dp"
             android:layout_marginBottom="-10dp" />
 
         <RadioButton
-            android:id="@+id/classSetting_Public"
-            android:layout_below="@+id/classSetting_Private"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:id="@+id/privacySetting_Public"
+            style="@style/wrapHeightAndWidth"
+            android:layout_below="@+id/privacySetting_Private"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="-10dp" />
 
         <TextView
             android:id="@+id/privateText"
             style="@style/GenericText"
+            android:layout_below="@id/createClassNameEditText"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/privacySetting_Private"
             android:text="@string/wordPrivate"
-            android:textSize="20sp"
-            android:layout_toEndOf="@id/classSetting_Private"
-            android:layout_below="@id/userEnteredClassName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/publicText"
             style="@style/GenericText"
+            android:layout_below="@id/privacySetting_Private"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/privacySetting_Public"
             android:text="@string/wordPublic"
-            android:textSize="20sp"
-            android:layout_toEndOf="@id/classSetting_Public"
-            android:layout_below="@id/classSetting_Private"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:textSize="20sp" />
 
         <Button
+            android:id="@+id/CreateClassButton"
             style="@style/Buttons"
-            android:id="@+id/CreateClass"
-            android:text="@string/createClass"
-            android:layout_below="@id/classSetting_Public"
+            android:layout_below="@id/privacySetting_Public"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="50dp"
+            android:text="@string/createClassButtonText" />
 
     </RelativeLayout>
 
     <Button
+        android:id="@+id/backButton"
         style="@style/SmallButtons"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:foreground="@drawable/ic_backarrow"
-        android:id="@+id/backBt"/>
+        android:foreground="@drawable/ic_backarrow" />
+
 </RelativeLayout>

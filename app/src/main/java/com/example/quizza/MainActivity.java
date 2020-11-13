@@ -38,11 +38,13 @@ public class MainActivity extends AppCompatActivity {
     Button logoutButton;
     Button addCoursesButton;
     Button deleteCoursesButton;
-    Button homeBt;
+    Button homeButton;
+
     TextView userName;
     TextView userEmail;
     TextView courseDetails;
     EditText userInputtedCourseName;
+
     FirebaseAuth fAuth;
     User currentUser;
     DatabaseReference currentDatabaseReference;
@@ -57,12 +59,14 @@ public class MainActivity extends AppCompatActivity {
         deleteCoursesButton = (Button) findViewById(R.id.deleteCourse);
         courseDetails = (TextView) findViewById(R.id.courseDetails);
         userInputtedCourseName = (EditText) findViewById(R.id.courseInfo);
-        homeBt = (Button) findViewById(R.id.homeBt);
+        homeButton = (Button) findViewById(R.id.homeBt);
 
         userName = (TextView) findViewById(R.id.userInfo1);
         userEmail = (TextView) findViewById(R.id.userInfo2);
 
-        homeBt.setOnClickListener(new View.OnClickListener() {
+        String addClassFail = "Error occurred in adding class";
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), HomePage.class));
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                //not done
             }
         });
 
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         courseDetails.setText(course1.getCourseName());
                                     } else {
-                                        Toast.makeText(MainActivity.this, "Error occurred in adding class",
+                                        Toast.makeText(MainActivity.this, addClassFail,
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -122,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         deleteCoursesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //not done
             }
         });
     }

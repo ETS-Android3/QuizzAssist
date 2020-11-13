@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/createdClassPage"
+    style="@style/matchParentHeightAndWidth"
     android:background="@color/appBackgroundColor">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/matchParentHeightAndWidth">
+
         <TextView
             android:id="@+id/classSuccessfullyCreatedText"
             style="@style/GenericText"
-            android:text="@string/createdClass"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:text="@string/createClassSuccessText"
             android:textSize="30sp"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"></TextView>
+            android:layout_centerVertical="true" />
+
         <TextView
-            style="@style/GenericText"
             android:id="@+id/inviteCodeHelperText"
-            android:text="@string/inviteCode"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            style="@style/GenericText"
+            android:text="@string/inviteCodeHelperText"
             android:textSize="30sp"
             android:layout_marginBottom="150dp"
-            android:layout_below="@+id/classSuccessfullyCreatedText"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"></TextView>
+            android:layout_below="@+id/classSuccessfullyCreatedText" />
 
         <Button
             android:id="@+id/continueButton"
             style="@style/Buttons"
             android:layout_below="@+id/inviteCodeHelperText"
             android:layout_centerHorizontal="true"
-            android:text="@string/continueToNext"></Button>
+            android:text="@string/continueToNextButtonText" />
+
     </RelativeLayout>
+
 </RelativeLayout>

@@ -2,22 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".signUpPage"
+
+    android:id="@+id/signUpPage"
+    style="@style/matchParentHeightAndWidth"
     android:background="@color/appBackgroundColor">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/wrapHeightAndWidth"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp">
+
+        <TextView
+            style="@style/wrapHeightAndWidth"
+            android:text="@string/signUpHelperText"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:id="@+id/signupTitle"
+            android:layout_margin="30dp"
+            android:layout_centerHorizontal="true"/>
 
         <EditText
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:background="@drawable/edit_bg"
-            android:hint="@string/name"
+            android:hint="@string/userDesiredUserName"
+            android:layout_below="@+id/signupTitle"
             android:layout_margin="5dp"
             android:id="@+id/et_name"
             android:layout_centerHorizontal="true"/>
@@ -26,7 +36,7 @@
             android:layout_height="40dp"
             android:layout_below="@id/et_name"
             android:background="@drawable/edit_bg"
-            android:hint="@string/email"
+            android:hint="@string/userEmail"
             android:layout_margin="5dp"
             android:id="@+id/et_email"
             android:layout_centerHorizontal="true"/>
@@ -35,15 +45,16 @@
             android:layout_height="40dp"
             android:layout_below="@id/et_email"
             android:background="@drawable/edit_bg"
-            android:hint="@string/Pass"
+            android:hint="@string/userPassword"
             android:layout_margin="5dp"
             android:id="@+id/et_pass"
+            android:inputType="textPassword"
             android:layout_centerHorizontal="true"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/signup"
+            android:text="@string/signUpButtonText"
             android:layout_below="@id/et_pass"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
@@ -65,7 +76,7 @@
             android:id="@+id/backToLogin"
             android:layout_margin="5dp"
             android:layout_centerHorizontal="true"
-            android:text="@string/login"/>
+            android:text="@string/loginButtonText"/>
 
 
     </RelativeLayout>

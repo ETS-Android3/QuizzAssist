@@ -2,32 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:id="@+id/splashScreen"
-    android:layout_height="match_parent"
-    android:background="@color/appBackgroundColor"
-    tools:context=".SplashScreen">
+    tools:context=".SplashScreen"
+
+    android:id="@+id/splashPage"
+    style="@style/matchParentHeightAndWidth"
+    android:background="@color/appBackgroundColor">
 
     <TextView
         android:id="@+id/appName"
-        android:text="@string/appName"
-        style="@style/HeaderText"/>
+        style="@style/HeaderText"
+        android:text="@string/appName" />
 
     <TextView
         android:id="@+id/appSlogan"
         style="@style/GenericText"
         android:text="@string/appSlogan"
         android:textSize="20sp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:layout_below="@+id/appName"
         android:layout_marginTop="-5dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/getStartedButton"
-        style = "@style/Buttons"
-        android:text="@string/getStarted"
+        style="@style/Buttons"
+        android:text="@string/getStartedButtonText"
         android:layout_marginTop="525dp"
-        android:layout_centerHorizontal="true"></Button>
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

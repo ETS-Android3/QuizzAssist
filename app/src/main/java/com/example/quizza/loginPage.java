@@ -56,13 +56,14 @@ public class loginPage extends AppCompatActivity {
         userName = (EditText) findViewById(R.id.tv_username);
         userPassword = (EditText) findViewById(R.id.tv_password);
 
+        signUp = (Button) findViewById(R.id.bt_signup);
         loginButton = (Button) findViewById(R.id.bt_login);
+
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
         fAuth = FirebaseAuth.getInstance();
 
         Handler handler = new Handler();
 
-        signUp = (Button) findViewById(R.id.bt_signup);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,9 +84,9 @@ public class loginPage extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 2000);
 
+        //figure out logic here (same for signUpPage.java
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            //make error checking & user input checks more secure after
             public void onClick(View v) {
                 String email = userName.getText().toString();
                 final String password = userPassword.getText().toString();
@@ -105,7 +106,6 @@ public class loginPage extends AppCompatActivity {
 
                 mProgressBar.setVisibility(View.VISIBLE);
 
-                //Authentication of the User
                 fAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -113,10 +113,12 @@ public class loginPage extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(loginPage.this, "Login Successful",
                                             Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    startActivity(new Intent(getApplicationContext(),
+                                            MainActivity.class));
                                 } else {
                                     Toast.makeText(loginPage.this, "Error !" +
-                                            task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                            task.getException().getMessage(),
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

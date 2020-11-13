@@ -6,144 +6,144 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml
+8-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="30" />
-9-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml
+9-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-11-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:5:5-81
-11-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:5:22-78
+11-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:5:5-81
+11-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:5:22-78
 12    <uses-permission android:name="android.permission.INTERNET" />
-12-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:6:5-67
-12-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:6:22-64
+12-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:6:5-67
+12-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:6:22-64
 13
 14    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
 15    <!-- <uses-sdk android:minSdkVersion="14"/> -->
 16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-16-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:25:5-79
-16-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:25:22-76
+16-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:25:5-79
+16-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:25:22-76
 17
 18    <application
-18-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:8:5-30:19
+18-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:8:5-30:19
 19        android:allowBackup="true"
-19-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:9:9-35
+19-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:9:9-35
 20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-20-->[androidx.core:core:1.3.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\12a6bf48d95b151f5141a87053ee8e99\core-1.3.1\AndroidManifest.xml:24:18-86
+20-->[androidx.core:core:1.3.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\12a6bf48d95b151f5141a87053ee8e99\core-1.3.1\AndroidManifest.xml:24:18-86
 21        android:debuggable="true"
 22        android:icon="@mipmap/ic_launcher"
-22-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:10:9-43
+22-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:10:9-43
 23        android:label="@string/appName"
-23-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:11:9-40
+23-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:11:9-40
 24        android:roundIcon="@mipmap/ic_launcher_round"
-24-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:12:9-54
+24-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:12:9-54
 25        android:supportsRtl="true"
-25-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:13:9-35
+25-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:13:9-35
 26        android:testOnly="true"
 27        android:theme="@style/Theme.QuizzA" >
-27-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:14:9-44
+27-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:14:9-44
 28        <activity android:name="com.example.quizza.CreatedClass" />
-28-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:15:9-59
-28-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:15:19-47
+28-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:15:9-59
+28-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:15:19-47
 29        <activity android:name="com.example.quizza.HomePage" />
-29-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:16:9-46
-29-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:16:19-43
+29-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:16:9-46
+29-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:16:19-43
 30        <activity android:name="com.example.quizza.ClassJoining" />
-30-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:17:9-50
-30-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:17:19-47
+30-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:17:9-50
+30-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:17:19-47
 31        <activity android:name="com.example.quizza.ClassCreation" />
-31-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:18:9-51
-31-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:18:19-49
+31-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:18:9-51
+31-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:18:19-49
 32        <activity android:name="com.example.quizza.MainActivity" />
-32-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:19:9-50
-32-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:19:19-47
+32-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:19:9-50
+32-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:19:19-47
 33        <activity android:name="com.example.quizza.CreateOrJoinClass" />
-33-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:20:9-55
-33-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:20:19-52
+33-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:20:9-55
+33-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:20:19-52
 34        <activity android:name="com.example.quizza.signUpPage" />
-34-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:21:9-48
-34-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:21:19-45
+34-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:21:9-48
+34-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:21:19-45
 35        <activity android:name="com.example.quizza.SplashScreen" />
-35-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:22:9-50
-35-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:22:19-47
+35-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:22:9-50
+35-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:22:19-47
 36        <activity android:name="com.example.quizza.loginPage" >
-36-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:23:9-29:20
-36-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:23:19-44
+36-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:23:9-29:20
+36-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:23:19-44
 37            <intent-filter>
-37-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:24:13-28:29
+37-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:24:13-28:29
 38                <action android:name="android.intent.action.MAIN" />
-38-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:25:17-69
-38-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:25:25-66
+38-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:25:17-69
+38-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:25:25-66
 39
 40                <category android:name="android.intent.category.LAUNCHER" />
-40-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:27:17-77
-40-->C:\Users\Vatsal\AndroidStudioProjects\QuizzAssist\app\src\main\AndroidManifest.xml:27:27-74
+40-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:27:17-77
+40-->C:\Users\Brand\Desktop\Projects\QuizzAssist\app\src\main\AndroidManifest.xml:27:27-74
 41            </intent-filter>
 42        </activity>
 43        <activity
-43-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:24:9-31:50
+43-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:24:9-31:50
 44            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
-44-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:25:13-85
+44-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:25:13-85
 45            android:excludeFromRecents="true"
-45-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:26:13-46
+45-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:26:13-46
 46            android:exported="true"
-46-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:27:13-36
+46-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:27:13-36
 47            android:launchMode="singleTask"
-47-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:28:13-44
+47-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:28:13-44
 48            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
-48-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:29:13-102
+48-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:29:13-102
 49            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-49-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:30:13-72
+49-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:30:13-72
 50
 51        <service
-51-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:33:9-39:19
+51-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:33:9-39:19
 52            android:name="com.google.firebase.components.ComponentDiscoveryService"
-52-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:34:13-84
+52-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:34:13-84
 53            android:directBootAware="true"
-53-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:35:13-43
+53-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:35:13-43
 54            android:exported="false" >
-54-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:35:13-37
+54-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:35:13-37
 55            <meta-data
-55-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:36:13-38:85
+55-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:36:13-38:85
 56                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-56-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:37:17-109
+56-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:37:17-109
 57                android:value="com.google.firebase.components.ComponentRegistrar" />
-57-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:38:17-82
+57-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\df41cc87673e3f39d30041cedf2f337f\jetified-firebase-auth-19.2.0\AndroidManifest.xml:38:17-82
 58            <meta-data
-58-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:32:13-34:85
+58-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:32:13-34:85
 59                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
-59-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:33:17-109
+59-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:33:17-109
 60                android:value="com.google.firebase.components.ComponentRegistrar" />
-60-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:34:17-82
+60-->[com.google.firebase:firebase-database:19.5.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\5d0f838f2b8ef4bfd28f8262d3c8429b\jetified-firebase-database-19.5.1\AndroidManifest.xml:34:17-82
 61        </service>
 62
 63        <activity
-63-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\a8235920046dd925bdec8b6748f129a4\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+63-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\a8235920046dd925bdec8b6748f129a4\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
 64            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-64-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\a8235920046dd925bdec8b6748f129a4\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+64-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\a8235920046dd925bdec8b6748f129a4\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
 65            android:exported="false"
-65-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\a8235920046dd925bdec8b6748f129a4\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+65-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\a8235920046dd925bdec8b6748f129a4\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
 66            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-66-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\a8235920046dd925bdec8b6748f129a4\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+66-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\a8235920046dd925bdec8b6748f129a4\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
 67
 68        <provider
-68-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:26:9-31:39
+68-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:26:9-31:39
 69            android:name="com.google.firebase.provider.FirebaseInitProvider"
-69-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:27:13-77
+69-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:27:13-77
 70            android:authorities="com.example.quizza.firebaseinitprovider"
-70-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:28:13-72
+70-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:28:13-72
 71            android:directBootAware="true"
-71-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:29:13-43
+71-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:29:13-43
 72            android:exported="false"
-72-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:30:13-37
+72-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:30:13-37
 73            android:initOrder="100" />
-73-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:31:13-36
+73-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\c600c96c6db4d2cbf19587bca20cd600\jetified-firebase-common-19.3.1\AndroidManifest.xml:31:13-36
 74
 75        <meta-data
-75-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\ce53febe539132800a46a9079cdd025f\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+75-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\ce53febe539132800a46a9079cdd025f\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
 76            android:name="com.google.android.gms.version"
-76-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\ce53febe539132800a46a9079cdd025f\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+76-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\ce53febe539132800a46a9079cdd025f\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
 77            android:value="@integer/google_play_services_version" />
-77-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Vatsal\.gradle\caches\transforms-2\files-2.1\ce53febe539132800a46a9079cdd025f\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+77-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Brand\.gradle\caches\transforms-2\files-2.1\ce53febe539132800a46a9079cdd025f\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
 78    </application>
 79
 80</manifest>

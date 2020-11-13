@@ -2,19 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/appBackgroundColor"
-    tools:context=".HomePage">
+    tools:context=".HomePage"
+
+    android:id="@+id/homePage"
+    style="@style/matchParentHeightAndWidth"
+    android:background="@color/appBackgroundColor">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/matchParentHeightAndWidth"
+        >
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/joinOrCreate"
+            style="@style/wrapHeightAndWidth"
+            android:id="@+id/joinOrCreateFragment"
             android:layout_centerInParent="true"
             android:visibility="invisible">
 
@@ -22,17 +22,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/createBt"
-                android:text="@string/createA_Class"
+                android:text="@string/userOption_CreateClass"
+                android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:id="@+id/joinBt"
                 android:layout_below="@+id/createBt"
-                android:text="@string/joinA_Class"
+                android:text="@string/userOption_joinClass"
                 android:layout_margin="10dp"/>
-
 
         </RelativeLayout>
 
@@ -42,17 +43,19 @@
             android:layout_height="75dp"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="80dp"
-            android:layout_marginTop="650dp"
             android:foreground="@drawable/ic_add"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
             android:background="@drawable/circle"/>
 
         <Button
             android:id="@+id/settingsButton"
             android:layout_toRightOf="@+id/createOrJoinButton"
-            android:layout_marginTop="650dp"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:foreground="@drawable/ic_settings"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
             android:background="@drawable/circle"/>
 
     </RelativeLayout>

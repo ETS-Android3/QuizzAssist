@@ -2,60 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ClassJoining"
+
+    android:id="@+id/joinClassPage"
+    style="@style/matchParentHeightAndWidth"
     android:background="@color/appBackgroundColor">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/wrapHeightAndWidth"
         android:layout_centerInParent="true">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/joinA_Class"
+            android:id="@+id/joinClassText"
+            style="@style/GenericText"
+            android:text="@string/userOption_joinClass"
             android:textSize="40sp"
             android:textColor="@color/white"
-            android:id="@+id/joinTitle"
             android:layout_marginBottom="75dp"
             android:layout_centerHorizontal="true"/>
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/classCode"
-            android:layout_below="@id/joinTitle"
+            android:id="@+id/classCodeEditText"
+            style="@style/EditTextStandard"
+            android:layout_below="@id/joinClassText"
             android:hint="@string/classCode"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:background="@drawable/edit_bg"
             android:layout_margin="30dp"
             android:padding="10dp"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/joinButton"
-            android:layout_below="@id/classCode"
-            android:text="@string/joinA_Class"
+            android:id="@+id/joinClassButton"
+            style="@style/Buttons"
+            android:layout_below="@id/classCodeEditText"
+            android:text="@string/userOption_joinClass"
             android:layout_margin="10dp"
             android:layout_centerHorizontal="true"/>
-
 
     </RelativeLayout>
 
     <Button
+        android:id="@+id/backButton"
         style="@style/SmallButtons"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
         android:foreground="@drawable/ic_backarrow"
-        android:id="@+id/backBt"
         android:layout_alignParentTop="true"/>
-
-
-
-
 
 </RelativeLayout>

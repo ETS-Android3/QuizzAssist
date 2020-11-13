@@ -59,6 +59,11 @@ public class signUpPage extends AppCompatActivity {
         returnToLoginButton = (Button) findViewById(R.id.backToLogin);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        String newUserMsg = "User Created";
+        String existingUserMsg = "User already exists! ";
+        String signUpFailedMsg = "Error, sign up failed!";
+        String genericErrorMsg = "Error Occurred!";
+
         returnToLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +74,7 @@ public class signUpPage extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
+        //figure out logic here (same for loginPage.java
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             //throw exception here later, return stmt for now
@@ -91,7 +97,6 @@ public class signUpPage extends AppCompatActivity {
                 }
 
                 mProgressBar.setVisibility(View.VISIBLE);
-
                 //Registration Methods
                 fAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -105,32 +110,39 @@ public class signUpPage extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Toast.makeText(signUpPage.this, "User Created",
-                                                                Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(getApplicationContext(),
-                                                                MainActivity.class));
+                                                        Toast.makeText(signUpPage.this, newUserMsg, Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                                         finish();
                                                     } else {
-                                                        if (task.getException() instanceof
-                                                                FirebaseAuthUserCollisionException) {
-                                                            Toast.makeText(signUpPage.this, "User already exists! "
-                                                                            + task.getException(),
+                                                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                                            Toast.makeText(signUpPage.this, existingUserMsg + task.getException(),
                                                                     Toast.LENGTH_SHORT).show();
                                                         } else {
-                                                            Toast.makeText(signUpPage.this, "Error, sign up failed!"
-                                                                            + task.getException(),
+                                                            Toast.makeText(signUpPage.this, signUpFailedMsg + task.getException(),
                                                                     Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 }
                                             });
                                 } else {
-                                    Toast.makeText(signUpPage.this, "Error Occured !" + task.getException()
-                                            .getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(signUpPage.this, genericErrorMsg + task.getException()
+                                                    .getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
             }
         });
+    }
+
+    //figure out later, probably have to split email and check @ and .com/.ca etc.
+    //figure out logic, textUtils needed? why not just .isEmpty() ?
+    public String checkUserInput(String userEmail, String userPassword) {
+        String userErrors = "";
+
+        if (TextUtils.isEmpty(userEmail)) {
+
+        }
+
+        return userErrors;
     }
 }

@@ -1,6 +1,18 @@
+/***
+ * HomePage.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class has been newly created to manage the courses that users of application create.
+ * From the home screen, once the plus button has been pressed, a new layout will
+ * appear, providing the user with three options: Create Class, Join Class, or return to home screen.
+ *
+ * Features to implement: Layout appearing on the foreground of the homepage and asks user which
+ * option they want to execute (Join/Create/Return).
+ * No known bugs.
+ */
+
 package com.example.quizza;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,12 +23,12 @@ import android.widget.RelativeLayout;
 
 public class HomePage extends AppCompatActivity {
 
-    Button createBt;
-    Button joinBt;
-    Button addBt;
-    Button settingsBt;
-    RelativeLayout relay1;
-    Button backBt;
+    Button createButton;
+    Button joinButton;
+    Button addButton;
+    Button settingsButton;
+    Button backButton;
+    RelativeLayout relativeLayoutOne;
 
 
     @Override
@@ -24,42 +36,39 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        relay1 = (RelativeLayout) findViewById(R.id.joinOrCreate);
-        createBt = (Button) findViewById(R.id.createBt);
-        joinBt = (Button) findViewById(R.id.joinBt);
-        addBt = (Button) findViewById(R.id.createOrJoinButton);
-        settingsBt = (Button) findViewById(R.id.settingsButton);
-        backBt = (Button) findViewById(R.id.backBt);
+        relativeLayoutOne = (RelativeLayout) findViewById(R.id.relat1);
+        createButton = (Button) findViewById(R.id.createBt);
+        joinButton = (Button) findViewById(R.id.joinBt);
+        addButton = (Button) findViewById(R.id.createOrJoinButton);
+        settingsButton = (Button) findViewById(R.id.settingsButton);
+        backButton = (Button) findViewById(R.id.backBt);
 
-        backBt.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
 
-        addBt.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                relay1.setVisibility(View.VISIBLE);
+                relativeLayoutOne.setVisibility(View.VISIBLE);
             }
         });
 
-        createBt.setOnClickListener(new View.OnClickListener() {
+        createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ClassCreation.class));
             }
         });
 
-        joinBt.setOnClickListener(new View.OnClickListener() {
+        joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ClassJoining.class));
             }
         });
-
-
-
     }
 }

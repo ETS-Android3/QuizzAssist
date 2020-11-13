@@ -1,28 +1,3 @@
-com/example/quizza/SplashScreen.java
- com.example.quizza.SplashScreen
- com.example.quizza.SplashScreen$1
-com/example/quizza/CreateOrJoinClass.java
- com.example.quizza.CreateOrJoinClass
- com.example.quizza.CreateOrJoinClass$1
- com.example.quizza.CreateOrJoinClass$2
-com/example/quizza/loginPage.java
- com.example.quizza.loginPage
- com.example.quizza.loginPage$1
- com.example.quizza.loginPage$2
- com.example.quizza.loginPage$3
- com.example.quizza.loginPage$3$1
-com/example/quizza/User.java
- com.example.quizza.User
-com/example/quizza/BuildConfig.java
- com.example.quizza.BuildConfig
-com/example/quizza/Course.java
- com.example.quizza.Course
-com/example/quizza/signUpPage.java
- com.example.quizza.signUpPage
- com.example.quizza.signUpPage$1
- com.example.quizza.signUpPage$2
- com.example.quizza.signUpPage$2$1
- com.example.quizza.signUpPage$2$1$1
 com/example/quizza/MainActivity.java
  com.example.quizza.MainActivity
  com.example.quizza.MainActivity$1
@@ -31,15 +6,31 @@ com/example/quizza/MainActivity.java
  com.example.quizza.MainActivity$3
  com.example.quizza.MainActivity$3$1
  com.example.quizza.MainActivity$4
+com/example/quizza/CreateOrJoinClass.java
+ com.example.quizza.CreateOrJoinClass
+ com.example.quizza.CreateOrJoinClass$1
+ com.example.quizza.CreateOrJoinClass$2
 com/example/quizza/HomePage.java
  com.example.quizza.HomePage
  com.example.quizza.HomePage$1
  com.example.quizza.HomePage$2
  com.example.quizza.HomePage$3
  com.example.quizza.HomePage$4
+com/example/quizza/User.java
+ com.example.quizza.User
+com/example/quizza/BuildConfig.java
+ com.example.quizza.BuildConfig
 com/example/quizza/CreatedClass.java
  com.example.quizza.CreatedClass
  com.example.quizza.CreatedClass$1
+com/example/quizza/signUpPage.java
+ com.example.quizza.signUpPage
+ com.example.quizza.signUpPage$1
+ com.example.quizza.signUpPage$2
+ com.example.quizza.signUpPage$2$1
+ com.example.quizza.signUpPage$2$1$1
+com/example/quizza/Course.java
+ com.example.quizza.Course
 com/example/quizza/ClassJoining.java
  com.example.quizza.ClassJoining
  com.example.quizza.ClassJoining$1
@@ -48,3 +39,12 @@ com/example/quizza/ClassCreation.java
  com.example.quizza.ClassCreation
  com.example.quizza.ClassCreation$1
  com.example.quizza.ClassCreation$2
+com/example/quizza/loginPage.java
+ com.example.quizza.loginPage
+ com.example.quizza.loginPage$1
+ com.example.quizza.loginPage$2
+ com.example.quizza.loginPage$3
+ com.example.quizza.loginPage$3$1
+com/example/quizza/SplashScreen.java
+ com.example.quizza.SplashScreen
+ com.example.quizza.SplashScreen$1

@@ -2,36 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/createOrJoinClass"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/appBackgroundColor"
-    tools:context=".CreateOrJoinClass">
+    tools:context=".CreateOrJoinClass"
+
+    android:id="@+id/createOrJoinClassPage"
+    style="@style/matchParentHeightAndWidth"
+    android:background="@color/appBackgroundColor">
 
     <TextView
         android:id="@+id/createOrJoinText"
-        android:layout_width="380dp"
+        style="@style/HeaderText"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_height="180dp"
-        android:textSize="50sp"
-        android:textStyle="italic|bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
         android:text="@string/userOption"></TextView>
 
     <Button
         android:id="@+id/createClassButton"
-        style = "@style/Buttons"
+        style="@style/Buttons"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
-        android:text="@string/createA_Class"></Button>
+        android:text="@string/userOption_CreateClass"></Button>
 
     <Button
         android:id="@+id/joinClassButton"
-        style = "@style/Buttons"
+        style="@style/Buttons"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="480dp"
-        android:text="@string/joinA_Class"></Button>
+        android:text="@string/userOption_joinClass"></Button>
 
 </RelativeLayout>

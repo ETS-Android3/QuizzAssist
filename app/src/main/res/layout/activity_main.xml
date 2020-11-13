@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".MainActivity"
+
+    android:id="@+id/testingPage"
+    style="@style/matchParentHeightAndWidth"
     android:background="@color/appBackgroundColor">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/wrapHeightAndWidth"
         android:layout_centerHorizontal="true"
         android:id="@+id/relay1">
 
@@ -29,7 +29,7 @@
             android:layout_below="@id/canvasCustom"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
-            android:text="@string/logout"
+            android:text="@string/test_logOutButtonText"
             android:onClick="logout" />
 
         <TextView
@@ -70,7 +70,7 @@
             android:layout_below="@+id/courseInfo"
             android:layout_margin="10dp"
             android:id="@+id/addCourse"
-            android:text="Add Course"/>
+            android:text="@string/test_addCourseButtonText"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
             android:layout_below="@id/courseInfo"
             android:layout_margin="10dp"
             android:id="@+id/deleteCourse"
-            android:text="Delete Course"/>
+            android:text="@string/test_deleteCourseButtonText"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/homeBt"
-        android:text="@string/Home"
+        android:text="@string/test_homePageButtonText"
         android:layout_below="@id/relay1"
         android:layout_margin="30dp"
         android:layout_centerHorizontal="true"

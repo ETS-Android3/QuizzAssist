@@ -49,7 +49,15 @@ public class loginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-
+        //Release version delete  this part
+        Button test=(Button) findViewById(R.id.bt_test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), WhiteBoard.class ));
+            }
+        });
+        ///////////////////////////////////
         relativeLayoutOne = (RelativeLayout) findViewById(R.id.relat1);
         relativeLayoutTwo = (RelativeLayout) findViewById(R.id.relat2);
 

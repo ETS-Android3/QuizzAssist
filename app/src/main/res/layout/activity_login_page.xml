@@ -68,7 +68,14 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/signup"
                 android:id="@+id/bt_signup"/>
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bt_signup"
+                android:layout_margin="2dp"
+                android:layout_centerHorizontal="true"
+                android:text="Test WhiteBoard"
+                android:id="@+id/bt_test"/>
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

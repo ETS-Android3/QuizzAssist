@@ -8,9 +8,17 @@
     <string name="signup">Sign UP</string>
 
     <string name="name">Name</string>
+
+    <string name="classDetails">Class Added</string>
     <string name="email">Email</string>
     <string name="logout">Log Out</string>
+    <string name="signupTitle">Sign Up Page</string>
+    <string name="test_addCourseButtonText">Add Class</string>
+    <string name="courseID">Course ID</string>
+    <string name="classAddFail">Error occurred in adding class</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -5,56 +5,80 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".loginPage"
-    android:background="@color/splashScreen">
+    android:background="@color/teal_200">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:id="@+id/relat1">
 
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:hint="@string/Pass"
-            android:id="@+id/tv_password"
-            android:layout_below="@id/tv_username"
-            android:background="@drawable/edit_bg"
-            android:layout_margin="5dp"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:hint="@string/User"
-            android:id="@+id/tv_username"
-            android:background="@drawable/edit_bg"
-            android:layout_margin="5dp" />
-
-        <Button
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_password"
-            android:layout_margin="5dp"
-            android:layout_centerHorizontal="true"
-            android:text="@string/login"
-            android:id="@+id/bt_login"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/bt_login"
-            android:layout_margin="2dp"
-            android:layout_centerHorizontal="true"
-            android:text="@string/signup"
-            android:id="@+id/bt_signup"/>
+            android:id="@+id/logo"
+            android:src="@drawable/logo"
+            android:layout_centerHorizontal="true"/>
 
-        <ProgressBar
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/bt_signup"
-            android:layout_margin="10dp"
-            android:layout_centerHorizontal="true"
-            android:visibility="invisible"
-            android:id="@+id/progressBar2"/>
+            android:id="@+id/relat2"
+            android:layout_below="@id/logo"
+            android:visibility="gone">
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:hint="@string/User"
+                android:padding="10dp"
+                android:id="@+id/tv_username"
+                android:background="@drawable/edit_bg"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"/>
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:hint="@string/Pass"
+                android:padding="10dp"
+                android:id="@+id/tv_password"
+                android:layout_below="@id/tv_username"
+                android:background="@drawable/edit_bg"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:inputType="textPassword"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_password"
+                android:layout_margin="5dp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/login"
+                android:id="@+id/bt_login"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bt_login"
+                android:layout_margin="2dp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/signup"
+                android:id="@+id/bt_signup"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bt_signup"
+                android:layout_margin="10dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"
+                android:id="@+id/progressBar2"/>
+
+        </RelativeLayout>
 
 
     </RelativeLayout>

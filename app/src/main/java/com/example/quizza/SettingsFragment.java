@@ -15,20 +15,27 @@ import android.widget.Button;
 public class SettingsFragment extends Fragment {
 
     Button logoutButton;
+    FirebaseAuth fAuth;
 
     public SettingsFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         logoutButton = (Button)view.findViewById(R.id.logout_button);
+        fAuth = FirebaseAuth.getInstance();
 
-        //TO DO : figure out a way to make the log out button work
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fAuth.signOut();
+                startActivity(new Intent(getActivity(), loginPage.class));
+                getActivity().finish();
+            }
+        });
 
         return view;
     }

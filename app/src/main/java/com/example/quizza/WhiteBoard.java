@@ -64,7 +64,7 @@ public class WhiteBoard extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whiteboard);
 
-        //imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.imageView);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         Button bt_submit = (Button) findViewById(R.id.bt_submit);
         Button bt_pen=(Button) findViewById(R.id.bt_pen);
@@ -179,33 +179,31 @@ public class WhiteBoard extends Activity {
             mCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
             invalidate();
         }
-        public boolean save()
+        public void save()
         {
-//            Bitmap b = ScreenShot.takescreenshotOfRootView(imageView);
-//            imageView.setImageBitmap(b);
-//            WhiteBoard.setBackgroundColor(Color.parseColor("#999999"));
-//
-//            OutputStream fOut = null;
-//            Integer counter = 0;
-//
-//            try {
-//                File file = new File(getExternalFilesDir(null), "BigPP" + counter + ".jpg");
-//                Uri myUri = Uri.fromFile(file);
-//                StorageReference riversRef = mStorageRef.child("BigPP" + counter + ".jpg");
-//                riversRef.putFile(myUri);
-//                if (!file.exists())
-//                    file.createNewFile();
-//
-//                try {
-//                    fOut = new FileOutputStream(file);
-//                    b.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            } catch(Exception e){
-//            }
-            if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
-                Toast.makeText(this.getContext(),"No Write External Storage Permission",Toast.LENGTH_LONG).show();
+            Bitmap b = ScreenShot.takescreenshotOfRootView(imageView);
+
+            OutputStream fOut = null;
+            Integer counter = 0;
+
+            try {
+                File file = new File(getExternalFilesDir(null), "BigPP" + counter + ".jpg");
+                Uri myUri = Uri.fromFile(file);
+                StorageReference riversRef = mStorageRef.child("BigPP" + counter + ".jpg");
+                riversRef.putFile(myUri);
+                if (!file.exists())
+                    file.createNewFile();
+
+                try {
+                    fOut = new FileOutputStream(file);
+                    b.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch(Exception e){
+            }
+/*           if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
+               Toast.makeText(this.getContext(),"No Write External Storage Permission",Toast.LENGTH_LONG).show();
                 Log.e("Permission","No Write External Storage");
                 return false;
             }
@@ -232,7 +230,7 @@ public class WhiteBoard extends Activity {
             } finally {
                 savedBitmap=null;
 
-            }
+            }*/
         }
         private void touch_start(float x, float y) {
             mPath.reset();

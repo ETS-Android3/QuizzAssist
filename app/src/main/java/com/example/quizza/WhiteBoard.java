@@ -187,9 +187,9 @@ public class WhiteBoard extends Activity {
             Integer counter = 0;
 
             try {
-                File file = new File(getExternalFilesDir(null), "BigPP" + counter + ".jpg");
+                File file = new File(getExternalFilesDir(null), "BigPP" + counter + ".png");
                 Uri myUri = Uri.fromFile(file);
-                StorageReference riversRef = mStorageRef.child("BigPP" + counter + ".jpg");
+                StorageReference riversRef = mStorageRef.child("BigPP" + counter + ".png");
                 riversRef.putFile(myUri);
                 if (!file.exists())
                     file.createNewFile();

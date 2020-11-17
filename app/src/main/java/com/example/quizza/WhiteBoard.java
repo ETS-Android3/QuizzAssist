@@ -174,6 +174,8 @@ public class WhiteBoard extends Activity {
         }
         public void clear()
         {
+            setScaleY(1);
+            setScaleX(1);
             mCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
             invalidate();
         }
@@ -274,24 +276,51 @@ public class WhiteBoard extends Activity {
                 mCanvas.drawPath(mPath, mEraserPaint);
             }
         }
+        private int moveType=0;
+        private float scale=1;
+        private float spacing;
+
+        private float getSpacing(MotionEvent event) {
+            float x = event.getX(0) - event.getX(1);
+            float y = event.getY(0) - event.getY(1);
+            return (float) Math.sqrt(x * x + y * y);
+        }
 
         @Override
         public boolean onTouchEvent(MotionEvent event) {
             float x = event.getX();
             float y = event.getY();
 
-            switch (event.getAction()) {
+            switch (event.getAction()&MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
+                    moveType=1;
                     touch_start(x, y);
                     invalidate();
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    touch_move(x, y);
-                    invalidate();
+                    if(moveType==2)
+                    {
+                        scale=scale*getSpacing(event) / spacing;
+                        setScaleX(scale);
+                        setScaleY(scale);
+                        invalidate();
+                    }
+                    else if(moveType==1)
+                    {
+                        touch_move(x, y);
+                        invalidate();
+                    }
                     break;
                 case MotionEvent.ACTION_UP:
                     touch_up();
                     invalidate();
+                    break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    moveType=2;
+                    spacing=getSpacing(event);
+                    break;
+                case MotionEvent.ACTION_POINTER_UP:
+                    moveType=0;
                     break;
             }
             return true;

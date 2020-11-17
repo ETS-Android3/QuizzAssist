@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/courseID"
+            android:id="@+id/courseID"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/classDetails"
+            android:id="@+id/classToAdd"
+            android:layout_below="@id/courseID"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/classToAdd"
+            android:layout_margin="10dp"
+            android:id="@+id/addCourse"
+            android:layout_centerHorizontal="true"
+            android:text="@string/test_addCourseButtonText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/classInfo"
+            android:layout_below="@id/addCourse"
+            android:text="@string/classDetails"
+            android:textSize="30sp" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

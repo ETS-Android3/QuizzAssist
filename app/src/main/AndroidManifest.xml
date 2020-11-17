@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.quizza">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
@@ -15,8 +14,8 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".signUpPage" />
         <activity android:name=".SplashScreen" />
-        <activity android:name=".loginPage"/>
-        <activity android:name=".WhiteBoard">
+        <activity android:name=".WhiteBoard"></activity>
+        <activity android:name=".loginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

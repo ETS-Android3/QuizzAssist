@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.net.Uri;
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.FloatMath;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -67,35 +70,65 @@ public class WhiteBoard extends Activity {
         imageView = (ImageView) findViewById(R.id.imageView);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         Button bt_submit = (Button) findViewById(R.id.bt_submit);
-        Button bt_pen=(Button) findViewById(R.id.bt_pen);
+        Button bt_pencil=(Button) findViewById(R.id.bt_pencil);
         Button bt_eraser=(Button) findViewById(R.id.bt_eraser);
         Button bt_clear=(Button) findViewById(R.id.bt_clear);
+        Button bt_whiteboard_options=(Button) findViewById(R.id.bt_whiteboard_options);
 
         ViewGroup container = (ViewGroup) findViewById(R.id.Whiteboard_container);
         final MyView myView = new MyView(this);
         container.addView(myView);
-        bt_pen.setOnClickListener(new View.OnClickListener() {
+        bt_pencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bt_whiteboard_options.setBackgroundResource(R.drawable.ic_pencil_256);
                 myView.setMode(Pen);
+                bt_pencil.setVisibility(View.INVISIBLE);
+                bt_eraser.setVisibility(View.INVISIBLE);
+                bt_clear.setVisibility(View.INVISIBLE);
+                bt_whiteboard_options.setVisibility(View.VISIBLE);
             }
         });
 
         bt_eraser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bt_whiteboard_options.setBackgroundResource(R.drawable.ic_eraser_256);
                 myView.setMode(Eraser);
+                bt_pencil.setVisibility(View.INVISIBLE);
+                bt_eraser.setVisibility(View.INVISIBLE);
+                bt_clear.setVisibility(View.INVISIBLE);
+                bt_whiteboard_options.setVisibility(View.VISIBLE);
             }
         });
         bt_clear.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { myView.clear(); }
+            public void onClick(View v) {
+                myView.clear();
+                myView.setMode(Pen);
+                bt_whiteboard_options.setBackgroundResource(R.drawable.ic_pencil_256);
+                bt_pencil.setVisibility(View.INVISIBLE);
+                bt_eraser.setVisibility(View.INVISIBLE);
+                bt_clear.setVisibility(View.INVISIBLE);
+                bt_whiteboard_options.setVisibility(View.VISIBLE);
+            }
         });
 
       bt_submit.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
                 myView.save();
+          }
+      });
+
+
+      bt_whiteboard_options.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              bt_whiteboard_options.setVisibility(View.INVISIBLE);
+              bt_pencil.setVisibility(View.VISIBLE);
+              bt_eraser.setVisibility(View.VISIBLE);
+              bt_clear.setVisibility(View.VISIBLE);
           }
       });
 }
@@ -272,6 +305,7 @@ public class WhiteBoard extends Activity {
                 mCanvas.drawPath(mPath, mEraserPaint);
             }
         }
+
 
         @Override
         public boolean onTouchEvent(MotionEvent event) {

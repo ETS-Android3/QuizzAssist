@@ -51,5 +51,9 @@ public class Question {
     {
         return this.finishedGrading;
     }
+
+    public void saveAnswer(Answer answer , int studentIndex) {
+        this.answerList.set(studentIndex , answer);
+    }
 }
 

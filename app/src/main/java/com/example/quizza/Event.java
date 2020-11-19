@@ -28,20 +28,19 @@ public class Event {
         //required empty constructor
     }
 
-    Event(String event_Name) {
+    public Event(String event_Name) {
         this.eventName = event_Name;
     }
 
     //I don't know if there are built in date inputs, if not, this must be changed
-    public void scheduleCourse(Date newStartTime, Date newEndTime) {
+    public void scheduleEvent(Date newStartTime, Date newEndTime) {
         this.eventStartTime = newStartTime;
         this.eventEndTime = newEndTime;
     }
 
-    public String getCourseName() {
+    public String getEventName() {
         return this.eventName;
     }
-
 
     public boolean isGraded() {
         return this.finishedGrading;
@@ -65,6 +64,25 @@ public class Event {
                         else
                             this.questionList.get(j).answerList.get(i).mark = 0;
                  }
+    }
+
+    //to be called during grading to get info to display the next ungraded answer
+    //this may need to return a pointer (not familiar with java)
+    public Answer getNextUngradedAnswer() {
+        for (int i = 0; i < this.questionList.size(); i++)
+            if (!this.questionList.get(i).finishedGrading)
+                for (int j = 0 ; j < this.questionList.get(i).answerList.size() ; j++)
+                    if (!this.questionList.get(i).answerList.get(j).finishedGrading)
+                        return this.questionList.get(i).answerList.get(j);
+        return null;
+    }
+
+    //to be called during event to load the next question/saved answer
+    public int getNextQuestionIndex(int currentQuestionIndex){
+        return ++currentQuestionIndex % this.questionList.size();
+    }
+    public int getPrevQuestionIndex(int currentQuestionIndex){
+        return --currentQuestionIndex % this.questionList.size();
     }
 
 }

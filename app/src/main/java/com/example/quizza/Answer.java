@@ -28,6 +28,10 @@ public class Answer {
         //required empty constructor
     }
 
+    public Answer(char input) { this.multipleChoiceInput = input; }
 
+    public Answer(String input) { this.shortAnswerInput = input; }
+
+    //public Answer(picture link input) { this.multipleChoiceInput = input; }
 
 }

@@ -68,4 +68,14 @@ public class Course {
         }
     }
 
+    public List<String> getListOfStudentsWhoDidNotSubmitPhotos(Event event) {
+        List<String> newList = new ArrayList<String>();
+
+        //for each student in course
+            //if array of photos(index) == null
+                //add student name(index) to list
+
+        return newList;
+    }
+
 }

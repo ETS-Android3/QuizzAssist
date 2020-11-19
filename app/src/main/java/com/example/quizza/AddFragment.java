@@ -43,8 +43,14 @@ public class AddFragment extends Fragment {
     private FirebaseAuth fAuth;
     DatabaseReference currentDatabase;
 
+    TextView classJoinInfo;
+    TextView classJoinCode;
+    TextView joinSuccessView;
+
     Button addViewButton;
     Button joinViewButton;
+
+    Button joinClassButton;
 
     ImageView backAddView;
     ImageView backJoinView;
@@ -71,8 +77,14 @@ public class AddFragment extends Fragment {
         addCourseView = (RelativeLayout) view.findViewById(R.id.courseAddView);
         joinCourseView = (RelativeLayout) view.findViewById(R.id.joinCourseView);
 
+        joinClassButton = (Button) view.findViewById(R.id.joinClassButton);
+        joinSuccessView = (TextView) view.findViewById(R.id.joinSuccessView);
+
+
         addViewButton = (Button) view.findViewById(R.id.addViewButton);
         joinViewButton = (Button) view.findViewById(R.id.joinViewButton);
+        classJoinInfo = (TextView) view.findViewById(R.id.classJoinCodeInfo);
+        classJoinCode = (TextView) view.findViewById(R.id.classJoinCode);
 
         backAddView = (ImageView) view.findViewById(R.id.backAddView);
         backJoinView = (ImageView) view.findViewById(R.id.backJoinView);
@@ -113,6 +125,12 @@ public class AddFragment extends Fragment {
             }
         });
 
+        joinClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                joinSuccessView.setVisibility(View.VISIBLE);
+            }
+        });
 
         final String addClassFail = "Error occurred in adding class";
 
@@ -154,6 +172,8 @@ public class AddFragment extends Fragment {
                                 public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     courseInfo.setText(course1.getCourseName());
+                                    classJoinInfo.setVisibility(View.VISIBLE);
+                                    classJoinCode.setVisibility(View.VISIBLE);
                                 } else {
                                     Toast.makeText(getActivity(), addClassFail,
                                         Toast.LENGTH_SHORT).show();

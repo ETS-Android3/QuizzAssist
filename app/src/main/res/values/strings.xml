@@ -12,6 +12,10 @@
     <string name="whatToDo">What would you like to do ?</string>
     <string name="joinPageSuccess">You have successfully joined the class !</string>
 
+    <string name="joinSuccess">YOu have successfully created the class, Here is the join code for the class :</string>
+
+    <string name="joinCodeDefault">7xuu2jj2 </string>
+
     <string name="classDetails">Class Added</string>
     <string name="email">Email</string>
     <string name="logout">Log Out</string>

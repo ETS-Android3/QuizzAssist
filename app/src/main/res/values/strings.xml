@@ -1,51 +1,36 @@
 <resources>
-
-<!--    Splash Screen Miscellaneous Portion    -->
     <string name="appName">QuizzAssist</string>
     <string name="appSlogan">Exams Made Easy</string>
-    <string name="getStartedButtonText">Get Started</string>
+    <string name="getStarted">Get Started</string>
+    <string name="User">Username</string>
+    <string name="Pass">Password</string>
+    <string name="login">Sign IN</string>
+    <string name="signup">Sign UP</string>
 
-<!--    User Sign-up & Login information Portion    -->
-    <string name="signUpButtonText">Sign Up</string>
-    <string name="signUpHelperText">Sign Up for An Account></string>
-    <string name="loginButtonText">Sign In</string>
+    <string name="name">Name</string>
 
-    <string name="userDesiredUserName">Username</string>
-    <string name="userFirstName">First Name</string>
-    <string name="userMiddleName">Middle Name</string>
-    <string name="userLastName">Last Name</string>
+    <string name="whatToDo">What would you like to do ?</string>
+    <string name="joinPageSuccess">You have successfully joined the class !</string>
 
-    <string name="userEmail">Email</string>
-    <string name="userPassword">Password</string>
-    <!--    End of User Sign-up & Login information Portion    -->
+    <string name="joinSuccess">YOu have successfully created the class, Here is the join code for the class :</string>
 
-<!--    User Option Portion    -->
-    <string name="userOption">What would you like to do?</string>
-    <string name="userOption_CreateClass">Create a Class</string>
-    <string name="userOption_joinClass">Join a Class</string>
+    <string name="joinCodeDefault">7xuu2jj2 </string>
 
-<!--    Class Creation Portion    -->
-    <string name="createClassButtonText">Create Class</string>
-    <string name="createClassNameEditTextHint">Enter Class Name</string>
-    <string name="wordPrivate">Private</string>
-    <string name="wordPublic">Public</string>
-    <string name="createClassSuccessText">Class Successfully Created!</string>
-    <string name="inviteCodeHelperText">Your unique invite code is:</string>
-
-<!--    Class Joining Portion    -->
-    <string name="classCode">Please enter the code to join the class</string>
-
-<!--    Post-Class Create/Join Portion    -->
-    <string name="continueToNextButtonText">Continue</string>
-
-<!--    Test Activity Main Portion    -->
-    <string name="test_homePageButtonText">Home Page</string>
-    <string name="test_addCourseButtonText">Add Course</string>
-    <string name="test_deleteCourseButtonText">Delete Course</string>
-    <string name="test_logOutButtonText">Log Out</string>
+    <string name="classDetails">Class Added</string>
+    <string name="email">Email</string>
+    <string name="logout">Log Out</string>
+    <string name="signupTitle">Sign Up Page</string>
+    <string name="addCourseButtonText">Add Class</string>
+    <string name="joinCourseButtonText">Join Class</string>
+    <string name="joinEditText">Class CODE</string>
+    <string name="courseID">Course ID</string>
+    <string name="classAddFail">Error occurred in adding class</string>
+    <string name="txtJoinView">Please Enter Class Join Code: </string>
 
 
-<!--    Undetermined Portion    -->
-    <string name="searchTitle">Search Course</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

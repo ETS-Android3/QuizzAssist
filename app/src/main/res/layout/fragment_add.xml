@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddFragment"
+    android:background="@color/appBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/addPage"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/whatToDo"
+            android:id="@+id/question"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="50sp"
+            android:layout_marginBottom="35dp"
+            android:layout_marginTop="70dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addViewButton"
+            android:layout_margin="20dp"
+            android:text="@string/addCourseButtonText"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/question"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/joinViewButton"
+            android:layout_margin="20dp"
+            android:text="@string/joinCourseButtonText"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/addViewButton"/>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/courseAddView"
+        android:visibility="invisible">
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/courseID"
+            android:id="@+id/courseID"
+            android:textSize="30sp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="100dp"
+            android:padding="10dp"
+            android:background="@drawable/edit_bg"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/classDetails"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:id="@+id/classToAdd"
+            android:padding="10dp"
+            android:background="@drawable/edit_bg"
+            android:layout_below="@id/courseID"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/classToAdd"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_bg"
+            android:id="@+id/addCourse"
+            android:layout_centerHorizontal="true"
+            android:text="@string/joinCourseButtonText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:id="@+id/classInfo"
+            android:layout_below="@id/addCourse"
+            android:text="@string/classDetails"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:id="@+id/classJoinCodeInfo"
+            android:textAlignment="center"
+            android:layout_below="@id/classInfo"
+            android:text="@string/joinSuccess"
+            android:textSize="25sp"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:id="@+id/classJoinCode"
+            android:textAlignment="center"
+            android:layout_below="@id/classJoinCodeInfo"
+            android:text="@string/joinCodeDefault"
+            android:textSize="30sp"
+            android:visibility="invisible"/>
+
+
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_bg"
+            android:src="@drawable/back_icon"
+            android:id="@+id/backAddView"
+            android:layout_margin="20sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/joinCourseView"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtJoinView"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:id="@+id/joinPageText"
+            android:layout_margin="70dp"
+            android:textAlignment="center"/>
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_below="@id/joinPageText"
+            android:hint="@string/joinEditText"
+            android:textColorHint="@color/white"
+            android:id="@+id/joinEditView"
+            android:background="@drawable/edit_bg"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/joinClassButton"
+            android:layout_below="@id/joinEditView"
+            android:text="@string/joinCourseButtonText"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/joinClassButton"
+            android:layout_centerHorizontal="true"
+            android:text="@string/joinPageSuccess"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:id="@+id/joinSuccessView"
+            android:textAlignment="center"
+            android:visibility="invisible"
+            android:layout_margin="20dp"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_bg"
+            android:src="@drawable/back_icon"
+            android:id="@+id/backJoinView"
+            android:layout_margin="20sp"/>
+
+
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

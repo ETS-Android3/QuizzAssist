@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
+
+import java.nio.charset.Charset;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,17 +47,21 @@ public class AddFragment extends Fragment {
     Button addButton;
     EditText userInputClass;
     EditText userInputcourseID;
+    EditText joinPageClassCode;
     User currentUser;
+    FirebaseUser firebaseUser;
     TextView courseInfo;
     private FirebaseAuth fAuth;
     DatabaseReference currentDatabase;
 
+    char[] CHARSET_AZ_09 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+
     TextView classJoinInfo;
     TextView classJoinCode;
     TextView joinSuccessView;
-
     Button addViewButton;
     Button joinViewButton;
+
 
     Button joinClassButton;
 
@@ -61,6 +74,17 @@ public class AddFragment extends Fragment {
 
     public AddFragment() {
         // Required empty public constructor
+    }
+
+    public String generateJoinCode(char[] characterSet, int length) {
+        Random random = new SecureRandom();
+        char[] result = new char[length];
+        for (int i = 0; i < result.length; i++) {
+            // picks a random index out of character set > random character
+            int randomCharIndex = random.nextInt(characterSet.length);
+            result[i] = characterSet[randomCharIndex];
+        }
+        return new String(result);
     }
 
     @Override
@@ -80,6 +104,7 @@ public class AddFragment extends Fragment {
         joinClassButton = (Button) view.findViewById(R.id.joinClassButton);
         joinSuccessView = (TextView) view.findViewById(R.id.joinSuccessView);
 
+        joinPageClassCode = (EditText) view.findViewById(R.id.joinEditView);
 
         addViewButton = (Button) view.findViewById(R.id.addViewButton);
         joinViewButton = (Button) view.findViewById(R.id.joinViewButton);
@@ -88,6 +113,9 @@ public class AddFragment extends Fragment {
 
         backAddView = (ImageView) view.findViewById(R.id.backAddView);
         backJoinView = (ImageView) view.findViewById(R.id.backJoinView);
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String Uid = firebaseUser.getUid();
 
         backAddView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,14 +153,8 @@ public class AddFragment extends Fragment {
             }
         });
 
-        joinClassButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joinSuccessView.setVisibility(View.VISIBLE);
-            }
-        });
-
         final String addClassFail = "Error occurred in adding class";
+        final String joinClassFail = "Error occurred in joining class";
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +162,8 @@ public class AddFragment extends Fragment {
             public void onClick(View v) {
                 String courseName = userInputClass.getText().toString();
                 Integer courseID = 0;
+                String joinCode = generateJoinCode(CHARSET_AZ_09, 7);
+                classJoinCode.setText(joinCode);
                 Log.d("courseName", courseName);
                 currentDatabase = FirebaseDatabase.getInstance().getReference("Users");
                 currentDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -163,8 +187,9 @@ public class AddFragment extends Fragment {
                     return;
                 }
 
+
                 if(!(currentUser == null)){
-                    Course course1 = new Course(courseName, currentUser, courseID);
+                    Course course1 = new Course(courseName, Uid, courseID, joinCode, Uid);
                     currentDatabase = FirebaseDatabase.getInstance().getReference();
                     currentDatabase.child("Courses").push().setValue(course1)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -184,6 +209,41 @@ public class AddFragment extends Fragment {
 
             }
         });
+
+        joinClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String classCode = joinPageClassCode.getText().toString();
+                currentDatabase = FirebaseDatabase.getInstance().getReference("Courses");
+                currentDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                            Course tempCourse = item_snapshot.getValue(Course.class);
+                            if(classCode.equals(tempCourse.getJoinCode())) {
+
+                                Set<String> myUsers = new HashSet<String>(tempCourse.getUserEnrolled());
+                                myUsers.add(Uid);
+
+                                tempCourse.setUserEnrolled(new ArrayList<String>(myUsers));
+                                FirebaseDatabase.getInstance().getReference("Courses/" + item_snapshot.getKey()).setValue(tempCourse);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+        });
+
+
+
+
 
         return view;
     }

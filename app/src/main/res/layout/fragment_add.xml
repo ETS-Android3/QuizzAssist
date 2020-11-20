@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/addPage"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,6 +124,7 @@
             android:textColor="@color/white"
             android:id="@+id/classJoinCode"
             android:textAlignment="center"
+            android:textStyle="bold"
             android:layout_below="@id/classJoinCodeInfo"
             android:text="@string/joinCodeDefault"
             android:textSize="30sp"
@@ -147,7 +148,7 @@
         android:layout_width="match_parent"
         android:id="@+id/joinCourseView"
         android:layout_height="match_parent"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"

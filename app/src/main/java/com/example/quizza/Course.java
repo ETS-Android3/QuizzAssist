@@ -12,19 +12,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
-    Integer courseID = 0;
-    String courseName;
-    User courseOwner;
+    private Integer courseID = 0;
+    private String courseName;
+    String courseOwner;
+    String joinCode;
+    String Uid;
     private List<String> userEnrolled = new ArrayList<>();
 
     public Course(){
         //required empty constructor
     }
 
-    Course (String course_Name, User course_Owner, Integer course_ID) {
+    public Course (String course_Name, String course_Owner, Integer course_ID, String joinCode, String Uid) {
         this.courseID = course_ID;
         this.courseName = course_Name;
         this.courseOwner = course_Owner;
+        this.joinCode = joinCode;
+        this.Uid = Uid;
+        this.userEnrolled = new ArrayList<>();
+    }
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
+
+    public String getJoinCode() {
+        return joinCode;
+    }
+
+    public void setJoinCode(String joinCode) {
+        this.joinCode = joinCode;
     }
 
     public String getCourseName() {
@@ -43,7 +64,7 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public void setCourseOwner(User courseOwner) {
+    public void setCourseOwner(String courseOwner) {
         this.courseOwner = courseOwner;
     }
 
@@ -56,16 +77,16 @@ public class Course {
     }
 
     public String getCourseOwner() {
-        return this.courseOwner.getName();
+        return this.courseOwner;
     }
 
-    public Boolean isOwner(User user){
-        if (user == courseOwner){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+//    public Boolean isOwner(String user){
+//        if (user == courseOwner){
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
+//    }
 
 }

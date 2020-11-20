@@ -226,7 +226,12 @@ public class AddFragment extends Fragment {
                                 myUsers.add(Uid);
 
                                 tempCourse.setUserEnrolled(new ArrayList<String>(myUsers));
-                                FirebaseDatabase.getInstance().getReference("Courses/" + item_snapshot.getKey()).setValue(tempCourse);
+                                FirebaseDatabase.getInstance().getReference("Courses/" + item_snapshot.getKey()).setValue(tempCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        joinSuccessView.setVisibility(View.VISIBLE);
+                                    }
+                                });
                             }
                         }
                     }

@@ -15,9 +15,9 @@ import java.util.List;
 
 public class CourseAdapter extends ArrayAdapter {
 
-    ArrayList<Course> courseList = new ArrayList<>();
+    ArrayList<String> courseList = new ArrayList<>();
 
-    public CourseAdapter(@NonNull Context context, int resource, ArrayList<Course> courseList) {
+    public CourseAdapter(@NonNull Context context, int resource, ArrayList<String> courseList) {
         super(context, resource);
         this.courseList = courseList;
     }
@@ -35,8 +35,8 @@ public class CourseAdapter extends ArrayAdapter {
         v = inflater.inflate(R.layout.list_view_courses, null);
         TextView courseName = (TextView) v.findViewById(R.id.className);
         TextView courseJoinCode = (TextView) v.findViewById(R.id.classJoinCode);
-        courseName.setText(courseList.get(position).getCourseName());
-        courseJoinCode.setText(courseList.get(position).getJoinCode());
+        courseName.setText(courseList.get(position));
+        courseJoinCode.setText(courseList.get(position));
         return v;
     }
 }

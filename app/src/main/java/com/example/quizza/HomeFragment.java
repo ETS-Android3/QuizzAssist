@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,28 +51,33 @@ public class HomeFragment extends Fragment {
 
         classList = (ListView) view.findViewById(R.id.classList);
 
-        ArrayList<Course> myCourses = new ArrayList<>();
+        ArrayList<String> myCourses = new ArrayList<String>();
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item_snapShot : snapshot.getChildren()){
-                    if(item_snapShot.getKey().equals(User.getUid())){
-                        course1 =  item_snapShot.getValue(Course.class);
-                        myCourses.add(course1);
-                        Log.d("classname", course1.getCourseName());
+        if(!(User==null)) {
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot item_snapShot : snapshot.getChildren()) {
+                        if (item_snapShot.getValue(Course.class).getUid().equals(User.getUid())) {
+                            course1 = item_snapShot.getValue(Course.class);
+                            myCourses.add(course1.getCourseName());
+                            ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, myCourses);
+                            classList.setAdapter(myAdapter);
+                            Log.d("classname", myCourses.toString());
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+            
 
-        CourseAdapter myAdapter = new CourseAdapter(getContext(), R.layout.list_view_courses, myCourses);
-        classList.setAdapter(myAdapter);
+//        CourseAdapter myAdapter = new CourseAdapter(getContext(), android.R.layout.simple_list_item_1, myCourses);
+
 
 
 

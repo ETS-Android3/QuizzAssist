@@ -27,55 +27,22 @@ public class Course {
         this.courseOwner = course_Owner;
     }
 
-    public String getCourseName() {
-        return this.courseName;
-    }
+    public String getCourseName() { return this.courseName; }
 
-    public int getCourseID() {
-        return this.courseID;
-    }
+    public int getCourseID() { return this.courseID; }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
-    }
+    public void setCourseID(int courseID) { this.courseID = courseID; }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
+    public void setCourseName(String courseName) { this.courseName = courseName; }
 
-    public void setCourseOwner(User courseOwner) {
-        this.courseOwner = courseOwner;
-    }
+    public void setCourseOwner(User courseOwner) { this.courseOwner = courseOwner; }
 
-    public List<String> getUserEnrolled() {
-        return userEnrolled;
-    }
+    public List<String> getUserEnrolled() { return userEnrolled; }
 
-    public void setUserEnrolled(List<String> userEnrolled) {
-        this.userEnrolled = userEnrolled;
-    }
+    public void setUserEnrolled(List<String> userEnrolled) { this.userEnrolled = userEnrolled; }
 
-    public String getCourseOwner() {
-        return this.courseOwner.getName();
-    }
+    public String getCourseOwner() { return this.courseOwner.getName(); }
 
-    public Boolean isOwner(User user){
-        if (user == courseOwner){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public List<String> getListOfStudentsWhoDidNotSubmitPhotos(Event event) {
-        List<String> newList = new ArrayList<String>();
-
-        //for each student in course
-            //if array of photos(index) == null
-                //add student name(index) to list
-
-        return newList;
-    }
+    public Boolean isOwner(User user) { return (user == this.courseOwner) ? (true) : (false); }
 
 }

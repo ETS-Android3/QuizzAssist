@@ -36,6 +36,10 @@ public class signUpPage extends AppCompatActivity {
 
     EditText userName;
     EditText userEmail;
+    EditText userFirstName;
+    EditText userMiddleName;
+    EditText userLastName;
+    EditText userStudentNumber;
     EditText userPassword;
 
     Button signUpButton;
@@ -52,10 +56,14 @@ public class signUpPage extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_page);
 
         userName = (EditText) findViewById(R.id.et_userName);
+        userFirstName = (EditText) findViewById(R.id.et_userFirstName);
+        userMiddleName = (EditText) findViewById(R.id.et_userMiddleName);
+        userLastName = (EditText) findViewById(R.id.et_userLastName);
+        userStudentNumber = (EditText) findViewById(R.id.et_userStudentNumber);
         userEmail = (EditText) findViewById(R.id.et_userEmail);
         userPassword = (EditText) findViewById(R.id.et_userPassword);
 
-        signUpButton = (Button) findViewById(R.id.bt_signUp);
+        signUpButton = (Button) findViewById(R.id.bt_signUpPage);
         returnToLoginButton = (Button) findViewById(R.id.backToLogin);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 

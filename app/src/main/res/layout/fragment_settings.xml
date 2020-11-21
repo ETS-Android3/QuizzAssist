@@ -12,7 +12,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/logout"
+            android:text="@string/logOutButtonText"
             android:id="@+id/logout_button"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"

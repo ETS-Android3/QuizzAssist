@@ -6,7 +6,7 @@
 
     android:id="@+id/createOrJoinClassPage"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/appBackgroundColor">
+    android:background="@color/appBackground">
 
     <TextView
         android:id="@+id/createOrJoinText"
@@ -20,13 +20,13 @@
         style="@style/Buttons"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
-        android:text="@string/userOption_CreateClass"></Button>
+        android:text="@string/createCourseButtonText"></Button>
 
     <Button
         android:id="@+id/joinClassButton"
         style="@style/Buttons"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="480dp"
-        android:text="@string/userOption_joinClass"></Button>
+        android:text="@string/joinCourseButtonText"></Button>
 
 </RelativeLayout>

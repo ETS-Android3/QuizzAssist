@@ -28,66 +28,71 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddFragment #newInstance} factory method to
  * create an instance of this fragment.
  */
 public class AddFragment extends Fragment {
-
-    Button addButton;
-    EditText userInputClass;
-    EditText userInputcourseID;
-    User currentUser;
-    TextView courseInfo;
-    private FirebaseAuth fAuth;
+    CourseManager courseManager = new CourseManager();
+    AtomicInteger courseID = new AtomicInteger(0);
+    User courseOwner;
     DatabaseReference currentDatabase;
+    FirebaseAuth fAuth;
 
+    TextView joinSuccessView;
     TextView classJoinInfo;
     TextView classJoinCode;
-    TextView joinSuccessView;
+    TextView courseInfo;
 
-    Button addViewButton;
-    Button joinViewButton;
+    ImageView backJoinView;
+    ImageView backAddView;
+
+    EditText userInputCourseID;
+    EditText userInputClass;
 
     Button joinClassButton;
+    Button joinViewButton;
+    Button addViewButton;
+    Button addButton;
 
-    ImageView backAddView;
-    ImageView backJoinView;
-
+    RelativeLayout joinCourseView;
     RelativeLayout initialAddView;
     RelativeLayout addCourseView;
-    RelativeLayout joinCourseView;
 
-    public AddFragment() {
-        // Required empty public constructor
-    }
+    private final String emptyCourseNameError = "Course Name is Required";
+    private final String addingClassError = "Error occurred in adding class";
+
+
+    public AddFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_add, container, false);
-        addButton = (Button) view.findViewById(R.id.addCourse);
-        userInputClass = (EditText) view.findViewById(R.id.classToAdd);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         fAuth = FirebaseAuth.getInstance();
-        userInputcourseID = (EditText) view.findViewById(R.id.courseID);
-        courseInfo = (TextView) view.findViewById(R.id.classInfo);
-        initialAddView = (RelativeLayout) view.findViewById(R.id.addPage);
-        addCourseView = (RelativeLayout) view.findViewById(R.id.courseAddView);
-        joinCourseView = (RelativeLayout) view.findViewById(R.id.joinCourseView);
+        View view = inflater.inflate(R.layout.fragment_add, container, false);
 
-        joinClassButton = (Button) view.findViewById(R.id.joinClassButton);
         joinSuccessView = (TextView) view.findViewById(R.id.joinSuccessView);
-
-
-        addViewButton = (Button) view.findViewById(R.id.addViewButton);
-        joinViewButton = (Button) view.findViewById(R.id.joinViewButton);
         classJoinInfo = (TextView) view.findViewById(R.id.classJoinCodeInfo);
         classJoinCode = (TextView) view.findViewById(R.id.classJoinCode);
+        courseInfo = (TextView) view.findViewById(R.id.classInfo);
 
-        backAddView = (ImageView) view.findViewById(R.id.backAddView);
         backJoinView = (ImageView) view.findViewById(R.id.backJoinView);
+        backAddView = (ImageView) view.findViewById(R.id.backAddView);
+
+        userInputCourseID = (EditText) view.findViewById(R.id.courseID);
+        userInputClass = (EditText) view.findViewById(R.id.classToAdd);
+
+        joinCourseView = (RelativeLayout) view.findViewById(R.id.joinCourseView);
+        initialAddView = (RelativeLayout) view.findViewById(R.id.addPage);
+        addCourseView = (RelativeLayout) view.findViewById(R.id.courseAddView);
+
+        joinClassButton = (Button) view.findViewById(R.id.joinClassButton);
+        joinViewButton = (Button) view.findViewById(R.id.joinViewButton);
+        addViewButton = (Button) view.findViewById(R.id.addViewButton);
+        addButton = (Button) view.findViewById(R.id.addCourse);
 
         backAddView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,59 +137,60 @@ public class AddFragment extends Fragment {
             }
         });
 
-        final String addClassFail = "Error occurred in adding class";
-
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String courseName = userInputClass.getText().toString();
-                Integer courseID = 0;
                 Log.d("courseName", courseName);
                 currentDatabase = FirebaseDatabase.getInstance().getReference("Users");
                 currentDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot item_snapshot:snapshot.getChildren()){
-                            if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                                currentUser = item_snapshot.getValue(User.class);
+                        for (DataSnapshot item_snapshot : snapshot.getChildren()) {
+                            if (item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                courseOwner = item_snapshot.getValue(User.class);
                             }
                         }
                     }
 
+                    //To implement
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        //To implement5
+
                     }
                 });
 
                 if (TextUtils.isEmpty(courseName)) {
-                    userInputClass.setError("Course Name is Required");
+                    userInputClass.setError(emptyCourseNameError);
                     return;
                 }
 
-                if(!(currentUser == null)){
-                    Course course1 = new Course(courseName, currentUser, courseID);
+                if (courseOwner != null) {
+                    Course newCourse = new Course(courseName, courseOwner, courseID.getAndIncrement());
+                    while (courseManager.getCourseInviteCodes().containsValue(newCourse.getInviteCode())) {
+                        newCourse.generateNewInviteCode();
+                    }
+                    courseManager.getCourseInviteCodes().put(newCourse, newCourse.getInviteCode());
+                    courseManager.getCourseList().add(newCourse);
+
                     currentDatabase = FirebaseDatabase.getInstance().getReference();
-                    currentDatabase.child("Courses").push().setValue(course1)
+
+                    currentDatabase.child("Courses").push().setValue(newCourse)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    courseInfo.setText(course1.getCourseName());
+                                    courseInfo.setText(newCourse.getCourseName());
                                     classJoinInfo.setVisibility(View.VISIBLE);
                                     classJoinCode.setVisibility(View.VISIBLE);
                                 } else {
-                                    Toast.makeText(getActivity(), addClassFail,
-                                        Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), addingClassError, Toast.LENGTH_SHORT).show();
                                 }
                         }
                     });
                 }
-
             }
         });
-
         return view;
     }
 }

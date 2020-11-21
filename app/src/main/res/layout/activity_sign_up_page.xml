@@ -16,52 +16,37 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/signupTitle"
+            android:text="@string/signUpHeaderText"
+            android:gravity="center"
             android:id="@+id/signupTitle"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             android:textSize="40sp"/>
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_bg"
-            android:hint="@string/name"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:layout_margin="5dp"
+            style="@style/EditTextStandard"
+            android:hint="@string/userNameEditTextHint"
             android:layout_below="@+id/signupTitle"
-            android:id="@+id/et_name"
-            android:layout_centerHorizontal="true"/>
+            android:id="@+id/et_name" />
+
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            style="@style/EditTextStandard"
             android:layout_below="@id/et_name"
-            android:background="@drawable/edit_bg"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:hint="@string/email"
-            android:layout_margin="5dp"
+            android:hint="@string/userEmailEditTextHint"
             android:id="@+id/et_email"
             android:layout_centerHorizontal="true"/>
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            style="@style/EditTextStandard"
             android:layout_below="@id/et_email"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:background="@drawable/edit_bg"
-            android:hint="@string/Pass"
-            android:layout_margin="5dp"
+            android:hint="@string/userPasswordEditTextHint"
             android:id="@+id/et_pass"
-            android:inputType="textPassword"
-            android:layout_centerHorizontal="true"/>
+            android:inputType="textPassword" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/signup"
+            android:text="@string/signUpButtonText"
             android:layout_below="@id/et_pass"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
@@ -83,7 +68,7 @@
             android:id="@+id/backToLogin"
             android:layout_margin="5dp"
             android:layout_centerHorizontal="true"
-            android:text="@string/login"/>
+            android:text="@string/loginButtonText"/>
 
 
     </RelativeLayout>

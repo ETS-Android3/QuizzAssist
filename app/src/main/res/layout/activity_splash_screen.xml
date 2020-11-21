@@ -6,7 +6,7 @@
 
     android:id="@+id/splashPage"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/appBackgroundColor">
+    android:background="@color/appBackground">
 
     <TextView
         android:id="@+id/appName"

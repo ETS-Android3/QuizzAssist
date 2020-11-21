@@ -6,7 +6,7 @@
 
     android:id="@+id/joinClassPage"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/appBackgroundColor">
+    android:background="@color/appBackground">
 
     <RelativeLayout
         style="@style/wrapHeightAndWidth"
@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/joinClassText"
             style="@style/GenericText"
-            android:text="@string/userOption_joinClass"
+            android:text="@string/userOption_joinCourse"
             android:textSize="40sp"
             android:textColor="@color/white"
             android:layout_marginBottom="75dp"
@@ -25,7 +25,7 @@
             android:id="@+id/classCodeEditText"
             style="@style/EditTextStandard"
             android:layout_below="@id/joinClassText"
-            android:hint="@string/classCode"
+            android:hint="@string/inviteCodeEditTextHint"
             android:layout_margin="30dp"
             android:padding="10dp"/>
 
@@ -33,7 +33,7 @@
             android:id="@+id/joinClassButton"
             style="@style/Buttons"
             android:layout_below="@id/classCodeEditText"
-            android:text="@string/userOption_joinClass"
+            android:text="@string/joinCourseButtonText"
             android:layout_margin="10dp"
             android:layout_centerHorizontal="true"/>
 

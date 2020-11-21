@@ -6,7 +6,7 @@
 
     android:id="@+id/homePage"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/appBackgroundColor">
+    android:background="@color/appBackground">
 
     <RelativeLayout
         style="@style/matchParentHeightAndWidth"
@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/createBt"
-                android:text="@string/userOption_CreateClass"
+                android:text="@string/createCourseButtonText"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"/>
 
@@ -32,7 +32,7 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/joinBt"
                 android:layout_below="@+id/createBt"
-                android:text="@string/userOption_joinClass"
+                android:text="@string/joinCourseButtonText"
                 android:layout_margin="10dp"/>
 
         </RelativeLayout>

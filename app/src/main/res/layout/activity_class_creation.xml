@@ -6,7 +6,7 @@
 
     android:id="@+id/createClassPage"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/appBackgroundColor">
+    android:background="@color/appBackground">
 
     <RelativeLayout
         style="@style/wrapHeightAndWidth"
@@ -58,7 +58,7 @@
             android:layout_below="@id/privacySetting_Public"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="@string/createClassButtonText" />
+            android:text="@string/createCourseButtonText" />
 
     </RelativeLayout>
 

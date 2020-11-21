@@ -4,7 +4,7 @@
 
     android:id="@+id/createdClassPage"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/appBackgroundColor">
+    android:background="@color/appBackground">
 
     <RelativeLayout
         style="@style/matchParentHeightAndWidth">
@@ -12,7 +12,7 @@
         <TextView
             android:id="@+id/classSuccessfullyCreatedText"
             style="@style/GenericText"
-            android:text="@string/createClassSuccessText"
+            android:text="@string/createCourseSuccessText"
             android:textSize="30sp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />

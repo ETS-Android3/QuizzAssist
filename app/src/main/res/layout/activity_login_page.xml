@@ -2,139 +2,78 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".loginPage"
-
-    android:id="@+id/logoPage"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/teal_200">
+    android:background="@color/teal_200"
+    tools:context=".loginPage">
 
     <RelativeLayout
+        android:id="@+id/introRelativeLayout"
         style="@style/wrapHeightAndWidth"
-        android:layout_centerInParent="true"
-        android:id="@+id/relat1">
+        android:layout_centerInParent="true">
 
         <ImageView
+            android:id="@+id/logo"
             style="@style/wrapHeightAndWidth"
-            android:id="@+id/logo"
-            android:src="@drawable/logo"
-            android:layout_centerHorizontal="true"/>
-    android:background="@color/teal_200">
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/relat2"
-            android:layout_below="@id/logo"
-            android:visibility="gone">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/relat1">
-
-        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/logo"
-            android:src="@drawable/logo"
-            android:layout_centerHorizontal="true"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/relat2"
             android:layout_below="@id/logo"
             android:visibility="gone">
 
             <EditText
+                android:id="@+id/tv_username"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:hint="@string/userDesiredUserName"
-                android:padding="10dp"
-                android:id="@+id/tv_username"
-                android:background="@drawable/edit_bg"
                 android:layout_margin="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"/>
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:hint="@string/User"
-                android:padding="10dp"
-                android:id="@+id/tv_username"
                 android:background="@drawable/edit_bg"
-                android:layout_margin="10dp"
+                android:hint="@string/userNameEditTextHint"
+                android:padding="10dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"/>
+                android:textColorHint="@color/black" />
 
             <EditText
+                android:id="@+id/tv_password"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:hint="@string/userPassword"
-                android:padding="10dp"
-                android:id="@+id/tv_password"
                 android:layout_below="@id/tv_username"
-                android:background="@drawable/edit_bg"
                 android:layout_margin="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:inputType="textPassword"/>
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:hint="@string/Pass"
+                android:background="@drawable/edit_bg"
+                android:hint="@string/userPasswordEditTextHint"
+                android:inputType="textPassword"
                 android:padding="10dp"
-                android:id="@+id/tv_password"
-                android:layout_below="@id/tv_username"
-                android:background="@drawable/edit_bg"
-                android:layout_margin="10dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:inputType="textPassword"/>
+                android:textColorHint="@color/black" />
 
             <Button
+                android:id="@+id/bt_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_password"
-                android:layout_margin="5dp"
                 android:layout_centerHorizontal="true"
-                android:text="@string/loginButtonText"
-                android:id="@+id/bt_login"/>
+                android:layout_margin="5dp"
+                android:text="@string/loginButtonText" />
 
             <Button
+                android:id="@+id/bt_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/bt_login"
+                android:layout_centerHorizontal="true"
                 android:layout_margin="2dp"
-                android:layout_centerHorizontal="true"
-                android:text="@string/signUpButtonText"
-                android:id="@+id/bt_signup"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_password"
-                android:layout_margin="5dp"
-                android:layout_centerHorizontal="true"
-                android:text="@string/login"
-                android:id="@+id/bt_login"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/bt_login"
-                android:layout_margin="2dp"
-                android:layout_centerHorizontal="true"
-                android:text="@string/signup"
-                android:id="@+id/bt_signup"/>
+                android:text="@string/signUpButtonText" />
 
             <ProgressBar
+                android:id="@+id/progressBar2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/bt_signup"
-                android:layout_margin="10dp"
                 android:layout_centerHorizontal="true"
-                android:visibility="invisible"
-                android:id="@+id/progressBar2"/>
+                android:layout_margin="10dp"
+                android:visibility="invisible" />
 
         </RelativeLayout>
 

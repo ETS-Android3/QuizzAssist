@@ -37,8 +37,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        userName = (TextView) view.findViewById(R.id.userInfo1);
-        userEmail = (TextView) view.findViewById(R.id.userInfo2);
+        userName = (TextView) view.findViewById(R.id.et_userName);
+        userEmail = (TextView) view.findViewById(R.id.et_userEmail);
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 

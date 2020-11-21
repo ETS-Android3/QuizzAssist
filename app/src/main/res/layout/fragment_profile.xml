@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/userProfile"
+    style="@style/matchParentHeightAndWidth"
     tools:context=".ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/userInformationRelativeView"
+        style="@style/matchParentHeightAndWidth">
 
         <ImageView
+            android:id="@+id/userAvatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/profilePic"
             android:src="@drawable/profile_icon"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="150dp"/>
 
         <TextView
+            android:id="@+id/userFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:layout_centerInParent="true"
-            android:id="@+id/userInfo1"
             android:text="Name"
             android:layout_margin="10dp"
             android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
 
         <TextView
+            android:id="@+id/userEmail"
+            android:layout_below="@id/userFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:id="@+id/userInfo2"
             android:text="Email"
             android:layout_margin="10dp"
-            android:layout_below="@id/userInfo1"
             android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
 
         <TextView
+            android:id="@+id/userStudentNumber"
+            android:layout_below="@id/userEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:id="@+id/userInfo3"
             android:text="Student Number (Optional)"
             android:layout_margin="10dp"
-            android:layout_below="@id/userInfo2"
             android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
 

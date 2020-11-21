@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         FrameLayout flFragment = (FrameLayout) findViewById(R.id.flFragment);
 
-        BottomNavigationView bottomNavBar = findViewById(R.id.navBar);
+        BottomNavigationView bottomNavBar = findViewById(R.id.navigationBar);
 
         bottomNavBar.setOnNavigationItemSelectedListener(navBarMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment());
@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navBarMethod =  new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener navBarMethod
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;

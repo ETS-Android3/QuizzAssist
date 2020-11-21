@@ -51,11 +51,11 @@ public class signUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
 
-        userName = (EditText) findViewById(R.id.et_name);
-        userEmail = (EditText) findViewById(R.id.et_email);
-        userPassword = (EditText) findViewById(R.id.et_pass);
+        userName = (EditText) findViewById(R.id.et_userFirstName);
+        userEmail = (EditText) findViewById(R.id.et_userEmail);
+        userPassword = (EditText) findViewById(R.id.et_userPassword);
 
-        signUpButton = (Button) findViewById(R.id.bt_signupPage);
+        signUpButton = (Button) findViewById(R.id.bt_signUp);
         returnToLoginButton = (Button) findViewById(R.id.backToLogin);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 

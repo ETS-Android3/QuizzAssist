@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/signUpPage"
     style="@style/matchParentHeightAndWidth"
     android:background="@color/appBackground"
     tools:context=".signUpPage">
@@ -10,7 +9,7 @@
     <RelativeLayout
         style="@style/wrapHeightAndWidth"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/signupTitle"
@@ -23,7 +22,6 @@
             android:hint="@string/userNameEditTextHint"
             android:layout_below="@+id/signupTitle" />
 
-        //here
         <EditText
             android:id="@+id/et_userFirstName"
             style="@style/EditTextStandard"

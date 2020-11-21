@@ -41,7 +41,7 @@ public class signUpPage extends AppCompatActivity {
     Button signUpButton;
     Button returnToLoginButton;
 
-    FirebaseAuth fAuth;
+    private FirebaseAuth fAuth;
     ProgressBar mProgressBar;
     DatabaseReference mDatabase;
     public final int minPasswordLength = 6;
@@ -51,7 +51,7 @@ public class signUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
 
-        userName = (EditText) findViewById(R.id.et_userFirstName);
+        userName = (EditText) findViewById(R.id.et_userName);
         userEmail = (EditText) findViewById(R.id.et_userEmail);
         userPassword = (EditText) findViewById(R.id.et_userPassword);
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.security.CryptoPrimitive;
@@ -34,6 +35,8 @@ public class HomeFragment extends Fragment {
     CardView courseBox2;
     CardView courseBox3;
     CardView courseBox4;
+    LinearLayout classRoom;
+    RelativeLayout dashboard;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -49,6 +52,9 @@ public class HomeFragment extends Fragment {
         courseBox2 = (CardView) view.findViewById(R.id.courseBox2);
         courseBox3 = (CardView) view.findViewById(R.id.courseBox3);
         courseBox4 = (CardView) view.findViewById(R.id.courseBox4);
+        classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
+        dashboard = (RelativeLayout) view.findViewById(R.id.coursesView);
+
         context = getContext();
         GridLayout = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
 
@@ -62,7 +68,8 @@ public class HomeFragment extends Fragment {
         courseBox1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                dashboard.setVisibility(View.INVISIBLE);
+                classRoom.setVisibility(View.VISIBLE);
             }
         });
 

@@ -24,12 +24,9 @@ public class User {
     private List<String> enrolledCourses = new ArrayList<>();
 
 
-    public User(){
-        this.name = "Default";
-        this.createdCourses = new ArrayList<>();
-    }
+    public User() {}
 
-    public User(String name){
+    public User(String name) {
         this.name = name;
         this.createdCourses = new ArrayList<>();
     }

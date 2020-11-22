@@ -12,7 +12,6 @@
         android:theme="@style/Theme.QuizzA">
 
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ClassRoom"/>
         <activity android:name=".signUpPage" />
         <activity android:name=".SplashScreen" />
         <activity android:name=".loginPage">

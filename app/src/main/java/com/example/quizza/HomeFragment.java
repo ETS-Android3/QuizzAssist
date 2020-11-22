@@ -101,10 +101,10 @@ public class HomeFragment extends Fragment {
         //Initialize the TextView
         textview = new TextView(context);
         Text_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        Text_View_Params.setMargins(0,DpToPix(12),0,0);
+        Text_View_Params.setMargins(0,DpToPix(6),0,6);
         textview.setText("Event Number");
         textview.setTextColor(Color.BLACK);
-        textview.setTextSize(18);
+        textview.setTextSize(20);
 
         linearlayout.addView(textview);
         cardview.addView(linearlayout);

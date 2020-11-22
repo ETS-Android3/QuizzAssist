@@ -15,19 +15,19 @@ import java.util.UUID;
 public class Course {
     private Integer courseID;
     private String courseName;
-    private String courseOwnerName;
+    private String courseOwner;
     private String inviteCode;
     private final Integer inviteCodeLength = 10;
     private List<String> enrolledUsers;
 
     public Course() {}
 
-    Course (String course_Name, String courseOwnerName, Integer course_ID) {
+    Course (String course_Name, String courseOwner, Integer course_ID) {
         this.courseID = course_ID;
         this.courseName = course_Name;
-        this.courseOwnerName = courseOwnerName;
+        this.courseOwner = courseOwner;
         this.enrolledUsers = new ArrayList<>();
-        this.enrolledUsers.add(this.courseOwnerName);
+        this.enrolledUsers.add(this.courseOwner);
         this.inviteCode = generateInviteCode(this.inviteCodeLength);
     }
 
@@ -52,7 +52,7 @@ public class Course {
     }
 
     public void setCourseOwner(String courseOwnerName) {
-        this.courseOwnerName = courseOwnerName;
+        this.courseOwner = courseOwnerName;
     }
 
     public List<String> getEnrolledUsers() {
@@ -64,11 +64,11 @@ public class Course {
     }
 
     public String getCourseOwner() {
-        return this.courseOwnerName;
+        return this.courseOwner;
     }
 
-    public Boolean isOwner(String courseOwnerName) {
-        return (courseOwnerName == this.courseOwnerName) ? true : false;
+    public Boolean isOwner(String courseOwner) {
+        return (courseOwner == this.courseOwner) ? true : false;
     }
 
     public String getInviteCode() {
@@ -77,22 +77,6 @@ public class Course {
 
     public Integer getInviteCodeLength() {
         return inviteCodeLength;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "courseID=" + courseID +
-                ", courseName='" + courseName + '\'' +
-                ", courseOwner=" + courseOwnerName +
-                ", inviteCode='" + inviteCode + '\'' +
-                ", inviteCodeLength=" + inviteCodeLength +
-                ", enrolledUsers=" + enrolledUsers +
-                '}';
-    }
-
-    public String getCourseOwnerName() {
-        return courseOwnerName;
     }
 
     public void generateNewInviteCode() {

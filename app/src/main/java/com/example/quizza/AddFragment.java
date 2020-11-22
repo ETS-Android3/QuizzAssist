@@ -31,7 +31,9 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -165,39 +167,37 @@ public class AddFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             boolean isValidInviteCode = false;
                             for (DataSnapshot currentSnapshot : snapshot.getChildren()) {
-
-                                Integer courseID = currentSnapshot.getValue(Course.class).getCourseID();
-                                String courseName = currentSnapshot.getValue(Course.class).getCourseName();
-                                String courseOwnerName = currentSnapshot.getValue(Course.class).getCourseOwnerName();
-                                String inviteCode = currentSnapshot.getValue(Course.class).getInviteCode();
-                                List<String> enrolledUsers = currentSnapshot.getValue(Course.class).getEnrolledUsers();
-                                Course currentCourse = new Course(courseName, courseOwnerName, courseID);
-                                currentCourse.setInviteCode(inviteCode);
-                                currentCourse.setEnrolledUsers(enrolledUsers);
-
+                                Course currentCourse = currentSnapshot.getValue(Course.class);
+//                                Integer courseID = currentSnapshot.getValue(Course.class).getCourseID();
+//                                String courseName = currentSnapshot.getValue(Course.class).getCourseName();
+//                                String courseOwnerName = currentSnapshot.getValue(Course.class).getCourseOwnerName();
+//                                String inviteCode = currentSnapshot.getValue(Course.class).getInviteCode();
+//                                List<String> enrolledUsers = currentSnapshot.getValue(Course.class).getEnrolledUsers();
+//                                Course currentCourse = new Course(courseName, courseOwnerName, courseID);
+//                                currentCourse.setInviteCode(inviteCode);
+//                                currentCourse.setEnrolledUsers(enrolledUsers);
                                 if (currentCourse.getInviteCode().equals(userInputInviteCode)) {
                                     isValidInviteCode = true;
                                     int i = 0;
-                                    currentCourse.getEnrolledUsers().add(currentUser.getName());
-                                    FirebaseDatabase.getInstance().getReference("Courses/"
-                                            + currentSnapshot.getKey()).setValue(currentCourse)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        Toast.makeText(getContext(), "Successfully Joined!",
-                                                                Toast.LENGTH_SHORT).show();
-                                                    } else {
-                                                        Toast.makeText(getActivity(), courseNameExistsError,
-                                                                Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
-                                    for (Course courseIterator : courseManager.getCourseList()) {
-                                        if (currentCourse.getInviteCode().equals(courseIterator.getInviteCode()))
-                                            courseManager.getCourseList().set(i, currentCourse);
-                                        i++;
-                                    }
+                                    Set<String> myUsers = new HashSet<String>(currentCourse.getEnrolledUsers());
+                                    myUsers.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                    currentCourse.setEnrolledUsers(new ArrayList<String>(myUsers));
+                                    FirebaseDatabase.getInstance().getReference("Courses/" + currentSnapshot.getKey()).setValue(currentCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Set<String> enrolledCoures = new HashSet<>();
+                                            enrolledCoures.add(currentCourse.getCourseName());
+                                            currentUser.setEnrolledCourses(new ArrayList<String>(enrolledCoures));
+                                            FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(currentUser);
+
+                                            rv_userOptionPage.setVisibility(View.VISIBLE);
+                                            rv_createCoursePage.setVisibility(View.INVISIBLE);
+                                            rv_joinCoursePage.setVisibility(View.INVISIBLE);
+                                            Toast.makeText(getContext(), "Successfully Joined!",
+                                                                Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+//
                                 }
                             }
                             if (!isValidInviteCode) {
@@ -219,6 +219,7 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String courseName = et_userInputCourseName.getText().toString();
+
                 currentDatabase = FirebaseDatabase.getInstance().getReference("Users");
                 currentDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -226,6 +227,10 @@ public class AddFragment extends Fragment {
                         for (DataSnapshot currentSnapshot : snapshot.getChildren()) {
                             if (currentSnapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 currentUser = currentSnapshot.getValue(User.class);
+                                Set<String> createdCourses = new HashSet<>(currentUser.getCreatedCourses());
+                                createdCourses.add(courseName);
+                                currentUser.setCreatedCourses(new ArrayList<String>(createdCourses));
+                                FirebaseDatabase.getInstance().getReference("Users/"+FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(currentUser);
                             }
                         }
                     }
@@ -250,7 +255,7 @@ public class AddFragment extends Fragment {
 
                 if (currentUser != null) {
                     Course newCourse = new Course(courseName, currentUser.getName(), courseID.getAndIncrement());
-                    while (courseManager.getCourseInviteCodes().containsValue(newCourse.getInviteCode())) {
+                   while (courseManager.getCourseInviteCodes().containsValue(newCourse.getInviteCode())) {
                         newCourse.generateNewInviteCode();
                     }
                     courseManager.getCourseInviteCodes().put(newCourse.getCourseName(), newCourse.getInviteCode());

@@ -94,14 +94,14 @@ public class HomeFragment extends Fragment {
         LinearLayout.LayoutParams Linear_Layout = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         linearlayout.setLayoutParams(Linear_Layout);
-        linearlayout.setPadding(0,DpToPix(16),0,0);
+        linearlayout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
         linearlayout.setGravity(Gravity.CENTER);
         linearlayout.setOrientation(LinearLayout.VERTICAL);
 
         //Initialize the TextView
         textview = new TextView(context);
         Text_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        Text_View_Params.setMargins(0,DpToPix(6),0,6);
+        Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
         textview.setText("Event Number");
         textview.setTextColor(Color.BLACK);
         textview.setTextSize(20);

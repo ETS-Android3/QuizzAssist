@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.renderscript.Sampler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AddFragment extends Fragment {
     CourseManager courseManager = new CourseManager();
     AtomicInteger courseID = new AtomicInteger(0);
-    User courseOwner;
+    User currentUser;
     DatabaseReference currentDatabase;
     FirebaseAuth fAuth;
 
@@ -51,6 +52,7 @@ public class AddFragment extends Fragment {
     ImageView iv_returnToUserOptionFromCreateCourse;
 
     EditText et_userInputCourseName;
+    EditText et_userInputInviteCode;
 
     Button bt_userOptionJoinCourse; //user choice to join a course
     Button bt_joiningCourse; //join course after inputting invite code
@@ -63,7 +65,8 @@ public class AddFragment extends Fragment {
     RelativeLayout rv_createCoursePage;
 
     private final String emptyCourseNameError = "Course Name is Required";
-    private final String addingClassError = "Error occurred in adding class";
+    private final String courseNameExistsError = "Error occurred in adding class";
+    private final String invalidInviteCodeError = "Invite code is invalid. Try again";
 
 
     public AddFragment() {}
@@ -83,6 +86,7 @@ public class AddFragment extends Fragment {
         iv_returnToUserOptionFromCreateCourse = (ImageView) view.findViewById(R.id.iv_returnToUserOptionFromCreating);
 
         et_userInputCourseName = (EditText) view.findViewById(R.id.et_courseName);
+        et_userInputInviteCode = (EditText) view.findViewById(R.id.et_joinCourseInviteCode);
 
         rv_userOptionPage = (RelativeLayout) view.findViewById(R.id.rv_userOptionPage);
         rv_joinCoursePage = (RelativeLayout) view.findViewById(R.id.rv_JoiningCoursePage);
@@ -132,6 +136,53 @@ public class AddFragment extends Fragment {
         bt_joiningCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String userInputInviteCode = et_userInputInviteCode.getText().toString();
+
+                currentDatabase = FirebaseDatabase.getInstance().getReference("Users");
+                currentDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        boolean validInviteCode = false;
+                        for (DataSnapshot currentSnapshot : snapshot.getChildren()) {
+                            if (currentSnapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                                currentUser = currentSnapshot.getValue(User.class);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        //do later
+                    }
+                });
+
+                currentDatabase = FirebaseDatabase.getInstance().getReference("Courses");
+                currentDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        boolean validInviteCode = false;
+                        for (DataSnapshot currentSnapshot : snapshot.getChildren()) {
+                            for (Course currentCourse : courseManager.getCourseList()) {
+                                if (currentCourse.getInviteCode().equals(userInputInviteCode)) {
+                                    currentCourse.getEnrolledUsers().add(currentUser);
+                                    currentDatabase = FirebaseDatabase.getInstance().getReference("Courses/"
+                                        + currentSnapshot.getKey());
+                                    currentDatabase.setValue(courseManager.getCourseList());
+                                    validInviteCode = true;
+                                }
+                            }
+                            if (!validInviteCode) {
+                                et_userInputInviteCode.setError(invalidInviteCodeError);
+                                return;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 tv_joinCourseSuccessText.setVisibility(View.VISIBLE);
             }
         });
@@ -145,9 +196,9 @@ public class AddFragment extends Fragment {
                 currentDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot item_snapshot : snapshot.getChildren()) {
-                            if (item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                                courseOwner = item_snapshot.getValue(User.class);
+                        for (DataSnapshot currentSnapshot : snapshot.getChildren()) {
+                            if (currentSnapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                currentUser = currentSnapshot.getValue(User.class);
                             }
                         }
                     }
@@ -164,27 +215,33 @@ public class AddFragment extends Fragment {
                     return;
                 }
 
-                if (courseOwner != null) {
-                    Course newCourse = new Course(courseName, courseOwner, courseID.getAndIncrement());
+                //issue here if you restart app, it'll allow same course name to exist
+                else if (courseManager.getCourseInviteCodes().containsKey(courseName)) {
+                    et_userInputCourseName.setError(courseNameExistsError);
+                    return;
+                }
+
+                if (currentUser != null) {
+                    Course newCourse = new Course(courseName, currentUser, courseID.getAndIncrement());
                     while (courseManager.getCourseInviteCodes().containsValue(newCourse.getInviteCode())) {
                         newCourse.generateNewInviteCode();
                     }
-                    courseManager.getCourseInviteCodes().put(newCourse, newCourse.getInviteCode());
+                    courseManager.getCourseInviteCodes().put(newCourse.getCourseName(), newCourse.getInviteCode());
                     courseManager.getCourseList().add(newCourse);
 
                     currentDatabase = FirebaseDatabase.getInstance().getReference();
 
-                    currentDatabase.child("Courses").push().setValue(newCourse)
+                    currentDatabase.child("Courses").push().setValue(courseManager.getCourseList())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (!task.isSuccessful()) {
+                                    if (task.isSuccessful()) {
                                         //courseInfo.setText(newCourse.getCourseName());
                                         tv_courseInviteCodeHelperText.setVisibility(View.VISIBLE);
                                         tv_courseInviteCode.setText(newCourse.getInviteCode());
                                         tv_courseInviteCode.setVisibility(View.VISIBLE);
                                     } else {
-                                        Toast.makeText(getActivity(), addingClassError, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), courseNameExistsError, Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

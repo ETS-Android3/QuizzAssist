@@ -28,6 +28,8 @@
             android:text="@string/joinCourseButtonText"
             android:layout_below="@id/bt_userOptionCreateCourse" />
 
+    </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/rv_JoiningCoursePage"
             style="@style/matchParentHeightAndWidth"
@@ -75,14 +77,12 @@
                 android:id="@+id/iv_returnToUserOptionFromJoining"
                 style="@style/BackViewStandard" />
 
-        </RelativeLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rv_creatingCoursePage"
         style="@style/matchParentHeightAndWidth"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/et_courseName"

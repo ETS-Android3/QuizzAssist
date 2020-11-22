@@ -26,11 +26,6 @@ public class User {
 
     public User() {}
 
-    public User(String name) {
-        this.name = name;
-        this.createdCourses = new ArrayList<>();
-    }
-
     public User(String userName, String userEmail) {
         this.name = userName;
         this.email = userEmail;
@@ -60,4 +55,13 @@ public class User {
         this.enrolledCourses = enrolledCourses;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", createdCourses=" + createdCourses +
+                ", enrolledCourses=" + enrolledCourses +
+                '}';
+    }
 }

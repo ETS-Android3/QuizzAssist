@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/addPageRelativeView"
         style="@style/matchParentHeightAndWidth"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <TextView
             style="@style/HeaderText"
@@ -121,7 +121,7 @@
         android:id="@+id/joinCourseRelativeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/joinPageText"

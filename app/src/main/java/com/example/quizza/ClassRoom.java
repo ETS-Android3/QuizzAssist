@@ -52,6 +52,7 @@ public class ClassRoom extends AppCompatActivity {
         cardview.setLayoutParams(Card_View_Params);
         cardview.setCardElevation(DpToPix(6));
         cardview.setRadius(DpToPix(12));
+        cardview.setBackgroundColor(Color.WHITE);
 
         //Initialize the LinearLayout
         LinearLayout.LayoutParams Linear_Layout = new LinearLayout.LayoutParams(

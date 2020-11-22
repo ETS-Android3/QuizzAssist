@@ -42,7 +42,7 @@
     <!--    Course Joining Portion    -->
     <string name="joinCourseButtonText">Join Course</string>
     <string name="inviteCodeHeaderText">Enter the course invite code below</string>
-    <string name="inviteCodeEditTextHint">Enter Course Invite Code</string>
+    <string name="inviteCodeEditTextHint">Enter invite code</string>
 
     <!--    Post-Course Create/Join Portion    -->
     <string name="createCourseSuccessText">Course Successfully Created!</string>
@@ -58,9 +58,8 @@
     <string name="test_inviteCodeDefault">gfu40giXz</string>
     <string name="test_classNameDefault">Test Class</string>
 
-    <!--    Undetermined Portion    -->
+    <!--    Undetermined Portion    -->11
     <string name="searchTitle">Search Course</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="courseIDHelperText">Course ID</string>
 
 </resources>

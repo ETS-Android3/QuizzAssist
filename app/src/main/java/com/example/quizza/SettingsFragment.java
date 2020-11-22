@@ -15,6 +15,7 @@ import android.widget.Button;
 public class SettingsFragment extends Fragment {
 
     Button logoutButton;
+    Button classRoomButton;
     FirebaseAuth fAuth;
 
     public SettingsFragment() {
@@ -25,8 +26,17 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        classRoomButton = (Button) view.findViewById(R.id.classRoomButton);
         logoutButton = (Button)view.findViewById(R.id.logout_button);
         fAuth = FirebaseAuth.getInstance();
+
+        classRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ClassRoom.class));
+                getActivity().finish();
+            }
+        });
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -26,11 +26,8 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout flFragment = (FrameLayout) findViewById(R.id.flFragment);
 
         BottomNavigationView bottomNavBar = findViewById(R.id.navigationBar);
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment()).commit();
         bottomNavBar.setOnNavigationItemSelectedListener(navBarMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment());
-
-
 
     }
 

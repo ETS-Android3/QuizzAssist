@@ -171,9 +171,14 @@ public class AddFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    courseInfo.setText(course1.getCourseName());
-                                    classJoinInfo.setVisibility(View.VISIBLE);
-                                    classJoinCode.setVisibility(View.VISIBLE);
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            courseInfo.setText(course1.getCourseName());
+                                            classJoinInfo.setVisibility(View.VISIBLE);
+                                            classJoinCode.setVisibility(View.VISIBLE);
+                                        }
+                                    });
                                 } else {
                                     Toast.makeText(getActivity(), addClassFail,
                                         Toast.LENGTH_SHORT).show();

@@ -3,53 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/userProfile"
     style="@style/matchParentHeightAndWidth"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileFragment"
+    android:background="@color/cardview_dark_background">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
-        android:id="@+id/userInformationRelativeView"
-        style="@style/matchParentHeightAndWidth">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="300dp"
+        android:background="@drawable/roundedgradient">
 
         <ImageView
             android:id="@+id/userAvatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/profile_icon"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="150dp"/>
+            android:layout_gravity="center"
+            android:src="@drawable/user_icon_default"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
-            android:id="@+id/userFirstName"
             android:layout_width="wrap_content"
+            android:id="@+id/userFirstName"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:text="Name"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:layout_centerHorizontal="true"/>
+            android:layout_margin="20dp"
+            android:textSize="30sp"
+            style="@style/GenericText"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/userInformationRelativeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp">
 
         <TextView
             android:id="@+id/userEmail"
-            android:layout_below="@id/userFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="Email"
+            style="@style/GenericText"
+            android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:layout_centerHorizontal="true"/>
+            android:text="Email"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/userStudentNumber"
-            android:layout_below="@id/userEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="Student Number (Optional)"
+            android:layout_below="@id/userEmail"
+            android:layout_centerHorizontal="true"
+            style="@style/GenericText"
             android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:layout_centerHorizontal="true"/>
+            android:text="Student Number (Optional)"
+            android:textSize="25sp" />
 
 
     </RelativeLayout>

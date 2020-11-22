@@ -15,19 +15,19 @@ import java.util.UUID;
 public class Course {
     private Integer courseID;
     private String courseName;
-    User courseOwner;
+    private String courseOwnerName;
     private String inviteCode;
     private final Integer inviteCodeLength = 10;
-    private List<User> enrolledUsers;
+    private List<String> enrolledUsers;
 
     public Course() {}
 
-    Course (String course_Name, User courseOwner, Integer course_ID) {
+    Course (String course_Name, String courseOwnerName, Integer course_ID) {
         this.courseID = course_ID;
         this.courseName = course_Name;
-        this.courseOwner = courseOwner;
+        this.courseOwnerName = courseOwnerName;
         this.enrolledUsers = new ArrayList<>();
-        this.enrolledUsers.add(this.courseOwner);
+        this.enrolledUsers.add(this.courseOwnerName);
         this.inviteCode = generateInviteCode(this.inviteCodeLength);
     }
 
@@ -43,24 +43,32 @@ public class Course {
         this.courseID = courseID;
     }
 
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+    }
+
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
-    public void setCourseOwner(User courseOwner) {
-        this.courseOwner = courseOwner;
+    public void setCourseOwner(String courseOwnerName) {
+        this.courseOwnerName = courseOwnerName;
     }
 
-    public List<User> getEnrolledUsers() {
+    public List<String> getEnrolledUsers() {
         return enrolledUsers;
     }
 
-    public User getCourseOwner() {
-        return this.courseOwner;
+    public void setEnrolledUsers(List<String> enrolledUsers) {
+        this.enrolledUsers = enrolledUsers;
     }
 
-    public Boolean isOwner(User user) {
-        return (user == this.courseOwner) ? true : false;
+    public String getCourseOwner() {
+        return this.courseOwnerName;
+    }
+
+    public Boolean isOwner(String courseOwnerName) {
+        return (courseOwnerName == this.courseOwnerName) ? true : false;
     }
 
     public String getInviteCode() {
@@ -76,11 +84,15 @@ public class Course {
         return "Course{" +
                 "courseID=" + courseID +
                 ", courseName='" + courseName + '\'' +
-                ", courseOwner=" + courseOwner +
+                ", courseOwner=" + courseOwnerName +
                 ", inviteCode='" + inviteCode + '\'' +
                 ", inviteCodeLength=" + inviteCodeLength +
                 ", enrolledUsers=" + enrolledUsers +
                 '}';
+    }
+
+    public String getCourseOwnerName() {
+        return courseOwnerName;
     }
 
     public void generateNewInviteCode() {

@@ -25,10 +25,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -139,14 +142,14 @@ public class AddFragment extends Fragment {
                 String userInputInviteCode = et_userInputInviteCode.getText().toString();
 
                 currentDatabase = FirebaseDatabase.getInstance().getReference("Users");
-                currentDatabase.addValueEventListener(new ValueEventListener() {
+                currentDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        boolean validInviteCode = false;
                         for (DataSnapshot currentSnapshot : snapshot.getChildren()) {
                             if (currentSnapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
                                 currentUser = currentSnapshot.getValue(User.class);
                         }
+
                     }
 
                     @Override
@@ -156,34 +159,59 @@ public class AddFragment extends Fragment {
                 });
 
                 currentDatabase = FirebaseDatabase.getInstance().getReference("Courses");
-                currentDatabase.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        boolean validInviteCode = false;
-                        for (DataSnapshot currentSnapshot : snapshot.getChildren()) {
-                            for (Course currentCourse : courseManager.getCourseList()) {
+                if (currentUser != null) {
+                    currentDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            boolean isValidInviteCode = false;
+                            for (DataSnapshot currentSnapshot : snapshot.getChildren()) {
+
+                                Integer courseID = currentSnapshot.getValue(Course.class).getCourseID();
+                                String courseName = currentSnapshot.getValue(Course.class).getCourseName();
+                                String courseOwnerName = currentSnapshot.getValue(Course.class).getCourseOwnerName();
+                                String inviteCode = currentSnapshot.getValue(Course.class).getInviteCode();
+                                List<String> enrolledUsers = currentSnapshot.getValue(Course.class).getEnrolledUsers();
+                                Course currentCourse = new Course(courseName, courseOwnerName, courseID);
+                                currentCourse.setInviteCode(inviteCode);
+                                currentCourse.setEnrolledUsers(enrolledUsers);
+
                                 if (currentCourse.getInviteCode().equals(userInputInviteCode)) {
-                                    currentCourse.getEnrolledUsers().add(currentUser);
-                                    currentDatabase = FirebaseDatabase.getInstance().getReference("Courses/"
-                                        + currentSnapshot.getKey());
-                                    currentDatabase.setValue(courseManager.getCourseList());
-                                    validInviteCode = true;
+                                    isValidInviteCode = true;
+                                    int i = 0;
+                                    currentCourse.getEnrolledUsers().add(currentUser.getName());
+                                    FirebaseDatabase.getInstance().getReference("Courses/"
+                                            + currentSnapshot.getKey()).setValue(currentCourse)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(getContext(), "Successfully Joined!",
+                                                                Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(getActivity(), courseNameExistsError,
+                                                                Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                    for (Course courseIterator : courseManager.getCourseList()) {
+                                        if (currentCourse.getInviteCode().equals(courseIterator.getInviteCode()))
+                                            courseManager.getCourseList().set(i, currentCourse);
+                                        i++;
+                                    }
                                 }
                             }
-                            if (!validInviteCode) {
+                            if (!isValidInviteCode) {
                                 et_userInputInviteCode.setError(invalidInviteCodeError);
                                 return;
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-
-                tv_joinCourseSuccessText.setVisibility(View.VISIBLE);
+                        }
+                    });
+                }
             }
         });
 
@@ -191,7 +219,6 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String courseName = et_userInputCourseName.getText().toString();
-                Log.d("courseName", courseName);
                 currentDatabase = FirebaseDatabase.getInstance().getReference("Users");
                 currentDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -222,7 +249,7 @@ public class AddFragment extends Fragment {
                 }
 
                 if (currentUser != null) {
-                    Course newCourse = new Course(courseName, currentUser, courseID.getAndIncrement());
+                    Course newCourse = new Course(courseName, currentUser.getName(), courseID.getAndIncrement());
                     while (courseManager.getCourseInviteCodes().containsValue(newCourse.getInviteCode())) {
                         newCourse.generateNewInviteCode();
                     }
@@ -231,7 +258,7 @@ public class AddFragment extends Fragment {
 
                     currentDatabase = FirebaseDatabase.getInstance().getReference();
 
-                    currentDatabase.child("Courses").push().setValue(courseManager.getCourseList())
+                    currentDatabase.child("Courses").push().setValue(newCourse)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

@@ -7,7 +7,7 @@
     tools:context=".SettingsFragment">
 
     <RelativeLayout
-        android:id="@+id/userSettingsRelativeView"
+        android:id="@+id/rv_userSettings"
         style="@style/matchParentHeightAndWidth">
 
             android:layout_centerHorizontal="true"
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/userAvatar"
+            android:id="@+id/iv_userAvatar"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:src="@drawable/profile_icon"
@@ -23,16 +23,17 @@
             android:layout_marginTop="100dp"/>
 
         <ImageView
+            android:id="@+id/iv_changeUserAvatar"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:padding="10dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/btn_bg"
-            android:layout_below="@id/userAvatar"
+            android:layout_below="@id/iv_userAvatar"
             android:src="@drawable/ic_camera" />
 
         <TextView
-            android:id="@+id/userFirstName"
+            android:id="@+id/tv_userFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
@@ -43,19 +44,19 @@
             android:layout_centerHorizontal="true"/>
 
         <TextView
-            android:id="@+id/userEmail"
-            android:layout_below="@id/userFirstName"
+            android:id="@+id/tv_userEmail"
+            android:layout_below="@id/tv_userFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:text="Email"
             android:layout_margin="10dp"
             android:textColor="@color/black"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true" />
 
         <TextView
-            android:id="@+id/userStudentNumber"
-            android:layout_below="@id/userEmail"
+            android:id="@+id/tv_userStudentNumber"
+            android:layout_below="@id/tv_userEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
@@ -67,13 +68,13 @@
         <Button
             android:id="@+id/bt_editProfile"
             style="@style/MediumButtons"
-            android:layout_below="@id/userStudentNumber"
+            android:layout_below="@id/tv_userStudentNumber"
             android:layout_marginTop="20dp"
             android:text="@string/editUserInfoButtonText"
             />
 
         <Button
-            android:id="@+id/logout_button"
+            android:id="@+id/bt_logoutButton"
             style="@style/MediumButtons"
             android:layout_marginBottom="75dp"
             android:text="@string/logOutButtonText"

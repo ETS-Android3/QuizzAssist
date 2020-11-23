@@ -11,6 +11,7 @@
  * No known bugs.
  */
 
+ //STILL HAVE TO ASSIGN BACK BUTTON WITH LISTENER TO GO BACK TO SIGNUP
 
 package com.example.quizza;
 
@@ -22,6 +23,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,7 +45,8 @@ public class SignUpPage extends AppCompatActivity {
     EditText userPassword;
 
     Button signUpButton;
-    Button returnToLoginButton;
+
+    ImageView returnToLogin;
 
     private FirebaseAuth fAuth;
     ProgressBar mProgressBar;
@@ -63,11 +66,12 @@ public class SignUpPage extends AppCompatActivity {
         userEmail = (EditText) findViewById(R.id.et_userEmail);
         userPassword = (EditText) findViewById(R.id.et_userPassword);
 
+        returnToLogin = (ImageView) findViewById(R.id.iv_returnToLogin);
+
         signUpButton = (Button) findViewById(R.id.bt_signUpPage);
-        returnToLoginButton = (Button) findViewById(R.id.backToLogin);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        returnToLoginButton.setOnClickListener(new View.OnClickListener() {
+        returnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), LoginPage.class));
@@ -133,7 +137,7 @@ public class SignUpPage extends AppCompatActivity {
                                                 }
                                             });
                                 } else {
-                                    Toast.makeText(SignUpPage.this, "Error Occured !" + task.getException()
+                                    Toast.makeText(SignUpPage.this, "Error Occurred !" + task.getException()
                                             .getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }

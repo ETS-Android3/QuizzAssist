@@ -30,17 +30,15 @@ public class SettingsFragment extends Fragment {
     TextView userStudentNumber;
     User currentUser;
 
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
+    public SettingsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        userName = (TextView) view.findViewById(R.id.userFirstName);
-        userEmail = (TextView) view.findViewById(R.id.userEmail);
-        userStudentNumber = (TextView) view.findViewById(R.id.userStudentNumber);
+        userName = (TextView) view.findViewById(R.id.tv_userFirstName);
+        userEmail = (TextView) view.findViewById(R.id.tv_userEmail);
+        userStudentNumber = (TextView) view.findViewById(R.id.tv_userStudentNumber);
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -63,7 +61,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        logoutButton = (Button)view.findViewById(R.id.logout_button);
+        logoutButton = (Button)view.findViewById(R.id.bt_logoutButton);
         fAuth = FirebaseAuth.getInstance();
 
         logoutButton.setOnClickListener(new View.OnClickListener() {

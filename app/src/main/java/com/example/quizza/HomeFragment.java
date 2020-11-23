@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.security.CryptoPrimitive;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class HomeFragment extends Fragment {
     Button bt_addEvent;
     Button button;
     TextView test;
+    TextView courseNameDisplay;
     TextView textview;
     CardView cardview;
     ImageView imageview;
@@ -71,7 +74,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
         test = (TextView)view.findViewById(R.id.test1);
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
         classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
@@ -80,6 +82,8 @@ public class HomeFragment extends Fragment {
         context = getContext();
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
         GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
+        bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
+        courseNameDisplay = (TextView)view.findViewById(R.id.tv_courseNameDisplay) ;
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -119,8 +123,8 @@ public class HomeFragment extends Fragment {
                 AddClassroomUI("CMPT 6969");
             }
         });
+        
 
-        //Only make the button show if the UID is equal to course owner
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,11 +132,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         return view;
     }
 
 
+    //Note that the following 3 functions are to establish specific UI patterns onto the view. Patterns of initializing the type of UI and setting its parameters are listed below. Please consult with Andrew Yeon for details.
     //Dynamically creates Event buttons on the fragment_home.xml.
     public void AddEvent(){
         //Initialize the CardView and set properties
@@ -168,36 +172,6 @@ public class HomeFragment extends Fragment {
         GridLayout_classroom.addView(cardview);
     }
 
-    public void SetClassView(String courseName){
-        //Initialize the RelativeLayout and it's properties
-        relativelayout = new RelativeLayout(context);
-        RelativeLayout.LayoutParams Relative_Layout_params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        Relative_Layout_params.setMargins(DpToPix(20), DpToPix(30), DpToPix(20), 0);
-
-        //Initialize the Button and it's properties for: AddEvent
-        button = new Button(context);
-        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
-        button.setText("ADD EVENT");
-        if(1 == 2/*current user is not the course creator*/){
-            //button.setVisibility(View.INVISIBLE);
-        }
-
-        //Initialize the TextView and set properties
-        textview = new TextView(context);
-        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
-        textview.setText(courseName);
-        textview.setTextColor(Color.WHITE);
-        textview.setTextSize(40);
-
-        //Set children and parents relationship between each component
-        relativelayout.addView(button);
-        relativelayout.addView(textview);
-        classRoom1.addView(relativelayout);
-    }
-
-
     //Dynamically creates class buttons in scrollview on the fragment_home.xml
     public void AddClassroomUI(String className){
         //Initialize the CardView and set properties
@@ -215,7 +189,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 dashboard.setVisibility(View.INVISIBLE);
                 classRoom.setVisibility(View.VISIBLE);
-                SetClassView(className);
+                //SetClassView(className);
+                courseNameDisplay.setText(className);
                 Toast.makeText(getActivity(), "Hello ldies", Toast.LENGTH_LONG).show();
             }
         });
@@ -250,10 +225,43 @@ public class HomeFragment extends Fragment {
         GridLayout_home.addView(cardview);
     }
 
-
     //Establishes UI needed to see class when clicking on any of the classes
+    /*public void SetClassView(String courseName){
+        //Initialize the RelativeLayout and it's properties
+        relativelayout = new RelativeLayout(context);
+        RelativeLayout.LayoutParams Relative_Layout_params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        Relative_Layout_params.setMargins(DpToPix(20), DpToPix(32), DpToPix(20), 0);
 
+        //Initialize the Button and it's properties for: AddEvent
+        button = new Button(context);
+        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        Button_Params.setMargins(DpToPix(200), DpToPix(20),0,0);
+        button.setText("ADD EVENT");
+        if(//current user is not the course creator){
+            //button.setVisibility(View.INVISIBLE);
+        }
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddEvent();
+            }
+        });
 
+        //Initialize the TextView and set properties
+        textview = new TextView(context);
+        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+        textview.setText(courseName);
+        textview.setTextColor(Color.WHITE);
+        textview.setTextSize(40);
+
+        //Set children and parents relationship between each component
+        relativelayout.addView(button);
+        relativelayout.addView(textview);
+        classRoom1.addView(relativelayout);
+    }*/
+
+    //Turns Dp values in float to Pixel values in int
     public int DpToPix(float sizeInDp){
         float scale = getResources().getDisplayMetrics().density;
         int dpAsPixels = (int) (sizeInDp*scale + 0.5f);

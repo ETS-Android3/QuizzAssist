@@ -75,7 +75,6 @@
             android:id="@+id/parentLinearLayout_activity_classroom"
             android:orientation="vertical"
             style = "@style/matchParentHeightAndWidth">
-
             <RelativeLayout
                 android:layout_marginTop="32dp"
                 android:layout_marginRight="20dp"
@@ -95,14 +94,6 @@
                     android:text="Course Name"
                     android:textSize="40sp"
                     android:textColor="#FFFFFF"/>
-                <TextView
-                    android:id="@+id/tv_eventsCountDisplay"
-                    style = "@style/wrapHeightAndWidth"
-                    android:text="# of Events"
-                    android:textSize="20sp"
-                    android:textColor="#FFFFFF"
-                    android:layout_below="@id/tv_courseNameDisplay">
-                </TextView>
             </RelativeLayout>
 
             <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"

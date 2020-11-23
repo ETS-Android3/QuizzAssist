@@ -40,12 +40,9 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
 
-            switch(item.getItemId()){
+            switch(item.getItemId()) {
                 case R.id.nav_home:
                     fragment = new HomeFragment();
-                    break;
-                case R.id.nav_profile:
-                    fragment = new ProfileFragment();
                     break;
                 case R.id.nav_add:
                     fragment = new AddFragment();

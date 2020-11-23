@@ -12,6 +12,7 @@ import java.util.UUID;
  * No known bugs.
  */
 
+
 public class Course {
     private Integer courseID;
     private String courseName;

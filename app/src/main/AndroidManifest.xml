@@ -12,15 +12,19 @@
         android:theme="@style/Theme.QuizzA">
 
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".signUpPage" />
+        <activity android:name=".SignUpPage" />
         <activity android:name=".SplashScreen" />
-        <activity android:name=".loginPage">
+        <activity android:name=".LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -70,28 +70,28 @@ public class HomeFragment extends Fragment {
         context = getContext();
         GridLayout = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
 
-        DatabaseReference reference =FirebaseDatabase.getInstance().getReference("Users");
-        //Finding User and Storing in USer Class
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item_snapshot : snapshot.getChildren()){
-                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                        currentUser = item_snapshot.getValue(User.class);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        ArrayList<String> myCreatedCourses = new ArrayList<>(currentUser.getCreatedCourses());
-        ArrayList<String> myEnrolledCourses = new ArrayList<>(currentUser.getEnrolledCourses());
-
-        Integer countCreatedClass = myCreatedCourses.size();
-        Integer countEnrollClass = myEnrolledCourses.size();
+//        DatabaseReference reference =FirebaseDatabase.getInstance().getReference("Users");
+//        //Finding User and Storing in USer Class
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot item_snapshot : snapshot.getChildren()){
+//                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+//                        currentUser = item_snapshot.getValue(User.class);
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//        ArrayList<String> myCreatedCourses = new ArrayList<>(currentUser.getCreatedCourses());
+//        ArrayList<String> myEnrolledCourses = new ArrayList<>(currentUser.getEnrolledCourses());
+//
+//        Integer countCreatedClass = myCreatedCourses.size();
+//        Integer countEnrollClass = myEnrolledCourses.size();
 
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override

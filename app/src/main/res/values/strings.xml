@@ -12,7 +12,7 @@
     <string name="getStartedButtonText">Get Started</string>
 
     <!--    User Sign-up & Login information Portion    -->
-    <string name="signUpHeaderText">Sign Up for An Account</string>
+    <string name="signUpHeaderText">Create An Account</string>
     <string name="signUpButtonText">Sign Up</string>
     <string name="logInHeaderText">Log In To Your Account></string>
     <string name="loginButtonText">Sign In</string>
@@ -28,7 +28,7 @@
     <string name="userPasswordEditTextHint">Password (required)</string>
 
     <!--    User Option Portion    -->
-    <string name="userOption">What would you like to do?</string>
+    <string name="userOption">Create or Join a class</string>
     <string name="userOption_CreateCourse">Create a Course</string>
     <string name="userOption_joinCourse">Join a Course</string>
 
@@ -62,9 +62,8 @@
     <string name="homeFtCourseTV">My Courses</string>
     <string name="courseCardText">Course Name</string>
 
-
     <!-- Profile Fragment Strings -->
-    <string name="updateInfo">Update Information</string>
+    <string name="editUserInfoButtonText">Edit Profile</string>
 
     <!--    Undetermined Portion    -->11
     <string name="searchTitle">Search Course</string>

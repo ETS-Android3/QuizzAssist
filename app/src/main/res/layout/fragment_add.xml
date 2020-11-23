@@ -39,10 +39,11 @@
             style="@style/matchParentHeightAndWidth"
             android:visibility="invisible">
 
-            <TextView
-                android:id="@+id/tv_joinPageHeaderText"
-                style="@style/HeaderText"
-                android:text="@string/inviteCodeHeaderText" />
+        <TextView
+            android:id="@+id/tv_joinPageHeaderText"
+            style="@style/HeaderText"
+            android:fontFamily="More Fonts..."
+            android:text="@string/inviteCodeHeaderText" />
 
             <EditText
                 android:id="@+id/et_joinCourseInviteCode"

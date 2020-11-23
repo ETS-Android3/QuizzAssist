@@ -175,25 +175,25 @@ public class HomeFragment extends Fragment {
         Relative_Layout_params.setMargins(DpToPix(20), DpToPix(30), DpToPix(20), 0);
 
         //Initialize the Button and it's properties for: AddEvent
-        button = new Button(context);
-        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
-        button.setText("ADD EVENT");
-        if(1 == 2/*current user is not the course creator*/){
-            //button.setVisibility(View.INVISIBLE);
-        }
-
-        //Initialize the TextView and set properties
-        textview = new TextView(context);
-        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
-        textview.setText(courseName);
-        textview.setTextColor(Color.WHITE);
-        textview.setTextSize(40);
+//        button = new Button(context);
+//        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
+//        button.setText("ADD EVENT");
+//        if(1 == 2/*current user is not the course creator*/){
+//            //button.setVisibility(View.INVISIBLE);
+//        }
+//
+//        //Initialize the TextView and set properties
+//        textview = new TextView(context);
+//        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+//        textview.setText(courseName);
+//        textview.setTextColor(Color.WHITE);
+//        textview.setTextSize(40);
 
         //Set children and parents relationship between each component
-        relativelayout.addView(button);
-        relativelayout.addView(textview);
+//        relativelayout.addView(button);
+//        relativelayout.addView(textview);
         classRoom1.addView(relativelayout);
     }
 

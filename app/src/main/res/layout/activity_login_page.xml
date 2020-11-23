@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginPageRelativeView"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/teal_200"
+    android:background="@drawable/gradient"
     tools:context=".LoginPage">
 
     <RelativeLayout

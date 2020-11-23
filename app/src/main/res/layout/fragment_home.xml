@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/homeFragment"
-    style="@style/matchParentHeightAndWidth"
+    style="@style/MatchParentHeightAndWidth"
     tools:context=".HomeFragment"
     android:background="@color/appBackground">
 
@@ -72,6 +72,7 @@
                         android:layout_height="wrap_content"
                         style="@style/GenericText"
                         android:text="@string/courseCardText"/>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -105,6 +106,7 @@
                         android:layout_height="wrap_content"
                         style="@style/GenericText"
                         android:text="@string/courseCardText"/>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -138,6 +140,7 @@
                         android:layout_height="wrap_content"
                         style="@style/GenericText"
                         android:text="@string/courseCardText"/>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -171,27 +174,27 @@
                         android:layout_height="wrap_content"
                         style="@style/GenericText"
                         android:text="@string/courseCardText"/>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
-
-
         </GridLayout>
+
     </RelativeLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/classRoom"
-        style="@style/matchParentHeightAndWidth"
+        style="@style/MatchParentHeightAndWidth"
         tools:context=".ClassRoom"
         android:visibility="invisible">
 
         <LinearLayout
             android:id="@+id/parentLinearLayout_activity_classroom"
             android:orientation="vertical"
-            style = "@style/matchParentHeightAndWidth">
+            style = "@style/MatchParentHeightAndWidth">
 
             <RelativeLayout
                 android:layout_marginTop="32dp"
@@ -199,32 +202,38 @@
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <Button
                     android:id="@+id/bt_addEvent"
-                    style="@style/wrapHeightAndWidth"
+                    style="@style/WrapHeightAndWidth"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="290dp"
                     android:text="Add Event"
                     android:visibility="visible"/>
+
                 <TextView
                     android:id="@+id/tv_courseNameDisplay"
-                    style="@style/wrapHeightAndWidth"
+                    style="@style/WrapHeightAndWidth"
                     android:text="Course Name"
                     android:textSize="40sp"
                     android:textColor="#FFFFFF"/>
+
                 <TextView
                     android:id="@+id/tv_eventsCountDisplay"
-                    style = "@style/wrapHeightAndWidth"
+                    style = "@style/WrapHeightAndWidth"
                     android:text="# of Events"
                     android:textSize="20sp"
                     android:textColor="#FFFFFF"
                     android:layout_below="@id/tv_courseNameDisplay">
+
                 </TextView>
+
             </RelativeLayout>
 
             <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <GridLayout
                     android:id="@+id/gridLayout_activity_classroom"
                     android:columnCount="1"
@@ -232,10 +241,10 @@
                     android:columnOrderPreserved="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                 </GridLayout>
+
             </ScrollView>
-
-
 
         </LinearLayout>
 

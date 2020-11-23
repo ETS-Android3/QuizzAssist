@@ -83,11 +83,9 @@ public class SignUpPage extends AppCompatActivity {
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            //throw exception here later, return stmt for now
             public void onClick(View v) {
                 String email = userEmail.getText().toString();
                 String password = userPassword.getText().toString();
-                final String name = userName.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
                     userEmail.setError("Email is Required");
@@ -110,7 +108,16 @@ public class SignUpPage extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    User newUser = new User(name, email);
+                                    User newUser = new User(userName.getText().toString(),
+                                            userFirstName.getText().toString(),
+                                            userLastName.getText().toString(),
+                                            userEmail.getText().toString());
+
+                                    if (!userMiddleName.getText().toString().isEmpty())
+                                        newUser.setUserMiddleName(userMiddleName.getText().toString());
+                                    if (!userStudentNumber.getText().toString().isEmpty())
+                                        newUser.setUserStudentNumber(userStudentNumber.getText().toString());
+
                                     mDatabase.child(FirebaseAuth.getInstance()
                                             .getCurrentUser().getUid()).setValue(newUser)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -141,7 +141,6 @@ public class AddFragment extends Fragment {
                             if (currentSnapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
                                 currentUser = currentSnapshot.getValue(User.class);
                         }
-
                     }
 
                     @Override
@@ -227,7 +226,7 @@ public class AddFragment extends Fragment {
                 }
 
                 if (currentUser != null) {
-                    Course newCourse = new Course(userInputCourseName, currentUser.getName(), courseID.getAndIncrement());
+                    Course newCourse = new Course(userInputCourseName, currentUser.getUserName(), courseID.getAndIncrement());
 
 
                     currentDatabase = FirebaseDatabase.getInstance().getReference();

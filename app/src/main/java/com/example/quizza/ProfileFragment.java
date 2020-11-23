@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
                     if (item_snapshot.getKey().equals
                             (FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         currentUser = item_snapshot.getValue(User.class);
-                        userName.setText(currentUser.getName());
+                        userName.setText(currentUser.getUserName());
                         userEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                     }
                 }

@@ -2,14 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/userOptionPage"
-    style="@style/matchParentHeightAndWidth"
+    style="@style/MatchParentHeightAndWidth"
     android:background="@color/appBackground"
     tools:context=".AddFragment">
 
     <!-- Main Add page Layout -->
     <RelativeLayout
         android:id="@+id/rv_userOptionPage"
-        style="@style/matchParentHeightAndWidth"
+        style="@style/MatchParentHeightAndWidth"
         android:visibility="visible">
 
         <TextView
@@ -25,14 +25,14 @@
 
         <Button
             android:id="@+id/bt_userOptionCreateCourse"
-            style="@style/MediumButtons"
+            style="@style/Buttons"
             android:text="@string/createCourseButtonText"
             android:layout_below="@id/tv_userOptionHeaderText"
             android:layout_margin="30dp"/>
 
         <Button
             android:id="@+id/bt_userOptionJoinCourse"
-            style="@style/MediumButtons"
+            style="@style/Buttons"
             android:text="@string/joinCourseButtonText"
             android:layout_below="@id/bt_userOptionCreateCourse" />
 
@@ -41,7 +41,7 @@
     <!-- Join Page layout   -->
     <RelativeLayout
             android:id="@+id/rv_JoiningCoursePage"
-            style="@style/matchParentHeightAndWidth"
+            style="@style/MatchParentHeightAndWidth"
             android:visibility="invisible">
 
         <TextView
@@ -91,7 +91,7 @@
     <!-- Create Page layout   -->
     <RelativeLayout
         android:id="@+id/rv_creatingCoursePage"
-        style="@style/matchParentHeightAndWidth"
+        style="@style/MatchParentHeightAndWidth"
         android:visibility="gone">
 
         <EditText

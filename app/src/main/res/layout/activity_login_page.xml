@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginPageRelativeView"
-    style="@style/matchParentHeightAndWidth"
+    style="@style/MatchParentHeightAndWidth"
     android:background="@color/teal_200"
     tools:context=".LoginPage">
 
     <RelativeLayout
         android:id="@+id/appLogoRelativeView"
-        style="@style/wrapHeightAndWidth"
+        style="@style/WrapHeightAndWidth"
         android:layout_centerInParent="true">
 
         <ImageView
             android:id="@+id/logo"
-            style="@style/wrapHeightAndWidth"
+            style="@style/WrapHeightAndWidth"
             android:src="@drawable/logo"
             android:layout_centerHorizontal="true" />
 
         <RelativeLayout
             android:id="@+id/userSignInRelativeView"
-            style="@style/wrapHeightAndWidth"
+            style="@style/WrapHeightAndWidth"
             android:layout_below="@id/logo"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <EditText
                 android:id="@+id/tv_username"
-                style="@style/EditTextStandard_Test"
+                style="@style/EditTextStandard"
                 android:hint="@string/userNameEditTextHint" />
 
             <EditText
                 android:id="@+id/tv_password"
-                style="@style/EditTextStandard_Test"
+                style="@style/EditTextStandard"
+                android:layout_margin="10dp"
                 android:hint="@string/userPasswordEditTextHint"
                 android:layout_below="@id/tv_username"
                 android:inputType="textPassword" />
 
             <Button
-                style="@style/MediumButtons"
+                style="@style/Buttons"
                 android:layout_below="@id/tv_password"
                 android:layout_margin="5dp"
                 android:layout_centerHorizontal="true"
@@ -46,13 +46,13 @@
 
             <Button
                 android:id="@+id/bt_signUp"
-                style="@style/MediumButtons"
+                style="@style/Buttons"
                 android:layout_below="@id/bt_login"
                 android:text="@string/signUpButtonText" />
 
             <ProgressBar
                 android:id="@+id/progressBar2"
-                style="@style/wrapHeightAndWidth"
+                style="@style/WrapHeightAndWidth"
                 android:layout_below="@id/bt_signUp"
                 android:layout_margin="10dp"
                 android:layout_centerHorizontal="true"

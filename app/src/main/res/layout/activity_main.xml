@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/homePage"
-    style="@style/matchParentHeightAndWidth"
+    style="@style/MatchParentHeightAndWidth"
     android:background="@color/appBackground"
     tools:context=".MainActivity">
 
     <FrameLayout
         android:id="@+id/flFragment"
-        style="@style/matchParentHeightAndWidth"
+        style="@style/MatchParentHeightAndWidth"
         android:layout_above="@+id/navigationBar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

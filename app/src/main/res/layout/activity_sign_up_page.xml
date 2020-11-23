@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/matchParentHeightAndWidth"
+    style="@style/MatchParentHeightAndWidth"
     android:background="@color/appBackground"
     tools:context=".SignUpPage">
 
     <RelativeLayout
-        style="@style/wrapHeightAndWidth"
+        style="@style/WrapHeightAndWidth"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp">
+        android:layout_margin="20dp">
 
         <TextView
             android:id="@+id/tv_signUpTitle"
@@ -19,6 +19,7 @@
         <EditText
             android:id="@+id/et_userName"
             style="@style/EditTextStandard"
+            android:layout_margin="5dp"
             android:hint="@string/userNameEditTextHint"
             android:layout_below="@+id/tv_signUpTitle" />
 
@@ -27,9 +28,10 @@
             android:layout_height="50dp"
             android:layout_width="200dp"
             android:layout_margin="5dp"
+            android:gravity="center"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:background="@drawable/edit_bg"
+            android:background="@drawable/btn_bg"
             android:hint="@string/userFirstNameEditTextHint"
             android:layout_below="@+id/et_userName" />
 
@@ -38,9 +40,10 @@
             android:layout_height="50dp"
             android:layout_width="200dp"
             android:layout_margin="5dp"
+            android:gravity="center"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:background="@drawable/edit_bg"
+            android:background="@drawable/btn_bg"
             android:hint="@string/userMiddleNameEditTextHint"
             android:layout_toRightOf="@id/et_userFirstName"
             android:layout_below="@id/et_userName" />
@@ -48,24 +51,29 @@
         <EditText
             android:id="@+id/et_userLastName"
             style="@style/EditTextStandard"
+            android:layout_margin="5dp"
             android:hint="@string/userLastNameEditTextHint"
             android:layout_below="@+id/et_userFirstName" />
 
         <EditText
             android:id="@+id/et_userStudentNumber"
             style="@style/EditTextStandard"
+            android:layout_margin="5dp"
             android:hint="@string/userStudentNumberEditTextHint"
             android:layout_below="@+id/et_userLastName" />
 
         <EditText
             android:id="@+id/et_userEmail"
             style="@style/EditTextStandard"
+            android:layout_margin="5dp"
             android:hint="@string/userEmailEditTextHint"
+            android:inputType="textEmailAddress"
             android:layout_below="@id/et_userStudentNumber" />
 
         <EditText
             android:id="@+id/et_userPassword"
             style="@style/EditTextStandard"
+            android:layout_margin="5dp"
             android:hint="@string/userPasswordEditTextHint"
             android:layout_below="@id/et_userEmail"
             android:inputType="textPassword" />
@@ -73,14 +81,14 @@
         <Button
             android:id="@+id/bt_signUpPage"
             android:layout_marginTop="50dp"
-            style="@style/MediumButtons"
+            style="@style/Buttons"
             android:text="@string/signUpButtonText"
             android:layout_below="@id/et_userPassword" />
 
 
         <ProgressBar
             android:id="@+id/progressBar"
-            style="@style/wrapHeightAndWidth"
+            style="@style/WrapHeightAndWidth"
             android:layout_below="@id/bt_signUpPage"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
@@ -89,6 +97,7 @@
         <ImageView
             android:id="@+id/iv_returnToLogin"
             style="@style/BackViewStandard"
+            android:layout_alignParentTop="true"
             android:background="@drawable/btn_bg"
             android:src="@drawable/back_icon" />
 

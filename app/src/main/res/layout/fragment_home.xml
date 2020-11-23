@@ -13,7 +13,7 @@
         android:id="@+id/coursesView"
         style="@style/matchParentHeightAndWidth"
         tools:context=".ClassRoom"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <LinearLayout
             android:orientation="vertical"
@@ -69,7 +69,7 @@
         android:id="@+id/classRoom"
         style="@style/matchParentHeightAndWidth"
         tools:context=".ClassRoom"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <LinearLayout
             android:id="@+id/parentLinearLayout_activity_classroom"

@@ -1,3 +1,11 @@
+/***
+ * HomeFragment.java
+ * Developers: Andrew Yeon, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class implements the dynamic UI elements which are generated based on the
+ * created courses and enrolled courses of the user.
+ */
+
 package com.example.quizza;
 
 import android.content.Context;

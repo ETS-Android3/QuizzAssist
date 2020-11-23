@@ -1,9 +1,3 @@
-package com.example.quizza;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /***
  * Course.java
  * Developers: Brandon Yip, Vatsal Parmar
@@ -11,6 +5,14 @@ import java.util.UUID;
  * This class has been newly created to manage the courses that users of application create.
  * No known bugs.
  */
+
+package com.example.quizza;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+
 
 
 public class Course {

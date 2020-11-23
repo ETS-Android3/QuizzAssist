@@ -22,29 +22,26 @@ import android.widget.TextView;
 
 public class SettingsFragment extends Fragment {
 
-    Button editProfileButton;
     Button logoutButton;
+    Button editProfileButton;
     FirebaseAuth fAuth;
     DatabaseReference currentDatabaseReference;
-
     TextView userName;
-    TextView userFullName;
     TextView userEmail;
     TextView userStudentNumber;
-
     User currentUser;
+
+    final String toImplement = "This feature will be implemented";
 
     public SettingsFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-
         userName = (TextView) view.findViewById(R.id.tv_userFirstName);
-        //userFullName = (TextView) view.findViewById(R.id.tv_userFullName);
         userEmail = (TextView) view.findViewById(R.id.tv_userEmail);
         userStudentNumber = (TextView) view.findViewById(R.id.tv_userStudentNumber);
-
         editProfileButton = (Button) view.findViewById(R.id.bt_editProfile);
         logoutButton = (Button) view.findViewById(R.id.bt_logoutButton);
 
@@ -53,24 +50,12 @@ public class SettingsFragment extends Fragment {
         currentDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot item_snapshot : snapshot.getChildren()) {
-                    if (item_snapshot.getKey().equals(FirebaseAuth.getInstance()
-                            .getCurrentUser().getUid())) {
+                for (DataSnapshot item_snapshot:snapshot.getChildren()) {
+                    if (item_snapshot.getKey().equals
+                            (FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         currentUser = item_snapshot.getValue(User.class);
-//                        String currentUserName = currentUser.getUserName();
-//                        String currentUserFirstName = currentUser.getUserFirstName();
-//                        String currentUserMiddleName = currentUser.getUserMiddleName();
-//                        String currentUserLastName = currentUser.getUserLastName();
-//                        String currentUserEmail = currentUser.getUserEmail();
-
-//                        userName.setText(currentUserName);
-//                        userEmail.setText(currentUserEmail);
-
-//                        if (currentUserMiddleName != null)
-//                            userFullName.setText(currentUserFirstName + " " + currentUserMiddleName
-//                                    + " " + currentUserLastName);
-//                        else
-//                            userFullName.setText(currentUserFirstName + " " + currentUserLastName);
+                        userName.setText(currentUser.getName());
+                        userEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                     }
                 }
             }
@@ -89,6 +74,7 @@ public class SettingsFragment extends Fragment {
         });
 
         fAuth = FirebaseAuth.getInstance();
+
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +83,8 @@ public class SettingsFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
         return view;
     }
+
 }

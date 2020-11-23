@@ -1,3 +1,11 @@
+/***
+ * MainActivity.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class contains our main home page layout where our fragment layout is implemented.
+ * we also have our navigation bar implemented here.
+ */
+
 package com.example.quizza;
 
 import androidx.annotation.NonNull;
@@ -25,22 +33,20 @@ public class MainActivity extends AppCompatActivity {
 
         FrameLayout flFragment = (FrameLayout) findViewById(R.id.flFragment);
 
-        BottomNavigationView bottomNavBar = findViewById(R.id.navigationBar);
+        BottomNavigationView bottomNavBar = findViewById(R.id.navBar);
 
         bottomNavBar.setOnNavigationItemSelectedListener(navBarMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment()).commit();
 
 
-
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navBarMethod
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener navBarMethod =  new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
 
-            switch(item.getItemId()) {
+            switch(item.getItemId()){
                 case R.id.nav_home:
                     fragment = new HomeFragment();
                     break;

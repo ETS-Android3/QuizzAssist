@@ -96,6 +96,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        //Only make the button show if the UID is equal to course owner
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,11 +116,11 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public void AddEvent(){
-        //Initialize the CardView
-        cardview = new CardView(context);
 
-        //Creating parameters for CardView
+    //Dynamically creates Event buttons on the fragment_home.xml.
+    public void AddEvent(){
+        //Initialize the CardView and set properties
+        cardview = new CardView(context);
         Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT,
                 1.0f);
         Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
@@ -127,7 +129,7 @@ public class HomeFragment extends Fragment {
         cardview.setCardElevation(DpToPix(6));
         cardview.setRadius(DpToPix(12));
 
-
+        //Initialize the Linear Layout
         linearlayout = new LinearLayout(context);
         LinearLayout.LayoutParams Linear_Layout = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -147,6 +149,29 @@ public class HomeFragment extends Fragment {
         linearlayout.addView(textview);
         cardview.addView(linearlayout);
         GridLayout.addView(cardview);
+    }
+
+    public void AddClassroomUI(){
+        //Initialize the CardView and set properties
+        cardview = new CardView(context);
+        Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+        Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
+                , DpToPix(12));
+        cardview.setClickable(true);
+        cardview.setLayoutParams(Card_View_Params);
+        cardview.setCardElevation(DpToPix(7));
+        cardview.setRadius(DpToPix(12));
+
+        //Initialize the Linear Layout and set properties
+        linearlayout = new LinearLayout(context);
+        LinearLayout.LayoutParams Linear_Layout = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        linearlayout.setLayoutParams(Linear_Layout);
+        linearlayout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
+        linearlayout.setGravity(Gravity.CENTER);
+        linearlayout.setOrientation(LinearLayout.VERTICAL);
+        linearlayout.setBackground(android.graphics.drawable.Drawable.createFromPath("@drawable/gradient"));
 
 
     }

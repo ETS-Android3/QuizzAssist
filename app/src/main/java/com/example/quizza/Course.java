@@ -1,3 +1,9 @@
+package com.example.quizza;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /***
  * Course.java
  * Developers: Brandon Yip, Vatsal Parmar
@@ -6,25 +12,24 @@
  * No known bugs.
  */
 
-package com.example.quizza;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Course {
-    Integer courseID = 0;
-    String courseName;
-    User courseOwner;
-    private List<String> userEnrolled = new ArrayList<>();
+    private Integer courseID;
+    private String courseName;
+    private String courseOwner;
+    private String inviteCode;
+    private final Integer inviteCodeLength = 10;
+    private List<String> enrolledUsers;
 
-    public Course(){
-        //required empty constructor
-    }
+    public Course() {}
 
-    Course (String course_Name, User course_Owner, Integer course_ID) {
+    Course (String course_Name, String courseOwner, Integer course_ID) {
         this.courseID = course_ID;
         this.courseName = course_Name;
-        this.courseOwner = course_Owner;
+        this.courseOwner = courseOwner;
+        this.enrolledUsers = new ArrayList<>();
+        this.enrolledUsers.add(this.courseOwner);
+        this.inviteCode = generateInviteCode(this.inviteCodeLength);
     }
 
     public String getCourseName() { return this.courseName; }
@@ -33,16 +38,47 @@ public class Course {
 
     public void setCourseID(int courseID) { this.courseID = courseID; }
 
-    public void setCourseName(String courseName) { this.courseName = courseName; }
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+    }
 
-    public void setCourseOwner(User courseOwner) { this.courseOwner = courseOwner; }
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 
-    public List<String> getUserEnrolled() { return userEnrolled; }
+    public void setCourseOwner(String courseOwnerName) {
+        this.courseOwner = courseOwnerName;
+    }
 
-    public void setUserEnrolled(List<String> userEnrolled) { this.userEnrolled = userEnrolled; }
+    public List<String> getEnrolledUsers() {
+        return enrolledUsers;
+    }
 
-    public String getCourseOwner() { return this.courseOwner.getName(); }
+    public void setEnrolledUsers(List<String> enrolledUsers) {
+        this.enrolledUsers = enrolledUsers;
+    }
 
-    public Boolean isOwner(User user) { return (user == this.courseOwner) ? (true) : (false); }
+    public String getCourseOwner() {
+        return this.courseOwner;
+    }
 
+    public Boolean isOwner(String courseOwner) {
+        return (courseOwner == this.courseOwner) ? true : false;
+    }
+
+    public String getInviteCode() {
+        return this.inviteCode;
+    }
+
+    public Integer getInviteCodeLength() {
+        return inviteCodeLength;
+    }
+
+    public void generateNewInviteCode() {
+        this.inviteCode = generateInviteCode(this.inviteCodeLength);
+    }
+
+    public String generateInviteCode(int inviteCodeLength) {
+        return UUID.randomUUID().toString().replace("-", "").substring(0, inviteCodeLength);
+    }
 }

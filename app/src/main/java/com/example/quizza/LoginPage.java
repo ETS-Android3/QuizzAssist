@@ -30,7 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class loginPage extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity {
 
     Button loginButton;
     Button signUp;
@@ -50,8 +50,8 @@ public class loginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        relativeLayoutOne = (RelativeLayout) findViewById(R.id.relat1);
-        relativeLayoutTwo = (RelativeLayout) findViewById(R.id.relat2);
+        relativeLayoutOne = (RelativeLayout) findViewById(R.id.appLogoRelativeView);
+        relativeLayoutTwo = (RelativeLayout) findViewById(R.id.userSignInRelativeView);
 
         userName = (EditText) findViewById(R.id.tv_username);
         userPassword = (EditText) findViewById(R.id.tv_password);
@@ -62,11 +62,11 @@ public class loginPage extends AppCompatActivity {
 
         Handler handler = new Handler();
 
-        signUp = (Button) findViewById(R.id.bt_signup);
+        signUp = (Button) findViewById(R.id.bt_signUp);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), signUpPage.class ));
+                startActivity(new Intent(getApplicationContext(), SignUpPage.class));
             }
         });
 
@@ -111,11 +111,11 @@ public class loginPage extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(loginPage.this, "Login Successful",
+                                    Toast.makeText(LoginPage.this, "Login Successful",
                                             Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 } else {
-                                    Toast.makeText(loginPage.this, "Error !" +
+                                    Toast.makeText(LoginPage.this, "Error !" +
                                             task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }

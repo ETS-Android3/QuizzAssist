@@ -25,29 +25,24 @@ public class MainActivity extends AppCompatActivity {
 
         FrameLayout flFragment = (FrameLayout) findViewById(R.id.flFragment);
 
-        BottomNavigationView bottomNavBar = findViewById(R.id.navBar);
+        BottomNavigationView bottomNavBar = findViewById(R.id.navigationBar);
 
         bottomNavBar.setOnNavigationItemSelectedListener(navBarMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment());
-
-
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment()).commit();
 
 
 
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navBarMethod =  new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener navBarMethod
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
 
-            switch(item.getItemId()){
+            switch(item.getItemId()) {
                 case R.id.nav_home:
                     fragment = new HomeFragment();
-                    break;
-                case R.id.nav_profile:
-                    fragment = new ProfileFragment();
                     break;
                 case R.id.nav_add:
                     fragment = new AddFragment();

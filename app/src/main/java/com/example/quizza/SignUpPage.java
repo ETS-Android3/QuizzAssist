@@ -11,6 +11,7 @@
  * No known bugs.
  */
 
+ //STILL HAVE TO ASSIGN BACK BUTTON WITH LISTENER TO GO BACK TO SIGNUP
 
 package com.example.quizza;
 
@@ -22,6 +23,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,16 +34,21 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class signUpPage extends AppCompatActivity {
+public class SignUpPage extends AppCompatActivity {
 
     EditText userName;
     EditText userEmail;
+    EditText userFirstName;
+    EditText userMiddleName;
+    EditText userLastName;
+    EditText userStudentNumber;
     EditText userPassword;
 
     Button signUpButton;
-    Button returnToLoginButton;
 
-    FirebaseAuth fAuth;
+    ImageView returnToLogin;
+
+    private FirebaseAuth fAuth;
     ProgressBar mProgressBar;
     DatabaseReference mDatabase;
     public final int minPasswordLength = 6;
@@ -51,18 +58,23 @@ public class signUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
 
-        userName = (EditText) findViewById(R.id.et_name);
-        userEmail = (EditText) findViewById(R.id.et_email);
-        userPassword = (EditText) findViewById(R.id.et_pass);
+        userName = (EditText) findViewById(R.id.et_userName);
+        userFirstName = (EditText) findViewById(R.id.et_userFirstName);
+        userMiddleName = (EditText) findViewById(R.id.et_userMiddleName);
+        userLastName = (EditText) findViewById(R.id.et_userLastName);
+        userStudentNumber = (EditText) findViewById(R.id.et_userStudentNumber);
+        userEmail = (EditText) findViewById(R.id.et_userEmail);
+        userPassword = (EditText) findViewById(R.id.et_userPassword);
 
-        signUpButton = (Button) findViewById(R.id.bt_signupPage);
-        returnToLoginButton = (Button) findViewById(R.id.backToLogin);
+        returnToLogin = (ImageView) findViewById(R.id.iv_returnToLogin);
+
+        signUpButton = (Button) findViewById(R.id.bt_signUpPage);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        returnToLoginButton.setOnClickListener(new View.OnClickListener() {
+        returnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), loginPage.class));
+                startActivity(new Intent(getApplicationContext(), LoginPage.class));
             }
         });
 
@@ -105,7 +117,7 @@ public class signUpPage extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Toast.makeText(signUpPage.this, "User Created",
+                                                        Toast.makeText(SignUpPage.this, "User Created",
                                                                 Toast.LENGTH_SHORT).show();
                                                         startActivity(new Intent(getApplicationContext(),
                                                                 MainActivity.class));
@@ -113,11 +125,11 @@ public class signUpPage extends AppCompatActivity {
                                                     } else {
                                                         if (task.getException() instanceof
                                                                 FirebaseAuthUserCollisionException) {
-                                                            Toast.makeText(signUpPage.this, "User already exists! "
+                                                            Toast.makeText(SignUpPage.this, "User already exists! "
                                                                             + task.getException(),
                                                                     Toast.LENGTH_SHORT).show();
                                                         } else {
-                                                            Toast.makeText(signUpPage.this, "Error, sign up failed!"
+                                                            Toast.makeText(SignUpPage.this, "Error, sign up failed!"
                                                                             + task.getException(),
                                                                     Toast.LENGTH_SHORT).show();
                                                         }
@@ -125,7 +137,7 @@ public class signUpPage extends AppCompatActivity {
                                                 }
                                             });
                                 } else {
-                                    Toast.makeText(signUpPage.this, "Error Occured !" + task.getException()
+                                    Toast.makeText(SignUpPage.this, "Error Occurred !" + task.getException()
                                             .getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }

@@ -18,17 +18,21 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class SettingsFragment extends Fragment {
 
     Button logoutButton;
+    Button editProfileButton;
     FirebaseAuth fAuth;
     DatabaseReference currentDatabaseReference;
     TextView userName;
     TextView userEmail;
     TextView userStudentNumber;
     User currentUser;
+
+    final String toImplement = "This feature will be implemented";
 
     public SettingsFragment() {}
 
@@ -39,6 +43,14 @@ public class SettingsFragment extends Fragment {
         userName = (TextView) view.findViewById(R.id.tv_userFirstName);
         userEmail = (TextView) view.findViewById(R.id.tv_userEmail);
         userStudentNumber = (TextView) view.findViewById(R.id.tv_userStudentNumber);
+        editProfileButton = (Button) view.findViewById(R.id.bt_editProfile);
+        
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), toImplement, Toast.LENGTH_LONG).show();
+            }
+        });
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 

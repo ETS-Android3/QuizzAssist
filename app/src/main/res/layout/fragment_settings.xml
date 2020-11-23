@@ -10,10 +10,6 @@
         android:id="@+id/rv_userSettings"
         style="@style/matchParentHeightAndWidth">
 
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
         <ImageView
             android:id="@+id/iv_userAvatar"
             android:layout_width="140dp"

@@ -21,8 +21,10 @@
         <RelativeLayout
             android:id="@+id/userSignInRelativeView"
             style="@style/wrapHeightAndWidth"
+            android:layout_margin="20dp"
             android:layout_below="@id/logo"
-            android:visibility="gone">
+            android:visibility="visible">
+
 
             <EditText
                 android:id="@+id/tv_username"
@@ -39,7 +41,7 @@
             <Button
                 style="@style/MediumButtons"
                 android:layout_below="@id/tv_password"
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 android:layout_centerHorizontal="true"
                 android:text="@string/loginButtonText"
                 android:id="@+id/bt_login" />
@@ -50,15 +52,6 @@
                 android:layout_below="@id/bt_login"
                 android:text="@string/signUpButtonText" />
 
-            <TextView
-                android:id="@+id/tv_forgotPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forgotPassword"
-                android:layout_below="@id/bt_signUp"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="10dp"
-                android:textSize="25sp" />
 
             <ProgressBar
                 android:id="@+id/progressBar2"

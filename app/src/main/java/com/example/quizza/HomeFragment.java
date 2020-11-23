@@ -92,10 +92,7 @@ public class HomeFragment extends Fragment {
                         currentUser = item_snapshot.getValue(User.class);
                         enrolledCourses = currentUser.getEnrolledCourses();
                         createdCourses = currentUser.getCreatedCourses();
-                        Log.d("createCourse", createdCourses.toString());
-                        Log.d("enrollCourse", enrolledCourses.toString());
                         for(String currentCourse : enrolledCourses){
-                            Log.d("createdCourse",currentCourse);
                             AddClassroomUI(currentCourse);
                         }
                         for(String currentCourse : createdCourses){
@@ -168,20 +165,22 @@ public class HomeFragment extends Fragment {
         GridLayout_classroom.addView(cardview);
     }
 
+
+    //Stil have to work on this class to make it appear as we want it
     public void SetClassView(String courseName){
         //Initialize the RelativeLayout and it's properties
         relativelayout = new RelativeLayout(context);
         RelativeLayout.LayoutParams Relative_Layout_params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         Relative_Layout_params.setMargins(DpToPix(20), DpToPix(30), DpToPix(20), 0);
 
-        //Initialize the Button and it's properties for: AddEvent
-        button = new Button(context);
-        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
-        button.setText("ADD EVENT");
-        if(1 == 2/*current user is not the course creator*/){
-            //button.setVisibility(View.INVISIBLE);
-        }
+//        //Initialize the Button and it's properties for: AddEvent
+//        button = new Button(context);
+//        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
+//        button.setText("ADD EVENT");
+//        if(1 == 2/*current user is not the course creator*/){
+//            //button.setVisibility(View.INVISIBLE);
+//        }
 
         //Initialize the TextView and set properties
         textview = new TextView(context);
@@ -192,13 +191,14 @@ public class HomeFragment extends Fragment {
         textview.setTextSize(40);
 
         //Set children and parents relationship between each component
-        relativelayout.addView(button);
-        relativelayout.addView(textview);
+//        relativelayout.addView(button);
+//        relativelayout.addView(textview);
         classRoom1.addView(relativelayout);
     }
 
 
     //Dynamically creates class buttons in scrollview on the fragment_home.xml
+    //Works Perfectly
     public void AddClassroomUI(String className){
         //Initialize the CardView and set properties
         cardview = new CardView(context);

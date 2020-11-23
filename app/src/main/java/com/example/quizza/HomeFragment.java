@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.CryptoPrimitive;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
@@ -48,6 +50,8 @@ public class HomeFragment extends Fragment {
     RelativeLayout dashboard;
 
     User currentUser;
+    List<String> enrolledCourses = new ArrayList<>();
+    List<String> createdCourses = new ArrayList<>();
 
 
     public HomeFragment() {
@@ -70,28 +74,27 @@ public class HomeFragment extends Fragment {
         context = getContext();
         GridLayout = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
 
-//        DatabaseReference reference =FirebaseDatabase.getInstance().getReference("Users");
-//        //Finding User and Storing in USer Class
-//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot item_snapshot : snapshot.getChildren()){
-//                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-//                        currentUser = item_snapshot.getValue(User.class);
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        ArrayList<String> myCreatedCourses = new ArrayList<>(currentUser.getCreatedCourses());
-//        ArrayList<String> myEnrolledCourses = new ArrayList<>(currentUser.getEnrolledCourses());
-//
-//        Integer countCreatedClass = myCreatedCourses.size();
-//        Integer countEnrollClass = myEnrolledCourses.size();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        currentUser = item_snapshot.getValue(User.class);
+                        enrolledCourses = currentUser.getEnrolledCourses();
+                        createdCourses = currentUser.getCreatedCourses();
+                        Log.d("createCourse", createdCourses.toString());
+                        Log.d("enrollCoures", enrolledCourses.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override

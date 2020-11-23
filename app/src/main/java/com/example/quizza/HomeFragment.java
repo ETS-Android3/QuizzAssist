@@ -2,6 +2,7 @@ package com.example.quizza;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,13 +36,17 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     Context context;
-    android.widget.GridLayout GridLayout;
+    android.widget.GridLayout GridLayout_home;
+    android.widget.GridLayout GridLayout_classroom;
     Button bt_addEvent;
+    TextView test;
     TextView textview;
     CardView cardview;
+    ImageView imageview;
     LinearLayout linearlayout;
     LinearLayout.LayoutParams Card_View_Params;
     LinearLayout.LayoutParams Text_View_Params;
+    LinearLayout.LayoutParams Image_View_Params;
 
     CardView courseBox1;
     CardView courseBox2;
@@ -64,15 +70,17 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
-        courseBox1 = (CardView) view.findViewById(R.id.courseBox1);
-        courseBox2 = (CardView) view.findViewById(R.id.courseBox2);
-        courseBox3 = (CardView) view.findViewById(R.id.courseBox3);
-        courseBox4 = (CardView) view.findViewById(R.id.courseBox4);
+        test = (TextView)view.findViewById(R.id.test1);
+        //courseBox1 = (CardView) view.findViewById(R.id.courseBox1);
+        //courseBox2 = (CardView) view.findViewById(R.id.courseBox2);
+        //courseBox3 = (CardView) view.findViewById(R.id.courseBox3);
+        //courseBox4 = (CardView) view.findViewById(R.id.courseBox4);
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
         dashboard = (RelativeLayout) view.findViewById(R.id.coursesView);
 
         context = getContext();
-        GridLayout = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
+        GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
+        GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -85,17 +93,36 @@ public class HomeFragment extends Fragment {
                         enrolledCourses = currentUser.getEnrolledCourses();
                         createdCourses = currentUser.getCreatedCourses();
                         Log.d("createCourse", createdCourses.toString());
-                        Log.d("enrollCoures", enrolledCourses.toString());
+                        Log.d("enrollCourse", enrolledCourses.toString());
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
+
+
+            for(String currentCourse : enrolledCourses){
+                Log.d("createdCourse",currentCourse);
+                AddClassroomUI(currentCourse);
+            }
+
+
+            for(String currentCourse : createdCourses){
+                AddClassroomUI(currentCourse);
+            }
+
+
+
+        test.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                AddClassroomUI("penis");
+            }
+        });
 
         //Only make the button show if the UID is equal to course owner
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
@@ -105,13 +132,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        courseBox1.setOnClickListener(new View.OnClickListener() {
+        /*courseBox1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dashboard.setVisibility(View.INVISIBLE);
                 classRoom.setVisibility(View.VISIBLE);
             }
-        });
+        });*/
 
         return view;
     }
@@ -146,12 +173,13 @@ public class HomeFragment extends Fragment {
         textview.setTextColor(Color.BLACK);
         textview.setTextSize(20);
 
+        //Set children and parent relationship between each component
         linearlayout.addView(textview);
         cardview.addView(linearlayout);
-        GridLayout.addView(cardview);
+        GridLayout_classroom.addView(cardview);
     }
 
-    public void AddClassroomUI(){
+    public void AddClassroomUI(String className){
         //Initialize the CardView and set properties
         cardview = new CardView(context);
         Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -171,9 +199,26 @@ public class HomeFragment extends Fragment {
         linearlayout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
         linearlayout.setGravity(Gravity.CENTER);
         linearlayout.setOrientation(LinearLayout.VERTICAL);
-        linearlayout.setBackground(android.graphics.drawable.Drawable.createFromPath("@drawable/gradient"));
+        linearlayout.setBackgroundResource(R.drawable.gradient);
 
+        //Initialize the TextView and set properties
+        textview = new TextView(context);
+        Text_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+        textview.setText(className);
+        textview.setTextColor(Color.WHITE);
+        textview.setTextSize(20);
 
+        //Initialize the ImageView and set properties
+        imageview = new ImageView(context);
+        Image_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        imageview.setBackgroundResource(R.drawable.course_icon);
+
+        //Set children and parents relationship between each component
+        linearlayout.addView(textview);
+        linearlayout.addView(imageview);
+        cardview.addView(linearlayout);
+        GridLayout_home.addView(cardview);
     }
 
     public int DpToPix(float sizeInDp){

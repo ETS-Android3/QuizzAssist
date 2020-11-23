@@ -47,7 +47,6 @@
         <TextView
             android:id="@+id/tv_joinPageHeaderText"
             style="@style/HeaderText"
-            android:fontFamily="More Fonts..."
             android:text="@string/inviteCodeHeaderText" />
 
             <EditText

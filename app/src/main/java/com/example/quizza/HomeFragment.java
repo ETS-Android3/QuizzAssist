@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -215,6 +216,7 @@ public class HomeFragment extends Fragment {
                 dashboard.setVisibility(View.INVISIBLE);
                 classRoom.setVisibility(View.VISIBLE);
                 SetClassView(className);
+                Toast.makeText(getActivity(), "Hello ldies", Toast.LENGTH_LONG).show();
             }
         });
 

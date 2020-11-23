@@ -18,7 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class SettingsFragment extends Fragment {
@@ -44,13 +43,7 @@ public class SettingsFragment extends Fragment {
         userEmail = (TextView) view.findViewById(R.id.tv_userEmail);
         userStudentNumber = (TextView) view.findViewById(R.id.tv_userStudentNumber);
         editProfileButton = (Button) view.findViewById(R.id.bt_editProfile);
-
-        editProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), toImplement, Toast.LENGTH_LONG).show();
-            }
-        });
+        logoutButton = (Button) view.findViewById(R.id.bt_logoutButton);
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -73,7 +66,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        logoutButton = (Button)view.findViewById(R.id.bt_logoutButton);
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startActivity(new Intent(getActivity(), EditProfileSettings.class));
+            }
+        });
+
         fAuth = FirebaseAuth.getInstance();
 
         logoutButton.setOnClickListener(new View.OnClickListener() {

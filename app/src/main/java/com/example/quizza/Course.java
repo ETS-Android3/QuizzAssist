@@ -32,17 +32,11 @@ public class Course {
         this.inviteCode = generateInviteCode(this.inviteCodeLength);
     }
 
-    public String getCourseName() {
-        return this.courseName;
-    }
+    public String getCourseName() { return this.courseName; }
 
-    public int getCourseID() {
-        return this.courseID;
-    }
+    public int getCourseID() { return this.courseID; }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
-    }
+    public void setCourseID(int courseID) { this.courseID = courseID; }
 
     public void setInviteCode(String inviteCode) {
         this.inviteCode = inviteCode;

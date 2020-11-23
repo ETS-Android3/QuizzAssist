@@ -25,22 +25,54 @@
             android:layout_below="@id/logo"
             android:visibility="visible">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/userNameInput"
+                android:hint="@string/userNameEditTextHint"
+                app:boxBackgroundMode="outline"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text">
 
-            <EditText
-                android:id="@+id/tv_username"
-                style="@style/EditTextStandard_Test"
-                android:hint="@string/userNameEditTextHint" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_username"/>
 
-            <EditText
-                android:id="@+id/tv_password"
-                style="@style/EditTextStandard_Test"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/userPassInput"
                 android:hint="@string/userPasswordEditTextHint"
-                android:layout_below="@id/tv_username"
-                android:inputType="textPassword" />
+                app:boxBackgroundMode="outline"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="password_toggle"
+                android:layout_below="@id/userNameInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_password"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/tv_username"-->
+<!--                style="@style/EditTextStandard_Test"-->
+<!--                android:hint="@string/userNameEditTextHint" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/tv_password"-->
+<!--                style="@style/EditTextStandard_Test"-->
+<!--                android:hint="@string/userPasswordEditTextHint"-->
+<!--                android:layout_below="@id/userNameInput"-->
+<!--                android:inputType="textPassword" />-->
 
             <Button
                 style="@style/MediumButtons"
-                android:layout_below="@id/tv_password"
+                android:layout_below="@id/userPassInput"
                 android:layout_margin="10dp"
                 android:layout_centerHorizontal="true"
                 android:text="@string/loginButtonText"

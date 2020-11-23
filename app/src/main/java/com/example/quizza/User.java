@@ -24,19 +24,21 @@ public class User {
     private List<String> enrolledCourses = new ArrayList<>();
 
 
-    public User(){
-        this.name = "Default";
-        this.createdCourses = new ArrayList<>();
-    }
-
-    public User(String name){
-        this.name = name;
-        this.createdCourses = new ArrayList<>();
-    }
+    public User() {}
 
     public User(String userName, String userEmail) {
         this.name = userName;
         this.email = userEmail;
+        this.createdCourses = new ArrayList<String>();
+        this.enrolledCourses = new ArrayList<String>();
+    }
+
+    public List<String> getCreatedCourses() {
+        return createdCourses;
+    }
+
+    public List<String> getEnrolledCourses() {
+        return enrolledCourses;
     }
 
     public String getName() {

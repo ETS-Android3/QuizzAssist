@@ -23,7 +23,8 @@
             style="@style/wrapHeightAndWidth"
             android:layout_margin="20dp"
             android:layout_below="@id/logo"
-            android:visibility="gone">
+            android:visibility="visible">
+
 
 
             <EditText

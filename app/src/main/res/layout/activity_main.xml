@@ -2,27 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/appBackground">
+    android:id="@+id/homePage"
+    style="@style/matchParentHeightAndWidth"
+    android:background="@color/appBackground"
+    tools:context=".MainActivity">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/flFragment"
-        android:layout_above="@+id/navBar"/>
+        style="@style/matchParentHeightAndWidth"
+        android:layout_above="@+id/navigationBar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/navBar"
         app:menu="@menu/bottom_menu"
-        android:layout_alignParentBottom="true"/>
-
-
-
-
-
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

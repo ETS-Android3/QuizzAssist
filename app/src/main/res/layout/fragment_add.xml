@@ -1,53 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/userOptionPage"
+    style="@style/matchParentHeightAndWidth"
+    android:background="@color/appBackground"
     tools:context=".AddFragment">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/courseID"
-            android:id="@+id/courseID"
-            android:textSize="30sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="150dp"
-            android:layout_marginBottom="20dp"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/classDetails"
-            android:id="@+id/classToAdd"
-            android:layout_below="@id/courseID"
-            android:textSize="30sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/classToAdd"
-            android:layout_margin="10dp"
-            android:id="@+id/addCourse"
-            android:layout_centerHorizontal="true"
-            android:text="@string/test_addCourseButtonText"/>
+        android:id="@+id/rv_userOptionPage"
+        style="@style/matchParentHeightAndWidth"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/tv_userOptionHeaderText"
+            style="@style/HeaderText"
+            android:text="@string/userOption" />
+
+        <Button
+            android:id="@+id/bt_userOptionCreateCourse"
+            style="@style/MediumButtons"
+            android:text="@string/createCourseButtonText"
+            android:layout_below="@id/tv_userOptionHeaderText" />
+
+        <Button
+            android:id="@+id/bt_userOptionJoinCourse"
+            style="@style/MediumButtons"
+            android:text="@string/joinCourseButtonText"
+            android:layout_below="@id/bt_userOptionCreateCourse" />
+
+        <RelativeLayout
+            android:id="@+id/rv_JoiningCoursePage"
+            style="@style/matchParentHeightAndWidth"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_joinPageHeaderText"
+                style="@style/HeaderText"
+                android:text="@string/inviteCodeHeaderText" />
+
+            <EditText
+                android:id="@+id/et_joinCourseInviteCode"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/tv_joinPageHeaderText"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/edit_bg"
+                android:hint="@string/inviteCodeEditTextHint"
+                android:padding="10dp"
+                android:textColorHint="@color/white" />
+
+            <Button
+                android:id="@+id/bt_joiningCourse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_joinCourseInviteCode"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="30dp"
+                android:text="@string/joinCourseButtonText" />
+
+            <TextView
+                android:id="@+id/tv_joinCourseSuccess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_joiningCourse"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:text="@string/joinCourseSuccessText"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/iv_returnToUserOptionFromJoining"
+                style="@style/BackViewStandard" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rv_creatingCoursePage"
+        style="@style/matchParentHeightAndWidth"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/et_courseName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/createClassNameEditTextHint"
+            android:textSize="30sp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:padding="10dp"
+            android:background="@drawable/edit_bg"
+            android:layout_marginBottom="20dp" />
+
+        <Button
+            android:id="@+id/bt_creatingCourse"
             android:layout_width="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_courseName"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_bg"
+            android:layout_centerHorizontal="true"
+            android:text="@string/createCourseButtonText" />
+
+        <TextView
+            android:id="@+id/tv_CourseInviteCodeHelperText"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
-            android:id="@+id/classInfo"
-            android:layout_below="@id/addCourse"
-            android:text="@string/classDetails"
-            android:textSize="30sp" />
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_below="@id/bt_creatingCourse"
+            android:text="@string/joinCourseSuccessText"
+            android:textSize="25sp"
+            android:visibility="invisible" />
 
+        <TextView
+            android:id="@+id/tv_generatedCourseInviteCode"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_below="@id/tv_CourseInviteCodeHelperText"
+            android:text="@string/test_inviteCodeDefault"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/iv_returnToUserOptionFromCreating"
+            style="@style/BackViewStandard" />
 
     </RelativeLayout>
 

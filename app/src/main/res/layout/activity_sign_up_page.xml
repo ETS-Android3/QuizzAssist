@@ -2,89 +2,83 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".signUpPage"
-    android:background="@color/appBackground">
+    style="@style/matchParentHeightAndWidth"
+    android:background="@color/appBackground"
+    tools:context=".signUpPage">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/wrapHeightAndWidth"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/signupTitle"
             android:id="@+id/signupTitle"
-            android:textColor="@color/white"
-            android:layout_margin="10dp"
-            android:textSize="40sp"/>
+            style="@style/HeaderText"
+            android:text="@string/signUpHeaderText" />
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_bg"
-            android:hint="@string/name"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:layout_margin="5dp"
-            android:layout_below="@+id/signupTitle"
-            android:id="@+id/et_name"
-            android:layout_centerHorizontal="true"/>
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/et_name"
-            android:background="@drawable/edit_bg"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:hint="@string/email"
-            android:layout_margin="5dp"
-            android:id="@+id/et_email"
-            android:layout_centerHorizontal="true"/>
+            android:id="@+id/et_userName"
+            style="@style/EditTextStandard"
+            android:hint="@string/userNameEditTextHint"
+            android:layout_below="@+id/signupTitle" />
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/et_email"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:background="@drawable/edit_bg"
-            android:hint="@string/Pass"
-            android:layout_margin="5dp"
-            android:id="@+id/et_pass"
-            android:inputType="textPassword"
-            android:layout_centerHorizontal="true"/>
+            android:id="@+id/et_userFirstName"
+            style="@style/EditTextStandard"
+            android:hint="@string/userFirstNameEditTextHint"
+            android:layout_below="@+id/et_userName" />
+
+        <EditText
+            android:id="@+id/et_userMiddleName"
+            style="@style/EditTextStandard"
+            android:hint="@string/userMiddleNameEditTextHint"
+            android:layout_below="@+id/et_userFirstName" />
+
+        <EditText
+            android:id="@+id/et_userLastName"
+            style="@style/EditTextStandard"
+            android:hint="@string/userLastNameEditTextHint"
+            android:layout_below="@+id/et_userMiddleName" />
+
+        <EditText
+            android:id="@+id/et_userStudentNumber"
+            style="@style/EditTextStandard"
+            android:hint="@string/userStudentNumberEditTextHint"
+            android:layout_below="@+id/et_userLastName" />
+
+        <EditText
+            android:id="@+id/et_userEmail"
+            style="@style/EditTextStandard"
+            android:hint="@string/userEmailEditTextHint"
+            android:layout_below="@id/et_userStudentNumber" />
+
+        <EditText
+            android:id="@+id/et_userPassword"
+            style="@style/EditTextStandard"
+            android:hint="@string/userPasswordEditTextHint"
+            android:layout_below="@id/et_userEmail"
+            android:inputType="textPassword" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/signup"
-            android:layout_below="@id/et_pass"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:id="@+id/bt_signupPage"/>
+            android:id="@+id/bt_signUpPage"
+            style="@style/MediumButtons"
+            android:text="@string/signUpButtonText"
+            android:layout_below="@id/et_userPassword" />
+
+        <Button
+            android:id="@+id/backToLogin"
+            style="@style/MediumButtons"
+            android:layout_below="@id/bt_signUpPage"
+            android:text="@string/loginButtonText" />
+
 
         <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/progressBar"
+            style="@style/wrapHeightAndWidth"
             android:layout_below="@id/backToLogin"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
             android:visibility="invisible"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/bt_signupPage"
-            android:id="@+id/backToLogin"
-            android:layout_margin="5dp"
-            android:layout_centerHorizontal="true"
-            android:text="@string/login"/>
-
 
     </RelativeLayout>
 

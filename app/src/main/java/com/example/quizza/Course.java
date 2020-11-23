@@ -1,3 +1,10 @@
+package com.example.quizza;
+
+import com.example.quizza.User;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /***
  * Course.java
  * Developers: Brandon Yip, Vatsal Parmar
@@ -6,25 +13,21 @@
  * No known bugs.
  */
 
-package com.example.quizza;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Course {
-    Integer courseID = 0;
-    String courseName;
+    private Integer courseID;
+    private String courseName;
+    private String inviteCode;
+    private final Integer inviteCodeLength = 10;
     User courseOwner;
-    private List<String> userEnrolled = new ArrayList<>();
+    private List<String> enrolledUsers = new ArrayList<>();
 
-    public Course(){
-        //required empty constructor
-    }
+    public Course() {}
 
     Course (String course_Name, User course_Owner, Integer course_ID) {
         this.courseID = course_ID;
         this.courseName = course_Name;
         this.courseOwner = course_Owner;
+        this.inviteCode = generateInviteCode(this.inviteCodeLength);
     }
 
     public String getCourseName() {
@@ -48,24 +51,30 @@ public class Course {
     }
 
     public List<String> getUserEnrolled() {
-        return userEnrolled;
+        return enrolledUsers;
     }
 
-    public void setUserEnrolled(List<String> userEnrolled) {
-        this.userEnrolled = userEnrolled;
+    public void setUserEnrolled(List<String> enrolledUsers) {
+        this.enrolledUsers = enrolledUsers;
     }
 
     public String getCourseOwner() {
         return this.courseOwner.getName();
     }
 
-    public Boolean isOwner(User user){
-        if (user == courseOwner){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public Boolean isOwner(User user) {
+        return (user == this.courseOwner ? true : false);
     }
 
+    public String getInviteCode() {
+        return this.inviteCode;
+    }
+
+    public void generateNewInviteCode() {
+        this.inviteCode = generateInviteCode(this.inviteCodeLength);
+    }
+
+    public String generateInviteCode(int inviteCodeLength) {
+        return UUID.randomUUID().toString().replace("-", "").substring(0, inviteCodeLength);
+    }
 }

@@ -25,8 +25,8 @@ public class ProfileFragment extends Fragment {
     DatabaseReference currentDatabaseReference;
     TextView userName;
     TextView userEmail;
+    TextView userStudentNumber;
     User currentUser;
-    FirebaseAuth fAuth;
 
     public void profileFragment() {
         //
@@ -37,8 +37,9 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        userName = (TextView) view.findViewById(R.id.userInfo1);
-        userEmail = (TextView) view.findViewById(R.id.userInfo2);
+        userName = (TextView) view.findViewById(R.id.userFirstName);
+        userEmail = (TextView) view.findViewById(R.id.userEmail);
+        userStudentNumber = (TextView) view.findViewById(R.id.userStudentNumber);
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -50,7 +51,7 @@ public class ProfileFragment extends Fragment {
                             (FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         currentUser = item_snapshot.getValue(User.class);
                         userName.setText(currentUser.getName());
-                        userEmail.setText(fAuth.getInstance().getCurrentUser().getEmail());
+                        userEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                     }
                 }
             }

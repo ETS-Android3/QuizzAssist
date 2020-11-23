@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,17 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
         FrameLayout flFragment = (FrameLayout) findViewById(R.id.flFragment);
 
-        BottomNavigationView bottomNavBar = findViewById(R.id.navBar);
+        BottomNavigationView bottomNavBar = findViewById(R.id.navigationBar);
 
         bottomNavBar.setOnNavigationItemSelectedListener(navBarMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment());
 
 
 
-
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navBarMethod =  new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener navBarMethod
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;

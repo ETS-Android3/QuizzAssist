@@ -1,27 +1,65 @@
 <resources>
+
+    <!--    Header Text = Text that appears at the top of page to instruct users on what to do next   -->
+    <!--    Helper Text = Text that appears throughout page to provide users with information    -->
+    <!--    Edit Text Hint = Text that appears in EditText boxes to inform users on what to input    -->
+    <!--    Error Text = Text that appears when an error has occurred    -->
+    <!--    Button Text = Text  that appears on the actual buttons    -->
+
+    <!--    Splash Screen Miscellaneous Portion    -->
     <string name="appName">QuizzAssist</string>
     <string name="appSlogan">Exams Made Easy</string>
-    <string name="getStarted">Get Started</string>
-    <string name="User">Username</string>
-    <string name="Pass">Password</string>
-    <string name="login">Sign IN</string>
-    <string name="signup">Sign UP</string>
+    <string name="getStartedButtonText">Get Started</string>
 
-    <string name="name">Name</string>
+    <!--    User Sign-up & Login information Portion    -->
+    <string name="signUpHeaderText">Sign Up for An Account</string>
+    <string name="signUpButtonText">Sign Up</string>
+    <string name="logInHeaderText">Log In To Your Account></string>
+    <string name="loginButtonText">Sign In</string>
+    <string name="logOutButtonText">Log Out</string>
 
-    <string name="classDetails">Class Added</string>
-    <string name="email">Email</string>
-    <string name="logout">Log Out</string>
-    <string name="signupTitle">Sign Up Page</string>
-    <string name="test_addCourseButtonText">Add Class</string>
-    <string name="courseID">Course ID</string>
-    <string name="classAddFail">Error occurred in adding class</string>
+    <string name="userNameEditTextHint">Username (required)</string>
+    <string name="userFirstNameEditTextHint">First Name (required)</string>
+    <string name="userMiddleNameEditTextHint">Middle Name (optional)</string>
+    <string name="userLastNameEditTextHint">Last Name (required)</string>
+    <string name="userStudentNumberEditTextHint">Student Number (optional)</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="userEmailEditTextHint">Email (required)</string>
+    <string name="userPasswordEditTextHint">Password (required)</string>
+
+    <!--    User Option Portion    -->
+    <string name="userOption">What would you like to do?</string>
+    <string name="userOption_CreateCourse">Create a Course</string>
+    <string name="userOption_joinCourse">Join a Course</string>
+
+    <!--    Course Creation Portion    -->
+    <string name="createCourseButtonText">Create Course</string>
+    <string name="createClassNameEditTextHint">Enter Course Name</string>
+    <string name="wordPrivate">Private</string>
+    <string name="wordPublic">Public</string>
+    <string name="addCourseErrorText">Error occurred in adding class</string>
+
+    <!--    Course Joining Portion    -->
+    <string name="joinCourseButtonText">Join Course</string>
+    <string name="inviteCodeHeaderText">Enter the course invite code below</string>
+    <string name="inviteCodeEditTextHint">Enter invite code</string>
+
+    <!--    Post-Course Create/Join Portion    -->
+    <string name="createCourseSuccessText">Course Successfully Created!</string>
+    <string name="inviteCodeHelperText">Your unique invite code is:</string>
+    <string name="joinCourseSuccessText">You have successfully joined the course!</string>
+    <string name="continueToNextButtonText">Continue</string>
+
+    <!--    Test Activity Main Portion    -->
+    <string name="test_homePageButtonText">Home Page</string>
+    <string name="test_addCourseButtonText">Add Course</string>
+    <string name="test_deleteCourseButtonText">Delete Course</string>
+    <string name="test_logOutButtonText">Log Out</string>
+    <string name="test_inviteCodeDefault">gfu40giXz</string>
+    <string name="test_classNameDefault">Test Class</string>
+
+    <!--    Undetermined Portion    -->11
+    <string name="searchTitle">Search Course</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="submit">Submit</string>
-    <string name="pen">Pen</string>
-    <string name="todo">TODO</string>
-
 
 </resources>

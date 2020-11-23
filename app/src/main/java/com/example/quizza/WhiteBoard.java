@@ -163,6 +163,7 @@ public class WhiteBoard extends Activity {
 
             mBitmap = Bitmap.createBitmap(SCREEN_W, SCREEN_H, Bitmap.Config.ARGB_8888);
             mCanvas = new Canvas(mBitmap);
+            setBackgroundColor(Color.RED);
         }
 
         @Override
@@ -291,6 +292,7 @@ public class WhiteBoard extends Activity {
 
             switch (event.getAction()&MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
+                    Log.d("WhiteBoard","Action_Down "+moveType);
                     moveType=1;
                     touch_start(x, y);
                     invalidate();
@@ -299,25 +301,36 @@ public class WhiteBoard extends Activity {
                     if(moveType==2)
                     {
                         scale=scale*getSpacing(event) / spacing;
+                        Log.d("WhiteBoard","Action_Move zoom "+moveType+" "+scale);
+                        if(scale<1)//cancel zoom out
+                            break;
+                        setPivotX(x);
+                        setPivotY(y);
                         setScaleX(scale);
                         setScaleY(scale);
                         invalidate();
                     }
                     else if(moveType==1)
                     {
+                        Log.d("WhiteBoard","Action_Move write "+moveType);
                         touch_move(x, y);
                         invalidate();
                     }
                     break;
                 case MotionEvent.ACTION_UP:
+                    Log.d("WhiteBoard","ACTION_UP  "+moveType);
+                    if(moveType!=1)
+                        break;
                     touch_up();
                     invalidate();
                     break;
                 case MotionEvent.ACTION_POINTER_DOWN:
                     moveType=2;
                     spacing=getSpacing(event);
+                    Log.d("WhiteBoard","ACTION_POINTER_DOWN "+moveType);
                     break;
                 case MotionEvent.ACTION_POINTER_UP:
+                    Log.d("WhiteBoard","ACTION_POINTER_UP "+moveType);
                     moveType=0;
                     break;
             }

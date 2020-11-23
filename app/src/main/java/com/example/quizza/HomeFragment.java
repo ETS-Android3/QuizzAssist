@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
     CardView courseBox3;
     CardView courseBox4;
     LinearLayout classRoom;
-    RelativeLayout dashboard;
+    LinearLayout dashboard;
 
     User currentUser;
     List<String> enrolledCourses = new ArrayList<>();
@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
         //courseBox3 = (CardView) view.findViewById(R.id.courseBox3);
         //courseBox4 = (CardView) view.findViewById(R.id.courseBox4);
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
-        dashboard = (RelativeLayout) view.findViewById(R.id.coursesView);
+        dashboard = (LinearLayout) view.findViewById(R.id.coursesView);
 
         context = getContext();
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
@@ -94,6 +94,13 @@ public class HomeFragment extends Fragment {
                         createdCourses = currentUser.getCreatedCourses();
                         Log.d("createCourse", createdCourses.toString());
                         Log.d("enrollCourse", enrolledCourses.toString());
+                        for(String currentCourse : enrolledCourses){
+                            Log.d("createdCourse",currentCourse);
+                            AddClassroomUI(currentCourse);
+                        }
+                        for(String currentCourse : createdCourses){
+                            AddClassroomUI(currentCourse);
+                        }
                     }
                 }
             }
@@ -105,22 +112,11 @@ public class HomeFragment extends Fragment {
 
 
 
-            for(String currentCourse : enrolledCourses){
-                Log.d("createdCourse",currentCourse);
-                AddClassroomUI(currentCourse);
-            }
-
-
-            for(String currentCourse : createdCourses){
-                AddClassroomUI(currentCourse);
-            }
-
-
 
         test.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                AddClassroomUI("penis");
+                AddClassroomUI("CMPT 6969");
             }
         });
 
@@ -196,7 +192,7 @@ public class HomeFragment extends Fragment {
         LinearLayout.LayoutParams Linear_Layout = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         linearlayout.setLayoutParams(Linear_Layout);
-        linearlayout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
+        linearlayout.setPadding(DpToPix(33),DpToPix(16),DpToPix(33),DpToPix(16));
         linearlayout.setGravity(Gravity.CENTER);
         linearlayout.setOrientation(LinearLayout.VERTICAL);
         linearlayout.setBackgroundResource(R.drawable.gradient);

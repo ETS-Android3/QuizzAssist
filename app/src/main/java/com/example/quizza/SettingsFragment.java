@@ -200,30 +200,24 @@ public class SettingsFragment extends Fragment {
                     currentUser.setUserEmail(userEmailString);
                     currentUser.setUserStudentNumber(userStudentNumberString);
 
-                    saveUserProfileChangesButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Log.d("middleName", userMiddleNameString);
-                            userProfileEditView.setVisibility(View.INVISIBLE);
-                            userProfileView.setVisibility(View.VISIBLE);
-                            FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance()
-                                    .getCurrentUser().getUid()).setValue(currentUser)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(getActivity(), userProfileUpdated,
-                                                        Toast.LENGTH_SHORT).show();
+                    userProfileEditView.setVisibility(View.INVISIBLE);
+                    userProfileView.setVisibility(View.VISIBLE);
+                    FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance()
+                            .getCurrentUser().getUid()).setValue(currentUser)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getActivity(), userProfileUpdated,
+                                                Toast.LENGTH_SHORT).show();
 
-                                            } else {
-                                                Toast.makeText(getActivity(), userProfileUpdateError,
-                                                        Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
+                                    } else {
+                                        Toast.makeText(getActivity(), userProfileUpdateError,
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                         }
-                    });
-                }
             }
         });
 

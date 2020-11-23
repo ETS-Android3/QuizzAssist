@@ -39,20 +39,21 @@ public class HomeFragment extends Fragment {
     android.widget.GridLayout GridLayout_home;
     android.widget.GridLayout GridLayout_classroom;
     Button bt_addEvent;
+    Button button;
     TextView test;
     TextView textview;
     CardView cardview;
     ImageView imageview;
     LinearLayout linearlayout;
+    RelativeLayout relativelayout;
     LinearLayout.LayoutParams Card_View_Params;
-    LinearLayout.LayoutParams Text_View_Params;
+    LinearLayout.LayoutParams Text_View_Params_Lin;
     LinearLayout.LayoutParams Image_View_Params;
+    RelativeLayout.LayoutParams Button_Params;
+    RelativeLayout.LayoutParams Text_View_Params_Rel;
 
-    CardView courseBox1;
-    CardView courseBox2;
-    CardView courseBox3;
-    CardView courseBox4;
     LinearLayout classRoom;
+    LinearLayout classRoom1;
     LinearLayout dashboard;
 
     User currentUser;
@@ -71,16 +72,14 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
         test = (TextView)view.findViewById(R.id.test1);
-        //courseBox1 = (CardView) view.findViewById(R.id.courseBox1);
-        //courseBox2 = (CardView) view.findViewById(R.id.courseBox2);
-        //courseBox3 = (CardView) view.findViewById(R.id.courseBox3);
-        //courseBox4 = (CardView) view.findViewById(R.id.courseBox4);
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
+        classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
         dashboard = (LinearLayout) view.findViewById(R.id.coursesView);
 
         context = getContext();
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
         GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -154,17 +153,17 @@ public class HomeFragment extends Fragment {
 
         //Initialize the Linear Layout
         linearlayout = new LinearLayout(context);
-        LinearLayout.LayoutParams Linear_Layout = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        linearlayout.setLayoutParams(Linear_Layout);
+        linearlayout.setLayoutParams(Linear_Layout_params);
         linearlayout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
         linearlayout.setGravity(Gravity.CENTER);
         linearlayout.setOrientation(LinearLayout.VERTICAL);
 
         //Initialize the TextView
         textview = new TextView(context);
-        Text_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+        Text_View_Params_Lin = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        Text_View_Params_Lin.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
         textview.setText("Event Number");
         textview.setTextColor(Color.BLACK);
         textview.setTextSize(20);
@@ -175,6 +174,7 @@ public class HomeFragment extends Fragment {
         GridLayout_classroom.addView(cardview);
     }
 
+    //Dynamically creates class buttons in scrollview on the fragment_home.xml
     public void AddClassroomUI(String className){
         //Initialize the CardView and set properties
         cardview = new CardView(context);
@@ -189,9 +189,9 @@ public class HomeFragment extends Fragment {
 
         //Initialize the Linear Layout and set properties
         linearlayout = new LinearLayout(context);
-        LinearLayout.LayoutParams Linear_Layout = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        linearlayout.setLayoutParams(Linear_Layout);
+        linearlayout.setLayoutParams(Linear_Layout_params);
         linearlayout.setPadding(DpToPix(33),DpToPix(16),DpToPix(33),DpToPix(16));
         linearlayout.setGravity(Gravity.CENTER);
         linearlayout.setOrientation(LinearLayout.VERTICAL);
@@ -199,7 +199,7 @@ public class HomeFragment extends Fragment {
 
         //Initialize the TextView and set properties
         textview = new TextView(context);
-        Text_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        Text_View_Params_Lin = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
         textview.setText(className);
         textview.setTextColor(Color.WHITE);
@@ -215,6 +215,37 @@ public class HomeFragment extends Fragment {
         linearlayout.addView(imageview);
         cardview.addView(linearlayout);
         GridLayout_home.addView(cardview);
+    }
+
+
+    //Establishes UI needed to see class when clicking on any of the classes
+    public void SetClassView(String courseName){
+        //Initialize the RelativeLayout and it's properties
+        relativelayout = new RelativeLayout(context);
+        RelativeLayout.LayoutParams Relative_Layout_params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        Relative_Layout_params.setMargins(DpToPix(20), DpToPix(30), DpToPix(20), 0);
+
+        //Initialize the Button and it's properties for: AddEvent
+        button = new Button(context);
+        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
+        button.setText("ADD EVENT");
+        if(1 == 2/*current user is not the course creator*/){
+            //button.setVisibility(View.INVISIBLE);
+        }
+
+        //Initialize the TextView and set properties
+        textview = new TextView(context);
+        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+        textview.setText(courseName);
+        textview.setTextColor(Color.WHITE);
+        textview.setTextSize(40);
+
+        //Set children and parents relationship between each component
+        relativelayout.addView(button);
+        relativelayout.addView(textview);
+        classRoom1.addView(relativelayout);
     }
 
     public int DpToPix(float sizeInDp){

@@ -39,21 +39,15 @@ public class Question {
         //required empty constructor
     }
 
-    public void setQuestionText(String questionInputText) {
-        this.questionText = questionInputText;
-    }
+    public void setQuestionText(String questionInputText) { this.questionText = questionInputText; }
 
-    public String getQuestionText() {
-        return this.questionText;
-    }
+    public String getQuestionText() { return this.questionText; }
 
-    public boolean isGraded()
-    {
-        return this.finishedGrading;
-    }
+    public boolean isGraded() { return this.finishedGrading; }
 
-    public void saveAnswer(Answer answer , int studentIndex) {
-        this.answerList.set(studentIndex , answer);
-    }
+    //this save function assumes an answer data type is already created
+    //in future, may be easier create and save answer to do it in a single function
+    //for now I'm not sure how we're saving data from the canvas
+    public void saveAnswer(Answer answer , int studentIndex) { this.answerList.set(studentIndex , answer); }
 }
 

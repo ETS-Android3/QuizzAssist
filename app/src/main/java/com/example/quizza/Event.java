@@ -28,28 +28,20 @@ public class Event {
         //required empty constructor
     }
 
-    public Event(String event_Name) {
-        this.eventName = event_Name;
-    }
+    Event(String event_Name) { this.eventName = event_Name; }
 
     //I don't know if there are built in date inputs, if not, this must be changed
-    public void scheduleEvent(Date newStartTime, Date newEndTime) {
+    public void scheduleCourse(Date newStartTime, Date newEndTime) {
         this.eventStartTime = newStartTime;
         this.eventEndTime = newEndTime;
     }
 
-    public String getEventName() {
-        return this.eventName;
-    }
+    public String getCourseName() { return this.eventName; }
 
-    public boolean isGraded() {
-        return this.finishedGrading;
-    }
+    public boolean isGraded() { return this.finishedGrading; }
 
     public boolean eventInProgress(Date currentDate) {
-        if (currentDate.after(eventStartTime) && currentDate.before(eventEndTime))
-            return true;
-        return false;
+        return (currentDate.after(eventStartTime) && currentDate.before(eventEndTime) ? true : false);
     }
 
     public void GradeMultipleChoiceQuestions() {
@@ -57,13 +49,10 @@ public class Event {
             if (this.questionList.get(j).multipleChoice)
                 for (int i = 0; i < this.questionList.get(j).answerList.size() ; i++)
                     if (this.questionList.get(j).answerList.get(i).finishedGrading == false)
-                    {
-
-                        if (this.questionList.get(j).answerList.get(i).multipleChoiceInput == this.questionList.get(j).answerKeyMultipleChoice)
-                            this.questionList.get(j).answerList.get(i).mark = this.questionList.get(j).maxGrade;
-                        else
-                            this.questionList.get(j).answerList.get(i).mark = 0;
-                 }
+                        this.questionList.get(j).answerList.get(i).mark
+                                = (this.questionList.get(j).answerList.get(i).multipleChoiceInput
+                                == this.questionList.get(j).answerKeyMultipleChoice)
+                                ? (this.questionList.get(j).maxGrade) : 0;
     }
 
     //to be called during grading to get info to display the next ungraded answer
@@ -81,6 +70,7 @@ public class Event {
     public int getNextQuestionIndex(int currentQuestionIndex){
         return ++currentQuestionIndex % this.questionList.size();
     }
+    
     public int getPrevQuestionIndex(int currentQuestionIndex){
         return --currentQuestionIndex % this.questionList.size();
     }

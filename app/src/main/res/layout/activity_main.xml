@@ -10,7 +10,14 @@
     <FrameLayout
         android:id="@+id/flFragment"
         style="@style/matchParentHeightAndWidth"
-        android:layout_above="@+id/navigationBar" />
+        android:layout_above="@+id/navigationBar" >
+
+        <Button
+            android:id="@+id/Test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationBar"

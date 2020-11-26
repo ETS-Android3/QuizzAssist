@@ -44,6 +44,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class WhiteBoard extends Activity {
 
@@ -70,6 +72,7 @@ public class WhiteBoard extends Activity {
         Button bt_pen=(Button) findViewById(R.id.bt_pen);
         Button bt_eraser=(Button) findViewById(R.id.bt_eraser);
         Button bt_clear=(Button) findViewById(R.id.bt_clear);
+        Button bt_undo=(Button) findViewById(R.id.bt_undo);
 
         ViewGroup container = (ViewGroup) findViewById(R.id.Whiteboard_container);
         final MyView myView = new MyView(this);
@@ -98,13 +101,32 @@ public class WhiteBoard extends Activity {
                 myView.save();
           }
       });
+      bt_undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myView.undo();
+            }
+        });
 }
+    private class DrawPath{
+        public Path path;
+        public Paint paint;
+
+        public DrawPath(Path mPath, Paint mPaint) {
+            path=mPath;
+            paint=mPaint;
+        }
+    }
     public class MyView extends View {
         private int mMode = 1;
         private Bitmap mBitmap;
         private Canvas mCanvas;
         private Paint mEraserPaint;
         private Paint mPaint;
+
+        private ArrayList<DrawPath> savePath;
+        private ArrayList<DrawPath> deletePath;
+        private DrawPath mlastDP;
         private Path mPath;
         private float mX, mY;
         private static final float TOUCH_TOLERANCE = 4;
@@ -114,14 +136,29 @@ public class WhiteBoard extends Activity {
             setFocusable(true);
             setScreenWH();
             setBackgroundColor(Color.WHITE);
+            savePath=new ArrayList<DrawPath>();
+            deletePath=new ArrayList<DrawPath>();
             initPaint();
         }
         public MyView(Context context, AttributeSet attrs) {
             super(context, attrs);
+            setFocusable(true);
+            setScreenWH();
+            setBackgroundColor(Color.WHITE);
+            savePath=new ArrayList<DrawPath>();
+            deletePath=new ArrayList<DrawPath>();
+            initPaint();
+
         }
 
         public MyView(Context context, AttributeSet attrs, int defStyleAttr) {
             super(context, attrs, defStyleAttr);
+            setFocusable(true);
+            setScreenWH();
+            setBackgroundColor(Color.WHITE);
+            savePath=new ArrayList<DrawPath>();
+            deletePath=new ArrayList<DrawPath>();
+            initPaint();
         }
 
 
@@ -163,22 +200,36 @@ public class WhiteBoard extends Activity {
 
             mBitmap = Bitmap.createBitmap(SCREEN_W, SCREEN_H, Bitmap.Config.ARGB_8888);
             mCanvas = new Canvas(mBitmap);
-            setBackgroundColor(Color.RED);
         }
 
         @Override
         protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
             if (mBitmap != null) {
                 canvas.drawBitmap(mBitmap, 0, 0, mPaint);
             }
-            super.onDraw(canvas);
+//            if(mPath!=null)
+//            {
+//                Log.d("OnDrwa",String.valueOf(mPath)+"  "+String.valueOf(mPaint));
+//                if (mMode == Pen) {
+//                    mCanvas.drawPath(mPath, mPaint);
+//                }
+//                if (mMode == Eraser) {
+//                    mCanvas.drawPath(mPath, mEraserPaint);
+//                }
+//            }
+
         }
         public void clear()
         {
             setScaleY(1);
             setScaleX(1);
             mCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+            initPaint();
             invalidate();
+            //clear path for undo function
+            savePath.clear();
+            deletePath.clear();
         }
         public void save()
         {
@@ -233,19 +284,39 @@ public class WhiteBoard extends Activity {
 
             }*/
         }
+        public void undo()
+        {
+            Log.d("WhiteBoard","Undo:"+String.valueOf(savePath.size()));
+
+            if(savePath!=null && savePath.size()>0)
+            {
+                mCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+                DrawPath drawPath=savePath.get(savePath.size()-1);
+                deletePath.add(drawPath);
+                savePath.remove(savePath.size()-1);
+                Log.d("WhiteBoard","Undo:"+String.valueOf(savePath.size()));
+                //mCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+
+                for (int i=0;i<savePath.size();i++)
+                {
+                    DrawPath temp=savePath.get(i);
+                    Log.d("Undo", String.valueOf(temp.path)+" "+String.valueOf(temp.paint));
+                    mCanvas.drawPath(temp.path,temp.paint);
+                }
+                invalidate();
+            }
+        }
         private void touch_start(float x, float y) {
             mPath.reset();
             mPath.moveTo(x, y);
             mX = x;
             mY = y;
-
             if (mMode == Pen) {
-                mCanvas.drawPath(mPath, mPaint);
-            }
-
+                    mCanvas.drawPath(mPath, mPaint);
+                }
             if (mMode == Eraser) {
-                mCanvas.drawPath(mPath, mEraserPaint);
-            }
+                    mCanvas.drawPath(mPath, mEraserPaint);
+                }
 
         }
 
@@ -274,6 +345,9 @@ public class WhiteBoard extends Activity {
             if (mMode == Eraser) {
                 mCanvas.drawPath(mPath, mEraserPaint);
             }
+            mlastDP=new DrawPath(mPath,mPaint);
+            savePath.add(mlastDP);
+            mPath=null;
         }
         private int moveType=0;
         private float scale=1;
@@ -293,7 +367,10 @@ public class WhiteBoard extends Activity {
             switch (event.getAction()&MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
                     Log.d("WhiteBoard","Action_Down "+moveType);
+
                     moveType=1;
+                    mPath=new Path();
+                    mPath.reset();
                     touch_start(x, y);
                     invalidate();
                     break;

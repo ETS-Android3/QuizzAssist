@@ -42,14 +42,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+//Date and time stuff
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.icu.text.SimpleDateFormat;
+import android.os.SystemClock;
+import android.provider.Settings;
+//import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+
 public class HomeFragment extends Fragment {
 
     Context context;
     android.widget.GridLayout GridLayout_home;
     android.widget.GridLayout GridLayout_classroom;
-    Button bt_addEvent;
+    Button bt_addEvent,bt_scheduleEventDate,bt_scheduleEventTime;
     Button button;
-    TextView test;
+    TextView test,tv_eventDateDisplay,tv_eventTimeDisplay;
     TextView textview;
     CardView cardview;
     ImageView imageview;
@@ -68,6 +89,8 @@ public class HomeFragment extends Fragment {
     User currentUser;
     List<String> enrolledCourses = new ArrayList<>();
     List<String> createdCourses = new ArrayList<>();
+    int currentCourseIndex = -1;
+    int currentEventIndex = -1;
 
 
     public HomeFragment() {
@@ -89,6 +112,12 @@ public class HomeFragment extends Fragment {
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
         GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
 
+
+        //date and time stuff
+        bt_scheduleEventDate = (Button)view.findViewById(R.id.bt_scheduleEventDate);
+        bt_scheduleEventTime = (Button)view.findViewById(R.id.bt_scheduleEventTime);
+        tv_eventDateDisplay = (TextView)view.findViewById(R.id.tv_eventDateDisplay);
+        tv_eventTimeDisplay = (TextView)view.findViewById(R.id.tv_eventTimeDisplay);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -120,7 +149,6 @@ public class HomeFragment extends Fragment {
 
 
 
-
         test.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -135,6 +163,22 @@ public class HomeFragment extends Fragment {
                 AddEvent();
             }
         });
+
+
+        bt_scheduleEventDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleDateButton();
+            }
+        });
+
+        bt_scheduleEventTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleTimeButton();
+            }
+        });
+
 
 
         return view;
@@ -176,7 +220,58 @@ public class HomeFragment extends Fragment {
         GridLayout_classroom.addView(cardview);
     }
 
-    public void SetClassView(String courseName){
+
+    public void handleDateButton() {
+
+        Calendar calendar = Calendar.getInstance();
+        int YEAR = calendar.get(Calendar.YEAR);
+        int MONTH = calendar.get(Calendar.MONTH);
+        int DATE = calendar.get(Calendar.DATE);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(Calendar.YEAR, year);
+                calendar1.set(Calendar.MONTH, month);
+                calendar1.set(Calendar.DATE, date);
+                String dateText = DateFormat.format("EEEE, MMM d, yyyy", calendar1).toString();
+
+                tv_eventDateDisplay.setText(dateText);
+            }
+        }, YEAR, MONTH, DATE);
+
+        datePickerDialog.show();
+
+
+    }
+
+    public void handleTimeButton() {
+
+        Calendar calendar = Calendar.getInstance();
+        int HOUR = calendar.get(Calendar.HOUR);
+        int MINUTE = calendar.get(Calendar.MINUTE);
+        boolean is24HourFormat = DateFormat.is24HourFormat(getActivity());
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                //Log.i("Text", "onTimeSet: " + hour + minute);
+                Calendar tempCalendar = Calendar.getInstance();
+                tempCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                tempCalendar.set(Calendar.MINUTE, minute);
+                String timeText = DateFormat.format("h:mm aa", tempCalendar).toString();
+                tv_eventTimeDisplay.setText(timeText);
+            }
+        }, HOUR, MINUTE, is24HourFormat);
+
+        timePickerDialog.show();
+
+    }
+
+
+    public void SetClassView(String className){
         //Initialize the RelativeLayout and it's properties
         relativelayout = new RelativeLayout(context);
         RelativeLayout.LayoutParams Relative_Layout_params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -204,7 +299,6 @@ public class HomeFragment extends Fragment {
 //        relativelayout.addView(textview);
         classRoom1.addView(relativelayout);
     }
-
 
     //Dynamically creates class buttons in scrollview on the fragment_home.xml
     public void AddClassroomUI(String className){

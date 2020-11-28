@@ -53,6 +53,15 @@ public class LoginPage extends AppCompatActivity {
         relativeLayoutOne = (RelativeLayout) findViewById(R.id.appLogoRelativeView);
         relativeLayoutTwo = (RelativeLayout) findViewById(R.id.userSignInRelativeView);
 
+        Button test =(Button) findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), WhiteBoard.class ));
+            }
+        });
+
+
         userName = (EditText) findViewById(R.id.tv_username);
         userPassword = (EditText) findViewById(R.id.tv_password);
 

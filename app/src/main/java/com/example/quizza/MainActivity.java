@@ -38,13 +38,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavBar.setOnNavigationItemSelectedListener(navBarMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment()).commit();
 
-        Button test =(Button) findViewById(R.id.Test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), WhiteBoard.class ));
-            }
-        });
+
 
     }
 

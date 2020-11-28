@@ -7,6 +7,12 @@
     android:background="@drawable/gradient"
     tools:context=".LoginPage">
 
+    <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
     <RelativeLayout
         android:id="@+id/appLogoRelativeView"
         style="@style/wrapHeightAndWidth"

@@ -77,194 +77,200 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
-        test = (TextView)view.findViewById(R.id.test1);
-        classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
-        classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
-        dashboard = (LinearLayout) view.findViewById(R.id.coursesView);
 
-        context = getContext();
-        GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
-        GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
+        return getView();
 
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item_snapshot : snapshot.getChildren()){
-                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                        currentUser = item_snapshot.getValue(User.class);
-                        enrolledCourses = currentUser.getEnrolledCourses();
-                        createdCourses = currentUser.getCreatedCourses();
-                        Log.d("createCourse", createdCourses.toString());
-                        Log.d("enrollCourse", enrolledCourses.toString());
-                        for(String currentCourse : enrolledCourses){
-                            Log.d("createdCourse",currentCourse);
-                            AddClassroomUI(currentCourse);
-                        }
-                        for(String currentCourse : createdCourses){
-                            AddClassroomUI(currentCourse);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-
-
-
-        test.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                AddClassroomUI("CMPT 6969");
-            }
-        });
-
-        //Only make the button show if the UID is equal to course owner
-        bt_addEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddEvent();
-            }
-        });
-
-
-        return view;
-    }
-
-
-    //Dynamically creates Event buttons on the fragment_home.xml.
-    public void AddEvent(){
-        //Initialize the CardView and set properties
-        cardview = new CardView(context);
-        Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT,
-                1.0f);
-        Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
-                , DpToPix(12));
-        cardview.setLayoutParams(Card_View_Params);
-        cardview.setCardElevation(DpToPix(6));
-        cardview.setRadius(DpToPix(12));
-
-        //Initialize the Linear Layout
-        linearlayout = new LinearLayout(context);
-        LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        linearlayout.setLayoutParams(Linear_Layout_params);
-        linearlayout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
-        linearlayout.setGravity(Gravity.CENTER);
-        linearlayout.setOrientation(LinearLayout.VERTICAL);
-
-        //Initialize the TextView
-        textview = new TextView(context);
-        Text_View_Params_Lin = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        Text_View_Params_Lin.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
-        textview.setText("Event Number");
-        textview.setTextColor(Color.BLACK);
-        textview.setTextSize(20);
-
-        //Set children and parent relationship between each component
-        linearlayout.addView(textview);
-        cardview.addView(linearlayout);
-        GridLayout_classroom.addView(cardview);
-    }
-
-    public void SetClassView(String courseName){
-        //Initialize the RelativeLayout and it's properties
-        relativelayout = new RelativeLayout(context);
-        RelativeLayout.LayoutParams Relative_Layout_params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        Relative_Layout_params.setMargins(DpToPix(20), DpToPix(30), DpToPix(20), 0);
-
-        //Initialize the Button and it's properties for: AddEvent
-//        button = new Button(context);
-//        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
-//        button.setText("ADD EVENT");
-//        if(1 == 2/*current user is not the course creator*/){
-//            //button.setVisibility(View.INVISIBLE);
-//        }
+    };
+//        // Inflate the layout for this fragment
+//        View view = inflater.inflate(R.layout.fragment_home, container, false);
+//        bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
+//        test = (TextView)view.findViewById(R.id.test1);
+//        classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
+//        classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
+//        dashboard = (LinearLayout) view.findViewById(R.id.coursesView);
+//
+//        context = getContext();
+//        GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
+//        GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
+//
+//
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+//        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot item_snapshot : snapshot.getChildren()){
+//                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+//                        currentUser = item_snapshot.getValue(User.class);
+//                        enrolledCourses = currentUser.getEnrolledCourses();
+//                        createdCourses = currentUser.getCreatedCourses();
+//                        Log.d("createCourse", createdCourses.toString());
+//                        Log.d("enrollCourse", enrolledCourses.toString());
+//                        for(String currentCourse : enrolledCourses){
+//                            Log.d("createdCourse",currentCourse);
+//                            AddClassroomUI(currentCourse);
+//                        }
+//                        for(String currentCourse : createdCourses){
+//                            AddClassroomUI(currentCourse);
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
+//
+//
+//
+//
+//        test.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                AddClassroomUI("CMPT 6969");
+//            }
+//        });
+//
+//        //Only make the button show if the UID is equal to course owner
+//        bt_addEvent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AddEvent();
+//            }
+//        });
+//
+//
+//        return view;
+//    }
+//
+//
+//    //Dynamically creates Event buttons on the fragment_home.xml.
+//    public void AddEvent(){
+//        //Initialize the CardView and set properties
+//        cardview = new CardView(context);
+//        Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT,
+//                1.0f);
+//        Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
+//                , DpToPix(12));
+//        cardview.setLayoutParams(Card_View_Params);
+//        cardview.setCardElevation(DpToPix(6));
+//        cardview.setRadius(DpToPix(12));
+//
+//        //Initialize the Linear Layout
+//        linearlayout = new LinearLayout(context);
+//        LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//        linearlayout.setLayoutParams(Linear_Layout_params);
+//        linearlayout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
+//        linearlayout.setGravity(Gravity.CENTER);
+//        linearlayout.setOrientation(LinearLayout.VERTICAL);
+//
+//        //Initialize the TextView
+//        textview = new TextView(context);
+//        Text_View_Params_Lin = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        Text_View_Params_Lin.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+//        textview.setText("Event Number");
+//        textview.setTextColor(Color.BLACK);
+//        textview.setTextSize(20);
+//
+//        //Set children and parent relationship between each component
+//        linearlayout.addView(textview);
+//        cardview.addView(linearlayout);
+//        GridLayout_classroom.addView(cardview);
+//    }
+//
+//    public void SetClassView(String courseName){
+//        //Initialize the RelativeLayout and it's properties
+//        relativelayout = new RelativeLayout(context);
+//        RelativeLayout.LayoutParams Relative_Layout_params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        Relative_Layout_params.setMargins(DpToPix(20), DpToPix(30), DpToPix(20), 0);
+//
+//        //Initialize the Button and it's properties for: AddEvent
+////        button = new Button(context);
+////        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+////        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
+////        button.setText("ADD EVENT");
+////        if(1 == 2/*current user is not the course creator*/){
+////            //button.setVisibility(View.INVISIBLE);
+////        }
+////
+////        //Initialize the TextView and set properties
+////        textview = new TextView(context);
+////        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+////        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+////        textview.setText(courseName);
+////        textview.setTextColor(Color.WHITE);
+////        textview.setTextSize(40);
+//
+//        //Set children and parents relationship between each component
+////        relativelayout.addView(button);
+////        relativelayout.addView(textview);
+//        classRoom1.addView(relativelayout);
+//    }
+//
+//
+//    //Dynamically creates class buttons in scrollview on the fragment_home.xml
+//    public void AddClassroomUI(String className){
+//        //Initialize the CardView and set properties
+//        cardview = new CardView(context);
+//        Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+//        Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
+//                , DpToPix(12));
+//        cardview.setClickable(true);
+//        cardview.setLayoutParams(Card_View_Params);
+//        cardview.setCardElevation(DpToPix(7));
+//        cardview.setRadius(DpToPix(12));
+//        cardview.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dashboard.setVisibility(View.INVISIBLE);
+//                classRoom.setVisibility(View.VISIBLE);
+//                SetClassView(className);
+//                Toast.makeText(getActivity(), "Hello ldies", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        //Initialize the Linear Layout and set properties
+//        linearlayout = new LinearLayout(context);
+//        LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//        linearlayout.setLayoutParams(Linear_Layout_params);
+//        linearlayout.setPadding(DpToPix(33),DpToPix(16),DpToPix(33),DpToPix(16));
+//        linearlayout.setGravity(Gravity.CENTER);
+//        linearlayout.setOrientation(LinearLayout.VERTICAL);
+//        linearlayout.setBackgroundResource(R.drawable.gradient);
 //
 //        //Initialize the TextView and set properties
 //        textview = new TextView(context);
-//        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        Text_View_Params_Lin = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 //        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
-//        textview.setText(courseName);
+//        textview.setText(className);
 //        textview.setTextColor(Color.WHITE);
-//        textview.setTextSize(40);
-
-        //Set children and parents relationship between each component
-//        relativelayout.addView(button);
-//        relativelayout.addView(textview);
-        classRoom1.addView(relativelayout);
-    }
-
-
-    //Dynamically creates class buttons in scrollview on the fragment_home.xml
-    public void AddClassroomUI(String className){
-        //Initialize the CardView and set properties
-        cardview = new CardView(context);
-        Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
-        Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
-                , DpToPix(12));
-        cardview.setClickable(true);
-        cardview.setLayoutParams(Card_View_Params);
-        cardview.setCardElevation(DpToPix(7));
-        cardview.setRadius(DpToPix(12));
-        cardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dashboard.setVisibility(View.INVISIBLE);
-                classRoom.setVisibility(View.VISIBLE);
-                SetClassView(className);
-                Toast.makeText(getActivity(), "Hello ldies", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        //Initialize the Linear Layout and set properties
-        linearlayout = new LinearLayout(context);
-        LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        linearlayout.setLayoutParams(Linear_Layout_params);
-        linearlayout.setPadding(DpToPix(33),DpToPix(16),DpToPix(33),DpToPix(16));
-        linearlayout.setGravity(Gravity.CENTER);
-        linearlayout.setOrientation(LinearLayout.VERTICAL);
-        linearlayout.setBackgroundResource(R.drawable.gradient);
-
-        //Initialize the TextView and set properties
-        textview = new TextView(context);
-        Text_View_Params_Lin = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
-        textview.setText(className);
-        textview.setTextColor(Color.WHITE);
-        textview.setTextSize(20);
-
-        //Initialize the ImageView and set properties
-        imageview = new ImageView(context);
-        Image_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        imageview.setBackgroundResource(R.drawable.course_icon);
-
-        //Set children and parents relationship between each component
-        linearlayout.addView(textview);
-        linearlayout.addView(imageview);
-        cardview.addView(linearlayout);
-        GridLayout_home.addView(cardview);
-    }
+//        textview.setTextSize(20);
+//
+//        //Initialize the ImageView and set properties
+//        imageview = new ImageView(context);
+//        Image_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        imageview.setBackgroundResource(R.drawable.course_icon);
+//
+//        //Set children and parents relationship between each component
+//        linearlayout.addView(textview);
+//        linearlayout.addView(imageview);
+//        cardview.addView(linearlayout);
+//        GridLayout_home.addView(cardview);
+//    }
+//
+//
+//    //Establishes UI needed to see class when clicking on any of the classes
+//
+//
+//    public int DpToPix(float sizeInDp){
+//        float scale = getResources().getDisplayMetrics().density;
+//        int dpAsPixels = (int) (sizeInDp*scale + 0.5f);
+//        return dpAsPixels;
+//    }
 
 
-    //Establishes UI needed to see class when clicking on any of the classes
-
-
-    public int DpToPix(float sizeInDp){
-        float scale = getResources().getDisplayMetrics().density;
-        int dpAsPixels = (int) (sizeInDp*scale + 0.5f);
-        return dpAsPixels;
-    }
 }

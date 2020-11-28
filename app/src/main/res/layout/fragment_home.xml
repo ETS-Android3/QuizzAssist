@@ -7,9 +7,7 @@
     tools:context=".HomeFragment"
     android:background="@color/appBackground">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:id="@+id/coursesView"
         style="@style/matchParentHeightAndWidth"
         tools:context=".ClassRoom"
@@ -40,8 +38,37 @@
                     style="@style/GenericText"
                     android:textSize="25sp"
                     android:layout_margin="20dp" />
-
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/bt_joinedCourses"
+                style="@style/Buttons"
+                android:layout_width="190dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/btn_bg"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/joinedCourses"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/bt_createdCourses"
+                style="@style/Buttons"
+                android:layout_width="190dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="210dp"
+                android:background="@drawable/btn_bg"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/createdCourses"
+                android:textSize="13sp" />
+            </RelativeLayout>
+
+
 
 
             <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"

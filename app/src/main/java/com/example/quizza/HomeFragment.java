@@ -48,7 +48,8 @@ public class HomeFragment extends Fragment {
     android.widget.GridLayout GridLayout_home;
     android.widget.GridLayout GridLayout_classroom;
     Button bt_addEvent;
-    Button button;
+    Button bt_joinedCourses;
+    Button bt_createdCourses;
     TextView test;
     TextView textview;
     CardView cardview;
@@ -80,6 +81,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
+        bt_joinedCourses = (Button)view.findViewById(R.id.bt_joinedCourses);
+        bt_createdCourses = (Button)view.findViewById(R.id.bt_createdCourses);
         test = (TextView)view.findViewById(R.id.test1);
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
         classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
@@ -99,14 +102,9 @@ public class HomeFragment extends Fragment {
                     if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         currentUser = item_snapshot.getValue(User.class);
                         enrolledCourses = currentUser.getEnrolledCourses();
-                        createdCourses = currentUser.getCreatedCourses();
-                        Log.d("createCourse", createdCourses.toString());
                         Log.d("enrollCourse", enrolledCourses.toString());
                         for(String currentCourse : enrolledCourses){
                             Log.d("createdCourse",currentCourse);
-                            AddClassroomUI(currentCourse);
-                        }
-                        for(String currentCourse : createdCourses){
                             AddClassroomUI(currentCourse);
                         }
                     }
@@ -137,9 +135,62 @@ public class HomeFragment extends Fragment {
         });
 
 
+        bt_joinedCourses.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ClearCreatedUI();
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                            if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                currentUser = item_snapshot.getValue(User.class);
+                                enrolledCourses = currentUser.getEnrolledCourses();
+                                Log.d("enrollCourse", enrolledCourses.toString());
+                                for(String currentCourse : enrolledCourses){
+                                    AddClassroomUI(currentCourse);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
+            }
+        });
+        bt_createdCourses.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ClearCreatedUI();
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                            if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                currentUser = item_snapshot.getValue(User.class);
+                                createdCourses = currentUser.getCreatedCourses();
+                                Log.d("createCourse", createdCourses.toString());
+                                for(String currentCourse : createdCourses){
+                                    AddClassroomUI(currentCourse);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
+            }
+        });
+
+
         return view;
     }
-
 
     //Dynamically creates Event buttons on the fragment_home.xml.
     public void AddEvent(){
@@ -176,7 +227,7 @@ public class HomeFragment extends Fragment {
         GridLayout_classroom.addView(cardview);
     }
 
-    public void SetClassView(String courseName){
+    public void SetClassViewUI(String courseName){
         //Initialize the RelativeLayout and it's properties
         relativelayout = new RelativeLayout(context);
         RelativeLayout.LayoutParams Relative_Layout_params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -223,7 +274,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 dashboard.setVisibility(View.INVISIBLE);
                 classRoom.setVisibility(View.VISIBLE);
-                SetClassView(className);
+                SetClassViewUI(className);
                 Toast.makeText(getActivity(), "Hello ldies", Toast.LENGTH_LONG).show();
             }
         });
@@ -258,10 +309,12 @@ public class HomeFragment extends Fragment {
         GridLayout_home.addView(cardview);
     }
 
+    public void ClearCreatedUI(){
+        GridLayout_home.removeAllViewsInLayout();
+    }
 
-    //Establishes UI needed to see class when clicking on any of the classes
 
-
+    //Converts dp (in float) to pixels (in integer)
     public int DpToPix(float sizeInDp){
         float scale = getResources().getDisplayMetrics().density;
         int dpAsPixels = (int) (sizeInDp*scale + 0.5f);

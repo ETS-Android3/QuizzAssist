@@ -62,6 +62,8 @@
     <!-- Home Fragment strings   -->
     <string name="homeFtCourseTV">My Courses</string>
     <string name="courseCardText">Course Name</string>
+    <string name="joinedCourses">Joined Courses</string>
+    <string name="createdCourses">Created Courses</string>
 
     <!-- Profile Fragment Strings -->
     <string name="editUserInfoButtonText">Edit Profile</string>

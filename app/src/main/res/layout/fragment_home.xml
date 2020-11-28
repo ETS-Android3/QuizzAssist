@@ -7,180 +7,61 @@
     tools:context=".HomeFragment"
     android:background="@color/appBackground">
 
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/coursesView"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/matchParentHeightAndWidth"
+        tools:context=".ClassRoom"
+        android:visibility="visible">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            style = "@style/matchParentHeightAndWidth">
+            <RelativeLayout
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/profilePicture"
+                    android:layout_width="82dp"
+                    android:layout_height="82dp"
+                    android:src="@drawable/profile_icon"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/btn_bg"/>
 
-            <ImageView
-                android:id="@+id/profilePicture"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
-                android:src="@drawable/profile_icon"
-                android:layout_alignParentRight="true"
-                android:layout_margin="30dp"
-                android:background="@drawable/btn_bg"/>
+                <TextView
+                    android:clickable="true"
+                    android:id="@+id/test1"
+                    android:text="@string/homeFtCourseTV"
+                    style="@style/GenericText"
+                    android:textSize="25sp"
+                    android:layout_margin="20dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/homeFtCourseTV"
-                style="@style/GenericText"
-                android:textSize="25sp"
-                android:layout_margin="50dp"/>
+            </RelativeLayout>
 
-        </RelativeLayout>
 
-        <GridLayout
-            android:columnCount="2"
-            android:rowCount="3"
-            android:layout_marginTop="150dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alignmentMode="alignMargins"
-            android:columnOrderPreserved="false">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/courseBox1"
-                android:clickable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                app:cardElevation="7dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:orientation="vertical"
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <GridLayout
+                    android:id="@+id/gridLayout_activity_home"
+                    android:columnCount="2"
+                    android:alignmentMode="alignMargins"
+                    android:columnOrderPreserved="false"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/course_icon"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/GenericText"
-                        android:text="@string/courseCardText"/>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/courseBox2"
-                android:clickable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                app:cardElevation="7dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/course_icon"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/GenericText"
-                        android:text="@string/courseCardText"/>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/courseBox3"
-                android:clickable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                app:cardElevation="7dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/course_icon"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/GenericText"
-                        android:text="@string/courseCardText"/>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/courseBox4"
-                android:clickable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                app:cardElevation="7dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/gradient">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/course_icon"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/GenericText"
-                        android:text="@string/courseCardText"/>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="wrap_content">
+                </GridLayout>
+            </ScrollView>
 
 
 
-        </GridLayout>
-    </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -194,7 +75,6 @@
             android:id="@+id/parentLinearLayout_activity_classroom"
             android:orientation="vertical"
             style = "@style/matchParentHeightAndWidth">
-
             <RelativeLayout
                 android:layout_marginTop="32dp"
                 android:layout_marginRight="20dp"
@@ -210,18 +90,10 @@
                     android:visibility="visible"/>
                 <TextView
                     android:id="@+id/tv_courseNameDisplay"
-                    style = "@style/wrapHeightAndWidth"
+                    style="@style/wrapHeightAndWidth"
                     android:text="Course Name"
                     android:textSize="40sp"
                     android:textColor="#FFFFFF"/>
-                <TextView
-                    android:id="@+id/tv_eventsCountDisplay"
-                    style = "@style/wrapHeightAndWidth"
-                    android:text="# of Events"
-                    android:textSize="20sp"
-                    android:textColor="#FFFFFF"
-                    android:layout_below="@id/tv_courseNameDisplay">
-                </TextView>
             </RelativeLayout>
 
             <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"

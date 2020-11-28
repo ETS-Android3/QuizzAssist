@@ -8,9 +8,12 @@
  */
 
 package com.example.quizza;
+import android.content.ClipData;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import android.content.ClipboardManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -252,6 +255,12 @@ public class AddFragment extends Fragment {
                                                 tv_courseInviteCodeHelperText.setVisibility(View.VISIBLE);
                                                 tv_courseInviteCode.setText(newCourse.getInviteCode());
                                                 tv_courseInviteCode.setVisibility(View.VISIBLE);
+                                                tv_courseInviteCode.setOnClickListener(new View.OnClickListener(){
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        CopyToClipBoard(newCourse.getInviteCode());
+                                                    }
+                                                });
                                             } else {
                                                 Toast.makeText(getActivity(), courseNameExistsError, Toast.LENGTH_SHORT).show();
                                             }
@@ -267,6 +276,13 @@ public class AddFragment extends Fragment {
                 }
             }
         });
+
         return view;
+    }
+    public void CopyToClipBoard(String text){
+        Context context = getContext();
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("ClassCode", text);
+        clipboard.setPrimaryClip(clip);
     }
 }

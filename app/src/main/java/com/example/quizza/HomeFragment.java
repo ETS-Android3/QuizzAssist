@@ -84,6 +84,7 @@ public class HomeFragment extends Fragment {
 
     LinearLayout classRoom;
     LinearLayout classRoom1;
+    RelativeLayout eventPage;
     LinearLayout dashboard;
 
     User currentUser;
@@ -106,12 +107,12 @@ public class HomeFragment extends Fragment {
         test = (TextView)view.findViewById(R.id.test1);
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
         classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
+        eventPage = (RelativeLayout) view.findViewById(R.id.eventPage);
         dashboard = (LinearLayout) view.findViewById(R.id.coursesView);
 
         context = getContext();
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
         GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
-
 
         //date and time stuff
         bt_scheduleEventDate = (Button)view.findViewById(R.id.bt_scheduleEventDate);
@@ -148,7 +149,6 @@ public class HomeFragment extends Fragment {
         });
 
 
-
         test.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -164,7 +164,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         bt_scheduleEventDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,8 +177,6 @@ public class HomeFragment extends Fragment {
                 handleTimeButton();
             }
         });
-
-
 
         return view;
     }
@@ -207,19 +204,32 @@ public class HomeFragment extends Fragment {
         linearlayout.setOrientation(LinearLayout.VERTICAL);
 
         //Initialize the TextView
-        textview = new TextView(context);
+        button = new Button(context);
         Text_View_Params_Lin = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         Text_View_Params_Lin.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
-        textview.setText("Event Number");
-        textview.setTextColor(Color.BLACK);
-        textview.setTextSize(20);
+        button.setText("Event Number");
+        button.setTextColor(Color.BLACK);
+        button.setTextSize(20);
 
         //Set children and parent relationship between each component
-        linearlayout.addView(textview);
+        linearlayout.addView(button);
         cardview.addView(linearlayout);
         GridLayout_classroom.addView(cardview);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEventPage();
+            }
+        });
     }
 
+    public void openEventPage() {
+        Toast.makeText(getActivity(), "Hello boyos", Toast.LENGTH_LONG).show();
+        dashboard.setVisibility(View.INVISIBLE);
+        classRoom.setVisibility(View.INVISIBLE);
+        eventPage.setVisibility(View.VISIBLE);
+    }
 
     public void handleDateButton() {
 
@@ -243,7 +253,6 @@ public class HomeFragment extends Fragment {
         }, YEAR, MONTH, DATE);
 
         datePickerDialog.show();
-
 
     }
 

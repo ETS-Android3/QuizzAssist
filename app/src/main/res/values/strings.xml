@@ -17,7 +17,6 @@
     <string name="logInHeaderText">Log In To Your Account></string>
     <string name="loginButtonText">Sign In</string>
     <string name="logOutButtonText">Log Out</string>
-    <string name="forgotPassword">Forgot Password?</string>
 
     <string name="userNameEditTextHint">Username (required)</string>
     <string name="userFirstNameEditTextHint">First Name (required)</string>
@@ -51,7 +50,7 @@
     <string name="joinCourseSuccessText">You have successfully joined the course!</string>
     <string name="continueToNextButtonText">Continue</string>
 
-    <!--    Test Activity Main Portion    -->
+    <!--    Test Strings Portion    -->
     <string name="test_homePageButtonText">Home Page</string>
     <string name="test_addCourseButtonText">Add Course</string>
     <string name="test_deleteCourseButtonText">Delete Course</string>
@@ -59,15 +58,46 @@
     <string name="test_inviteCodeDefault">gfu40giXz</string>
     <string name="test_classNameDefault">Test Class</string>
 
-    <!-- Home Fragment strings   -->
+    <string name="test_userName">testUserName123</string>
+    <string name="test_userFullName">Brandon Middlename Joe</string>
+    <string name="test_userFirstName">Brandon</string>
+    <string name="test_userMiddleName">NoMiddleName</string>
+    <string name="test_userLastName">Yip</string>
+    <string name="test_userEmail">testEmail@gmail.com</string>
+    <string name="test_userStudentNumber">301219683</string>
+
+    <!--    Home Fragment strings   -->
     <string name="homeFtCourseTV">My Courses</string>
     <string name="courseCardText">Course Name</string>
 
-    <!-- Profile Fragment Strings -->
+    <!--    Settings Fragment Strings Portion    -->
     <string name="editUserInfoButtonText">Edit Profile</string>
+    <string name="settings_userNameHelperText">Username</string>
+
+    <!--    Edit User Profile Settings Portion    -->
+    <string name="settings_profileSettingsHeaderText">Profile Settings</string>
+    <string name="settings_saveProfileChangesButtonText">Save Changes</string>
+    <string name="classCreated">Class created</string>
+    <string name="enrollClass">Enrolled Class</string>
+
+    <string name="settings_userFirstNameHelperText">First Name</string>
+    <string name="settings_userMiddleNameHelperText">Middle Name</string>
+    <string name="settings_userLastNameHelperText">Last Name</string>
+    <string name="settings_userEmailHelperText">Email</string>
+    <string name="settings_userStudentNumberNameHelperText">Student Number</string>
+
+    <string name="createQuestionTitle">Create your question Below</string>
+    <string name="createQuestionHint">Input your Question Here</string>
+    <string name="createQuestion">Create Question</string>
+
+    <string name="ForgotPassword">Forgot Password?</string>
+    <string name="ForgotPasswordHeader">Please Input your email for recovery</string>
+    <string name="forgotPasswordHint">Input Email</string>
+    <string name="forgotPasswordButton">Send Mail</string>
+    <string name="forgotPasswordDialogTitle">Password Reset</string>
+    <string name="alertDialogMessage">Verification Email is sent, Check ur mailbox to reset your password!</string>
 
     <!--    Undetermined Portion    -->11
-    <string name="needToImplement">Still implementing this feature</string>
     <string name="searchTitle">Search Course</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -227,7 +227,7 @@ public class AddFragment extends Fragment {
                 }
 
                 if (currentUser != null) {
-                    Course newCourse = new Course(userInputCourseName, currentUser.getName(), courseID.getAndIncrement());
+                    Course newCourse = new Course(userInputCourseName, currentUser.getUserName(), courseID.getAndIncrement());
 
 
                     currentDatabase = FirebaseDatabase.getInstance().getReference();

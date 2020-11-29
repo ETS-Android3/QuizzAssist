@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.UUID;
 
 
-
-
 public class Course {
     private Integer courseID;
     private String courseName;
@@ -22,6 +20,7 @@ public class Course {
     private String inviteCode;
     private final Integer inviteCodeLength = 10;
     private List<String> enrolledUsers;
+    private List<String> questionList;
 
     public Course() {}
 
@@ -32,6 +31,14 @@ public class Course {
         this.enrolledUsers = new ArrayList<>();
         this.enrolledUsers.add(this.courseOwner);
         this.inviteCode = generateInviteCode(this.inviteCodeLength);
+    }
+
+    public List<String> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<String> questionList) {
+        this.questionList = questionList;
     }
 
     public String getCourseName() { return this.courseName; }
@@ -83,4 +90,5 @@ public class Course {
     public String generateInviteCode(int inviteCodeLength) {
         return UUID.randomUUID().toString().replace("-", "").substring(0, inviteCodeLength);
     }
+
 }

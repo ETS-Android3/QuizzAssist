@@ -23,14 +23,14 @@
             android:fontFamily="@font/armata"
             android:text="@string/userOption" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_userOptionCreateCourse"
             style="@style/MediumButtons"
             android:text="@string/createCourseButtonText"
             android:layout_below="@id/tv_userOptionHeaderText"
             android:layout_margin="30dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_userOptionJoinCourse"
             style="@style/MediumButtons"
             android:text="@string/joinCourseButtonText"
@@ -60,7 +60,7 @@
             android:padding="10dp"
             android:textColorHint="@color/white" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_joiningCourse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
             android:background="@drawable/edit_bg"
             android:layout_marginBottom="20dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_creatingCourse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

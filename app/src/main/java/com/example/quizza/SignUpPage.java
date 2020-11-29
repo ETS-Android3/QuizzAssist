@@ -87,20 +87,8 @@
              public void onClick(View v) {
                  String email = userEmail.getText().toString();
                  String password = userPassword.getText().toString();
-                 final String name = userName.getText().toString();
 
-                 if (TextUtils.isEmpty(email)) {
-                     userEmail.setError("Email is Required");
-                     return;
-                 }
-                 if (TextUtils.isEmpty(password)) {
-                     userPassword.setError("Password is Required");
-                     return;
-                 }
-                 if (password.length() < minPasswordLength) {
-                     userPassword.setError("Password must be longer than 6 Characters");
-                     return;
-                 }
+
 
                  mProgressBar.setVisibility(View.VISIBLE);
 
@@ -110,7 +98,17 @@
                              @Override
                              public void onComplete(@NonNull Task<AuthResult> task) {
                                  if (task.isSuccessful()) {
-                                     User newUser = new User(name, email);
+
+                                     User newUser = new User(userName.getText().toString(),
+                                             userFirstName.getText().toString(),
+                                             userLastName.getText().toString(),
+                                             userEmail.getText().toString());
+
+                                     if (!userMiddleName.getText().toString().isEmpty())
+                                         newUser.setUserMiddleName(userMiddleName.getText().toString());
+                                     if (!userStudentNumber.getText().toString().isEmpty())
+                                         newUser.setUserStudentNumber(userStudentNumber.getText().toString());
+
                                      mDatabase.child(FirebaseAuth.getInstance()
                                              .getCurrentUser().getUid()).setValue(newUser)
                                              .addOnCompleteListener(new OnCompleteListener<Void>() {

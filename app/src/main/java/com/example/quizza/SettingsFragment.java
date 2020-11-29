@@ -39,7 +39,7 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        userName = (TextView) view.findViewById(R.id.tv_userFirstName);
+        userName = (TextView) view.findViewById(R.id.tv_userName);
         userEmail = (TextView) view.findViewById(R.id.tv_userEmail);
         userStudentNumber = (TextView) view.findViewById(R.id.tv_userStudentNumber);
         editProfileButton = (Button) view.findViewById(R.id.bt_editProfile);
@@ -54,7 +54,7 @@ public class SettingsFragment extends Fragment {
                     if (item_snapshot.getKey().equals
                             (FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         currentUser = item_snapshot.getValue(User.class);
-                        userName.setText(currentUser.getName());
+                        userName.setText(currentUser.getUserName());
                         userEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                     }
                 }

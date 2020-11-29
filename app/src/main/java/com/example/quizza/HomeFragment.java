@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,6 +31,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,12 +51,10 @@ public class HomeFragment extends Fragment {
     android.widget.GridLayout GridLayout_home;
     android.widget.GridLayout GridLayout_classroom;
     Button bt_addEvent;
-    Button button;
-    TextView test;
     TextView textview;
     CardView cardview;
     ImageView imageview;
-    LinearLayout linearlayout;
+    LinearLayout linear_layout;
     RelativeLayout relativelayout;
     LinearLayout.LayoutParams Card_View_Params;
     LinearLayout.LayoutParams Text_View_Params_Lin;
@@ -63,11 +64,17 @@ public class HomeFragment extends Fragment {
 
     LinearLayout classRoom;
     LinearLayout classRoom1;
-    LinearLayout dashboard;
+    RelativeLayout dashboard;
 
     User currentUser;
     List<String> enrolledCourses = new ArrayList<>();
     List<String> createdCourses = new ArrayList<>();
+
+    RelativeLayout createQuestion;
+    EditText questionString;
+    EditText classLinked;
+    Button createQuestionButton;
+
 
 
     public HomeFragment() {
@@ -80,11 +87,13 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
-        test = (TextView)view.findViewById(R.id.test1);
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
         classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
-        dashboard = (LinearLayout) view.findViewById(R.id.coursesView);
-
+        dashboard = (RelativeLayout) view.findViewById(R.id.coursesView);
+        questionString = (EditText) view.findViewById(R.id.tv_questionToAdd);
+        classLinked = (EditText) view.findViewById(R.id.tv_courseLinked);
+        createQuestion = (RelativeLayout) view.findViewById(R.id.createQuestion);
+        createQuestionButton = (Button) view.findViewById(R.id.createQuestionButton);
         context = getContext();
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
         GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
@@ -119,16 +128,32 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
-        test.setOnClickListener(new View.OnClickListener(){
+        createQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                AddClassroomUI("CMPT 6969");
+            public void onClick(View v) {
+                String question = questionString.getText().toString();
+                String courseLink = classLinked.getText().toString();
+                if(question.isEmpty()){
+                    questionString.setError("Please Input a Valid Question");
+                }
+                else if (courseLink.isEmpty()){
+                    classLinked.setError("Please Input a Valid class to Link");
+                }
+                else {
+                    Question myQuestion = new Question(question, courseLink, currentUser.getUserName());
+                    DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Questions");
+                    mReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getActivity(), "QuestionCreated", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
             }
         });
 
-        //Only make the button show if the UID is equal to course owner
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,11 +165,11 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-
-    //Dynamically creates Event buttons on the fragment_home.xml.
     public void AddEvent(){
-        //Initialize the CardView and set properties
+        //Initialize the CardView
         cardview = new CardView(context);
+
+        //Creating parameters for CardView
         Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT,
                 1.0f);
         Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
@@ -153,14 +178,14 @@ public class HomeFragment extends Fragment {
         cardview.setCardElevation(DpToPix(6));
         cardview.setRadius(DpToPix(12));
 
-        //Initialize the Linear Layout
-        linearlayout = new LinearLayout(context);
+
+        linear_layout = new LinearLayout(context);
         LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        linearlayout.setLayoutParams(Linear_Layout_params);
-        linearlayout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
-        linearlayout.setGravity(Gravity.CENTER);
-        linearlayout.setOrientation(LinearLayout.VERTICAL);
+        linear_layout.setLayoutParams(Linear_Layout_params);
+        linear_layout.setPadding(DpToPix(8),DpToPix(8),0,DpToPix(8));
+        linear_layout.setGravity(Gravity.CENTER);
+        linear_layout.setOrientation(LinearLayout.VERTICAL);
 
         //Initialize the TextView
         textview = new TextView(context);
@@ -171,8 +196,8 @@ public class HomeFragment extends Fragment {
         textview.setTextSize(20);
 
         //Set children and parent relationship between each component
-        linearlayout.addView(textview);
-        cardview.addView(linearlayout);
+        linear_layout.addView(textview);
+        cardview.addView(linear_layout);
         GridLayout_classroom.addView(cardview);
     }
 
@@ -205,7 +230,6 @@ public class HomeFragment extends Fragment {
         classRoom1.addView(relativelayout);
     }
 
-
     //Dynamically creates class buttons in scrollview on the fragment_home.xml
     public void AddClassroomUI(String className){
         //Initialize the CardView and set properties
@@ -229,14 +253,14 @@ public class HomeFragment extends Fragment {
         });
 
         //Initialize the Linear Layout and set properties
-        linearlayout = new LinearLayout(context);
-        LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
+        linear_layout = new LinearLayout(context);
+        LinearLayout.LayoutParams Linear_Layout = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        linearlayout.setLayoutParams(Linear_Layout_params);
-        linearlayout.setPadding(DpToPix(33),DpToPix(16),DpToPix(33),DpToPix(16));
-        linearlayout.setGravity(Gravity.CENTER);
-        linearlayout.setOrientation(LinearLayout.VERTICAL);
-        linearlayout.setBackgroundResource(R.drawable.gradient);
+        linear_layout.setLayoutParams(Linear_Layout);
+        linear_layout.setPadding(DpToPix(33),DpToPix(16),DpToPix(33),DpToPix(16));
+        linear_layout.setGravity(Gravity.CENTER);
+        linear_layout.setOrientation(LinearLayout.VERTICAL);
+        linear_layout.setBackgroundResource(R.drawable.gradient);
 
         //Initialize the TextView and set properties
         textview = new TextView(context);
@@ -252,15 +276,13 @@ public class HomeFragment extends Fragment {
         imageview.setBackgroundResource(R.drawable.course_icon);
 
         //Set children and parents relationship between each component
-        linearlayout.addView(textview);
-        linearlayout.addView(imageview);
-        cardview.addView(linearlayout);
+        linear_layout.addView(textview);
+        linear_layout.addView(imageview);
+        cardview.addView(linear_layout);
         GridLayout_home.addView(cardview);
     }
 
-
     //Establishes UI needed to see class when clicking on any of the classes
-
 
     public int DpToPix(float sizeInDp){
         float scale = getResources().getDisplayMetrics().density;

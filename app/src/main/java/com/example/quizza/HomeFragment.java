@@ -42,7 +42,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.CryptoPrimitive;
 import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class HomeFragment extends Fragment {
@@ -141,13 +144,56 @@ public class HomeFragment extends Fragment {
                 }
                 else {
                     Question myQuestion = new Question(question, courseLink, currentUser.getUserName());
-                    DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Questions");
-                    mReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    DatabaseReference tDatabase = FirebaseDatabase.getInstance().getReference("Courses");
+                    tDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(getActivity(), "QuestionCreated", Toast.LENGTH_SHORT).show();
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot item_snapshot:snapshot.getChildren()){
+                                if(item_snapshot.getValue(Course.class).getCourseName().equals(courseLink)){
+                                    Course theCourse = item_snapshot.getValue(Course.class);
+                                    List<String> questionIds = new ArrayList<>();
+
+                                    DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Questions");
+                                    mReference.push().setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            mReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    for(DataSnapshot item_snapshot:snapshot.getChildren()){
+                                                        if(item_snapshot.getValue(Question.class).getCourseLink().equals(theCourse.getCourseName())){
+                                                            questionIds.add(item_snapshot.getKey());
+                                                            Log.d("questionID", questionIds.toString());
+                                                        }
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+//
+                                        }
+                                    });
+                                    theCourse.setQuestionList(questionIds);
+                                    FirebaseDatabase.getInstance().getReference("Courses/" + item_snapshot.getKey()).setValue(theCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(getActivity(), "QuestionCreated", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
                         }
                     });
+
+
                 }
 
 

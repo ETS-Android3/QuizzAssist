@@ -31,6 +31,8 @@ public class Course {
         this.enrolledUsers = new ArrayList<>();
         this.enrolledUsers.add(this.courseOwner);
         this.inviteCode = generateInviteCode(this.inviteCodeLength);
+        this.questionList = new ArrayList<>();
+        this.questionList.add("Initial");
     }
 
     public List<String> getQuestionList() {

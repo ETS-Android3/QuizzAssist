@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
     Context context;
     android.widget.GridLayout GridLayout_home;
     android.widget.GridLayout GridLayout_classroom;
-    Button bt_addEvent,bt_scheduleEventDate,bt_scheduleEventTime;
+    Button bt_addEvent,bt_scheduleEventDate,bt_scheduleEventTime,bt_closeEventPage;
     Button button;
     TextView test,tv_eventDateDisplay,tv_eventTimeDisplay;
     TextView textview;
@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
     LinearLayout classRoom1;
     RelativeLayout eventPage;
     LinearLayout dashboard;
-
+    
     User currentUser;
     List<String> enrolledCourses = new ArrayList<>();
     List<String> createdCourses = new ArrayList<>();
@@ -117,6 +117,7 @@ public class HomeFragment extends Fragment {
         //date and time stuff
         bt_scheduleEventDate = (Button)view.findViewById(R.id.bt_scheduleEventDate);
         bt_scheduleEventTime = (Button)view.findViewById(R.id.bt_scheduleEventTime);
+        bt_closeEventPage = (Button)view.findViewById(R.id.bt_closeEventPage);
         tv_eventDateDisplay = (TextView)view.findViewById(R.id.tv_eventDateDisplay);
         tv_eventTimeDisplay = (TextView)view.findViewById(R.id.tv_eventTimeDisplay);
 
@@ -178,6 +179,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        bt_closeEventPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeEventPage();
+            }
+        });
+
         return view;
     }
 
@@ -229,6 +237,12 @@ public class HomeFragment extends Fragment {
         dashboard.setVisibility(View.INVISIBLE);
         classRoom.setVisibility(View.INVISIBLE);
         eventPage.setVisibility(View.VISIBLE);
+    }
+
+    public void closeEventPage() {
+        dashboard.setVisibility(View.INVISIBLE);
+        classRoom.setVisibility(View.VISIBLE);
+        eventPage.setVisibility(View.INVISIBLE);
     }
 
     public void handleDateButton() {

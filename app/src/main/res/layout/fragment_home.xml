@@ -154,9 +154,18 @@
             android:id="@+id/bt_scheduleEventTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/bt_closeEventPage"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="Schedule Time" />
+
+        <Button
+            android:id="@+id/bt_closeEventPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Back To Course" />
 
     </RelativeLayout>
 

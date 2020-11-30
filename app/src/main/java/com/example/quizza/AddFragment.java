@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -170,12 +171,22 @@ public class AddFragment extends Fragment {
                                                 currentUser.setEnrolledCourses(new ArrayList<String>(enrolledCourses));
                                                 FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(currentUser);
 
-                                                FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Questions");
+                                                mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                        for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                                                        for(DataSnapshot item_snapshot: snapshot.getChildren()){
                                                             if(item_snapshot.getValue(Question.class).getCourseLink().equals(currentCourse.getCourseName())){
-                                                                item_snapshot.getValue(Question.class).setEnrolledUsers(new ArrayList<>(myUsers));
+                                                                Question myQuestion = item_snapshot.getValue(Question.class);
+                                                                List<String> myEnrolledUsers = myQuestion.getEnrolledUsers();
+                                                                myEnrolledUsers.add(currentUser.getUserName());
+                                                                myQuestion.setEnrolledUsers(myEnrolledUsers);
+                                                                FirebaseDatabase.getInstance().getReference("Questions/" + item_snapshot.getKey()).setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        Toast.makeText(getActivity(), "User enrolled Updated !", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
                                                             }
                                                         }
                                                     }
@@ -185,6 +196,8 @@ public class AddFragment extends Fragment {
 
                                                     }
                                                 });
+
+
 
                                                 rv_userOptionPage.setVisibility(View.VISIBLE);
                                                 rv_createCoursePage.setVisibility(View.INVISIBLE);

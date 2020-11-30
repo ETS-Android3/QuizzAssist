@@ -259,10 +259,20 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         changeUserAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
+                sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                    @Override
+                    public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                        sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    }
 
+                    @Override
+                    public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+                    }
+                });
+//                if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+//
+//                }
             }
         });
         return view;

@@ -1,20 +1,28 @@
 package com.example.quizza;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,11 +33,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends BottomSheetDialogFragment {
 
     TextInputEditText userNameEditProfile;
     TextInputEditText userFirstNameEditProfile;
@@ -44,10 +53,14 @@ public class SettingsFragment extends Fragment {
 
     User currentUser;
 
+    LinearLayout userAvatarSettingsMenu;
+    BottomSheetBehavior sheetBehavior;
+
     FirebaseAuth myFirebaseAuthenticator;
     DatabaseReference myFirebaseReference;
 
     ImageView backToUserProfile;
+    ImageView changeUserAvatar;
 
     FirebaseAuth fAuth;
     DatabaseReference currentDatabaseReference;
@@ -87,6 +100,10 @@ public class SettingsFragment extends Fragment {
         userStudentNumberProfile = (TextView) view.findViewById(R.id.tv_userStudentNumber);
 
         backToUserProfile = (ImageView) view.findViewById(R.id.iv_backToUserProfile);
+        changeUserAvatar = (ImageView) view.findViewById(R.id.iv_changeUserAvatar);
+
+        userAvatarSettingsMenu = (LinearLayout) view.findViewById(R.id.linLayout_userAvatarSettingsMenu);
+        sheetBehavior = BottomSheetBehavior.from(userAvatarSettingsMenu);
 
         String userProfileUpdated = "User Profile Updated";
         String userProfileUpdateError = "User Profile Updated";
@@ -120,7 +137,7 @@ public class SettingsFragment extends Fragment {
 
 
                         //Set data visible for User Profile Page
-                        if (currentUserMiddleName != null)
+                        if (!currentUserMiddleName.isEmpty())
                             userFullNameProfile.setText(currentUserFirstName + " " + currentUserMiddleName
                                     + " " + currentUserLastName);
                         else
@@ -239,6 +256,15 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        changeUserAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+
+            }
+        });
         return view;
     }
 }

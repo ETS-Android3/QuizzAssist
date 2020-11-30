@@ -87,8 +87,9 @@
     <string name="settings_userStudentNumberNameHelperText">Student Number</string>
 
     <string name="createQuestionTitle">Create your question Below</string>
-    <string name="createQuestionHint">Input your Question Here</string>
+    <string name="createQuestionHint">Input your Question text Here</string>
     <string name="createQuestion">Create Question</string>
+    <string name="classLinkHint">Enter the Course Name</string>
 
     <string name="ForgotPassword">Forgot Password?</string>
     <string name="ForgotPasswordHeader">Please Input your email for recovery</string>

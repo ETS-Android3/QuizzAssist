@@ -170,7 +170,7 @@
             android:id="@+id/courseLinkLayout"
             android:layout_below="@id/createQuestionLayout"
             android:layout_margin="20dp"
-            android:hint="@string/createQuestionHint"
+            android:hint="@string/classLinkHint"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/icon_class"
             app:boxBackgroundMode="outline"

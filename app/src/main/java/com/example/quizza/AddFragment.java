@@ -170,6 +170,22 @@ public class AddFragment extends Fragment {
                                                 currentUser.setEnrolledCourses(new ArrayList<String>(enrolledCourses));
                                                 FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(currentUser);
 
+                                                FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                                                            if(item_snapshot.getValue(Question.class).getCourseLink().equals(currentCourse.getCourseName())){
+                                                                item_snapshot.getValue(Question.class).setEnrolledUsers(new ArrayList<>(myUsers));
+                                                            }
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
                                                 rv_userOptionPage.setVisibility(View.VISIBLE);
                                                 rv_createCoursePage.setVisibility(View.INVISIBLE);
                                                 rv_joinCoursePage.setVisibility(View.INVISIBLE);

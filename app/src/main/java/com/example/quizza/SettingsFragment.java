@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -30,6 +31,8 @@ public class SettingsFragment extends Fragment {
     TextView userEmail;
     TextView userStudentNumber;
     User currentUser;
+    RelativeLayout rv_userSettings;
+    RelativeLayout rv_editUserSettings;
 
     final String toImplement = "This feature will be implemented";
 
@@ -44,6 +47,9 @@ public class SettingsFragment extends Fragment {
         userStudentNumber = (TextView) view.findViewById(R.id.tv_userStudentNumber);
         editProfileButton = (Button) view.findViewById(R.id.bt_editProfile);
         logoutButton = (Button) view.findViewById(R.id.bt_logoutButton);
+
+        rv_userSettings = (RelativeLayout) view.findViewById(R.id.rv_userSettings);
+        rv_editUserSettings = (RelativeLayout) view.findViewById(R.id.rv_editUserSettingsPage);
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -70,6 +76,8 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 //                startActivity(new Intent(getActivity(), EditProfileSettings.class));
+                rv_userSettings.setVisibility(View.INVISIBLE);
+                rv_editUserSettings.setVisibility(view.VISIBLE);
             }
         });
 

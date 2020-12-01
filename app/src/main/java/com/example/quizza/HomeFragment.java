@@ -8,6 +8,7 @@
 
 package com.example.quizza;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
@@ -17,22 +18,29 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +50,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.CryptoPrimitive;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
@@ -76,6 +85,34 @@ public class HomeFragment extends Fragment {
     Set<String> questionIDs;
 
 
+    CardView startDateView;
+    CardView startTimeView;
+    CardView endDateView;
+    CardView endTimeView;
+    TextView startDateText;
+    TextView startTimeText;
+    TextView endDateText;
+    TextView endTimeText;
+    EditText numberOfQuestions;
+    EditText classLinkedEvent;
+    Button startDateButton;
+    Button startTimeButton;
+    Button endDateButton;
+    Button endTimeButton;
+    Button saveEventButton;
+    String startDate;
+    String endDate;
+    String startTime;
+    String endTime;
+    Integer numOfQuestions = 0;
+    String courseLinkEvent;
+    Integer startHour = 0;
+    Integer startMins = 0;
+    Integer endHour = 0;
+    Integer endMins = 0;
+
+
+
     RelativeLayout createQuestion;
     EditText questionString;
     EditText classLinked;
@@ -104,6 +141,24 @@ public class HomeFragment extends Fragment {
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
         GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
 
+        startDateView = (CardView) view.findViewById(R.id.startDateCardView);
+        startTimeView = (CardView) view.findViewById(R.id.startTimeCardView);
+        endDateView = (CardView) view.findViewById(R.id.endDateCardView);
+        endTimeView = (CardView) view.findViewById(R.id.endTimeCardView);
+        startDateText = (TextView) view.findViewById(R.id.tv_startDate);
+        endDateText = (TextView) view.findViewById(R.id.tv_endDate);
+        startTimeText = (TextView) view.findViewById(R.id.tv_startTime);
+        endTimeText = (TextView) view.findViewById(R.id.tv_endTime);
+        numberOfQuestions = (EditText) view.findViewById(R.id.et_numberOfQuestion);
+        classLinkedEvent = (EditText) view.findViewById(R.id.et_classLinked);
+        startDateButton = (Button) view.findViewById(R.id.startDateButton);
+        startTimeButton = (Button) view.findViewById(R.id.startTimeButton);
+        endDateButton = (Button) view.findViewById(R.id.endDateButton);
+        endTimeButton = (Button) view.findViewById(R.id.endTimeButton);
+        saveEventButton = (Button) view.findViewById(R.id.saveEventButton);
+
+
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -130,6 +185,119 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        startDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+                builder.setTitleText("Select a Start Date");
+                MaterialDatePicker materialDatePicker = builder.build();
+                materialDatePicker.show(getFragmentManager(), "DATE_PICKER");
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                    @Override
+                    public void onPositiveButtonClick(Object selection) {
+                        startDate = materialDatePicker.getHeaderText();
+                        startDateText.setText(startDate);
+                    }
+                });
+            }
+        });
+
+        startTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        getActivity(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                startHour = hourOfDay;
+                                startMins = minute;
+                                startTime = hourOfDay + ":" + minute;
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(0,0,0, hourOfDay, minute);
+                                startTimeText.setText(DateFormat.format("HH:mm", calendar));
+                            }
+                        }, 12, 0, true
+                );
+                timePickerDialog.show();
+            }
+        });
+
+        endDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+                builder.setTitleText("Select a Start Date");
+                MaterialDatePicker materialDatePicker = builder.build();
+                materialDatePicker.show(getFragmentManager(), "DATE_PICKER");
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                    @Override
+                    public void onPositiveButtonClick(Object selection) {
+                        endDate = materialDatePicker.getHeaderText();
+                        endDateText.setText(endDate);
+                    }
+                });
+            }
+        });
+
+        endTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        getActivity(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                endHour = hourOfDay;
+                                endMins = minute;
+                                endTime = hourOfDay + ":" + minute;
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(0,0,0, hourOfDay, minute);
+                                endTimeText.setText(DateFormat.format("HH:mm", calendar));
+                            }
+                        }, 12, 0, true
+                );
+                timePickerDialog.show();
+            }
+        });
+
+        saveEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numOfQuestions = Integer.parseInt(numberOfQuestions.getText().toString());
+                courseLinkEvent = classLinkedEvent.getText().toString();
+                Event myEvent = new Event(startDate, startHour, startMins, endDate, endHour, endMins, numOfQuestions, courseLinkEvent);
+                DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Events").push();
+                String eventID = mReference.getKey();
+                mReference.setValue(myEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        DatabaseReference yReference = FirebaseDatabase.getInstance().getReference("Courses");
+                        yReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                                    if(item_snapshot.getValue(Course.class).getCourseName().equals(courseLinkEvent)){
+                                        Course mCourse = item_snapshot.getValue(Course.class);
+                                        List<String> eventIDS = new ArrayList<>(mCourse.getEventLinkID());
+                                        eventIDS.add(eventID);
+                                        mCourse.setEventLinkID(eventIDS);
+                                        FirebaseDatabase.getInstance().getReference("Courses/" + item_snapshot.getKey()).setValue(mCourse);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        Toast.makeText(getActivity(), "Event Created !", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

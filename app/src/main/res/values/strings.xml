@@ -98,6 +98,15 @@
     <string name="forgotPasswordDialogTitle">Password Reset</string>
     <string name="alertDialogMessage">Verification Email is sent, Check ur mailbox to reset your password!</string>
 
+    <string name="eventCreationTitle">Create your Event here</string>
+    <string name="startDate">Event start Date</string>
+    <string name="startTime">Event start Time</string>
+    <string name="endDate">Event end Date</string>
+    <string name="endTime">Event end Time</string>
+    <string name="questionNumber">Number of questions in Event</string>
+    <string name="submitButton">Save Event</string>
+
+
     <!--    Undetermined Portion    -->11
     <string name="searchTitle">Search Course</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

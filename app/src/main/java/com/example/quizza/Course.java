@@ -21,6 +21,7 @@ public class Course {
     private final Integer inviteCodeLength = 10;
     private List<String> enrolledUsers;
     private List<String> questionList;
+    private List<String> eventLinkID;
 
     public Course() {}
 
@@ -33,6 +34,16 @@ public class Course {
         this.inviteCode = generateInviteCode(this.inviteCodeLength);
         this.questionList = new ArrayList<>();
         this.questionList.add("Initial");
+        this.eventLinkID = new ArrayList<>();
+        this.eventLinkID.add("initial");
+    }
+
+    public List<String> getEventLinkID() {
+        return eventLinkID;
+    }
+
+    public void setEventLinkID(List<String> eventLinkID) {
+        this.eventLinkID = eventLinkID;
     }
 
     public List<String> getQuestionList() {

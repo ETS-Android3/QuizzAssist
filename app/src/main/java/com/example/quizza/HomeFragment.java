@@ -17,6 +17,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -62,6 +64,7 @@ public class HomeFragment extends Fragment {
     Context context;
     android.widget.GridLayout GridLayout_home;
     android.widget.GridLayout GridLayout_classroom;
+    Button button;
     Button bt_addEvent;
     TextView textview;
     CardView cardview;
@@ -84,6 +87,8 @@ public class HomeFragment extends Fragment {
 
     Set<String> questionIDs;
 
+    RelativeLayout eventCreationView;
+    RelativeLayout questionCreationView;
 
     CardView startDateView;
     CardView startTimeView;
@@ -111,14 +116,15 @@ public class HomeFragment extends Fragment {
     Integer endHour = 0;
     Integer endMins = 0;
 
+    RecyclerView recyclerView;
 
-
-    RelativeLayout createQuestion;
+    RelativeLayout createQuestionView;
     EditText questionString;
     EditText classLinked;
     Button createQuestionButton;
 
-
+    List<String> classList = new ArrayList<>();
+    List<String> eventList = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -135,12 +141,13 @@ public class HomeFragment extends Fragment {
         dashboard = (RelativeLayout) view.findViewById(R.id.coursesView);
         questionString = (EditText) view.findViewById(R.id.tv_questionToAdd);
         classLinked = (EditText) view.findViewById(R.id.tv_courseLinked);
-        createQuestion = (RelativeLayout) view.findViewById(R.id.createQuestion);
+        createQuestionView = (RelativeLayout) view.findViewById(R.id.createQuestion);
         createQuestionButton = (Button) view.findViewById(R.id.createQuestionButton);
         context = getContext();
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
         GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
 
+        eventCreationView = (RelativeLayout) view.findViewById(R.id.eventCreationView);
         startDateView = (CardView) view.findViewById(R.id.startDateCardView);
         startTimeView = (CardView) view.findViewById(R.id.startTimeCardView);
         endDateView = (CardView) view.findViewById(R.id.endDateCardView);
@@ -156,9 +163,7 @@ public class HomeFragment extends Fragment {
         endDateButton = (Button) view.findViewById(R.id.endDateButton);
         endTimeButton = (Button) view.findViewById(R.id.endTimeButton);
         saveEventButton = (Button) view.findViewById(R.id.saveEventButton);
-
-
-
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -170,8 +175,19 @@ public class HomeFragment extends Fragment {
                         currentUser = item_snapshot.getValue(User.class);
                         enrolledCourses = currentUser.getEnrolledCourses();
                         createdCourses = currentUser.getCreatedCourses();
-                        Log.d("createCourse", createdCourses.toString());
-                        Log.d("enrollCourse", enrolledCourses.toString());
+                        classList.addAll(enrolledCourses);
+                        classList.addAll(createdCourses);
+                        for(String className : enrolledCourses){
+                            eventList.addAll(generateEventList(className));
+                        }
+                        for(String className: createdCourses){
+                            eventList.addAll(generateEventList(className));
+                        }
+                        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
                         for(String currentCourse : enrolledCourses){
                             Log.d("createdCourse",currentCourse);
                             AddClassroomUI(currentCourse);
@@ -188,6 +204,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        //Start Date and time Picker
         startDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,6 +244,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //End date and time picker
         endDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,6 +283,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Saving events method
         saveEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -286,6 +306,17 @@ public class HomeFragment extends Fragment {
                                         eventIDS.add(eventID);
                                         mCourse.setEventLinkID(eventIDS);
                                         FirebaseDatabase.getInstance().getReference("Courses/" + item_snapshot.getKey()).setValue(mCourse);
+                                        List<String> enrolledUsers = new ArrayList<>(mCourse.getEnrolledUsers());
+                                        myEvent.setEnrolledUsers(enrolledUsers);
+                                        FirebaseDatabase.getInstance().getReference("Events/"+eventID).setValue(myEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                dashboard.setVisibility(View.INVISIBLE);
+                                                classRoom.setVisibility(View.VISIBLE);
+                                                eventCreationView.setVisibility(View.INVISIBLE);
+                                                createQuestionView.setVisibility(View.INVISIBLE);
+                                            }
+                                        });
                                     }
                                 }
                             }
@@ -301,7 +332,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
+        //creating Questions method
         createQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -373,12 +404,38 @@ public class HomeFragment extends Fragment {
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eventCreationView.setVisibility(View.VISIBLE);
+                classRoom.setVisibility(View.INVISIBLE);
                 AddEvent();
             }
         });
 
-
         return view;
+    }
+
+    //Generates event list for recycler View
+    private List<String> generateEventList(String courseName){
+        List<String> eventList = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                    if(item_snapshot.getValue(Course.class).getCourseName().equals(courseName)){
+                        Course zCourse = item_snapshot.getValue(Course.class);
+                        if(zCourse.getEventLinkID().isEmpty()) {
+                            eventList.add("");
+                        } else {
+                            eventList.addAll(zCourse.getEventLinkID());
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return eventList;
     }
 
     public void AddEvent(){
@@ -393,6 +450,16 @@ public class HomeFragment extends Fragment {
         cardview.setLayoutParams(Card_View_Params);
         cardview.setCardElevation(DpToPix(6));
         cardview.setRadius(DpToPix(12));
+        cardview.setClickable(true);
+        cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dashboard.setVisibility(View.INVISIBLE);
+                classRoom.setVisibility(View.INVISIBLE);
+                createQuestionView.setVisibility(View.INVISIBLE);
+                eventCreationView.setVisibility(View.VISIBLE);
+            }
+        });
 
 
         linear_layout = new LinearLayout(context);
@@ -424,25 +491,33 @@ public class HomeFragment extends Fragment {
         Relative_Layout_params.setMargins(DpToPix(20), DpToPix(30), DpToPix(20), 0);
 
         //Initialize the Button and it's properties for: AddEvent
-//        button = new Button(context);
-//        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
-//        button.setText("ADD EVENT");
+        button = new Button(context);
+        Button_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        Button_Params.setMargins(DpToPix(290), DpToPix(20),0,0);
+        button.setText("ADD EVENT");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddEvent();
+            }
+        });
+
+        //TODO: implement logic to check current isOwner or not !!!
 //        if(1 == 2/*current user is not the course creator*/){
 //            //button.setVisibility(View.INVISIBLE);
 //        }
 //
 //        //Initialize the TextView and set properties
-//        textview = new TextView(context);
-//        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
-//        textview.setText(courseName);
-//        textview.setTextColor(Color.WHITE);
-//        textview.setTextSize(40);
+        textview = new TextView(context);
+        Text_View_Params_Rel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+        textview.setText(courseName);
+        textview.setTextColor(Color.WHITE);
+        textview.setTextSize(40);
 
         //Set children and parents relationship between each component
-//        relativelayout.addView(button);
-//        relativelayout.addView(textview);
+        relativelayout.addView(button);
+        relativelayout.addView(textview);
         classRoom1.addView(relativelayout);
     }
 
@@ -505,4 +580,5 @@ public class HomeFragment extends Fragment {
         int dpAsPixels = (int) (sizeInDp*scale + 0.5f);
         return dpAsPixels;
     }
+
 }

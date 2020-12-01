@@ -66,7 +66,15 @@
             </LinearLayout>
 
     </RelativeLayout>
-    
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recyclerView"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 
     <LinearLayout
         android:id="@+id/classRoom"
@@ -199,7 +207,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/eventCreationView">
+        android:id="@+id/eventCreationView"
+        android:visibility="invisible">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"

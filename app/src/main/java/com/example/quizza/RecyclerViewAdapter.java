@@ -1,6 +1,7 @@
 package com.example.quizza;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -41,12 +45,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("tag", "onbindViewHolder: called.");
         holder.courseTitle.setText(classesList.get(position));
-        holder.eventNumber.setText("This course has " + eventList.size() + " number of events !");
+        Log.d("size in recycler View", Integer.toString(eventList.size()));
+        if(eventList.size()-1 > 1){
+            holder.eventNumber.setText("" + (eventList.size()-1) + " events !");
+        } else {
+            holder.eventNumber.setText("" + (eventList.size()-1) + " event !");
+        }
+
 
         holder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, classesList.get(position), Toast.LENGTH_SHORT).show();
+                CreateEventFragment createEventFragment = new CreateEventFragment();
+                MainActivity myActivity = (MainActivity) mContext;
+                myActivity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, createEventFragment).addToBackStack(null).commit();
+
             }
         });
     }

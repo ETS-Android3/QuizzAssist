@@ -171,6 +171,27 @@ public class AddFragment extends Fragment {
                                                 currentUser.setEnrolledCourses(new ArrayList<String>(enrolledCourses));
                                                 FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(currentUser);
 
+                                                DatabaseReference tReference = FirebaseDatabase.getInstance().getReference("Events");
+                                                tReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                                                            if(item_snapshot.getValue(Event.class).getCourseLink().equals(currentCourse.getCourseName())){
+                                                                Event myEvent = item_snapshot.getValue(Event.class);
+                                                                List<String> enrolledUsers = myEvent.getEnrolledUsers();
+                                                                enrolledUsers.add(currentUser.getUserName());
+                                                                myEvent.setEnrolledUsers(enrolledUsers);
+                                                                FirebaseDatabase.getInstance().getReference("Events/"+item_snapshot.getKey()).setValue(myEvent);
+                                                            }
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
                                                 DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Questions");
                                                 mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override

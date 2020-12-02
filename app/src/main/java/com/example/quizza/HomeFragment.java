@@ -118,10 +118,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
 
-    RelativeLayout createQuestionView;
-    EditText questionString;
-    EditText classLinked;
-    Button createQuestionButton;
+
 
     List<String> classList = new ArrayList<>();
     List<String> eventList = new ArrayList<>();
@@ -139,10 +136,7 @@ public class HomeFragment extends Fragment {
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
         classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
         dashboard = (RelativeLayout) view.findViewById(R.id.coursesView);
-        questionString = (EditText) view.findViewById(R.id.tv_questionToAdd);
-        classLinked = (EditText) view.findViewById(R.id.tv_courseLinked);
-        createQuestionView = (RelativeLayout) view.findViewById(R.id.createQuestion);
-        createQuestionButton = (Button) view.findViewById(R.id.createQuestionButton);
+
         context = getContext();
         GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
         GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
@@ -183,11 +177,11 @@ public class HomeFragment extends Fragment {
                         for(String className: createdCourses){
                             eventList.addAll(generateEventList(className));
                         }
+                        Log.d("size in Home View", Integer.toString(eventList.size()));
                         RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
                         for(String currentCourse : enrolledCourses){
                             Log.d("createdCourse",currentCourse);
                             AddClassroomUI(currentCourse);
@@ -206,200 +200,19 @@ public class HomeFragment extends Fragment {
 
 
         //Start Date and time Picker
-        startDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
-                builder.setTitleText("Select a Start Date");
-                MaterialDatePicker materialDatePicker = builder.build();
-                materialDatePicker.show(getFragmentManager(), "DATE_PICKER");
-                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-                    @Override
-                    public void onPositiveButtonClick(Object selection) {
-                        startDate = materialDatePicker.getHeaderText();
-                        startDateText.setText(startDate);
-                    }
-                });
-            }
-        });
 
-        startTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(
-                        getActivity(),
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                startHour = hourOfDay;
-                                startMins = minute;
-                                startTime = hourOfDay + ":" + minute;
-                                Calendar calendar = Calendar.getInstance();
-                                calendar.set(0,0,0, hourOfDay, minute);
-                                startTimeText.setText(DateFormat.format("HH:mm", calendar));
-                            }
-                        }, 12, 0, true
-                );
-                timePickerDialog.show();
-            }
-        });
+
+
 
         //End date and time picker
-        endDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
-                builder.setTitleText("Select a Start Date");
-                MaterialDatePicker materialDatePicker = builder.build();
-                materialDatePicker.show(getFragmentManager(), "DATE_PICKER");
-                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-                    @Override
-                    public void onPositiveButtonClick(Object selection) {
-                        endDate = materialDatePicker.getHeaderText();
-                        endDateText.setText(endDate);
-                    }
-                });
-            }
-        });
 
-        endTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(
-                        getActivity(),
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                endHour = hourOfDay;
-                                endMins = minute;
-                                endTime = hourOfDay + ":" + minute;
-                                Calendar calendar = Calendar.getInstance();
-                                calendar.set(0,0,0, hourOfDay, minute);
-                                endTimeText.setText(DateFormat.format("HH:mm", calendar));
-                            }
-                        }, 12, 0, true
-                );
-                timePickerDialog.show();
-            }
-        });
+
+
 
         // Saving events method
-        saveEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                numOfQuestions = Integer.parseInt(numberOfQuestions.getText().toString());
-                courseLinkEvent = classLinkedEvent.getText().toString();
-                Event myEvent = new Event(startDate, startHour, startMins, endDate, endHour, endMins, numOfQuestions, courseLinkEvent);
-                DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Events").push();
-                String eventID = mReference.getKey();
-                mReference.setValue(myEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        DatabaseReference yReference = FirebaseDatabase.getInstance().getReference("Courses");
-                        yReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot item_snapshot : snapshot.getChildren()){
-                                    if(item_snapshot.getValue(Course.class).getCourseName().equals(courseLinkEvent)){
-                                        Course mCourse = item_snapshot.getValue(Course.class);
-                                        List<String> eventIDS = new ArrayList<>(mCourse.getEventLinkID());
-                                        eventIDS.add(eventID);
-                                        mCourse.setEventLinkID(eventIDS);
-                                        FirebaseDatabase.getInstance().getReference("Courses/" + item_snapshot.getKey()).setValue(mCourse);
-                                        List<String> enrolledUsers = new ArrayList<>(mCourse.getEnrolledUsers());
-                                        myEvent.setEnrolledUsers(enrolledUsers);
-                                        FirebaseDatabase.getInstance().getReference("Events/"+eventID).setValue(myEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                dashboard.setVisibility(View.INVISIBLE);
-                                                classRoom.setVisibility(View.VISIBLE);
-                                                eventCreationView.setVisibility(View.INVISIBLE);
-                                                createQuestionView.setVisibility(View.INVISIBLE);
-                                            }
-                                        });
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                        Toast.makeText(getActivity(), "Event Created !", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
 
         //creating Questions method
-        createQuestionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String question = questionString.getText().toString();
-                String courseLink = classLinked.getText().toString();
-                if(question.isEmpty()){
-                    questionString.setError("Empty Question string");
-                }
-                else if (courseLink.isEmpty()){
-                    classLinked.setError("Please Input a Non empty class");
-                }
-                else if (!(createdCourses.contains(courseLink))){
-                    classLinked.setError("Please Input a valid created Course");
-                }
-                else {
-                    Question myQuestion = new Question(question, courseLink, currentUser.getUserName());
-                    DatabaseReference yReference = FirebaseDatabase.getInstance().getReference("Questions").push();
-                    String myQuestionID = yReference.getKey();
-                    yReference.setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                DatabaseReference tReference = FirebaseDatabase.getInstance().getReference("Courses");
-                                tReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        for(DataSnapshot mySnapshot : snapshot.getChildren()){
-                                            if(mySnapshot.getValue(Course.class).getCourseName().equals(courseLink)){
-                                                Course nCourse = mySnapshot.getValue(Course.class);
-                                                if(nCourse.getQuestionList().isEmpty()) {
-                                                    questionIDs = new HashSet<>();
-                                                }
-                                                else {
-                                                    questionIDs = new HashSet<>(nCourse.getQuestionList());
-                                                }
-                                                questionIDs.add(myQuestionID);
-                                                myQuestion.setEnrolledUsers(nCourse.getEnrolledUsers());
-                                                nCourse.setQuestionList(new ArrayList<>(questionIDs));
-                                                FirebaseDatabase.getInstance().getReference("Courses/" + mySnapshot.getKey()).setValue(nCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
 
-                                                        Toast.makeText(getActivity(), "Question Created and Linked!", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                                FirebaseDatabase.getInstance().getReference("Questions/"+ myQuestionID).setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        Toast.makeText(getActivity(), "Question Updated!", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
-                            }
-                        }
-                    });
-
-                }
-            }
-        });
 
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -426,6 +239,8 @@ public class HomeFragment extends Fragment {
                             eventList.add("");
                         } else {
                             eventList.addAll(zCourse.getEventLinkID());
+
+                            Log.d("eventlistsize", Integer.toString(eventList.size()));
                         }
                     }
                 }
@@ -435,6 +250,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+        Log.d("eventlistsizeOnexit", Integer.toString(eventList.size()));
         return eventList;
     }
 
@@ -456,8 +272,8 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 dashboard.setVisibility(View.INVISIBLE);
                 classRoom.setVisibility(View.INVISIBLE);
-                createQuestionView.setVisibility(View.INVISIBLE);
-                eventCreationView.setVisibility(View.VISIBLE);
+                //createQuestionView.setVisibility(View.INVISIBLE);
+                //eventCreationView.setVisibility(View.VISIBLE);
             }
         });
 

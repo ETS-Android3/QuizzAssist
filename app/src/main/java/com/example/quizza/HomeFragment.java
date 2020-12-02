@@ -149,9 +149,16 @@ public class HomeFragment extends Fragment {
                 1.0f);
         Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
                 , DpToPix(12));
+        cardview.setClickable(true);
         cardview.setLayoutParams(Card_View_Params);
         cardview.setCardElevation(DpToPix(6));
         cardview.setRadius(DpToPix(12));
+        cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         //Initialize the Linear Layout
         linearlayout = new LinearLayout(context);
@@ -212,7 +219,7 @@ public class HomeFragment extends Fragment {
         cardview = new CardView(context);
         Card_View_Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
-        Card_View_Params.setMargins(DpToPix(12), DpToPix(12), DpToPix(12)
+        Card_View_Params.setMargins(DpToPix(24), DpToPix(12), DpToPix(12)
                 , DpToPix(12));
         cardview.setClickable(true);
         cardview.setLayoutParams(Card_View_Params);
@@ -233,7 +240,7 @@ public class HomeFragment extends Fragment {
         LinearLayout.LayoutParams Linear_Layout_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         linearlayout.setLayoutParams(Linear_Layout_params);
-        linearlayout.setPadding(DpToPix(33),DpToPix(16),DpToPix(33),DpToPix(16));
+        linearlayout.setPadding(DpToPix(58),DpToPix(16),DpToPix(33),DpToPix(16));
         linearlayout.setGravity(Gravity.CENTER);
         linearlayout.setOrientation(LinearLayout.VERTICAL);
         linearlayout.setBackgroundResource(R.drawable.gradient);
@@ -241,7 +248,7 @@ public class HomeFragment extends Fragment {
         //Initialize the TextView and set properties
         textview = new TextView(context);
         Text_View_Params_Lin = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        //Text_View_Params.setMargins(DpToPix(12), DpToPix(12),0, DpToPix(12));
+        Text_View_Params_Lin.setMargins(DpToPix(12), DpToPix(12),12, DpToPix(12));
         textview.setText(className);
         textview.setTextColor(Color.WHITE);
         textview.setTextSize(20);

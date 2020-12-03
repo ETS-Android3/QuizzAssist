@@ -8,6 +8,9 @@
  */
 
 package com.example.quizza;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -317,6 +320,22 @@ public class AddFragment extends Fragment {
                 }
             }
         });
+
+        tv_courseInviteCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CopyToClipBoard(tv_courseInviteCode.getText().toString());
+            }
+        });
+
         return view;
+    }
+
+
+    public void CopyToClipBoard(String text){
+        Context context = getContext();
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("ClassCode", text);
+        clipboard.setPrimaryClip(clip);
     }
 }

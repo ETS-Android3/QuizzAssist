@@ -112,6 +112,7 @@
     <string name="questionTitle">Enter Question Title here</string>
 
     <string name="courseInviteCode">Invite Code</string>
+    <string name="createCourseTitle">Create Your Course</string>
 
     <!--    Undetermined Portion    -->11
     <string name="searchTitle">Search Course</string>

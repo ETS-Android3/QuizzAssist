@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 
 public class SettingsFragment extends Fragment {
 
+    //TODO: if decided then add profile picture method here !
+
     Button logoutButton;
     Button editProfileButton;
     FirebaseAuth fAuth;
@@ -32,7 +35,8 @@ public class SettingsFragment extends Fragment {
     TextView userStudentNumber;
     User currentUser;
     RelativeLayout rv_userSettings;
-    RelativeLayout rv_editUserSettings;
+
+    // TODO: update fields like user MiddleName and other added fields in the SIGNUP page !
 
     final String toImplement = "This feature will be implemented";
 
@@ -49,7 +53,6 @@ public class SettingsFragment extends Fragment {
         logoutButton = (Button) view.findViewById(R.id.bt_logoutButton);
 
         rv_userSettings = (RelativeLayout) view.findViewById(R.id.rv_userSettings);
-        rv_editUserSettings = (RelativeLayout) view.findViewById(R.id.rv_editUserSettingsPage);
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -75,9 +78,9 @@ public class SettingsFragment extends Fragment {
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(getActivity(), EditProfileSettings.class));
-                rv_userSettings.setVisibility(View.INVISIBLE);
-                rv_editUserSettings.setVisibility(view.VISIBLE);
+                EditProfileFragment editProfileFragment = new EditProfileFragment();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.flFragment, editProfileFragment).addToBackStack(null).commit();
             }
         });
 

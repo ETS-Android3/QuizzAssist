@@ -59,7 +59,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 CreateEventFragment createEventFragment = new CreateEventFragment();
                 MainActivity myActivity = (MainActivity) mContext;
                 myActivity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, createEventFragment).addToBackStack(null).commit();
-
             }
         });
     }

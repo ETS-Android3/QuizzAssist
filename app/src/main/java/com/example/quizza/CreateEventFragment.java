@@ -54,12 +54,14 @@ public class CreateEventFragment extends Fragment {
     String endDate;
     String startTime;
     String endTime;
+    String eventTitleInput;
     Integer numOfQuestions = 0;
     String courseLinkEvent;
     Integer startHour = 0;
     Integer startMins = 0;
     Integer endHour = 0;
     Integer endMins = 0;
+    EditText eventTitle;
 
     public CreateEventFragment() {
         // Required empty public constructor
@@ -87,6 +89,7 @@ public class CreateEventFragment extends Fragment {
         endDateButton = (Button) view.findViewById(R.id.endDateButton);
         endTimeButton = (Button) view.findViewById(R.id.endTimeButton);
         saveEventButton = (Button) view.findViewById(R.id.saveEventButton);
+        eventTitle = (EditText) view.findViewById(R.id.tv_eventTitle);
 
         startDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,11 +171,10 @@ public class CreateEventFragment extends Fragment {
         saveEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                eventTitleInput = eventTitle.getText().toString();
                 numOfQuestions = Integer.parseInt(numberOfQuestions.getText().toString());
                 courseLinkEvent = classLinkedEvent.getText().toString();
-                Event myEvent = new Event(startDate, startHour, startMins, endDate, endHour, endMins, numOfQuestions, courseLinkEvent);
+                Event myEvent = new Event(eventTitleInput, startDate, startHour, startMins, endDate, endHour, endMins, numOfQuestions, courseLinkEvent);
                 DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Events").push();
                 String eventID = mReference.getKey();
                 mReference.setValue(myEvent).addOnCompleteListener(new OnCompleteListener<Void>() {

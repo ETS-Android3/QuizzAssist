@@ -15,6 +15,7 @@ import java.util.Date;
 public class Question {
     //question data to display
     String questionText;
+    String questionTitle;
     String questionID;
     List<String> answerList = new ArrayList<>();
     List<String> enrolledUsers = new ArrayList<>();
@@ -44,7 +45,8 @@ public class Question {
         //required empty constructor
     }
 
-    public Question(String questionText, String courseLink, String userCreated) {
+    public Question(String questionTitle, String questionText, String courseLink, String userCreated) {
+        this.questionTitle = questionTitle;
         this.questionText = questionText;
         this.courseLink = courseLink;
         this.userCreated = userCreated;
@@ -52,6 +54,13 @@ public class Question {
         enrolledUsers.add(userCreated);
     }
 
+    public String getQuestionTitle() {
+        return questionTitle;
+    }
+
+    public void setQuestionTitle(String questionTitle) {
+        this.questionTitle = questionTitle;
+    }
 
     public String getCourseLink() {
         return courseLink;

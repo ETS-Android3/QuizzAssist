@@ -26,8 +26,27 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/createQuestionLayout"
+            android:id="@+id/questionTitleLayout"
             android:layout_below="@id/questionCreationTitle"
+            android:layout_margin="20dp"
+            android:hint="@string/questionTitle"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/icon_title"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_questionTitle" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/createQuestionLayout"
+            android:layout_below="@id/questionTitleLayout"
             android:layout_margin="20dp"
             android:hint="@string/createQuestionHint"
             app:endIconMode="clear_text"

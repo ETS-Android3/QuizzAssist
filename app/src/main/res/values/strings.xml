@@ -106,6 +106,8 @@
     <string name="questionNumber">Number of questions in Event</string>
     <string name="submitButton">Save Event</string>
 
+    <string name="eventTitle">Enter event title here</string>
+    <string name="questionTitle">Enter Question Title here</string>
 
     <!--    Undetermined Portion    -->11
     <string name="searchTitle">Search Course</string>

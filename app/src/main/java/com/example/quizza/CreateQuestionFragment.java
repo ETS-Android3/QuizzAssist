@@ -32,9 +32,11 @@ public class CreateQuestionFragment extends Fragment {
     RelativeLayout createQuestionView;
     EditText questionString;
     EditText classLinked;
+    EditText questionTitle;
     Button createQuestionButton;
     List<String> createdCourses = new ArrayList<>();
     Set<String> questionIDs = new HashSet<String>();
+    String questionTitleInput;
 
     public CreateQuestionFragment() {
         // Required empty public constructor
@@ -49,6 +51,7 @@ public class CreateQuestionFragment extends Fragment {
         classLinked = (EditText) view.findViewById(R.id.tv_courseLinked);
         createQuestionView = (RelativeLayout) view.findViewById(R.id.createQuestion);
         createQuestionButton = (Button) view.findViewById(R.id.createQuestionButton);
+        questionTitle = (EditText) view.findViewById(R.id.tv_questionTitle);
 
         User currentUser = getCurrentUser();
         if(currentUser.getCreatedCourses().isEmpty()) {
@@ -62,6 +65,7 @@ public class CreateQuestionFragment extends Fragment {
             public void onClick(View v) {
                 String question = questionString.getText().toString();
                 String courseLink = classLinked.getText().toString();
+                questionTitleInput = questionTitle.getText().toString();
                 if(question.isEmpty()){
                     questionString.setError("Empty Question string");
                 }
@@ -72,7 +76,7 @@ public class CreateQuestionFragment extends Fragment {
                     classLinked.setError("Please Input a valid created Course");
                 }
                 else {
-                    Question myQuestion = new Question(question, courseLink, currentUser.getUserName());
+                    Question myQuestion = new Question(questionTitleInput, question, courseLink, currentUser.getUserName());
                     DatabaseReference yReference = FirebaseDatabase.getInstance().getReference("Questions").push();
                     String myQuestionID = yReference.getKey();
                     yReference.setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {

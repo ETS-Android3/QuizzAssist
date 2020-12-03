@@ -25,10 +25,32 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="30dp" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/eventTitleLayout"
+            android:layout_below="@id/eventCreationTitle"
+            app:boxBackgroundMode="outline"
+            app:endIconMode="clear_text"
+            android:textColorHint="@color/white"
+            app:startIconDrawable="@drawable/icon_title"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_eventTitle"
+                android:textSize="25sp"
+                android:hint="@string/eventTitle"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/eventCreationTitle"
+            android:layout_below="@id/eventTitleLayout"
             style="@style/Widget.MaterialComponents.CardView"
             app:cardBackgroundColor="@color/teal_700"
             android:layout_margin="10dp"
@@ -149,6 +171,7 @@
             android:id="@+id/numberOfQuestionLayout"
             android:layout_margin="10dp"
             android:layout_below="@id/endTimeCardView"
+            android:textColorHint="@color/white"
             app:boxBackgroundMode="outline"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/icon_question"
@@ -171,6 +194,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:boxBackgroundMode="outline"
             app:endIconMode="clear_text"
+            android:textColorHint="@color/white"
             app:startIconDrawable="@drawable/icon_class">
 
             <com.google.android.material.textfield.TextInputEditText

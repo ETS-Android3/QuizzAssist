@@ -83,6 +83,7 @@ import java.util.List;
 
 public class Event {
 
+    private String eventTitle;
     private Integer startHour;
     private Integer startMns;
     private String startDate;
@@ -97,7 +98,8 @@ public class Event {
     public Event() {
     } //Required by Firebase
 
-    Event (String startDate, Integer startHour, Integer startMns, String endDate, Integer endHours, Integer endMns, Integer numberOfQuestions, String courseLink){
+    Event (String eventTitle, String startDate, Integer startHour, Integer startMns, String endDate, Integer endHours, Integer endMns, Integer numberOfQuestions, String courseLink){
+        this.eventTitle = eventTitle;
         this.startDate = startDate;
         this.startHour = startHour;
         this.startMns = startMns;
@@ -108,6 +110,14 @@ public class Event {
         this.questionList = new ArrayList<>();
         this.courseLink = courseLink;
         this.enrolledUsers = new ArrayList<>();
+    }
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
     }
 
     public Integer getStartHour() {

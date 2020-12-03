@@ -169,23 +169,23 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot item_snapshot : snapshot.getChildren()){
-                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                        currentUser = item_snapshot.getValue(User.class);
-                        enrolledCourses = currentUser.getEnrolledCourses();
-                        createdCourses = currentUser.getCreatedCourses();
-                        classList.addAll(enrolledCourses);
-                        classList.addAll(createdCourses);
-                        for(String className : enrolledCourses){
-                            eventList.addAll(generateEventList(className));
-                        }
-                        for(String className: createdCourses){
-                            eventList.addAll(generateEventList(className));
-                        }
-                        Log.d("size in Home View", Integer.toString(eventList.size()));
-                        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
-                        recyclerView.setHasFixedSize(true);
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            currentUser = item_snapshot.getValue(User.class);
+                            enrolledCourses = currentUser.getEnrolledCourses();
+                            createdCourses = currentUser.getCreatedCourses();
+                            classList.addAll(enrolledCourses);
+                            classList.addAll(createdCourses);
+                            for(String className : enrolledCourses){
+                                eventList.addAll(generateEventList(className));
+                            }
+                            for(String className: createdCourses){
+                                eventList.addAll(generateEventList(className));
+                            }
+                            Log.d("size in Home View", Integer.toString(eventList.size()));
+                            RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         /*for(String currentCourse : enrolledCourses){
                             Log.d("createdCourse",currentCourse);
                             AddClassroomUI(currentCourse);
@@ -193,7 +193,7 @@ public class HomeFragment extends Fragment {
                         for(String currentCourse : createdCourses){
                             AddClassroomUI(currentCourse);
                         }*/
-                    }
+                        }
                 }
             }
 
@@ -205,6 +205,7 @@ public class HomeFragment extends Fragment {
         bt_joinedCourses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recyclerView.removeAllViews();
 
             }
         });
@@ -212,7 +213,7 @@ public class HomeFragment extends Fragment {
         bt_createdCourses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                recyclerView.removeAllViews();
             }
         });
 

@@ -66,6 +66,8 @@ public class HomeFragment extends Fragment {
     android.widget.GridLayout GridLayout_classroom;
     Button button;
     Button bt_addEvent;
+    Button bt_joinedCourses;
+    Button bt_createdCourses;
     TextView textview;
     CardView cardview;
     ImageView imageview;
@@ -133,6 +135,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
+        bt_joinedCourses = (Button)view.findViewById(R.id.bt_joinedCourses);
+        bt_createdCourses = (Button)view.findViewById(R.id.bt_createdCourses);
         classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
         classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
         dashboard = (RelativeLayout) view.findViewById(R.id.coursesView);
@@ -182,19 +186,33 @@ public class HomeFragment extends Fragment {
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        for(String currentCourse : enrolledCourses){
+                        /*for(String currentCourse : enrolledCourses){
                             Log.d("createdCourse",currentCourse);
                             AddClassroomUI(currentCourse);
                         }
                         for(String currentCourse : createdCourses){
                             AddClassroomUI(currentCourse);
-                        }
+                        }*/
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        bt_joinedCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        bt_createdCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
             }
         });
 

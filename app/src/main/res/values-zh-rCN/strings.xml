@@ -1,0 +1,74 @@
+<resources>
+
+    <!--    Header Text = Text that appears at the top of page to instruct users on what to do next   -->
+    <!--    Helper Text = Text that appears throughout page to provide users with information    -->
+    <!--    Edit Text Hint = Text that appears in EditText boxes to inform users on what to input    -->
+    <!--    Error Text = Text that appears when an error has occurred    -->
+    <!--    Button Text = Text  that appears on the actual buttons    -->
+
+    <!--    Splash Screen Miscellaneous Portion    -->
+    <string name="appName">QuizzAssist</string>
+    <string name="appSlogan">让考试更简单</string>
+    <string name="getStartedButtonText">开始</string>
+
+    <!--    User Sign-up & Login information Portion    -->
+    <string name="signUpHeaderText">创建账户</string>
+    <string name="signUpButtonText">注册</string>
+    <string name="logInHeaderText">登录已有账号></string>
+    <string name="loginButtonText">登录</string>
+    <string name="logOutButtonText">登出</string>
+    <string name="forgotPassword">忘记密码?</string>
+
+    <string name="userNameEditTextHint">用户名 (必需)</string>
+    <string name="userFirstNameEditTextHint">名 (必需)</string>
+    <string name="userMiddleNameEditTextHint">中间名 (可选)</string>
+    <string name="userLastNameEditTextHint">姓 (必需)</string>
+    <string name="userStudentNumberEditTextHint">学生号码 (可选)</string>
+
+    <string name="userEmailEditTextHint">邮箱 (必需)</string>
+    <string name="userPasswordEditTextHint">密码 (必需)</string>
+
+    <!--    User Option Portion    -->
+    <string name="userOption">创建或加入课程</string>
+    <string name="userOption_CreateCourse">新建课程</string>
+    <string name="userOption_joinCourse">加入课程</string>
+
+    <!--    Course Creation Portion    -->
+    <string name="createCourseButtonText">创建课程</string>
+    <string name="createClassNameEditTextHint">输入课程名称</string>
+    <string name="wordPrivate">私有</string>
+    <string name="wordPublic">公开</string>
+    <string name="addCourseErrorText">添加课程时发生错误</string>
+
+    <!--    Course Joining Portion    -->
+    <string name="joinCourseButtonText">加入课程</string>
+    <string name="inviteCodeHeaderText">在下方输入课程邀请代码</string>
+    <string name="inviteCodeEditTextHint">输入邀请代码</string>
+
+    <!--    Post-Course Create/Join Portion    -->
+    <string name="createCourseSuccessText">课程创建成功！</string>
+    <string name="inviteCodeHelperText">您的唯一邀请码为:</string>
+    <string name="joinCourseSuccessText">您已成功加入此课程</string>
+    <string name="continueToNextButtonText">继续</string>
+
+    <!--    Test Activity Main Portion    -->
+    <string name="test_homePageButtonText">主页</string>
+    <string name="test_addCourseButtonText">添加课程</string>
+    <string name="test_deleteCourseButtonText">删除课程</string>
+    <string name="test_logOutButtonText">登出</string>
+    <string name="test_inviteCodeDefault">gfu40giXz</string>
+    <string name="test_classNameDefault">测试课程</string>
+
+    <!-- Home Fragment strings   -->
+    <string name="homeFtCourseTV">我的课程</string>
+    <string name="courseCardText">课程名称</string>
+
+    <!-- Profile Fragment Strings -->
+    <string name="editUserInfoButtonText">偏好设置</string>
+
+    <!--    Undetermined Portion    -->11
+    <string name="needToImplement">Still implementing this feature</string>
+    <string name="searchTitle">搜索课程</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

@@ -29,14 +29,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         FrameLayout flFragment = (FrameLayout) findViewById(R.id.flFragment);
-
         BottomNavigationView bottomNavBar = findViewById(R.id.navigationBar);
-
         bottomNavBar.setOnNavigationItemSelectedListener(navBarMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new HomeFragment()).commit();
-
 
     }
 
@@ -44,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
-
             switch(item.getItemId()){
                 case R.id.nav_home:
                     fragment = new HomeFragment();
@@ -57,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragment).commit();
-
             return true;
         }
     };

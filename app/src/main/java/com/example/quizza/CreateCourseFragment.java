@@ -28,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,6 +47,7 @@ public class CreateCourseFragment extends Fragment {
 
     TextView tv_courseInviteCodeHelperText;
 
+    private StorageReference mReference  = FirebaseStorage.getInstance().getReference();
     Context mContext;
 
     private final String emptyCourseNameError = "Course name is required";
@@ -121,15 +124,21 @@ public class CreateCourseFragment extends Fragment {
                                   jReference.push().setValue(newCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
                                       @Override
                                       public void onComplete(@NonNull Task<Void> task) {
-                                          tv_courseInviteCode.setText(newCourse.getInviteCode());
-                                          tv_courseInviteCodeHelperText.setVisibility(View.VISIBLE);
-                                          tv_courseInviteCode.setVisibility(View.VISIBLE);
-                                          tv_courseInviteCode.setOnClickListener(new View.OnClickListener() {
-                                              @Override
-                                              public void onClick(View v) {
-                                                  CopyToClipBoard(tv_courseInviteCode.getText().toString());
+                                          if(task.isSuccessful()) {
+                                              tv_courseInviteCode.setText(newCourse.getInviteCode());
+                                              tv_courseInviteCodeHelperText.setVisibility(View.VISIBLE);
+                                              tv_courseInviteCode.setVisibility(View.VISIBLE);
+                                              tv_courseInviteCode.setOnClickListener(new View.OnClickListener() {
+                                                  @Override
+                                                  public void onClick(View v) {
+                                                      CopyToClipBoard(tv_courseInviteCode.getText().toString());
+                                                  }
+                                              });
+                                              StorageReference yReference = mReference.child(newCourse.getCourseName());
+                                              for(String myEvent : newCourse.getEventLinkID()){
+                                                  StorageReference zReference = yReference.child(myEvent);
                                               }
-                                          });
+                                          }
                                       }
                                   });
                                 }

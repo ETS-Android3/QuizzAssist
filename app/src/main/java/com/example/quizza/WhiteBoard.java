@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -74,39 +76,78 @@ public class WhiteBoard extends Activity {
         Button bt_clear=(Button) findViewById(R.id.bt_clear);
         Button bt_undo=(Button) findViewById(R.id.bt_undo);
 
+        ImageButton im_menuIcon=(ImageButton) findViewById(R.id.im_whiteboard_menu_icon);
+        LinearLayout ll_menuList=(LinearLayout) findViewById(R.id.ll_whiteboard_menu);
+        LinearLayout ll_clearWarning=(LinearLayout) findViewById(R.id.ll_clearWarning);
+        Button bt_warningYes=(Button) findViewById(R.id.bt_warningYes);
+        Button bt_warningNo=(Button) findViewById(R.id.bt_warningNo);
+
         ViewGroup container = (ViewGroup) findViewById(R.id.Whiteboard_container);
         final MyView myView = new MyView(this);
         container.addView(myView);
+        im_menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                im_menuIcon.setVisibility(View.INVISIBLE);
+                ll_menuList.setVisibility(View.VISIBLE);
+            }
+        });
+
         bt_pen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myView.setMode(Pen);
+                ll_menuList.setVisibility(View.INVISIBLE);
+                im_menuIcon.setVisibility(View.VISIBLE);
             }
         });
-
         bt_eraser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myView.setMode(Eraser);
+                ll_menuList.setVisibility(View.INVISIBLE);
+                im_menuIcon.setVisibility(View.VISIBLE);
             }
         });
         bt_clear.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { myView.clear(); }
+            public void onClick(View v) {
+                ll_menuList.setVisibility(View.INVISIBLE);
+                ll_clearWarning.setVisibility(View.VISIBLE);
+            }
         });
-
       bt_submit.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
                 myView.save();
+                ll_menuList.setVisibility(View.INVISIBLE);
+                im_menuIcon.setVisibility(View.VISIBLE);
           }
       });
       bt_undo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myView.undo();
+                ll_menuList.setVisibility(View.INVISIBLE);
+                im_menuIcon.setVisibility(View.VISIBLE);
             }
-        });
+      });
+      bt_warningYes.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              myView.clear();
+              ll_clearWarning.setVisibility(View.INVISIBLE);
+              im_menuIcon.setVisibility(View.VISIBLE);
+          }
+      });
+      bt_warningNo.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              ll_clearWarning.setVisibility(View.INVISIBLE);
+              ll_menuList.setVisibility(View.VISIBLE);
+          }
+      });
+
 }
     private class DrawPath{
         public Path path;

@@ -30,6 +30,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,18 +59,24 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+//graph stuff
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import java.util.Collections;
 
 public class HomeFragment extends Fragment {
 
     Context context;
     android.widget.GridLayout GridLayout_home;
     android.widget.GridLayout GridLayout_classroom;
-    Button bt_addEvent,bt_scheduleEventDate,bt_scheduleEventTime,bt_closeEventPage;
+    Button bt_addEvent,bt_scheduleEventDate,bt_scheduleEventTime,bt_closeEventPage,
+            bt_generateEventGraph,bt_returnToEvent;
     Button button;
     TextView test,tv_eventDateDisplay,tv_eventTimeDisplay;
     TextView textview;
@@ -93,6 +101,11 @@ public class HomeFragment extends Fragment {
     int currentCourseIndex = -1;
     int currentEventIndex = -1;
 
+    //for barchart
+    BarChart barChart;
+    ArrayList<BarEntry> barEntries;
+    ArrayList<Integer> grades;
+    RelativeLayout graphPage;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -120,6 +133,12 @@ public class HomeFragment extends Fragment {
         bt_closeEventPage = (Button)view.findViewById(R.id.bt_closeEventPage);
         tv_eventDateDisplay = (TextView)view.findViewById(R.id.tv_eventDateDisplay);
         tv_eventTimeDisplay = (TextView)view.findViewById(R.id.tv_eventTimeDisplay);
+
+        //graph stuff
+        barChart = (BarChart) view.findViewById(R.id.bargraph);
+        bt_generateEventGraph = (Button)view.findViewById(R.id.bt_generateEventGraph);
+        graphPage = (RelativeLayout) view.findViewById(R.id.graphPage);
+        bt_returnToEvent = (Button)view.findViewById(R.id.bt_returnToEvent);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -186,9 +205,55 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        bt_generateEventGraph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generateEventGraph();
+            }
+        });
+
+        bt_returnToEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEventPage();
+            }
+        });
+
+
         return view;
     }
 
+
+    //generates and displays the graph for the event (ie statistical breakdown of event)
+    public void generateEventGraph() {
+        barEntries = new ArrayList<>();
+
+        grades = new ArrayList<>();
+        grades.add(3);//TODO get barEntries from actual grades
+        grades.add(3);//TODO get barEntries from actual grades
+        grades.add(4);//TODO get barEntries from actual grades
+        grades.add(4);//TODO get barEntries from actual grades
+        grades.add(1);//TODO get barEntries from actual grades
+        Collections.sort(grades);
+
+        ArrayList<String> labels = new ArrayList<String>();
+        int maxGrade = 5; //TODO get max grade
+        for (int i = 0 ; i <= maxGrade ; i++)
+            labels.add(Integer.toString(i));
+
+        for(int j = 0; j< grades.size();j++)
+            barEntries.add(new BarEntry(grades.get(j),j));
+
+        BarDataSet barDataSet = new BarDataSet(barEntries,"Grades");
+        BarData barData = new BarData( labels,barDataSet);
+        barChart.setDescription("Grades");
+        barChart.setData(barData);
+
+        dashboard.setVisibility(View.INVISIBLE);
+        classRoom.setVisibility(View.INVISIBLE);
+        eventPage.setVisibility(View.INVISIBLE);
+        graphPage.setVisibility(View.VISIBLE);
+    }
 
     //Dynamically creates Event buttons on the fragment_home.xml.
     public void AddEvent(){
@@ -236,6 +301,7 @@ public class HomeFragment extends Fragment {
         Toast.makeText(getActivity(), "Hello boyos", Toast.LENGTH_LONG).show();
         dashboard.setVisibility(View.INVISIBLE);
         classRoom.setVisibility(View.INVISIBLE);
+        graphPage.setVisibility(View.INVISIBLE);
         eventPage.setVisibility(View.VISIBLE);
     }
 

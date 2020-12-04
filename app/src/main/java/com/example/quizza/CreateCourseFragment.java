@@ -112,37 +112,39 @@ public class CreateCourseFragment extends Fragment {
                     Course newCourse = new Course(userInputCourseName, currentUser.getUserName(), courseID.getAndIncrement());
                     newCourse.generateNewInviteCode();
 
-                    DatabaseReference jReference = FirebaseDatabase.getInstance().getReference("Courses");
-                    jReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    DatabaseReference jReference = FirebaseDatabase.getInstance().getReference();
+                    jReference.child("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for(DataSnapshot item_snap:snapshot.getChildren()){
                                 if(item_snap.getValue(Course.class).getCourseName().equals(userInputCourseName)){
                                     et_userInputCourseName.setError(courseNameExistsError);
                                     return;
-                                } else {
-                                  jReference.push().setValue(newCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                      @Override
-                                      public void onComplete(@NonNull Task<Void> task) {
-                                          if(task.isSuccessful()) {
-                                              tv_courseInviteCode.setText(newCourse.getInviteCode());
-                                              tv_courseInviteCodeHelperText.setVisibility(View.VISIBLE);
-                                              tv_courseInviteCode.setVisibility(View.VISIBLE);
-                                              tv_courseInviteCode.setOnClickListener(new View.OnClickListener() {
-                                                  @Override
-                                                  public void onClick(View v) {
-                                                      CopyToClipBoard(tv_courseInviteCode.getText().toString());
-                                                  }
-                                              });
-                                              StorageReference yReference = mReference.child(newCourse.getCourseName());
-                                              for(String myEvent : newCourse.getEventLinkID()){
-                                                  StorageReference zReference = yReference.child(myEvent);
-                                              }
-                                          }
-                                      }
-                                  });
+                                } while (item_snap.getValue(Course.class).getInviteCode().equals(newCourse.getInviteCode())) {
+                                    newCourse.generateNewInviteCode();
                                 }
                             }
+                            jReference.child("Courses").push().setValue(newCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        tv_courseInviteCode.setText(newCourse.getInviteCode());
+                                        tv_courseInviteCodeHelperText.setVisibility(View.VISIBLE);
+                                        tv_courseInviteCode.setVisibility(View.VISIBLE);
+                                        tv_courseInviteCode.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                CopyToClipBoard(tv_courseInviteCode.getText().toString());
+                                            }
+                                        });
+
+//                                              StorageReference yReference = mReference.child(newCourse.getCourseName());
+//                                              for(String myEvent : newCourse.getEventLinkID()){
+//                                                  StorageReference zReference = yReference.child(myEvent);
+//                                              }
+                                    }
+                                }
+                            });
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {

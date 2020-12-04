@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -209,6 +210,9 @@ public class CreateEventFragment extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(getActivity(), "ALL GOOD!", Toast.LENGTH_LONG).show();
+                                                HomeFragment homeFragment = new HomeFragment();
+                                                FragmentManager manager = getFragmentManager();
+                                                manager.beginTransaction().replace(R.id.flFragment, homeFragment).addToBackStack(null).commit();
                                             }
                                         });
                                     }

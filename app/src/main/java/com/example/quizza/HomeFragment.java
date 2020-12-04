@@ -17,6 +17,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -107,23 +108,23 @@ public class HomeFragment extends Fragment {
     Button endDateButton;
     Button endTimeButton;
     Button saveEventButton;
-    String startDate;
-    String endDate;
-    String startTime;
-    String endTime;
-    Integer numOfQuestions = 0;
-    String courseLinkEvent;
-    Integer startHour = 0;
-    Integer startMins = 0;
-    Integer endHour = 0;
-    Integer endMins = 0;
 
     RecyclerView recyclerView;
 
-
-
     List<String> classList = new ArrayList<>();
     List<String> eventList = new ArrayList<>();
+
+    LinkingInterface mInterface = new LinkingInterface() {
+        @Override
+        public void sendData(String value) {
+            Bundle bundle = new Bundle();
+            bundle.putString("courseName", value);
+            ClassDetailsFragment classDetailsFragment = new ClassDetailsFragment();
+            classDetailsFragment.setArguments(bundle);
+            FragmentManager manager = getFragmentManager();
+            manager.beginTransaction().replace(R.id.flFragment, classDetailsFragment).addToBackStack(null).commit();
+        }
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -181,8 +182,8 @@ public class HomeFragment extends Fragment {
                             /*for(String className: createdCourses){
                                 eventList.addAll(generateEventList(className));
                             }*/
-                            Log.d("size in Home View", Integer.toString(eventList.size()));
-                            RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
+
+                            RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setAdapter(adapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -213,7 +214,7 @@ public class HomeFragment extends Fragment {
                                     eventList.addAll(generateEventList(className));
                                 }
                                 Log.d("size in Home View", Integer.toString(eventList.size()));
-                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
+                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
                                 //recyclerView.setHasFixedSize(true);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -238,13 +239,14 @@ public class HomeFragment extends Fragment {
                             if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 currentUser = item_snapshot.getValue(User.class);
                                 createdCourses = currentUser.getCreatedCourses();
+
                                 classList.clear();
                                 classList.addAll(createdCourses);
                                 for(String className: createdCourses){
                                     eventList.addAll(generateEventList(className));
                                 }
                                 Log.d("size in Home View", Integer.toString(eventList.size()));
-                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
+                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
                                 //recyclerView.setHasFixedSize(true);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -259,22 +261,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-        //Start Date and time Picker
-
-
-
-
-        //End date and time picker
-
-
-
-
-        // Saving events method
-
-        //creating Questions method
-
-
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -286,6 +272,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
 
     //Generates event list for recycler View
     private List<String> generateEventList(String courseName){

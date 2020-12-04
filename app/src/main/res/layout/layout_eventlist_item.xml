@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/tv_eventListTitle"
-                    android:text="Event Number"
+                    android:text="Event title"
                     android:textSize="25dp">
                 </TextView>
             </LinearLayout>

@@ -1,22 +1,41 @@
 package com.example.quizza;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClassDetailsFragment extends Fragment {
 
     TextView courseTitle;
     TextView courseInviteCode;
-
+    Context mContext;
     Button createEvent;
+    String courseName;
+    Course currentCourse;
 
     RecyclerView classDetailsView;
 
@@ -36,8 +55,84 @@ public class ClassDetailsFragment extends Fragment {
 
         //!TODO: implement a list View of all the events in the class using eventList and also show Course invite code here
         //!TODO: implement a Recycler View adapter for the event list !
+        Bundle bundle = this.getArguments();
+        if(bundle!= null){
+            courseName = bundle.getString("courseName");
+        }
+
+        DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Courses");
+        mReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot item_snap : snapshot.getChildren()){
+                    if(item_snap.getValue(Course.class).getCourseName().equals(courseName)){
+                        currentCourse = item_snap.getValue(Course.class);
+                        courseTitle.setText(currentCourse.getCourseName());
+                        courseInviteCode.setText(currentCourse.getInviteCode());
+                        courseInviteCode.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                CopyToClipBoard(currentCourse.getInviteCode());
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        createEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateEventFragment createEventFragment = new CreateEventFragment();
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("courseName",currentCourse.getCourseName());
+                createEventFragment.setArguments(bundle1);
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.flFragment, createEventFragment).addToBackStack(null).commit();
+            }
+        });
 
 
         return view;
+    }
+
+    private List<String> generateEventList(String courseName){
+        List<String> eventList = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                    if(item_snapshot.getValue(Course.class).getCourseName().equals(courseName)){
+                        Course zCourse = item_snapshot.getValue(Course.class);
+                        if(zCourse.getEventLinkID().isEmpty()) {
+                            eventList.add("");
+                        } else {
+                            eventList.addAll(zCourse.getEventLinkID());
+
+                            Log.d("eventlistsize", Integer.toString(eventList.size()));
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        Log.d("eventlistsizeOnexit", Integer.toString(eventList.size()));
+        return eventList;
+    }
+
+    public void CopyToClipBoard(String text){
+        Context context = getContext();
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("ClassCode", text);
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(getContext(), "Copied To ClipBoard", Toast.LENGTH_SHORT).show();
     }
 }

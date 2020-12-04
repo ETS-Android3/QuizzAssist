@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ClassDetailsFragment extends Fragment {
 
     TextView courseTitle;
     TextView courseInviteCode;
+
+    Button createEvent;
 
     RecyclerView classDetailsView;
 
@@ -29,6 +32,7 @@ public class ClassDetailsFragment extends Fragment {
         courseTitle = (TextView) view.findViewById(R.id.tv_courseTitleDetailsPage);
         courseInviteCode = (TextView) view.findViewById(R.id.tv_inviteCodeDetailsPage);
         classDetailsView = (RecyclerView) view.findViewById(R.id.classDetailsRecyclerView);
+        createEvent = (Button) view.findViewById(R.id.bt_createEvent);
 
         //!TODO: implement a list View of all the events in the class using eventList and also show Course invite code here
         //!TODO: implement a Recycler View adapter for the event list !

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".JoinCourseFragment"
+    android:background="@color/appBackground">
+
+    <RelativeLayout
+        android:id="@+id/rv_JoiningCoursePage"
+        style="@style/matchParentHeightAndWidth"
+        android:visibility="visible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_joinPageHeaderText"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="35sp"
+            android:layout_margin="30dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:text="@string/inviteCodeHeaderText" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_joinPageHeaderText"
+            android:hint="@string/inviteCodeEditTextHint"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textColorHint="@color/white"
+            android:id="@+id/inviteCodeLayout"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/icon_invitecode">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_joinCourseInviteCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_joiningCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/inviteCodeLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="30dp"
+            android:text="@string/joinCourseButtonText" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_joinCourseSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bt_joiningCourse"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:text="@string/joinCourseSuccessText"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:background="@drawable/back_icon"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/bt_returnToUserOptionFromJoining"
+            android:layout_margin="20dp"
+            android:elevation="10dp"
+            app:backgroundTintMode="add"
+            app:cornerRadius="10dp" />
+
+    </RelativeLayout>
+
+</FrameLayout>

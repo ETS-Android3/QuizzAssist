@@ -14,19 +14,26 @@
 package com.example.quizza;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -34,14 +41,23 @@ public class LoginPage extends AppCompatActivity {
 
     Button loginButton;
     Button signUp;
+    Button forgotPasswordButton;
 
     EditText userName;
     EditText userPassword;
+
+    EditText forgotPasswordMail;
+
+    TextView forgotPassword;
+
+    ImageView backToLogin;
 
     ProgressBar mProgressBar;
     private FirebaseAuth fAuth;
     RelativeLayout relativeLayoutOne;
     RelativeLayout relativeLayoutTwo;
+    RelativeLayout loginPageLayout;
+    RelativeLayout forgotPasswordLayout;
     public final int minPasswordLength = 6;
 
 
@@ -52,6 +68,14 @@ public class LoginPage extends AppCompatActivity {
 
         relativeLayoutOne = (RelativeLayout) findViewById(R.id.appLogoRelativeView);
         relativeLayoutTwo = (RelativeLayout) findViewById(R.id.userSignInRelativeView);
+        forgotPasswordButton = (Button) findViewById(R.id.forgotPasswordButton);
+        loginPageLayout = (RelativeLayout) findViewById(R.id.appLogoRelativeView);
+        forgotPasswordLayout = (RelativeLayout) findViewById(R.id.forgotPasswordView);
+        forgotPasswordMail = (EditText) findViewById(R.id.et_forgotPasswordMail);
+
+        backToLogin = (ImageView) findViewById(R.id.iv_returnToLogin);
+
+        forgotPassword = (TextView) findViewById(R.id.tv_forgotPassword);
 
         userName = (EditText) findViewById(R.id.tv_username);
         userPassword = (EditText) findViewById(R.id.tv_password);
@@ -70,6 +94,22 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
+        backToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginPageLayout.setVisibility(View.VISIBLE);
+                forgotPasswordLayout.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginPageLayout.setVisibility(View.INVISIBLE);
+                forgotPasswordLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -77,11 +117,48 @@ public class LoginPage extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
-                relativeLayoutOne.setVisibility(View.VISIBLE);
+//                relativeLayoutOne.setVisibility(View.VISIBLE);
                 relativeLayoutTwo.setVisibility(View.VISIBLE);
             }
         };
         handler.postDelayed(runnable, 2000);
+
+        forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(forgotPasswordMail.getText().toString()).isEmpty()) {
+                    String userInputEmail = forgotPasswordMail.getText().toString();
+                    MaterialAlertDialogBuilder myBuilder = new MaterialAlertDialogBuilder(LoginPage.this);
+                    myBuilder.setTitle(R.string.forgotPasswordDialogTitle);
+                    myBuilder.setMessage(R.string.alertDialogMessage);
+                    myBuilder.setIcon(R.drawable.email_icon);
+                    myBuilder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            loginPageLayout.setVisibility(View.VISIBLE);
+                            forgotPasswordLayout.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                    myBuilder.show();
+
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(userInputEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            Toast.makeText(getApplicationContext(), "Check your mail for verification", Toast.LENGTH_LONG).show();
+//                        loginPageLayout.setVisibility(View.VISIBLE);
+//                        forgotPasswordLayout.setVisibility(View.INVISIBLE);
+                        }
+                    });
+
+
+                    Log.d("inputMail", userInputEmail);
+                } else {
+                    forgotPasswordMail.setError("Email Required");
+                }
+            }
+        });
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClassDetailsFragment"
+    android:background="@color/teal_700">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.CardView"
+            android:layout_margin="10dp"
+            android:elevation="10dp"
+            android:id="@+id/detailsHeaderSection">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/courseCardText"
+                    android:id="@+id/tv_courseTitleDetailsPage"
+                    android:textSize="25sp"
+                    android:layout_alignParentLeft="true"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_inviteCodeDetailsPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/courseInviteCode"
+                    android:textSize="25sp"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_createEvent"
+            android:layout_below="@+id/detailsHeaderSection"
+            android:layout_centerHorizontal="true"
+            android:text="Create Event">
+        </Button>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/classDetailsRecyclerView"
+            android:layout_below="@id/bt_createEvent"
+            android:layout_margin="10dp"/>
+
+        <!-- TODO: Create a recycler View to update Event list of the course -->
+
+    </RelativeLayout>
+
+</FrameLayout>

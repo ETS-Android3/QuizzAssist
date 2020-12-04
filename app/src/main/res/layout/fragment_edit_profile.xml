@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".EditProfileFragment"
+    android:background="@color/appBackground">
+
+
+<!--    TODO: Make the theme Material UI and link everything with the JAVA file of the Fragment editProfileFragment
+               already implement the Back button for better navigation-->
+
+    <RelativeLayout
+        android:id="@+id/rv_editUserSettingsPage"
+        style="@style/matchParentHeightAndWidth"
+        android:layout_margin="10dp"
+        android:visibility="visible">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_backEditProfile"
+            app:icon="@drawable/back_icon"
+            app:iconGravity="end"
+            app:iconPadding="2dp"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:elevation="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:id="@+id/profileSettingsHeaderText"
+            style="@style/GenericText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:textSize="30dp"
+            android:text="@string/settings_profileSettingsHeaderText"/>
+
+        <LinearLayout
+            android:id="@+id/linLayout_userInformationHeaderText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="170dp"
+            android:layout_marginEnd="250dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_userNameHelperText"
+                style="@style/GenericText"
+                android:text="@string/settings_userNameHelperText"
+                android:layout_marginBottom="47dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_userFirstNameHelperText"
+                style="@style/GenericText"
+                android:text="@string/settings_userFirstNameHelperText"
+                android:layout_marginBottom="40dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_userMiddleNameHelperText"
+                style="@style/GenericText"
+                android:text="@string/settings_userMiddleNameHelperText"
+                android:layout_marginBottom="43dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_userLastNameHelperText"
+                style="@style/GenericText"
+                android:text="@string/settings_userLastNameHelperText"
+                android:layout_marginBottom="40dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_userEmailNameHelperText"
+                style="@style/GenericText"
+                android:text="@string/settings_userEmailHelperText"
+                android:layout_marginBottom="30dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_userStudentNumberHelperText"
+                style="@style/GenericText"
+                android:text="@string/settings_userStudentNumberNameHelperText"
+                android:layout_marginBottom="25dp"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rv_userCurrentInformation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="150dp">
+
+            <LinearLayout
+                android:id="@+id/linLayout_userCurrentInformation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_userName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:textSize="20sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_userFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:textSize="20sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_userMiddleName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:right="120dp"
+                        android:layout_marginBottom="3dp"
+                        android:textSize="20sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_userLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:right="120dp"
+                        android:layout_marginBottom="3dp"
+                        android:textSize="20sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_userEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:right="120dp"
+                        android:layout_marginBottom="3dp"
+                        android:inputType="textEmailAddress"
+                        android:textSize="20sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ti_et_userStudentNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:right="120dp"
+                        android:layout_marginBottom="3dp"
+                        android:textSize="20sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt_saveUserProfileChanges"
+            style="@style/Buttons"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="570dp"
+            android:text="@string/settings_saveProfileChangesButtonText"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

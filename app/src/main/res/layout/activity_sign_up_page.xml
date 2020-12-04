@@ -3,84 +3,164 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/matchParentHeightAndWidth"
-    android:background="@color/appBackground"
+    android:background="@drawable/gradient"
     tools:context=".SignUpPage">
 
     <RelativeLayout
         style="@style/wrapHeightAndWidth"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp">
+        android:layout_margin="5dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/tv_signUpTitle"
             style="@style/HeaderText"
-            android:text="@string/signUpHeaderText" />
+            android:text="@string/signUpHeaderText"
+            android:layout_margin="10dp"/>
 
-        <EditText
-            android:id="@+id/et_userName"
-            style="@style/EditTextStandard"
-            android:hint="@string/userNameEditTextHint"
-            android:layout_below="@+id/tv_signUpTitle" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_signUpTitle"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/name_icon">
 
-        <EditText
-            android:id="@+id/et_userFirstName"
-            android:layout_height="50dp"
-            android:layout_width="200dp"
-            android:layout_margin="5dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:background="@drawable/edit_bg"
-            android:hint="@string/userFirstNameEditTextHint"
-            android:layout_below="@+id/et_userName" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_userName"
+                android:hint="@string/userNameEditTextHint"
+                />
 
-        <EditText
-            android:id="@+id/et_userMiddleName"
-            android:layout_height="50dp"
-            android:layout_width="200dp"
-            android:layout_margin="5dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:background="@drawable/edit_bg"
-            android:hint="@string/userMiddleNameEditTextHint"
-            android:layout_toRightOf="@id/et_userFirstName"
-            android:layout_below="@id/et_userName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/et_userLastName"
-            style="@style/EditTextStandard"
-            android:hint="@string/userLastNameEditTextHint"
-            android:layout_below="@+id/et_userFirstName" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userFirstNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userNameLayout"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/name_icon">
 
-        <EditText
-            android:id="@+id/et_userStudentNumber"
-            style="@style/EditTextStandard"
-            android:hint="@string/userStudentNumberEditTextHint"
-            android:layout_below="@+id/et_userLastName" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_userFirstName"
+                android:hint="@string/userFirstNameEditTextHint"
+                />
 
-        <EditText
-            android:id="@+id/et_userEmail"
-            style="@style/EditTextStandard"
-            android:hint="@string/userEmailEditTextHint"
-            android:layout_below="@id/et_userStudentNumber" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/et_userPassword"
-            style="@style/EditTextStandard"
-            android:hint="@string/userPasswordEditTextHint"
-            android:layout_below="@id/et_userEmail"
-            android:inputType="textPassword" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userMiddleNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userFirstNameLayout"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/name_icon">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_userMiddleName"
+                android:hint="@string/userMiddleNameEditTextHint"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userLastNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userMiddleNameLayout"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/name_icon">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_userLastName"
+                android:hint="@string/userLastNameEditTextHint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userStudentNumberLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userLastNameLayout"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/name_icon">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_userStudentNumber"
+                android:hint="@string/userStudentNumberEditTextHint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userEmailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userStudentNumberLayout"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/email_icon">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_userEmail"
+                android:hint="@string/userEmailEditTextHint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userPasswordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userEmailLayout"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_lock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_userPassword"
+                android:hint="@string/userPasswordEditTextHint"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/bt_signUpPage"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             style="@style/MediumButtons"
             android:text="@string/signUpButtonText"
-            android:layout_below="@id/et_userPassword" />
+            android:layout_below="@id/userPasswordLayout" />
 
 
         <ProgressBar
             android:id="@+id/progressBar"
-            style="@style/wrapHeightAndWidth"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
             android:layout_below="@id/bt_signUpPage"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
@@ -90,7 +170,8 @@
             android:id="@+id/iv_returnToLogin"
             style="@style/BackViewStandard"
             android:background="@drawable/btn_bg"
-            android:src="@drawable/back_icon" />
+            android:src="@drawable/back_icon"
+            android:layout_marginBottom="30dp"/>
 
     </RelativeLayout>
 

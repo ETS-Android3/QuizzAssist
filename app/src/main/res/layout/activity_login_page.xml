@@ -10,7 +10,8 @@
     <RelativeLayout
         android:id="@+id/appLogoRelativeView"
         style="@style/wrapHeightAndWidth"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/logo"
@@ -84,16 +85,79 @@
                 android:layout_below="@id/bt_login"
                 android:text="@string/signUpButtonText" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ForgotPassword"
+                android:textColor="@color/white"
+                android:id="@+id/tv_forgotPassword"
+                android:layout_below="@id/bt_signUp"
+                android:layout_centerHorizontal="true"
+                android:textSize="15sp"
+                android:layout_margin="20dp"/>
 
             <ProgressBar
                 android:id="@+id/progressBar2"
                 style="@style/wrapHeightAndWidth"
-                android:layout_below="@id/bt_signUp"
+                android:layout_below="@id/tv_forgotPassword"
                 android:layout_margin="10dp"
                 android:layout_centerHorizontal="true"
                 android:visibility="invisible" />
 
         </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/forgotPasswordView"
+        android:visibility="invisible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:id="@+id/forgotPasswordTitle"
+            android:layout_height="wrap_content"
+            android:text="@string/ForgotPasswordHeader"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_margin="50dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/forgotPasswordLayout"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/forgotPasswordTitle"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/email_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxBackgroundMode="outline"
+            android:layout_margin="30dp"
+            android:textColorHint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_forgotPasswordMail"
+                android:hint="@string/forgotPasswordHint"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgotPasswordButton"
+            android:layout_below="@id/forgotPasswordLayout"
+            android:layout_centerHorizontal="true"
+            android:text="@string/forgotPasswordButton"/>
+
+        <ImageView
+            android:id="@+id/iv_returnToLogin"
+            style="@style/BackViewStandard" />
+
 
     </RelativeLayout>
 

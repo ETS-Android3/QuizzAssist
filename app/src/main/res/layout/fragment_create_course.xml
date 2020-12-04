@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CreateCourseFragment"
+    android:background="@color/appBackground">
+
+    <RelativeLayout
+        android:id="@+id/rv_creatingCoursePage"
+        style="@style/matchParentHeightAndWidth"
+        android:visibility="visible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/createCourseTitle"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="30dp"
+            android:id="@+id/createCourseTitle" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/courseNameLayout"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxBackgroundMode="outline"
+            app:startIconDrawable="@drawable/icon_title"
+            app:endIconMode="clear_text"
+            android:textColorHint="@color/white"
+            android:layout_below="@id/createCourseTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_courseName"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:hint="@string/createClassNameEditTextHint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_creatingCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/courseNameLayout"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_bg"
+            android:layout_centerHorizontal="true"
+            android:text="@string/createCourseButtonText" />
+
+        <TextView
+            android:id="@+id/tv_CourseInviteCodeHelperText"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_below="@id/bt_creatingCourse"
+            android:text="@string/joinCourseSuccessText"
+            android:textSize="25sp"
+            android:visibility="invisible" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_generatedCourseInviteCode"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_below="@id/tv_CourseInviteCodeHelperText"
+            android:text="@string/test_inviteCodeDefault"
+            android:textSize="30sp"
+            android:visibility="invisible"
+            android:clickable="true"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_returnToUserOptionFromCreating"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            app:icon="@drawable/back_icon"
+            app:iconGravity="end"
+            app:iconPadding="2dp"
+            android:elevation="10dp"
+            android:layout_margin="20dp"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

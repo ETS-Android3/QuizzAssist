@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CreateQuestionFragment"
+    android:background="@color/teal_700">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/createQuestion"
+        android:visibility="visible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/questionCreationTitle"
+            android:text="@string/createQuestionTitle"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:layout_margin="40dp"
+            android:textAlignment="center"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/questionTitleLayout"
+            android:layout_below="@id/questionCreationTitle"
+            android:layout_margin="20dp"
+            android:hint="@string/questionTitle"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/icon_title"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_questionTitle" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/createQuestionLayout"
+            android:layout_below="@id/questionTitleLayout"
+            android:layout_margin="20dp"
+            android:hint="@string/createQuestionHint"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/icon_question"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_questionToAdd" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/courseLinkLayout"
+            android:layout_below="@id/createQuestionLayout"
+            android:layout_margin="20dp"
+            android:hint="@string/classLinkHint"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/icon_class"
+            app:boxBackgroundMode="outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_courseLinked" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/createQuestionButton"
+            android:text="@string/createQuestion"
+            android:layout_below="@id/courseLinkLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"/>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

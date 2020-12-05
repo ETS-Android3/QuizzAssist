@@ -79,6 +79,7 @@ public class ClassDetailsFragment extends Fragment {
                             }
                         });
                         eventList.addAll(currentCourse.getEventLinkID());
+                        eventList.remove(0);
                         Log.d("key", eventList.toString());
                         RecyclerViewAdapter_EventList adapterEventList = new RecyclerViewAdapter_EventList(getActivity(), eventList);
                         classDetailsView.setAdapter(adapterEventList);

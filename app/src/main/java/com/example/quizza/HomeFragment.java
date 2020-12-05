@@ -176,16 +176,19 @@ public class HomeFragment extends Fragment {
                         if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                             currentUser = item_snapshot.getValue(User.class);
                             enrolledCourses = currentUser.getEnrolledCourses();
+                            createdCourses.addAll(currentUser.getCreatedCourses());
+                            Log.d("keyVlue", enrolledCourses.toString());
                             //createdCourses = currentUser.getCreatedCourses();
                             classList.addAll(enrolledCourses);
-                            //classList.addAll(createdCourses);
-                            for(String className : enrolledCourses){
+                            classList.addAll(createdCourses);
+                            for(String className : classList){
                                 FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         for(DataSnapshot itemSnap : snapshot.getChildren()){
                                             if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
                                                 eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
+                                                Log.d("SizeFirebse", Integer.toString(eventList.size()));
                                             }
                                         }
                                     }
@@ -199,10 +202,10 @@ public class HomeFragment extends Fragment {
                                 eventList.addAll(generateEventList(className));
                             }*/
                             Log.d("SizeBeforeCall", Integer.toString(eventList.size()));
-                            RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setAdapter(adapter);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                            RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
+//                            recyclerView.setHasFixedSize(true);
+//                            recyclerView.setAdapter(adapter);
+//                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         }
                 }
             }

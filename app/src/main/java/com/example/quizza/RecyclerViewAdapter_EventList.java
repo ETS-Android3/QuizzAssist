@@ -18,6 +18,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,17 +40,31 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_class_details, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_eventlist_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter_EventList.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("tag", "onbindViewHolder: called.");
-//        if(eventList != null) {
-//            holder.EventListTitle.setText(eventList.get(position));
-//        }
+        FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    if(itemSnap.getKey().equals(eventList.get(position))){
+                        Event myEvent = itemSnap.getValue(Event.class);
+                        holder.EventListTitle.setText(myEvent.getEventTitle());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         holder.EventParentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -49,10 +49,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d("tag", "onbindViewHolder: called.");
         holder.courseTitle.setText(classesList.get(position));
         Log.d("size in recycler View", Integer.toString(eventList.size()));
-        if(eventList.size() == 1){
-            holder.eventNumber.setText("" + (eventList.size()) + " event !");
+        if((eventList.size()-1) == 1){
+            holder.eventNumber.setText("" + (eventList.size()-1) + " event !");
         } else {
-            holder.eventNumber.setText("" + (eventList.size()) + " events !");
+            holder.eventNumber.setText("" + (eventList.size()-1) + " events !");
         }
         holder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override

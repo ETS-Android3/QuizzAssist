@@ -111,6 +111,8 @@
     <string name="eventTitle">Enter event title here</string>
     <string name="questionTitle">Enter Question Title here</string>
 
+    <string name="eventQuestion"># Questions</string>
+
     <string name="courseInviteCode">Invite Code</string>
     <string name="createCourseTitle">Create Your Course</string>
 

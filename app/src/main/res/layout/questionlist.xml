@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/appBackground"
+    android:id="@+id/questionList_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        style="@style/Widget.MaterialComponents.CardView"
+        app:cardElevation="10dp"
+        android:id="@+id/questionListCardView">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/questionTitle"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:id="@+id/tv_questionTitleDetails"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

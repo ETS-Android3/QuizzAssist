@@ -29,8 +29,9 @@ public class EventDetailsFragment extends Fragment {
     FloatingActionButton FAB;
     RecyclerView questionListView;
 
-
     List<String> questionList = new ArrayList<>();
+    List<String> questionTitleList = new ArrayList<>();
+    Event myEvent;
 
     String eventName;
 
@@ -67,14 +68,37 @@ public class EventDetailsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
                     if(itemSnap.getKey().equals(eventName)){
-                        Event myEvent = itemSnap.getValue(Event.class);
+                        myEvent = itemSnap.getValue(Event.class);
                         questionList.addAll(myEvent.getQuestionList());
                         eventTitle.setText(myEvent.getEventTitle());
                         numOfQuestions.setText(Integer.toString(myEvent.getNumberOfQuestions()));
-                        QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionList);
-                        questionListView.setAdapter(adapter);
-                        questionListView.setHasFixedSize(true);
-                        questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                        QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionList);
+//                        questionListView.setAdapter(adapter);
+//                        questionListView.setHasFixedSize(true);
+//                        questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    for (String myQuestion : questionList){
+                        if(itemSnap.getKey().equals(myQuestion)){
+                            Question objQuestion = itemSnap.getValue(Question.class);
+                            questionTitleList.add(objQuestion.getQuestionTitle());
+                            QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionTitleList);
+                            questionListView.setAdapter(adapter);
+                            questionListView.setHasFixedSize(true);
+                            questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        }
                     }
                 }
             }

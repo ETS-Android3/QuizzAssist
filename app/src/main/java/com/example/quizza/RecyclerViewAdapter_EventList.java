@@ -43,7 +43,9 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter_EventList.ViewHolder holder, int position) {
         Log.d("tag", "onbindViewHolder: called.");
-        holder.EventListTitle.setText(eventList.get(position));
+//        if(eventList != null) {
+//            holder.EventListTitle.setText(eventList.get(position));
+//        }
         holder.EventParentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

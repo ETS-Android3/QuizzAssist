@@ -59,7 +59,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 MainActivity myActivity = (MainActivity) mContext;
                 String clickedValue = classesList.get(position);
-                Log.d("clickecVlue", clickedValue);
                 Toast.makeText(mContext, clickedValue, Toast.LENGTH_SHORT).show();
                 anInterface.sendData(clickedValue);
 //                ClassDetailsFragment classDetailsFragment = new ClassDetailsFragment();

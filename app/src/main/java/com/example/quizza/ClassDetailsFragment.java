@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -38,6 +39,8 @@ public class ClassDetailsFragment extends Fragment {
     Course currentCourse;
 
     RecyclerView classDetailsView;
+
+    List<String> eventList = new ArrayList<>();
 
     public ClassDetailsFragment() {
         // Required empty public constructor
@@ -75,6 +78,12 @@ public class ClassDetailsFragment extends Fragment {
                                 CopyToClipBoard(currentCourse.getInviteCode());
                             }
                         });
+                        eventList.addAll(currentCourse.getEventLinkID());
+                        Log.d("key", eventList.toString());
+                        RecyclerViewAdapter_EventList adapterEventList = new RecyclerViewAdapter_EventList(getActivity(), eventList);
+                        classDetailsView.setAdapter(adapterEventList);
+                        classDetailsView.setHasFixedSize(true);
+                        classDetailsView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     }
                 }
             }
@@ -101,32 +110,6 @@ public class ClassDetailsFragment extends Fragment {
         return view;
     }
 
-    private List<String> generateEventList(String courseName){
-        List<String> eventList = new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item_snapshot : snapshot.getChildren()){
-                    if(item_snapshot.getValue(Course.class).getCourseName().equals(courseName)){
-                        Course zCourse = item_snapshot.getValue(Course.class);
-                        if(zCourse.getEventLinkID().isEmpty()) {
-                            eventList.add("");
-                        } else {
-                            eventList.addAll(zCourse.getEventLinkID());
-
-                            Log.d("eventlistsize", Integer.toString(eventList.size()));
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        Log.d("eventlistsizeOnexit", Integer.toString(eventList.size()));
-        return eventList;
-    }
 
     public void CopyToClipBoard(String text){
         Context context = getContext();

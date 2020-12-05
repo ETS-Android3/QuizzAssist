@@ -31,10 +31,12 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
 
     private List<String> eventList = new ArrayList<>();
     Context mContext;
+    LinkingInterface mInterface;
 
-    public RecyclerViewAdapter_EventList(Context mContext, List<String> eventList){
+    public RecyclerViewAdapter_EventList(Context mContext, List<String> eventList, LinkingInterface mInterface){
         this.eventList = eventList;
         this.mContext = mContext;
+        this.mInterface = mInterface;
     }
 
     @NonNull
@@ -69,10 +71,11 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, eventList.get(position), Toast.LENGTH_SHORT).show();
-                CreateEventFragment createEventFragment = new CreateEventFragment();
+                EventDetailsFragment eventDetailsFragment = new EventDetailsFragment();
                 MainActivity myActivity = (MainActivity) mContext;
+                mInterface.sendData(eventList.get(position));
                 //Navigate to Questions list and Whiteboard
-               // myActivity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, createEventFragment).addToBackStack(null).commit();
+                //myActivity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, eventDetailsFragment).addToBackStack(null).commit();
 
             }
         });

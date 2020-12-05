@@ -38,9 +38,22 @@ public class ClassDetailsFragment extends Fragment {
     String courseName;
     Course currentCourse;
 
+    LinkingInterface mInterface = new LinkingInterface() {
+        @Override
+        public void sendData(String value) {
+            EventDetailsFragment eventDetailsFragment = new EventDetailsFragment();
+            Bundle mBundle = new Bundle();
+            mBundle.putString("keyValue", value);
+            eventDetailsFragment.setArguments(mBundle);
+            FragmentManager manager = getFragmentManager();
+            manager.beginTransaction().replace(R.id.flFragment, eventDetailsFragment).addToBackStack(null).commit();
+        }
+    };
+
     RecyclerView classDetailsView;
 
     List<String> eventList = new ArrayList<>();
+
 
     public ClassDetailsFragment() {
         // Required empty public constructor
@@ -81,7 +94,7 @@ public class ClassDetailsFragment extends Fragment {
                         eventList.addAll(currentCourse.getEventLinkID());
                         eventList.remove(0);
                         Log.d("key", eventList.toString());
-                        RecyclerViewAdapter_EventList adapterEventList = new RecyclerViewAdapter_EventList(getActivity(), eventList);
+                        RecyclerViewAdapter_EventList adapterEventList = new RecyclerViewAdapter_EventList(getActivity(), eventList, mInterface);
                         classDetailsView.setAdapter(adapterEventList);
                         classDetailsView.setHasFixedSize(true);
                         classDetailsView.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -1,6 +1,7 @@
 package com.example.quizza;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -85,6 +86,7 @@ public class WhiteBoard extends Activity {
         Button bt_warningYes=(Button) findViewById(R.id.bt_warningYes);
         Button bt_warningNo=(Button) findViewById(R.id.bt_warningNo);
         Button bt_viewQuestion=(Button) findViewById(R.id.bt_viewQuestion);
+        Button bt_back=(Button) findViewById(R.id.bt_back);
 
 
         Button bt_questionBack=(Button) findViewById(R.id.bt_questionBack);
@@ -152,6 +154,12 @@ public class WhiteBoard extends Activity {
                 myView.save();
                 ll_menuList.setVisibility(View.INVISIBLE);
                 im_menuIcon.setVisibility(View.VISIBLE);
+          }
+      });
+      bt_back.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              finish();
           }
       });
       bt_warningYes.setOnClickListener(new View.OnClickListener() {

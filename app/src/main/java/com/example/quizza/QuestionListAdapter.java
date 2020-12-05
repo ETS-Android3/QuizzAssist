@@ -1,6 +1,7 @@
 package com.example.quizza;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
 
     private List<String> questionList = new ArrayList<>();
     private Context mContext;
+    private Context context;
 
     public QuestionListAdapter(Context context, List<String> questionList){
         this.mContext = context;
@@ -38,6 +40,9 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
             @Override
             public void onClick(View v) {
                 //TODO: implement method to navigate to White Board Activity
+                final Intent intent;
+                intent = new Intent(context, WhiteBoard.class);
+                context.startActivity(intent);
             }
         });
     }
@@ -54,9 +59,9 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            context = itemView.getContext();
             questionList = itemView.findViewById(R.id.questionListCardView);
             questionTitle = itemView.findViewById(R.id.tv_questionTitleDetails);
-
         }
     }
 }

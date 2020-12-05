@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +35,7 @@ public class ClassDetailsFragment extends Fragment {
     TextView courseTitle;
     TextView courseInviteCode;
     Context mContext;
-    Button createEvent;
+    FloatingActionButton createEvent;
     String courseName;
     Course currentCourse;
 
@@ -67,7 +68,7 @@ public class ClassDetailsFragment extends Fragment {
         courseTitle = (TextView) view.findViewById(R.id.tv_courseTitleDetailsPage);
         courseInviteCode = (TextView) view.findViewById(R.id.tv_inviteCodeDetailsPage);
         classDetailsView = (RecyclerView) view.findViewById(R.id.classDetailsRecyclerView);
-        createEvent = (Button) view.findViewById(R.id.bt_createEvent);
+        createEvent = (FloatingActionButton) view.findViewById(R.id.bt_createEvent);
 
         //!TODO: implement a list View of all the events in the class using eventList and also show Course invite code here
         //!TODO: implement a Recycler View adapter for the event list !

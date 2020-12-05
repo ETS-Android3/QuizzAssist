@@ -39,6 +39,8 @@ import android.widget.Toast;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -79,8 +81,14 @@ public class WhiteBoard extends Activity {
         ImageButton im_menuIcon=(ImageButton) findViewById(R.id.im_whiteboard_menu_icon);
         LinearLayout ll_menuList=(LinearLayout) findViewById(R.id.ll_whiteboard_menu);
         LinearLayout ll_clearWarning=(LinearLayout) findViewById(R.id.ll_clearWarning);
+        LinearLayout ll_questionView=(LinearLayout) findViewById(R.id.ll_questionView);
         Button bt_warningYes=(Button) findViewById(R.id.bt_warningYes);
         Button bt_warningNo=(Button) findViewById(R.id.bt_warningNo);
+        Button bt_viewQuestion=(Button) findViewById(R.id.bt_viewQuestion);
+
+
+        Button bt_questionBack=(Button) findViewById(R.id.bt_questionBack);
+        TextView tv_question=(TextView) findViewById(R.id.tv_question);
 
         ViewGroup container = (ViewGroup) findViewById(R.id.Whiteboard_container);
         final MyView myView = new MyView(this);
@@ -109,11 +117,33 @@ public class WhiteBoard extends Activity {
                 im_menuIcon.setVisibility(View.VISIBLE);
             }
         });
+        bt_undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myView.undo();
+                ll_menuList.setVisibility(View.INVISIBLE);
+                im_menuIcon.setVisibility(View.VISIBLE);
+            }
+        });
         bt_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ll_menuList.setVisibility(View.INVISIBLE);
                 ll_clearWarning.setVisibility(View.VISIBLE);
+            }
+        });
+        bt_viewQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ll_menuList.setVisibility(View.INVISIBLE);
+                ll_questionView.setVisibility(View.VISIBLE);
+            }
+        });
+        bt_questionBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ll_questionView.setVisibility(View.INVISIBLE);
+                im_menuIcon.setVisibility(View.VISIBLE);
             }
         });
       bt_submit.setOnClickListener(new View.OnClickListener() {
@@ -123,14 +153,6 @@ public class WhiteBoard extends Activity {
                 ll_menuList.setVisibility(View.INVISIBLE);
                 im_menuIcon.setVisibility(View.VISIBLE);
           }
-      });
-      bt_undo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myView.undo();
-                ll_menuList.setVisibility(View.INVISIBLE);
-                im_menuIcon.setVisibility(View.VISIBLE);
-            }
       });
       bt_warningYes.setOnClickListener(new View.OnClickListener() {
           @Override

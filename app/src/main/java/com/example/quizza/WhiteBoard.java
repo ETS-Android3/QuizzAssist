@@ -12,7 +12,10 @@ import android.graphics.PorterDuffXfermode;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Environment;
 import android.util.AttributeSet;
@@ -37,6 +40,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -95,6 +102,27 @@ public class WhiteBoard extends Activity {
         ViewGroup container = (ViewGroup) findViewById(R.id.Whiteboard_container);
         final MyView myView = new MyView(this);
         container.addView(myView);
+
+        ArrayList<String> questionList = getIntent().getStringArrayListExtra("questions");
+        String questionTitle = getIntent().getStringExtra("questionTitle");
+
+        FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    Log.d("POOP1", itemSnap.getKey());
+                    if (itemSnap.getKey().equals(questionTitle)) {
+                        Question myQuestion = itemSnap.getValue(Question.class);
+                        tv_question.setText(myQuestion.getQuestionText());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         im_menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

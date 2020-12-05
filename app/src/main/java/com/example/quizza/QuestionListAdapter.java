@@ -2,17 +2,23 @@ package com.example.quizza;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapter.ViewHolder> {
 
@@ -37,11 +43,16 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.questionTitle.setText(questionList.get(position));
         holder.questionList.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 //TODO: implement method to navigate to White Board Activity
                 final Intent intent;
                 intent = new Intent(context, WhiteBoard.class);
+
+                intent.putExtra("questionTitle", holder.questionTitle.getText());
+                Log.d("poop", (String) holder.questionTitle.getText());
+                intent.putStringArrayListExtra("questions", (ArrayList<String>) questionList);
                 context.startActivity(intent);
             }
         });

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,6 +50,18 @@ public class EventDetailsFragment extends Fragment {
         Bundle bundle = this.getArguments();
         eventName = bundle.getString("keyValue");
 
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
+                FragmentManager manager = getFragmentManager();
+                Bundle zBundle = new Bundle();
+                zBundle.putString("eventName", eventName);
+                createQuestionFragment.setArguments(zBundle);
+                manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
+            }
+        });
+
         FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,18 +78,10 @@ public class EventDetailsFragment extends Fragment {
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        FAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
             }
         });
 

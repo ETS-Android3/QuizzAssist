@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,9 @@ public class CreateQuestionFragment extends Fragment {
     List<String> createdCourses = new ArrayList<>();
     Set<String> questionIDs = new HashSet<String>();
     String questionTitleInput;
+    User currentUser;
+    String eventTitle;
+    Event currentEvent;
 
     public CreateQuestionFragment() {
         // Required empty public constructor
@@ -53,12 +57,35 @@ public class CreateQuestionFragment extends Fragment {
         createQuestionButton = (Button) view.findViewById(R.id.createQuestionButton);
         questionTitle = (EditText) view.findViewById(R.id.tv_questionTitle);
 
-        User currentUser = getCurrentUser();
-        if(currentUser.getCreatedCourses().isEmpty()) {
-            List<String> createdCourses = new ArrayList<>();
-        } else {
-            List<String> createdCourses = new ArrayList<>(currentUser.getCreatedCourses());
+        Bundle jBundle = this.getArguments();
+        eventTitle = jBundle.getString("eventName");
+        Log.d("logvalue", eventTitle);
+
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap: snapshot.getChildren()){
+                    if(itemSnap.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        currentUser = itemSnap.getValue(User.class);
+                        createdCourses = currentUser.getCreatedCourses();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        if(currentUser!= null) {
+            if (currentUser.getCreatedCourses().isEmpty()) {
+                createdCourses = new ArrayList<>();
+            } else {
+                createdCourses = new ArrayList<>(currentUser.getCreatedCourses());
+            }
         }
+        Log.d("createdCourses", createdCourses.toString());
 
         createQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +139,23 @@ public class CreateQuestionFragment extends Fragment {
                                                         Toast.makeText(getActivity(), "Question Updated!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
+                                                FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        for(DataSnapshot itemSnap: snapshot.getChildren()){
+                                                            if(itemSnap.getKey().equals(eventTitle)){
+                                                                currentEvent = itemSnap.getValue(Event.class);
+                                                                currentEvent.setQuestionList(new ArrayList<>(questionIDs));
+                                                                FirebaseDatabase.getInstance().getReference("Events/"+itemSnap.getKey()).setValue(currentEvent);
+                                                            }
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
                                             }
                                         }
                                     }
@@ -130,27 +174,6 @@ public class CreateQuestionFragment extends Fragment {
         });
 
         return view;
-    }
-
-    private User getCurrentUser(){
-        final User[] myUser = {new User()};
-        DatabaseReference uReference = FirebaseDatabase.getInstance().getReference("Users");
-        uReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item_snapshot: snapshot.getChildren()){
-                    if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                        myUser[0] = item_snapshot.getValue(User.class);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return myUser[0];
     }
 
 }

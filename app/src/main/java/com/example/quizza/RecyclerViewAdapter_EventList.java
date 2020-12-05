@@ -35,13 +35,13 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_class_details, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_eventlist_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter_EventList.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("tag", "onbindViewHolder: called.");
         holder.EventListTitle.setText(eventList.get(position));
         holder.EventParentLayout.setOnClickListener(new View.OnClickListener() {

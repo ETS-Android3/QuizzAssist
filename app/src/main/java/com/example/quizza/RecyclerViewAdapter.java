@@ -2,6 +2,7 @@ package com.example.quizza;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +27,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<String> classesList = new ArrayList<>();
     private List<String> eventList = new ArrayList<>();
     Context mContext;
+    private LinkingInterface anInterface;
 
-    public RecyclerViewAdapter(Context mContext, List<String> classesList, List<String> eventList) {
+    public RecyclerViewAdapter(Context mContext, List<String> classesList, List<String> eventList, LinkingInterface mInterface) {
         this.classesList = classesList;
         this.eventList = eventList;
         this.mContext = mContext;
+        this.anInterface = mInterface;
     }
 
     @NonNull
@@ -46,19 +49,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d("tag", "onbindViewHolder: called.");
         holder.courseTitle.setText(classesList.get(position));
         Log.d("size in recycler View", Integer.toString(eventList.size()));
-        if(eventList.size() == 1){
-            holder.eventNumber.setText("" + (eventList.size()) + " event !");
+        if((eventList.size()-1) == 1){
+            holder.eventNumber.setText("" + (eventList.size()-1) + " event !");
         } else {
-            holder.eventNumber.setText("" + (eventList.size()) + " events !");
+            holder.eventNumber.setText("" + (eventList.size()-1) + " events !");
         }
-
         holder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, classesList.get(position), Toast.LENGTH_SHORT).show();
-                CreateEventFragment createEventFragment = new CreateEventFragment();
                 MainActivity myActivity = (MainActivity) mContext;
-                myActivity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, createEventFragment).addToBackStack(null).commit();
+                String clickedValue = classesList.get(position);
+                Toast.makeText(mContext, clickedValue, Toast.LENGTH_SHORT).show();
+                anInterface.sendData(clickedValue);
+//                ClassDetailsFragment classDetailsFragment = new ClassDetailsFragment();
+//                myActivity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, classDetailsFragment).addToBackStack(null).commit();
             }
         });
     }
@@ -81,7 +85,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             parent_layout = itemView.findViewById(R.id.parent_layout);
             eventNumber = itemView.findViewById(R.id.tv_eventNumber);
             myCardView = itemView.findViewById(R.id.classCardView);
+
         }
     }
 
 }
+

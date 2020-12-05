@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -63,8 +64,14 @@ public class CreateEventFragment extends Fragment {
     Integer endMins = 0;
     EditText eventTitle;
 
+    String courseName;
+
     public CreateEventFragment() {
         // Required empty public constructor
+    }
+
+    CreateEventFragment(String courseName){
+
     }
 
 
@@ -90,6 +97,12 @@ public class CreateEventFragment extends Fragment {
         endTimeButton = (Button) view.findViewById(R.id.endTimeButton);
         saveEventButton = (Button) view.findViewById(R.id.saveEventButton);
         eventTitle = (EditText) view.findViewById(R.id.tv_eventTitle);
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            courseName = bundle.getString("courseName");
+            classLinkedEvent.setText(courseName);
+        }
 
         startDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +210,9 @@ public class CreateEventFragment extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(getActivity(), "ALL GOOD!", Toast.LENGTH_LONG).show();
+                                                HomeFragment homeFragment = new HomeFragment();
+                                                FragmentManager manager = getFragmentManager();
+                                                manager.beginTransaction().replace(R.id.flFragment, homeFragment).addToBackStack(null).commit();
                                             }
                                         });
                                     }

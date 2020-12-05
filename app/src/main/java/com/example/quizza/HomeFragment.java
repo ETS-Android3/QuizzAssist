@@ -17,9 +17,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -49,6 +51,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.xml.sax.DTDHandler;
 
 import java.security.CryptoPrimitive;
 import java.util.ArrayList;
@@ -107,23 +111,23 @@ public class HomeFragment extends Fragment {
     Button endDateButton;
     Button endTimeButton;
     Button saveEventButton;
-    String startDate;
-    String endDate;
-    String startTime;
-    String endTime;
-    Integer numOfQuestions = 0;
-    String courseLinkEvent;
-    Integer startHour = 0;
-    Integer startMins = 0;
-    Integer endHour = 0;
-    Integer endMins = 0;
 
     RecyclerView recyclerView;
 
-
-
     List<String> classList = new ArrayList<>();
     List<String> eventList = new ArrayList<>();
+
+    LinkingInterface mInterface = new LinkingInterface() {
+        @Override
+        public void sendData(String value) {
+            Bundle bundle = new Bundle();
+            bundle.putString("courseName", value);
+            ClassDetailsFragment classDetailsFragment = new ClassDetailsFragment();
+            classDetailsFragment.setArguments(bundle);
+            FragmentManager manager = getFragmentManager();
+            manager.beginTransaction().replace(R.id.flFragment, classDetailsFragment).addToBackStack(null).commit();
+        }
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -172,20 +176,36 @@ public class HomeFragment extends Fragment {
                         if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                             currentUser = item_snapshot.getValue(User.class);
                             enrolledCourses = currentUser.getEnrolledCourses();
+                            createdCourses.addAll(currentUser.getCreatedCourses());
+                            Log.d("keyVlue", enrolledCourses.toString());
                             //createdCourses = currentUser.getCreatedCourses();
                             classList.addAll(enrolledCourses);
-                            //classList.addAll(createdCourses);
-                            for(String className : enrolledCourses){
-                                eventList.addAll(generateEventList(className));
+                            classList.addAll(createdCourses);
+                            for(String className : classList){
+                                FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for(DataSnapshot itemSnap : snapshot.getChildren()){
+                                            if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
+                                                eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
+                                                Log.d("SizeFirebse", Integer.toString(eventList.size()));
+                                            }
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                             /*for(String className: createdCourses){
                                 eventList.addAll(generateEventList(className));
                             }*/
-                            Log.d("size in Home View", Integer.toString(eventList.size()));
-                            RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setAdapter(adapter);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            Log.d("SizeBeforeCall", Integer.toString(eventList.size()));
+//                            RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
+//                            recyclerView.setHasFixedSize(true);
+//                            recyclerView.setAdapter(adapter);
+//                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         }
                 }
             }
@@ -210,10 +230,24 @@ public class HomeFragment extends Fragment {
                                 classList.clear();
                                 classList.addAll(enrolledCourses);
                                 for(String className : enrolledCourses){
-                                    eventList.addAll(generateEventList(className));
+                                    FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for(DataSnapshot itemSnap : snapshot.getChildren()){
+                                                if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
+                                                    eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                                 Log.d("size in Home View", Integer.toString(eventList.size()));
-                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
+                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
                                 //recyclerView.setHasFixedSize(true);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -238,13 +272,28 @@ public class HomeFragment extends Fragment {
                             if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 currentUser = item_snapshot.getValue(User.class);
                                 createdCourses = currentUser.getCreatedCourses();
+
                                 classList.clear();
                                 classList.addAll(createdCourses);
-                                for(String className: createdCourses){
-                                    eventList.addAll(generateEventList(className));
+                                for(String className : enrolledCourses){
+                                    FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for(DataSnapshot itemSnap : snapshot.getChildren()){
+                                                if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
+                                                    eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
                                 Log.d("size in Home View", Integer.toString(eventList.size()));
-                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList);
+                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
                                 //recyclerView.setHasFixedSize(true);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -259,22 +308,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-        //Start Date and time Picker
-
-
-
-
-        //End date and time picker
-
-
-
-
-        // Saving events method
-
-        //creating Questions method
-
-
         bt_addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,33 +320,6 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    //Generates event list for recycler View
-    private List<String> generateEventList(String courseName){
-        List<String> eventList = new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item_snapshot : snapshot.getChildren()){
-                    if(item_snapshot.getValue(Course.class).getCourseName().equals(courseName)){
-                        Course zCourse = item_snapshot.getValue(Course.class);
-                        if(zCourse.getEventLinkID().isEmpty()) {
-                            eventList.add("");
-                        } else {
-                            eventList.addAll(zCourse.getEventLinkID());
-
-                            Log.d("eventlistsize", Integer.toString(eventList.size()));
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        Log.d("eventlistsizeOnexit", Integer.toString(eventList.size()));
-        return eventList;
-    }
 
     public void AddEvent(){
         //Initialize the CardView

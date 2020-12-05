@@ -108,6 +108,7 @@ public class Event {
         this.endMns = endMns;
         this.numberOfQuestions = numberOfQuestions;
         this.questionList = new ArrayList<>();
+        this.questionList.add("initial");
         this.courseLink = courseLink;
         this.enrolledUsers = new ArrayList<>();
     }

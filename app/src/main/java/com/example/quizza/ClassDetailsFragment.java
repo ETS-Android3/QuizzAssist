@@ -144,7 +144,6 @@ public class ClassDetailsFragment extends Fragment {
 
         return view;
     }
-
     public void CopyToClipBoard(String text){
         Context context = getContext();
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);

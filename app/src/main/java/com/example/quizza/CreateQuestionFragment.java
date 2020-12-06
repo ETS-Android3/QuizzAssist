@@ -124,6 +124,7 @@ public class CreateQuestionFragment extends Fragment {
                                                 questionIDs.add(myQuestionID);
                                                 myQuestion.setEnrolledUsers(nCourse.getEnrolledUsers());
                                                 nCourse.setQuestionList(new ArrayList<>(questionIDs));
+
                                                 FirebaseDatabase.getInstance().getReference("Courses/" + mySnapshot.getKey()).setValue(nCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -131,12 +132,14 @@ public class CreateQuestionFragment extends Fragment {
                                                         Toast.makeText(getActivity(), "Question Created and Linked!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
+
                                                 FirebaseDatabase.getInstance().getReference("Questions/"+ myQuestionID).setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         Toast.makeText(getActivity(), "Question Updated!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
+
                                                 FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {

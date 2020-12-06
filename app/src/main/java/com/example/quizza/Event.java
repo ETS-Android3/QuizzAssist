@@ -94,6 +94,8 @@ public class Event {
     private List<String> questionList = new ArrayList<>();
     private String courseLink;
     private List<String> enrolledUsers = new ArrayList<>();
+    private Boolean eventStarted = false;
+    private Boolean eventEnded = false;
 
     public Event() {
     } //Required by Firebase
@@ -111,6 +113,24 @@ public class Event {
         this.questionList.add("initial");
         this.courseLink = courseLink;
         this.enrolledUsers = new ArrayList<>();
+        this.eventStarted = false;
+        this.eventEnded = false;
+    }
+
+    public Boolean getEventEnded() {
+        return eventEnded;
+    }
+
+    public void setEventEnded(Boolean eventEnded) {
+        this.eventEnded = eventEnded;
+    }
+
+    public Boolean getEventStarted() {
+        return eventStarted;
+    }
+
+    public void setEventStarted(Boolean eventStarted) {
+        this.eventStarted = eventStarted;
     }
 
     public String getEventTitle() {

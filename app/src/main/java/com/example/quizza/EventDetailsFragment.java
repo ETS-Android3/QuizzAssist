@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class EventDetailsFragment extends Fragment {
     List<String> questionList = new ArrayList<>();
     List<String> questionTitleList = new ArrayList<>();
     Event myEvent;
+    Course myCourse;
 
     String eventName;
 
@@ -51,18 +53,6 @@ public class EventDetailsFragment extends Fragment {
         Bundle bundle = this.getArguments();
         eventName = bundle.getString("keyValue");
 
-        FAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
-                FragmentManager manager = getFragmentManager();
-                Bundle zBundle = new Bundle();
-                zBundle.putString("eventName", eventName);
-                createQuestionFragment.setArguments(zBundle);
-                manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
-            }
-        });
-
         FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -72,14 +62,38 @@ public class EventDetailsFragment extends Fragment {
                         questionList.addAll(myEvent.getQuestionList());
                         eventTitle.setText(myEvent.getEventTitle());
                         numOfQuestions.setText(Integer.toString(myEvent.getNumberOfQuestions()));
-//                        QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionList);
-//                        questionListView.setAdapter(adapter);
-//                        questionListView.setHasFixedSize(true);
-//                        questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     }
                 }
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    if(itemSnap.getValue(Course.class).getCourseName().equals(myEvent.getCourseLink())){
+                        myCourse = itemSnap.getValue(Course.class);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    if(itemSnap.getValue(User.class).getCreatedCourses().contains(myCourse.getCourseName())){
+                        FAB.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -106,6 +120,18 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
+                FragmentManager manager = getFragmentManager();
+                Bundle zBundle = new Bundle();
+                zBundle.putString("eventName", eventName);
+                createQuestionFragment.setArguments(zBundle);
+                manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
             }
         });
 

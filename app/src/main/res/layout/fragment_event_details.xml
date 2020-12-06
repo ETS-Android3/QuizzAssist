@@ -62,7 +62,8 @@
         android:layout_margin="20dp"
         android:id="@+id/floatingActionQuestion"
         style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:src="@drawable/icon_add"/>
+        android:src="@drawable/icon_add"
+        android:visibility="invisible"/>
 
     </RelativeLayout>
 

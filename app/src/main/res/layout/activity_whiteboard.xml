@@ -41,41 +41,41 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:minWidth="50dp"
-            android:text="Pen" />
+            android:text="@string/whiteboardPen" />
         <Button
             android:id="@+id/bt_eraser"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:minWidth="50dp"
-            android:text="Eraser" />
+            android:text="@string/whiteboardEraser" />
         <Button
             android:id="@+id/bt_undo"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:minWidth="50dp"
-            android:text="Undo" />
+            android:text="@string/whiteboardUndo" />
         <Button
             android:id="@+id/bt_clear"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:minWidth="50dp"
-            android:text="Clear" />
+            android:text="@string/whiteboardclear" />
         <Button
             android:id="@+id/bt_viewQuestion"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="question"/>
+            android:text="@string/whiteboardQuestion"/>
         <Button
             android:id="@+id/bt_submit"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:minWidth="50dp"
-            android:text="Submit" />
+            android:text="@string/whiteboardSubmit" />
         <Button
             android:id="@+id/bt_back"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="back"/>
+            android:text="@string/whiteboardBack"/>
     </LinearLayout>
 
     <LinearLayout
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_question"
-            android:text="EXAMPLE QUESTION GOING BEYOND THE POWER 9000 TO CHECK"
+            android:text="@string/example_question_going_beyond_the_power_9000_to_check"
             android:textSize="20dp"
             android:padding="10dp"
             android:textColor="@color/black"/>
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bt_questionBack"
-            android:text="back"
+            android:text="@string/whiteboardBack"
             android:textSize="10dp"
             android:textColor="@color/white" />
 
@@ -119,7 +119,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CONFIRM CLEARING WHITEBOARD"
+            android:text="@string/confirm_clearing_whiteboard"
             android:textColor="@color/white"
             android:textSize="20dp"/>
         <RelativeLayout
@@ -130,13 +130,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bt_warningNo"
-                android:text="NO"
+                android:text="@string/no"
                 android:layout_marginLeft="100dp"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bt_warningYes"
-                android:text="YES"/>
+                android:text="@string/yes"/>
         </RelativeLayout>
 
     </LinearLayout>

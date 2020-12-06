@@ -62,13 +62,69 @@
     <!-- Home Fragment strings   -->
     <string name="homeFtCourseTV">我的课程</string>
     <string name="courseCardText">课程名称</string>
+    <string name="joinedCourses">加入课程</string>
+    <string name="createdCourses">创建课程</string>
+
+
 
     <!-- Profile Fragment Strings -->
     <string name="editUserInfoButtonText">偏好设置</string>
+    <string name="settings_userNameHelperText">用户名</string>
 
+    <!--    Edit User Profile Settings Portion    -->
+    <string name="settings_profileSettingsHeaderText">偏好设置</string>
+    <string name="settings_saveProfileChangesButtonText">保存设置</string>
+    <string name="classCreated">课程创建</string>
+    <string name="enrollClass">注册课程</string>
+
+    <string name="settings_userFirstNameHelperText">名</string>
+    <string name="settings_userMiddleNameHelperText">中间名</string>
+    <string name="settings_userLastNameHelperText">姓</string>
+    <string name="settings_userEmailHelperText">邮箱</string>
+    <string name="settings_userStudentNumberNameHelperText">学生ID</string>
+
+    <string name="createQuestionTitle">在下方创建你的问题</string>
+    <string name="createQuestionHint">在此处输入答案</string>
+    <string name="createQuestion">创建问题</string>
+    <string name="classLinkHint">输入课程名</string>
+
+    <string name="ForgotPassword">忘记密码?</string>
+    <string name="ForgotPasswordHeader">请输入邮箱地址找回密码</string>
+    <string name="forgotPasswordHint">输入邮箱地址</string>
+    <string name="forgotPasswordButton">发送邮件</string>
+    <string name="forgotPasswordDialogTitle">重置密码</string>
+    <string name="alertDialogMessage">验证邮件已发送, 检查你的邮箱来重置密码!</string>
+
+    <string name="eventCreationTitle">创建时间</string>
+    <string name="startDate">事件开始日期</string>
+    <string name="startTime">事件开始时间</string>
+    <string name="endDate">事件结束日期</string>
+    <string name="endTime">事件结束时间</string>
+    <string name="questionNumber">此事件中的问题数</string>
+    <string name="submitButton">保存事件</string>
+
+    <string name="eventTitle">事件名称</string>
+    <string name="questionTitle">输入问题标题</string>
+
+    <string name="eventQuestion"># 问题</string>
+
+    <string name="courseInviteCode">邀请码</string>
+    <string name="createCourseTitle">创建课程标题</string>
     <!--    Undetermined Portion    -->11
     <string name="needToImplement">Still implementing this feature</string>
     <string name="searchTitle">搜索课程</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- white board-->
+    <string name="whiteboardPen">笔</string>
+    <string name="whiteboardEraser">橡皮</string>
+    <string name="whiteboardUndo">撤销</string>
+    <string name="whiteboardclear">清除</string>
+    <string name="whiteboardQuestion">问题</string>
+    <string name="whiteboardSubmit">提交</string>
+    <string name="example_question_going_beyond_the_power_9000_to_check">示例问题</string>
+    <string name="whiteboardBack">返回</string>
+    <string name="confirm_clearing_whiteboard">确认清除全部内容吗？</string>
+    <string name="no">否</string>
+    <string name="yes">是</string>
 
 </resources>

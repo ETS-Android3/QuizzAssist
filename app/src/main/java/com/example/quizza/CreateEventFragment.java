@@ -73,11 +73,6 @@ public class CreateEventFragment extends Fragment {
         // Required empty public constructor
     }
 
-    CreateEventFragment(String courseName){
-
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -107,6 +102,7 @@ public class CreateEventFragment extends Fragment {
             classLinkedEvent.setText(courseName);
         }
 
+        //Material Date Picker for Start Date
         startDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +120,7 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
+        //Material Time Picker for Start Time
         startTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,6 +142,7 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
+        //Material Time Picker for End Time
         endTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,6 +164,7 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
+        //Material Date Picker for End Date
         endDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,7 +182,7 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
-
+        //Atfer pressing the save question button
         saveEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -37,7 +37,6 @@ public class EditProfileFragment extends Fragment {
                 manager.beginTransaction().replace(R.id.flFragment, settingsFragment).addToBackStack(null).commit();
             }
         });
-
         return view;
     }
 }

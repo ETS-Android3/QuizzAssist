@@ -108,7 +108,6 @@ public class WhiteBoard extends Activity {
         final MyView myView = new MyView(this);
         container.addView(myView);
 
-        ArrayList<String> questionList = getIntent().getStringArrayListExtra("questions");
         String questionTitle = getIntent().getStringExtra("questionTitle");
 
         FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {

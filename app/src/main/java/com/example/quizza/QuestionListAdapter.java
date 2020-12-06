@@ -52,7 +52,6 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
 
                 intent.putExtra("questionTitle", holder.questionTitle.getText());
                 Log.d("poop", (String) holder.questionTitle.getText());
-                intent.putStringArrayListExtra("questions", (ArrayList<String>) questionList);
                 context.startActivity(intent);
             }
         });

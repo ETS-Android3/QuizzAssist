@@ -36,7 +36,8 @@ public class StudentListFragment extends Fragment {
     String courseName;
     String eventName;
     String questionTitle;
-    String enrolledCourse;
+    String studentUID;
+    List<String> studentList = new ArrayList<String>();
 
     public StudentListFragment(){
         //Requires empty constructor
@@ -53,26 +54,6 @@ public class StudentListFragment extends Fragment {
         questionTitle = bundle.getString("questionTitle");
         studentsListView = (RecyclerView) view.findViewById(R.id.studentListView);
 
-        /*FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("dick", "it didnt work");
-                for(DataSnapshot itemSnap : snapshot.getChildren()){
-                    if(itemSnap.getValue(Question.class).equals(questionTitle)){
-                        Log.d("shit", "it worked");
-                        StudentListAdapter adapter = new StudentListAdapter(getActivity());
-                        studentListView.setAdapter(adapter);
-                        studentListView.setHasFixedSize(true);
-                        studentListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
         Log.d("courseName", courseName);
         FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -83,15 +64,18 @@ public class StudentListFragment extends Fragment {
                         Log.d("enrolledCourses", enrolledCourses.get(i));
                         if(enrolledCourses.get(i).equals(courseName)){
                             Log.d("WENT", "IN");
-                            StudentListAdapter adapter = new StudentListAdapter(getActivity(), itemSnap.getValue(User.class).getUserName());
-                            studentsListView.setAdapter(adapter);
-                            studentsListView.setHasFixedSize(true);
-                            studentsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            Log.d("WENT", "OUT");
+                            studentList.add(itemSnap.getValue(User.class).getUserName());
+                            studentUID = itemSnap.getKey();
+                            Log.i("SIZE", String.valueOf(studentList.size()));
                         }
                     }
+                        StudentListAdapter adapter = new StudentListAdapter(getActivity(),
+                                studentList, courseName, eventName, questionTitle,
+                                studentUID , itemSnap.getValue(User.class).getUserName());
+                        studentsListView.setAdapter(adapter);
+                        studentsListView.setHasFixedSize(true);
+                        studentsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 }
-
             }
 
             @Override

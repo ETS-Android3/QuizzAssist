@@ -1,5 +1,6 @@
 package com.example.quizza;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,22 @@ import java.util.List;
 public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.ViewHolder> {
 
     private List<String> studentsList = new ArrayList<String>();
-    private String studentName1;
+    private String studentName;
+    private String courseName;
+    private String eventName;
+    private String questionTitle;
+    private String studentUID;
     private Context context;
 
-    public StudentListAdapter(Context context, String studentName){
+    public StudentListAdapter(Context context, List<String> studentsList, String courseName,
+                              String eventName, String questionTitle, String studentUID, String studentName){
+        this.studentsList = studentsList;
+        this.courseName = courseName;
+        this.eventName = eventName;
+        this.questionTitle = questionTitle;
+        this.studentUID = studentUID;
         this.context = context;
-        this.studentName1 = studentName;
+        this.studentName = studentName;
     }
 
     @NonNull
@@ -38,13 +49,19 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.studentName.setText(studentName1);
+        holder.studentName.setText(studentName);
         holder.studentList.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 //TODO: implement method to display picture submitted online on firebase storage
-
+                final Intent intent;
+                intent = new Intent(context, ViewPNGAnswers.class);
+                intent.putExtra("courseName", courseName);
+                intent.putExtra("eventName", eventName);
+                intent.putExtra("questionTitle", questionTitle);
+                intent.putExtra("studentUID", studentUID);
+                context.startActivity(intent);
             }
         });
     }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ClassDetailsFragment"
     android:background="@color/teal_700">
 
@@ -42,20 +43,24 @@
             </RelativeLayout>
 
         </com.google.android.material.card.MaterialCardView>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bt_createEvent"
-            android:layout_below="@+id/detailsHeaderSection"
-            android:layout_centerHorizontal="true"
-            android:text="Create Event">
-        </Button>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/classDetailsRecyclerView"
-            android:layout_below="@id/bt_createEvent"
+            android:layout_below="@id/detailsHeaderSection"
             android:layout_margin="10dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:visibility="invisible"
+            android:src="@drawable/add_icon"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:id="@+id/FAB_createEvent"/>
 
         <!-- TODO: Create a recycler View to update Event list of the course -->
 

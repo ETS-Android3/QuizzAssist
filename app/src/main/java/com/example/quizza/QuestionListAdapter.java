@@ -26,11 +26,10 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
     private List<String> questionList = new ArrayList<>();
     private String eventName;
     private String courseName;
-    private Context mContext;
     private Context context;
 
     public QuestionListAdapter(Context context, List<String> questionList, String eventName, String courseName){
-        this.mContext = context;
+        this.context = context;
         this.questionList = questionList;
         this.eventName = eventName;
         this.courseName = courseName;

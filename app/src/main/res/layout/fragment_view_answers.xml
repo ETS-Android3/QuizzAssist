@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".EventDetailsFragment"
+    tools:context=".ViewAnswersFragment"
     android:background="@color/appBackground">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,10 +12,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bt_viewAnswers"
+            android:id="@+id/bt_questionAnswersBack"
             android:layout_alignParentBottom="true"
             android:layout_margin="10dp"
-            android:text="View Answers">
+            android:text="Back"
+            android:visibility="invisible">
         </Button>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             style="@style/Widget.MaterialComponents.CardView"
             android:padding="30dp"
             app:cardElevation="10dp"
-            android:id="@+id/eventTitleHeader">
+            android:id="@+id/eventTitleAnswersHeader">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -32,42 +33,19 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/eventTitle"
+                    android:text="Event Title Answers"
                     android:textSize="25sp"
-                    android:id="@+id/tv_eventTitleDetails"
+                    android:id="@+id/tv_eventTitleAnswers"
                     android:layout_alignParentLeft="true"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/eventQuestion"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/tv_eventQuestion"
-                    android:textSize="25sp"/>
-
             </RelativeLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/eventTitleHeader"
+            android:layout_below="@id/eventTitleAnswersHeader"
             android:layout_margin="5dp"
-            android:id="@+id/questionListView"/>
-
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:id="@+id/floatingActionQuestion"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:src="@drawable/icon_add"/>
-
+            android:id="@+id/questionAnswersView"/>
     </RelativeLayout>
-
 
 </FrameLayout>

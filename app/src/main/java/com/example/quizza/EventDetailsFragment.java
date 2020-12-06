@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,6 +29,7 @@ public class EventDetailsFragment extends Fragment {
     TextView eventTitle;
     TextView numOfQuestions;
     FloatingActionButton FAB;
+    Button viewAnswers;
     RecyclerView questionListView;
 
 
@@ -48,6 +50,7 @@ public class EventDetailsFragment extends Fragment {
         eventTitle = (TextView) view.findViewById(R.id.tv_eventTitleDetails);
         numOfQuestions = (TextView) view.findViewById(R.id.tv_eventQuestion);
         FAB = (FloatingActionButton) view.findViewById(R.id.floatingActionQuestion);
+        viewAnswers = (Button) view.findViewById(R.id.bt_viewAnswers);
         questionListView = (RecyclerView) view.findViewById(R.id.questionListView);
         Bundle bundle = this.getArguments();
         eventName = bundle.getString("keyValue");
@@ -63,6 +66,20 @@ public class EventDetailsFragment extends Fragment {
                 zBundle.putString("eventName", eventName);
                 createQuestionFragment.setArguments(zBundle);
                 manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
+            }
+        });
+
+        viewAnswers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewAnswersFragment viewAnswersFragment = new ViewAnswersFragment();
+                FragmentManager manager = getFragmentManager();
+                Bundle zBundle = new Bundle();
+                zBundle.putString("eventName", eventName);
+                zBundle.putString("courseName", courseName);
+                zBundle.putStringArrayList("questionsList", (ArrayList<String>) questionList);
+                viewAnswersFragment.setArguments(zBundle);
+                manager.beginTransaction().replace(R.id.flFragment, viewAnswersFragment).addToBackStack(null).commit();
             }
         });
 

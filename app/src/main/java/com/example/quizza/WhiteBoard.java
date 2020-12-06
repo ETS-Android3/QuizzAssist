@@ -61,7 +61,6 @@ import java.util.Iterator;
 
 public class WhiteBoard extends Activity {
 
-    private MyView WhiteBoard;
     private ImageView imageView;
     Question myQuestion;
     Course myCourse;
@@ -70,7 +69,6 @@ public class WhiteBoard extends Activity {
 
 
     private StorageReference mStorageRef;
-    private Uri filePath;
 
     //whiteboard
     private static int SCREEN_W;
@@ -214,8 +212,8 @@ public class WhiteBoard extends Activity {
         bt_submit.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-                myView.save(myCourse, myEvent);
                 ll_menuList.setVisibility(View.INVISIBLE);
+                myView.save(myCourse, myEvent);
                 im_menuIcon.setVisibility(View.VISIBLE);
           }
       });

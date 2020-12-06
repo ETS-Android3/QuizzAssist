@@ -3,6 +3,7 @@ package com.example.quizza;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,12 +24,16 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapter.ViewHolder> {
 
     private List<String> questionList = new ArrayList<>();
+    private String eventName;
+    private String courseName;
     private Context mContext;
     private Context context;
 
-    public QuestionListAdapter(Context context, List<String> questionList){
+    public QuestionListAdapter(Context context, List<String> questionList, String eventName, String courseName){
         this.mContext = context;
         this.questionList = questionList;
+        this.eventName = eventName;
+        this.courseName = courseName;
     }
 
     @NonNull
@@ -49,9 +54,12 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
                 //TODO: implement method to navigate to White Board Activity
                 final Intent intent;
                 intent = new Intent(context, WhiteBoard.class);
-
-                intent.putExtra("questionTitle", holder.questionTitle.getText());
-                Log.d("poop", (String) holder.questionTitle.getText());
+                intent.putExtra("courseName", courseName);
+                Log.d("courseName", courseName);
+                intent.putExtra("eventName", eventName);
+                Log.d("eventName", eventName);
+                intent.putExtra("questionTitle", questionList.get(position));
+                Log.d("poop", (String) questionList.get(position));
                 context.startActivity(intent);
             }
         });

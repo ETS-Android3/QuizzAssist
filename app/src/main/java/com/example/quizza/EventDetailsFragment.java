@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class EventDetailsFragment extends Fragment {
     List<String> questionList = new ArrayList<>();
 
     String eventName;
+    String courseName;
 
     public EventDetailsFragment() {
         // Required empty public constructor
@@ -49,6 +51,8 @@ public class EventDetailsFragment extends Fragment {
         questionListView = (RecyclerView) view.findViewById(R.id.questionListView);
         Bundle bundle = this.getArguments();
         eventName = bundle.getString("keyValue");
+        courseName = bundle.getString("courseName");
+        Log.d("CourseName", courseName);
 
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +75,7 @@ public class EventDetailsFragment extends Fragment {
                         questionList.addAll(myEvent.getQuestionList());
                         eventTitle.setText(myEvent.getEventTitle());
                         numOfQuestions.setText(Integer.toString(myEvent.getNumberOfQuestions()));
-                        QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionList);
+                        QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionList, eventName, courseName);
                         questionListView.setAdapter(adapter);
                         questionListView.setHasFixedSize(true);
                         questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));

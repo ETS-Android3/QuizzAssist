@@ -40,6 +40,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -76,6 +77,10 @@ public class WhiteBoard extends Activity {
     private static int Pen = 1;
     private static int Eraser = 2;
 
+    String courseName;
+    String eventName;
+    String questionTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +111,9 @@ public class WhiteBoard extends Activity {
         final MyView myView = new MyView(this);
         container.addView(myView);
 
-        String questionTitle = getIntent().getStringExtra("questionTitle");
+        questionTitle = getIntent().getStringExtra("questionTitle");
+        eventName = getIntent().getStringExtra("eventName");
+        courseName = getIntent().getStringExtra("courseName");
 
         FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -119,6 +126,18 @@ public class WhiteBoard extends Activity {
                         tv_question.setText(myQuestion.getQuestionText());
                     }
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
             }
 
             @Override
@@ -373,7 +392,7 @@ public class WhiteBoard extends Activity {
             try {
                 File file = new File(getExternalFilesDir(null), "BigPP" + counter + ".png");
                 Uri myUri = Uri.fromFile(file);
-                StorageReference riversRef = mStorageRef.child("BigPP" + counter + ".png");
+                StorageReference riversRef = mStorageRef.child(courseName + "/" + eventName + "/" + questionTitle + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + ".png");
                 riversRef.putFile(myUri);
                 if (!file.exists())
                     file.createNewFile();

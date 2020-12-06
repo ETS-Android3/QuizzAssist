@@ -71,7 +71,6 @@ public class CreateQuestionFragment extends Fragment {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -85,7 +84,6 @@ public class CreateQuestionFragment extends Fragment {
                 createdCourses = new ArrayList<>(currentUser.getCreatedCourses());
             }
         }
-        Log.d("createdCourses", createdCourses.toString());
 
         createQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +101,7 @@ public class CreateQuestionFragment extends Fragment {
                     classLinked.setError("Please Input a valid created Course");
                 }
                 else {
-                    Question myQuestion = new Question(questionTitleInput, question, courseLink, currentUser.getUserName());
+                    Question myQuestion = new Question(questionTitleInput, question, courseLink, currentUser.getUserName(), eventTitle);
                     DatabaseReference yReference = FirebaseDatabase.getInstance().getReference("Questions").push();
                     String myQuestionID = yReference.getKey();
                     yReference.setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {

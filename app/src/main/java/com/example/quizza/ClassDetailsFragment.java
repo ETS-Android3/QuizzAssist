@@ -71,7 +71,7 @@ public class ClassDetailsFragment extends Fragment {
         courseInviteCode = (TextView) view.findViewById(R.id.tv_inviteCodeDetailsPage);
         classDetailsView = (RecyclerView) view.findViewById(R.id.classDetailsRecyclerView);
         FABcreateEvent = (FloatingActionButton) view.findViewById(R.id.FAB_createEvent);
-
+        eventList.clear();
         //!TODO: implement a list View of all the events in the class using eventList and also show Course invite code here
         //!TODO: implement a Recycler View adapter for the event list !
         Bundle bundle = this.getArguments();
@@ -79,6 +79,7 @@ public class ClassDetailsFragment extends Fragment {
             courseName = bundle.getString("courseName");
         }
 
+        //Getting Current User from Database
         FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -100,6 +101,7 @@ public class ClassDetailsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot item_snap : snapshot.getChildren()){
                     if(item_snap.getValue(Course.class).getCourseName().equals(courseName)){
+                        eventList.clear();
                         currentCourse = item_snap.getValue(Course.class);
                         if(currentUser.getCreatedCourses().contains(currentCourse.getCourseName())){
                             FABcreateEvent.setVisibility(View.VISIBLE);
@@ -114,10 +116,9 @@ public class ClassDetailsFragment extends Fragment {
                         });
                         eventList.addAll(currentCourse.getEventLinkID());
                         eventList.remove(0);
-                        Log.d("key", eventList.toString());
                         RecyclerViewAdapter_EventList adapterEventList = new RecyclerViewAdapter_EventList(getActivity(), eventList, mInterface);
                         classDetailsView.setAdapter(adapterEventList);
-                        classDetailsView.setHasFixedSize(true);
+                        //classDetailsView.setHasFixedSize(true);
                         classDetailsView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     }
                 }
@@ -141,10 +142,8 @@ public class ClassDetailsFragment extends Fragment {
             }
         });
 
-
         return view;
     }
-
 
     public void CopyToClipBoard(String text){
         Context context = getContext();

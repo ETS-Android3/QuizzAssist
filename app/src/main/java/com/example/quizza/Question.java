@@ -21,6 +21,7 @@ public class Question {
     List<String> enrolledUsers = new ArrayList<>();
     String userCreated;
     String courseLink;
+    String eventLink;
     //link to image?
 
     //type of question
@@ -45,13 +46,22 @@ public class Question {
         //required empty constructor
     }
 
-    public Question(String questionTitle, String questionText, String courseLink, String userCreated) {
+    public Question(String questionTitle, String questionText, String courseLink, String userCreated, String eventLink) {
         this.questionTitle = questionTitle;
         this.questionText = questionText;
         this.courseLink = courseLink;
         this.userCreated = userCreated;
+        this.eventLink = eventLink;
         this.enrolledUsers = new ArrayList<>();
         enrolledUsers.add(userCreated);
+    }
+
+    public String getEventLink() {
+        return eventLink;
+    }
+
+    public void setEventLink(String eventLink) {
+        this.eventLink = eventLink;
     }
 
     public String getQuestionTitle() {

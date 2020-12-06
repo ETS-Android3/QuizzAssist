@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +36,7 @@ public class EventDetailsFragment extends Fragment {
     List<String> questionTitleList = new ArrayList<>();
     Event myEvent;
     Course myCourse;
+    Question objQuestion;
 
     String eventName;
 
@@ -59,6 +62,7 @@ public class EventDetailsFragment extends Fragment {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
                     if(itemSnap.getKey().equals(eventName)){
                         myEvent = itemSnap.getValue(Event.class);
+                        questionList.clear();
                         questionList.addAll(myEvent.getQuestionList());
                         eventTitle.setText(myEvent.getEventTitle());
                         numOfQuestions.setText(Integer.toString(myEvent.getNumberOfQuestions()));
@@ -67,7 +71,6 @@ public class EventDetailsFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -85,6 +88,7 @@ public class EventDetailsFragment extends Fragment {
             }
         });
 
+        //Checking if Current User isOwner to Make Creating Event Button Visible or not
         FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -96,18 +100,20 @@ public class EventDetailsFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
+        //Passing the question List to the Recycler View adapter to show on the UI
         FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
                     for (String myQuestion : questionList){
                         if(itemSnap.getKey().equals(myQuestion)){
-                            Question objQuestion = itemSnap.getValue(Question.class);
-                            questionTitleList.add(objQuestion.getQuestionTitle());
+                            objQuestion = itemSnap.getValue(Question.class);
+                            if(objQuestion.getEventLink().equals(eventName)){
+                                questionTitleList.add(objQuestion.getQuestionTitle());
+                            }
                             QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionTitleList);
                             questionListView.setAdapter(adapter);
                             questionListView.setHasFixedSize(true);
@@ -126,12 +132,21 @@ public class EventDetailsFragment extends Fragment {
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
-                FragmentManager manager = getFragmentManager();
-                Bundle zBundle = new Bundle();
-                zBundle.putString("eventName", eventName);
-                createQuestionFragment.setArguments(zBundle);
-                manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
+                if(questionList.size() > myEvent.getNumberOfQuestions() + 1) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+                    builder.setTitle("Question Limit Reached");
+                    builder.setMessage("You have created the Maximum Number of Questions in this Event !");
+                    builder.setIcon(R.drawable.icon_error);
+                    builder.show();
+//                    Toast.makeText(getActivity(), "Cant generate more Questions", Toast.LENGTH_SHORT).show();
+                } else {
+                    CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
+                    FragmentManager manager = getFragmentManager();
+                    Bundle zBundle = new Bundle();
+                    zBundle.putString("eventName", eventName);
+                    createQuestionFragment.setArguments(zBundle);
+                    manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
+                }
             }
         });
 

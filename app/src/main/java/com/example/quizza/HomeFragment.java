@@ -79,13 +79,6 @@ public class HomeFragment extends Fragment {
     List<String> eventList = new ArrayList<>();
     Event myEvent;
 
-    Date startingDate;
-//    String startDate;
-//    String startTime;
-//    String endDate;
-//    String endTime;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
 
     LinkingInterface mInterface = new LinkingInterface() {
         @Override
@@ -141,9 +134,7 @@ public class HomeFragment extends Fragment {
                         e.printStackTrace();
                         Log.d("error", e.getMessage());
                     }
-
                     FirebaseDatabase.getInstance().getReference("Events/"+itemSnap.getKey()).setValue(myEvent);
-
                 }
             }
             @Override

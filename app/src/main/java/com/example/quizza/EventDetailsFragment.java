@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,6 +32,9 @@ public class EventDetailsFragment extends Fragment {
     FloatingActionButton FAB;
     Button viewAnswers;
     RecyclerView questionListView;
+    User myUser;
+    Course myCourse;
+    Event myEvent;
 
 
     List<String> questionList = new ArrayList<>();
@@ -56,6 +60,42 @@ public class EventDetailsFragment extends Fragment {
         eventName = bundle.getString("keyValue");
         courseName = bundle.getString("courseName");
         Log.d("CourseName", courseName);
+
+        //Setting Current User to myUser Local
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    if(snap.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        myUser = snap.getValue(User.class);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        //Setting current course with courseName match from firebase
+        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    if(snap.getValue(Course.class).getCourseName().equals(courseName)){
+                        myCourse = snap.getValue(Course.class);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        if(myCourse.getCourseOwner().equals(myUser.getUserName())){
+            viewAnswers.setVisibility(View.VISIBLE);
+        }
 
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +128,7 @@ public class EventDetailsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
                     if(itemSnap.getKey().equals(eventName)){
-                        Event myEvent = itemSnap.getValue(Event.class);
+                        myEvent = itemSnap.getValue(Event.class);
                         questionList.addAll(myEvent.getQuestionList());
                         eventTitle.setText(myEvent.getEventTitle());
                         numOfQuestions.setText(Integer.toString(myEvent.getNumberOfQuestions()));
@@ -99,13 +139,10 @@ public class EventDetailsFragment extends Fragment {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
 
         return view;
     }

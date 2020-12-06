@@ -15,8 +15,10 @@
             android:id="@+id/bt_viewAnswers"
             android:layout_alignParentBottom="true"
             android:layout_margin="10dp"
-            android:text="View Answers">
+            android:text="@string/viewAnswers"
+            android:visibility="invisible">
         </Button>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

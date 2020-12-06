@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Answer {
 
-    String answerURLS;
+    List<String> answerURLS = new ArrayList<>();
     String questionID;
     String userSubmitted;
     String eventLink;
@@ -21,18 +21,18 @@ public class Answer {
         //required empty constructor
     }
 
-    public Answer(String answerURLS, String questionID, String userSubmitted, String eventLink) {
+    public Answer(List<String> answerURLS, String questionID, String userSubmitted, String eventLink) {
         this.answerURLS = answerURLS;
         this.questionID = questionID;
         this.userSubmitted = userSubmitted;
         this.eventLink = eventLink;
     }
 
-    public String getAnswerURLS() {
+    public List<String> getAnswerURLS() {
         return answerURLS;
     }
 
-    public void setAnswerURLS(String answerURLS) {
+    public void setAnswerURLS(List<String> answerURLS) {
         this.answerURLS = answerURLS;
     }
 

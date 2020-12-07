@@ -11,23 +11,52 @@ import java.util.List;
 
 public class Answer {
 
-    //saved answer inputs
-    //image link
-    String shortAnswerInput;
-    char multipleChoiceInput;
+    List<String> answerURLS = new ArrayList<>();
+    String questionID;
+    String userSubmitted;
+    String eventLink;
 
-    //grading data
-    boolean finishedGrading;
-    int mark;
 
     public Answer() {
         //required empty constructor
     }
 
-    public Answer(char input) { this.multipleChoiceInput = input; }
+    public Answer(List<String> answerURLS, String questionID, String userSubmitted, String eventLink) {
+        this.answerURLS = answerURLS;
+        this.questionID = questionID;
+        this.userSubmitted = userSubmitted;
+        this.eventLink = eventLink;
+    }
 
-    public Answer(String input) { this.shortAnswerInput = input; }
+    public List<String> getAnswerURLS() {
+        return answerURLS;
+    }
 
-    //public Answer(picture link input) { this.multipleChoiceInput = input; }
+    public void setAnswerURLS(List<String> answerURLS) {
+        this.answerURLS = answerURLS;
+    }
 
+    public String getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
+    }
+
+    public String getUserSubmitted() {
+        return userSubmitted;
+    }
+
+    public void setUserSubmitted(String userSubmitted) {
+        this.userSubmitted = userSubmitted;
+    }
+
+    public String getEventLink() {
+        return eventLink;
+    }
+
+    public void setEventLink(String eventLink) {
+        this.eventLink = eventLink;
+    }
 }

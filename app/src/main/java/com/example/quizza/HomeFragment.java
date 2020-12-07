@@ -55,8 +55,10 @@ import com.google.firebase.database.ValueEventListener;
 import org.xml.sax.DTDHandler;
 
 import java.security.CryptoPrimitive;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
@@ -88,6 +90,7 @@ public class HomeFragment extends Fragment {
     RelativeLayout dashboard;
 
     User currentUser;
+    RecyclerView recyclerView;
     List<String> enrolledCourses = new ArrayList<>();
     List<String> createdCourses = new ArrayList<>();
 
@@ -116,6 +119,8 @@ public class HomeFragment extends Fragment {
 
     List<String> classList = new ArrayList<>();
     List<String> eventList = new ArrayList<>();
+    Event myEvent;
+
 
     LinkingInterface mInterface = new LinkingInterface() {
         @Override
@@ -138,32 +143,10 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
         bt_joinedCourses = (Button)view.findViewById(R.id.bt_joinedCourses);
         bt_createdCourses = (Button)view.findViewById(R.id.bt_createdCourses);
-        classRoom = (LinearLayout) view.findViewById(R.id.classRoom);
-        classRoom1 = (LinearLayout) view.findViewById(R.id.parentLinearLayout_activity_classroom);
-        dashboard = (RelativeLayout) view.findViewById(R.id.coursesView);
-
         context = getContext();
-        GridLayout_classroom = (GridLayout)view.findViewById(R.id.gridLayout_activity_classroom);
-        GridLayout_home = (GridLayout)view.findViewById(R.id.gridLayout_activity_home);
-
-        eventCreationView = (RelativeLayout) view.findViewById(R.id.eventCreationView);
-        startDateView = (CardView) view.findViewById(R.id.startDateCardView);
-        startTimeView = (CardView) view.findViewById(R.id.startTimeCardView);
-        endDateView = (CardView) view.findViewById(R.id.endDateCardView);
-        endTimeView = (CardView) view.findViewById(R.id.endTimeCardView);
-        startDateText = (TextView) view.findViewById(R.id.tv_startDate);
-        endDateText = (TextView) view.findViewById(R.id.tv_endDate);
-        startTimeText = (TextView) view.findViewById(R.id.tv_startTime);
-        endTimeText = (TextView) view.findViewById(R.id.tv_endTime);
-        numberOfQuestions = (EditText) view.findViewById(R.id.et_numberOfQuestion);
-        classLinkedEvent = (EditText) view.findViewById(R.id.et_classLinked);
-        startDateButton = (Button) view.findViewById(R.id.startDateButton);
-        startTimeButton = (Button) view.findViewById(R.id.startTimeButton);
-        endDateButton = (Button) view.findViewById(R.id.endDateButton);
-        endTimeButton = (Button) view.findViewById(R.id.endTimeButton);
-        saveEventButton = (Button) view.findViewById(R.id.saveEventButton);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -174,12 +157,14 @@ public class HomeFragment extends Fragment {
                 for(DataSnapshot item_snapshot : snapshot.getChildren()){
                         if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                             currentUser = item_snapshot.getValue(User.class);
-                            enrolledCourses = currentUser.getEnrolledCourses();
+                            //AddAll was added
+                            enrolledCourses.addAll(currentUser.getEnrolledCourses());
                             createdCourses.addAll(currentUser.getCreatedCourses());
                             Log.d("keyVlue", enrolledCourses.toString());
+                            eventList.clear();
+                            classList.clear();
                             //createdCourses = currentUser.getCreatedCourses();
                             classList.addAll(enrolledCourses);
-                            classList.addAll(createdCourses);
                             for(String className : classList){
                                 FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -187,7 +172,6 @@ public class HomeFragment extends Fragment {
                                         for(DataSnapshot itemSnap : snapshot.getChildren()){
                                             if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
                                                 eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
-                                                Log.d("SizeFirebse", Integer.toString(eventList.size()));
                                             }
                                         }
                                     }
@@ -227,8 +211,9 @@ public class HomeFragment extends Fragment {
                                 currentUser = item_snapshot.getValue(User.class);
                                 enrolledCourses = currentUser.getEnrolledCourses();
                                 classList.clear();
+                                eventList.clear();
                                 classList.addAll(enrolledCourses);
-                                for(String className : enrolledCourses){
+                                for(String className : classList){
                                     FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -246,7 +231,7 @@ public class HomeFragment extends Fragment {
                                     });
                                 }
                                 Log.d("size in Home View", Integer.toString(eventList.size()));
-                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
+                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, mInterface);
                                 //recyclerView.setHasFixedSize(true);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -271,10 +256,10 @@ public class HomeFragment extends Fragment {
                             if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 currentUser = item_snapshot.getValue(User.class);
                                 createdCourses = currentUser.getCreatedCourses();
-
+                                eventList.clear();
                                 classList.clear();
                                 classList.addAll(createdCourses);
-                                for(String className : enrolledCourses){
+                                for(String className : classList){
                                     FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -291,8 +276,7 @@ public class HomeFragment extends Fragment {
                                         }
                                     });
                                 }
-                                Log.d("size in Home View", Integer.toString(eventList.size()));
-                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
+                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, mInterface);
                                 //recyclerView.setHasFixedSize(true);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

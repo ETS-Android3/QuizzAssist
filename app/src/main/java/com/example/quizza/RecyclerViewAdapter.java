@@ -25,13 +25,12 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private List<String> classesList = new ArrayList<>();
-    private List<String> eventList = new ArrayList<>();
+//    private List<String> eventList = new ArrayList<>();
     Context mContext;
     private LinkingInterface anInterface;
 
-    public RecyclerViewAdapter(Context mContext, List<String> classesList, List<String> eventList, LinkingInterface mInterface) {
+    public RecyclerViewAdapter(Context mContext, List<String> classesList, LinkingInterface mInterface) {
         this.classesList = classesList;
-        this.eventList = eventList;
         this.mContext = mContext;
         this.anInterface = mInterface;
     }
@@ -46,14 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("tag", "onbindViewHolder: called.");
         holder.courseTitle.setText(classesList.get(position));
-        Log.d("size in recycler View", Integer.toString(eventList.size()));
-        if((eventList.size()-1) == 1){
-            holder.eventNumber.setText("" + (eventList.size()-1) + " event !");
-        } else {
-            holder.eventNumber.setText("" + (eventList.size()-1) + " events !");
-        }
         holder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,13 +69,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView courseTitle;
         RelativeLayout parent_layout;
         CardView myCardView;
-        TextView eventNumber;
+//        TextView eventNumber;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             courseTitle = itemView.findViewById(R.id.CourseTitle);
             parent_layout = itemView.findViewById(R.id.parent_layout);
-            eventNumber = itemView.findViewById(R.id.tv_eventNumber);
+//            eventNumber = itemView.findViewById(R.id.tv_eventNumber);
             myCardView = itemView.findViewById(R.id.classCardView);
 
         }

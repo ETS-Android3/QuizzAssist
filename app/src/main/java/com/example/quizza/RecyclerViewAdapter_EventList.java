@@ -53,20 +53,23 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
         FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot itemSnap : snapshot.getChildren()){
-                    if(itemSnap.getKey().equals(eventList.get(position))){
+                for (DataSnapshot itemSnap : snapshot.getChildren()) {
+                    if (itemSnap.getKey().equals(eventList.get(position))) {
                         Event myEvent = itemSnap.getValue(Event.class);
                         holder.EventListTitle.setText(myEvent.getEventTitle());
+                        if(!(myEvent.getEventStarted())){
+                            holder.EventParentLayout.setClickable(false);
+                        }
+                        else {
+                            holder.EventParentLayout.setClickable(true);
+                        }
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
         holder.EventParentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +79,6 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
                 mInterface.sendData(eventList.get(position));
                 //Navigate to Questions list and Whiteboard
                 //myActivity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, eventDetailsFragment).addToBackStack(null).commit();
-
             }
         });
     }

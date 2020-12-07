@@ -71,7 +71,6 @@ public class CreateQuestionFragment extends Fragment {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -85,7 +84,6 @@ public class CreateQuestionFragment extends Fragment {
                 createdCourses = new ArrayList<>(currentUser.getCreatedCourses());
             }
         }
-        Log.d("createdCourses", createdCourses.toString());
 
         createQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +101,7 @@ public class CreateQuestionFragment extends Fragment {
 
                 }
                 else {
-                    Question myQuestion = new Question(questionTitleInput, question, courseLink, currentUser.getUserName());
+                    Question myQuestion = new Question(questionTitleInput, question, courseLink, currentUser.getUserName(), eventTitle);
                     DatabaseReference yReference = FirebaseDatabase.getInstance().getReference("Questions").push();
                     String myQuestionID = yReference.getKey();
                     yReference.setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -126,6 +124,7 @@ public class CreateQuestionFragment extends Fragment {
                                                 questionIDs.add(myQuestionID);
                                                 myQuestion.setEnrolledUsers(nCourse.getEnrolledUsers());
                                                 nCourse.setQuestionList(new ArrayList<>(questionIDs));
+
                                                 FirebaseDatabase.getInstance().getReference("Courses/" + mySnapshot.getKey()).setValue(nCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -133,12 +132,14 @@ public class CreateQuestionFragment extends Fragment {
                                                         Toast.makeText(getActivity(), "Question Created and Linked!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
+
                                                 FirebaseDatabase.getInstance().getReference("Questions/"+ myQuestionID).setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         Toast.makeText(getActivity(), "Question Updated!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
+
                                                 FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {

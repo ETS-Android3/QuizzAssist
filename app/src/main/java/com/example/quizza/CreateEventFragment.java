@@ -29,9 +29,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class CreateEventFragment extends Fragment {
 
@@ -70,11 +73,6 @@ public class CreateEventFragment extends Fragment {
         // Required empty public constructor
     }
 
-    CreateEventFragment(String courseName){
-
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,6 +102,7 @@ public class CreateEventFragment extends Fragment {
             classLinkedEvent.setText(courseName);
         }
 
+        //Material Date Picker for Start Date
         startDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +120,7 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
+        //Material Time Picker for Start Time
         startTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +142,7 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
+        //Material Time Picker for End Time
         endTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,6 +164,7 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
+        //Material Date Picker for End Date
         endDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,7 +182,7 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
-
+        //Atfer pressing the save question button
         saveEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,6 +212,14 @@ public class CreateEventFragment extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(getActivity(), "ALL GOOD!", Toast.LENGTH_LONG).show();
+//                                                for(int c = 0; c < myEvent.getNumberOfQuestions(); c++){
+//                                                    CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
+//                                                    FragmentManager manager = getFragmentManager();
+//                                                    Bundle mBundle = new Bundle();
+//                                                    mBundle.putString("eventTitle", myEvent.getEventTitle());
+//                                                    createQuestionFragment.setArguments(mBundle);
+//                                                    manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
+//                                                }
                                                 HomeFragment homeFragment = new HomeFragment();
                                                 FragmentManager manager = getFragmentManager();
                                                 manager.beginTransaction().replace(R.id.flFragment, homeFragment).addToBackStack(null).commit();

@@ -8,13 +8,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,11 +34,13 @@ public class EventDetailsFragment extends Fragment {
     Button viewAnswers;
     RecyclerView questionListView;
     User myUser;
-    Course myCourse;
-    Event myEvent;
 
 
     List<String> questionList = new ArrayList<>();
+    List<String> questionTitleList = new ArrayList<>();
+    Event myEvent;
+    Course myCourse;
+    Question objQuestion;
 
     String eventName;
     String courseName;
@@ -103,13 +106,22 @@ public class EventDetailsFragment extends Fragment {
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
-                FragmentManager manager = getFragmentManager();
-                Bundle zBundle = new Bundle();
-                zBundle.putString("eventName", eventName);
-                zBundle.putString("courseName", courseName);
-                createQuestionFragment.setArguments(zBundle);
-                manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
+                if(questionList.size() > myEvent.getNumberOfQuestions() + 1) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+                    builder.setTitle("Question Limit Reached");
+                    builder.setMessage("You have created the Maximum Number of Questions in this Event !");
+                    builder.setIcon(R.drawable.icon_error);
+                    builder.show();
+//                    Toast.makeText(getActivity(), "Cant generate more Questions", Toast.LENGTH_SHORT).show();
+                } else {
+                    CreateQuestionFragment createQuestionFragment = new CreateQuestionFragment();
+                    FragmentManager manager = getFragmentManager();
+                    Bundle zBundle = new Bundle();
+                    zBundle.putString("eventName", eventName);
+                    zBundle.putString("courseName", courseName);
+                    createQuestionFragment.setArguments(zBundle);
+                    manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
+                }
             }
         });
 
@@ -133,13 +145,30 @@ public class EventDetailsFragment extends Fragment {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
                     if(itemSnap.getKey().equals(eventName)){
                         myEvent = itemSnap.getValue(Event.class);
+                        questionList.clear();
                         questionList.addAll(myEvent.getQuestionList());
                         eventTitle.setText(myEvent.getEventTitle());
                         numOfQuestions.setText(Integer.toString(myEvent.getNumberOfQuestions()));
-                        QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionList, eventName, courseName);
+                        /*QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionList, eventName, courseName);
                         questionListView.setAdapter(adapter);
                         questionListView.setHasFixedSize(true);
-                        questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));*/
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    if(itemSnap.getValue(User.class).getCreatedCourses().contains(myCourse.getCourseName())){
+                        FAB.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -147,6 +176,33 @@ public class EventDetailsFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+        //Passing the question List to the Recycler View adapter to show on the UI
+        FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    for (String myQuestion : questionList){
+                        if(itemSnap.getKey().equals(myQuestion)){
+                            objQuestion = itemSnap.getValue(Question.class);
+                            if(objQuestion.getEventLink().equals(eventName)){
+                                questionTitleList.add(objQuestion.getQuestionTitle());
+                            }
+                            QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionTitleList);
+                            questionListView.setAdapter(adapter);
+                            questionListView.setHasFixedSize(true);
+                            questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         return view;
     }

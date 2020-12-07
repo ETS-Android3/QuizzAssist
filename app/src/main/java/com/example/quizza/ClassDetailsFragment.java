@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,9 +36,10 @@ public class ClassDetailsFragment extends Fragment {
     TextView courseTitle;
     TextView courseInviteCode;
     Context mContext;
-    FloatingActionButton createEvent;
+    FloatingActionButton FABcreateEvent;
     String courseName;
     Course currentCourse;
+    User currentUser;
 
     LinkingInterface mInterface = new LinkingInterface() {
         @Override
@@ -69,8 +71,8 @@ public class ClassDetailsFragment extends Fragment {
         courseTitle = (TextView) view.findViewById(R.id.tv_courseTitleDetailsPage);
         courseInviteCode = (TextView) view.findViewById(R.id.tv_inviteCodeDetailsPage);
         classDetailsView = (RecyclerView) view.findViewById(R.id.classDetailsRecyclerView);
-        createEvent = (FloatingActionButton) view.findViewById(R.id.bt_createEvent);
-
+        FABcreateEvent = (FloatingActionButton) view.findViewById(R.id.FAB_createEvent);
+        eventList.clear();
         //!TODO: implement a list View of all the events in the class using eventList and also show Course invite code here
         //!TODO: implement a Recycler View adapter for the event list !
         Bundle bundle = this.getArguments();
@@ -78,13 +80,33 @@ public class ClassDetailsFragment extends Fragment {
             courseName = bundle.getString("courseName");
         }
 
+        //Getting Current User from Database
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    if(itemSnap.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        currentUser = itemSnap.getValue(User.class);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("Courses");
         mReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot item_snap : snapshot.getChildren()){
                     if(item_snap.getValue(Course.class).getCourseName().equals(courseName)){
+                        eventList.clear();
                         currentCourse = item_snap.getValue(Course.class);
+                        if(currentUser.getCreatedCourses().contains(currentCourse.getCourseName())){
+                            FABcreateEvent.setVisibility(View.VISIBLE);
+                        }
                         courseTitle.setText(currentCourse.getCourseName());
                         courseInviteCode.setText(currentCourse.getInviteCode());
                         courseInviteCode.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +117,6 @@ public class ClassDetailsFragment extends Fragment {
                         });
                         eventList.addAll(currentCourse.getEventLinkID());
                         eventList.remove(0);
-                        Log.d("key", eventList.toString());
                         RecyclerViewAdapter_EventList adapterEventList = new RecyclerViewAdapter_EventList(getActivity(), eventList, mInterface);
                         classDetailsView.setAdapter(adapterEventList);
                         classDetailsView.setHasFixedSize(true);
@@ -110,7 +131,7 @@ public class ClassDetailsFragment extends Fragment {
             }
         });
 
-        createEvent.setOnClickListener(new View.OnClickListener() {
+        FABcreateEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CreateEventFragment createEventFragment = new CreateEventFragment();

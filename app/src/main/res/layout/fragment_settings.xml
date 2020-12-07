@@ -84,22 +84,26 @@
             android:layout_margin="10dp"
             android:textColor="@color/black"
             android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/bt_switchlanguage"
             style="@style/Buttons"
-            android:layout_below="@id/tv_userStudentNumber"
+            android:layout_below="@id/bt_editProfile"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="-74dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:text="@string/switch_language" />
 
         <Button
             android:id="@+id/bt_editProfile"
             style="@style/Buttons"
             android:layout_below="@id/tv_userStudentNumber"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/editUserInfoButtonText"
             android:layout_centerHorizontal="true"
             />
@@ -107,8 +111,7 @@
         <Button
             android:id="@+id/bt_logoutButton"
             style="@style/Buttons"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/bt_editProfile"
+            android:layout_below="@+id/bt_switchlanguage"
             android:text="@string/logOutButtonText"
             android:layout_centerHorizontal="true"/>
 

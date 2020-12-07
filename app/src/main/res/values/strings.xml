@@ -118,8 +118,6 @@
 
     <!-- WhiteBoard Activity Portion -->
     <string name="confirmClearingWhiteboard">CONFIRM CLEARING WHITEBOARD</string>
-    <string name="yes">YES</string>
-    <string name="no">NO</string>
     <string name="exampleQuestion">EXAMPLE QUESTION GOING BEYOND THE POWER 9000 TO CHECK</string>
     <string name="confirmSubmission">DO YOU WANT TO SUBMIT YOUR PHOTO?</string>
 

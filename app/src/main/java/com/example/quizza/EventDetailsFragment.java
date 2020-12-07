@@ -92,6 +92,9 @@ public class EventDetailsFragment extends Fragment {
                         if(myCourse.getCourseOwner().equals(myUser.getUserName())){
                             viewAnswers.setVisibility(View.VISIBLE);
                         }
+                        if(myCourse.getCourseOwner().equals(myUser.getUserName())){
+                            FAB.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
@@ -125,19 +128,7 @@ public class EventDetailsFragment extends Fragment {
             }
         });
 
-        viewAnswers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ViewAnswersFragment viewAnswersFragment = new ViewAnswersFragment();
-                FragmentManager manager = getFragmentManager();
-                Bundle zBundle = new Bundle();
-                zBundle.putString("eventName", eventName);
-                zBundle.putString("courseName", courseName);
-                zBundle.putStringArrayList("questionsList", (ArrayList<String>) questionList);
-                viewAnswersFragment.setArguments(zBundle);
-                manager.beginTransaction().replace(R.id.flFragment, viewAnswersFragment).addToBackStack(null).commit();
-            }
-        });
+
 
         FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -163,10 +154,6 @@ public class EventDetailsFragment extends Fragment {
             }
         });
 
-        if(myCourse.getCourseOwner().equals(myUser.getUserName())){
-            FAB.setVisibility(View.VISIBLE);
-        }
-
         //Passing the question List to the Recycler View adapter to show on the UI
         FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -190,6 +177,20 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        viewAnswers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewAnswersFragment viewAnswersFragment = new ViewAnswersFragment();
+                FragmentManager manager = getFragmentManager();
+                Bundle zBundle = new Bundle();
+                zBundle.putString("eventName", eventName);
+                zBundle.putString("courseName", courseName);
+                zBundle.putStringArrayList("questionsList", (ArrayList<String>) questionList);
+                viewAnswersFragment.setArguments(zBundle);
+                manager.beginTransaction().replace(R.id.flFragment, viewAnswersFragment).addToBackStack(null).commit();
             }
         });
 

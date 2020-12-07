@@ -66,7 +66,9 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap : snapshot.getChildren()){
+                    Log.d("fuck", snap.getKey());
                     if(snap.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        Log.d("fuck", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         myUser = snap.getValue(User.class);
                     }
                 }
@@ -81,8 +83,12 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap : snapshot.getChildren()){
+                    Log.d("fuck", snap.getKey());
                     if(snap.getValue(Course.class).getCourseName().equals(courseName)){
                         myCourse = snap.getValue(Course.class);
+                        if(myCourse.getCourseOwner().equals(myUser.getUserName())){
+                            viewAnswers.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
@@ -93,9 +99,6 @@ public class EventDetailsFragment extends Fragment {
             }
         });
 
-        if(myCourse.getCourseOwner().equals(myUser.getUserName())){
-            viewAnswers.setVisibility(View.VISIBLE);
-        }
 
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +107,7 @@ public class EventDetailsFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 Bundle zBundle = new Bundle();
                 zBundle.putString("eventName", eventName);
+                zBundle.putString("courseName", courseName);
                 createQuestionFragment.setArguments(zBundle);
                 manager.beginTransaction().replace(R.id.flFragment, createQuestionFragment).addToBackStack(null).commit();
             }

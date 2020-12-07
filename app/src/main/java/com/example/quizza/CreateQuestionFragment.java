@@ -32,7 +32,6 @@ public class CreateQuestionFragment extends Fragment {
 
     RelativeLayout createQuestionView;
     EditText questionString;
-    EditText classLinked;
     EditText questionTitle;
     Button createQuestionButton;
     List<String> createdCourses = new ArrayList<>();
@@ -40,6 +39,7 @@ public class CreateQuestionFragment extends Fragment {
     String questionTitleInput;
     User currentUser;
     String eventTitle;
+    String courseName;
     Event currentEvent;
 
     public CreateQuestionFragment() {
@@ -52,13 +52,13 @@ public class CreateQuestionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_question, container, false);
         questionString = (EditText) view.findViewById(R.id.tv_questionToAdd);
-        classLinked = (EditText) view.findViewById(R.id.tv_courseLinked);
         createQuestionView = (RelativeLayout) view.findViewById(R.id.createQuestion);
         createQuestionButton = (Button) view.findViewById(R.id.createQuestionButton);
         questionTitle = (EditText) view.findViewById(R.id.tv_questionTitle);
 
         Bundle jBundle = this.getArguments();
         eventTitle = jBundle.getString("eventName");
+        courseName = jBundle.getString("courseName");
         Log.d("logvalue", eventTitle);
 
         FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -91,16 +91,16 @@ public class CreateQuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String question = questionString.getText().toString();
-                String courseLink = classLinked.getText().toString();
+                String courseLink = courseName;
                 questionTitleInput = questionTitle.getText().toString();
                 if(question.isEmpty()){
                     questionString.setError("Empty Question string");
                 }
                 else if (courseLink.isEmpty()){
-                    classLinked.setError("Please Input a Non empty class");
+
                 }
                 else if (!(createdCourses.contains(courseLink))){
-                    classLinked.setError("Please Input a valid created Course");
+
                 }
                 else {
                     Question myQuestion = new Question(questionTitleInput, question, courseLink, currentUser.getUserName());

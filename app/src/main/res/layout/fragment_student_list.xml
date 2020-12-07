@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+tools:context=".ViewAnswersFragment"
+android:background="@color/teal_700">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_studentListBack"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="Back"
+        android:visibility="invisible">
+    </Button>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:padding="30dp"
+        app:cardElevation="10dp"
+        android:id="@+id/eventTitleAnswersHeader">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Students"
+                android:textSize="25sp"
+                android:id="@+id/tv_studentsList"
+                android:layout_alignParentLeft="true"/>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventTitleAnswersHeader"
+        android:layout_margin="5dp"
+        android:id="@+id/studentListView"/>
+</RelativeLayout>
+
+</FrameLayout>

@@ -136,4 +136,6 @@
     <string name="course_1">Course 1</string>
     <string name="event_title">Event title</string>
 
+    <string name="viewAnswers">View Answers</string>
+
 </resources>

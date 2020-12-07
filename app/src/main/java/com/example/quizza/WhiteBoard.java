@@ -40,6 +40,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -61,17 +62,24 @@ import java.util.Iterator;
 
 public class WhiteBoard extends Activity {
 
-    private MyView WhiteBoard;
     private ImageView imageView;
+    Question myQuestion;
+    Course myCourse;
+    Event myEvent;
+    String questionKey;
+
 
     private StorageReference mStorageRef;
-    private Uri filePath;
 
     //whiteboard
     private static int SCREEN_W;
     private static int SCREEN_H;
     private static int Pen = 1;
     private static int Eraser = 2;
+
+    String courseName;
+    String eventName;
+    String questionTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,16 +111,18 @@ public class WhiteBoard extends Activity {
         final MyView myView = new MyView(this);
         container.addView(myView);
 
-        ArrayList<String> questionList = getIntent().getStringArrayListExtra("questions");
-        String questionTitle = getIntent().getStringExtra("questionTitle");
+        questionTitle = getIntent().getStringExtra("questionTitle");
+        eventName = getIntent().getStringExtra("eventName");
+        courseName = getIntent().getStringExtra("courseName");
 
         FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
                     Log.d("POOP1", itemSnap.getKey());
+                    questionKey = itemSnap.getKey();
                     if (itemSnap.getKey().equals(questionTitle)) {
-                        Question myQuestion = itemSnap.getValue(Question.class);
+                        myQuestion = itemSnap.getValue(Question.class);
                         tv_question.setText(myQuestion.getQuestionText());
                     }
                 }
@@ -123,6 +133,49 @@ public class WhiteBoard extends Activity {
 
             }
         });
+
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    if(itemSnap.getValue(Course.class).getCourseName().equals(myQuestion.getCourseLink())){
+                        myCourse = itemSnap.getValue(Course.class);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                    if(itemSnap.getValue(Event.class).getQuestionList().contains(questionKey)){
+                        myEvent = itemSnap.getValue(Event.class);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
         im_menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +183,6 @@ public class WhiteBoard extends Activity {
                 ll_menuList.setVisibility(View.VISIBLE);
             }
         });
-
         bt_pen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,21 +228,21 @@ public class WhiteBoard extends Activity {
                 im_menuIcon.setVisibility(View.VISIBLE);
             }
         });
-      bt_submit.setOnClickListener(new View.OnClickListener() {
+        bt_submit.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-                myView.save();
                 ll_menuList.setVisibility(View.INVISIBLE);
+                myView.save(myCourse, myEvent);
                 im_menuIcon.setVisibility(View.VISIBLE);
           }
       });
-      bt_back.setOnClickListener(new View.OnClickListener() {
+        bt_back.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               finish();
           }
       });
-      bt_warningYes.setOnClickListener(new View.OnClickListener() {
+        bt_warningYes.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               myView.clear();
@@ -198,7 +250,7 @@ public class WhiteBoard extends Activity {
               im_menuIcon.setVisibility(View.VISIBLE);
           }
       });
-      bt_warningNo.setOnClickListener(new View.OnClickListener() {
+        bt_warningNo.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               ll_clearWarning.setVisibility(View.INVISIBLE);
@@ -330,7 +382,7 @@ public class WhiteBoard extends Activity {
             savePath.clear();
             deletePath.clear();
         }
-        public void save()
+        public void save(Course myCourse, Event myEvent)
         {
             Bitmap b = ScreenShot.takescreenshotOfRootView(imageView);
 
@@ -340,7 +392,7 @@ public class WhiteBoard extends Activity {
             try {
                 File file = new File(getExternalFilesDir(null), "BigPP" + counter + ".png");
                 Uri myUri = Uri.fromFile(file);
-                StorageReference riversRef = mStorageRef.child("BigPP" + counter + ".png");
+                StorageReference riversRef = mStorageRef.child(courseName + "/" + eventName + "/" + questionTitle + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + ".png");
                 riversRef.putFile(myUri);
                 if (!file.exists())
                     file.createNewFile();
@@ -352,6 +404,7 @@ public class WhiteBoard extends Activity {
                     e.printStackTrace();
                 }
             } catch(Exception e){
+
             }
 /*           if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
                Toast.makeText(this.getContext(),"No Write External Storage Permission",Toast.LENGTH_LONG).show();

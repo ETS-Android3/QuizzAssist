@@ -45,6 +45,7 @@ public class ClassDetailsFragment extends Fragment {
             EventDetailsFragment eventDetailsFragment = new EventDetailsFragment();
             Bundle mBundle = new Bundle();
             mBundle.putString("keyValue", value);
+            mBundle.putString("courseName", courseName);
             eventDetailsFragment.setArguments(mBundle);
             FragmentManager manager = getFragmentManager();
             manager.beginTransaction().replace(R.id.flFragment, eventDetailsFragment).addToBackStack(null).commit();

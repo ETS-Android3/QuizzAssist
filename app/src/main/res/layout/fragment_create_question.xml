@@ -72,6 +72,7 @@
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/icon_class"
             app:boxBackgroundMode="outline"
+            android:visibility="invisible"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText

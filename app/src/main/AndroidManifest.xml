@@ -16,6 +16,7 @@
         <activity android:name=".SignUpPage"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".WhiteBoard"/>
+        <activity android:name=".ViewPNGAnswers"/>
         <activity android:name=".LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -38,27 +38,32 @@
             android:layout_below="@+id/headerSectionHome"
             android:layout_centerHorizontal="true"
             android:id="@+id/headerJoinedCreatedButtons">
-            <Button
-                android:id="@+id/bt_joinedCourses"
-                style="@style/Buttons"
-                android:layout_width="190dp"
-                android:layout_height="41dp"
-                android:background="@drawable/btn_bg"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="@string/joinedCourses"
-                android:textSize="13sp" />
-            <Button
-                android:id="@+id/bt_createdCourses"
-                style="@style/Buttons"
-                android:layout_width="190dp"
-                android:layout_height="41dp"
-                android:layout_toRightOf="@id/bt_joinedCourses"
-                android:background="@drawable/btn_bg"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="@string/createdCourses"
-                android:textSize="13sp"/>
+
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabTextColor="@color/black"
+                android:layout_margin="10dp"
+                android:id="@+id/tabLayout"
+                app:tabBackground="@color/appBackground">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/itemJoinedCourses"
+                    android:text="@string/joinedCourses"
+                    android:icon="@drawable/icon_class"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/itemCreatedCourses"
+                    android:text="@string/createdCourses"
+                    android:icon="@drawable/icon_class"/>
+
+            </com.google.android.material.tabs.TabLayout>
+
+
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView

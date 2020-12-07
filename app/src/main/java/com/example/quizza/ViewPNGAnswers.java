@@ -1,10 +1,8 @@
 package com.example.quizza;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +11,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -74,7 +71,6 @@ public class ViewPNGAnswers extends Activity {
                             public void onSuccess(Uri uri) {
                                 Log.d("success", "penbuis");
                                 Picasso.get().load(uri).into(studentAnswerPNG);
-
                             }
                         });
                     }

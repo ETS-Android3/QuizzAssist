@@ -10,8 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -29,7 +35,10 @@ public class ViewPNGAnswers extends Activity {
     private String courseName;
     private String eventName;
     private String questionTitle;
+    private String questionUID;
     private String studentUID;
+
+    private Question myQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,13 +55,40 @@ public class ViewPNGAnswers extends Activity {
         studentUID = getIntent().getStringExtra("studentUID");
 
         OutputStream fOut = null;
-        Log.d("cc", courseName);
-        Log.d("cc", eventName);
-        Log.d("cc", questionTitle);
-        Log.d("cc", studentUID);
-        StorageReference riversRef = mStorageRef.child(courseName + "/" + eventName + "/" + questionTitle + "/" + studentUID + ".png");
-        Log.d("question", questionTitle);
-        mStorageRef.child(courseName + "/" + eventName + "/" + questionTitle + "/" + studentUID + ".png").
+        Log.d("cccourseName", courseName);
+        Log.d("cceventName", eventName);
+        Log.d("ccquestionTitle", questionTitle);
+        Log.d("ccstudentUID", studentUID);
+
+        FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap: snapshot.getChildren()){
+                    //Log.d("cc", snap.getValue(Question.class).getQuestionText());
+                    if(snap.getValue(Question.class).getQuestionTitle().equals(questionTitle)){
+                        myQuestion = snap.getValue(Question.class);
+                        questionUID = snap.getKey();
+                        mStorageRef.child(courseName + "/" + eventName + "/" + questionUID + "/" + studentUID + ".png").
+                                getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Log.d("success", "penbuis");
+                                Picasso.get().load(uri).into(studentAnswerPNG);
+
+                            }
+                        });
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+       /*Log.d("question", questionTitle);
+        Log.d("reference", courseName + "/" + eventName + "/" + questionUID + "/" + studentUID + ".png");
+        mStorageRef.child(courseName + "/" + eventName + "/" + questionUID + "/" + studentUID + ".png").
                 getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -60,7 +96,7 @@ public class ViewPNGAnswers extends Activity {
                 Picasso.get().load(uri).into(studentAnswerPNG);
 
             }
-        });
+        });*/
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

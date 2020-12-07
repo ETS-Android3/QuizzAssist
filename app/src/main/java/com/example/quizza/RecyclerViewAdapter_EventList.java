@@ -67,9 +67,7 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
         holder.EventParentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, eventList.get(position), Toast.LENGTH_SHORT).show();
-                EventDetailsFragment eventDetailsFragment = new EventDetailsFragment();
-                MainActivity myActivity = (MainActivity) mContext;
+                //Toast.makeText(mContext, eventList.get(position), Toast.LENGTH_SHORT).show();
                 mInterface.sendData(eventList.get(position));
                 //Navigate to Questions list and Whiteboard
                 //myActivity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, eventDetailsFragment).addToBackStack(null).commit();

@@ -119,9 +119,8 @@ public class WhiteBoard extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
-                    Log.d("POOP1", itemSnap.getKey());
-                    questionKey = itemSnap.getKey();
-                    if (itemSnap.getKey().equals(questionTitle)) {
+                    if (itemSnap.getValue(Question.class).getQuestionTitle().equals(questionTitle)) {
+                        questionKey = itemSnap.getKey();
                         myQuestion = itemSnap.getValue(Question.class);
                         tv_question.setText(myQuestion.getQuestionText());
                     }

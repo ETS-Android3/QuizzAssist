@@ -40,6 +40,7 @@ public class StudentListFragment extends Fragment {
     String eventName;
     String questionTitle;
     List<String> studentList = new ArrayList<String>();
+    List<String> studentNamesList = new ArrayList<String>();
 
     public StudentListFragment(){
         //Requires empty constructor
@@ -87,8 +88,9 @@ public class StudentListFragment extends Fragment {
                 for(DataSnapshot itemSnap: snapshot.getChildren()){
                     if(studentList.contains(itemSnap.getValue(User.class).getUserName())){
                         studentUID.add(itemSnap.getKey());
+                        studentNamesList.add(itemSnap.getValue(User.class).getUserName());
                         StudentListAdapter adapter = new StudentListAdapter(getActivity(),
-                                studentList, courseName, eventName, questionTitle,
+                                studentNamesList, courseName, eventName, questionTitle,
                                 studentUID );
                         studentsListView.setAdapter(adapter);
                         //studentsListView.setHasFixedSize(true);

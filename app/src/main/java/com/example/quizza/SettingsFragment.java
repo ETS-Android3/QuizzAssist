@@ -2,17 +2,21 @@ package com.example.quizza;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -44,7 +48,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.os.Environment.getExternalStoragePublicDirectory;
+
 public class SettingsFragment extends BottomSheetDialogFragment {
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     TextInputEditText userNameEditProfile;
     TextInputEditText userFirstNameEditProfile;
@@ -84,7 +92,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
     TextView userAvatarRemovePhoto;
     TextView userAvatarCancel;
 
-
+    String currentPhotoPath;
 
     public SettingsFragment() {}
 
@@ -121,8 +129,6 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
         userAvatarSettingsMenu = (LinearLayout) view.findViewById(R.id.linLayout_userAvatarSettingsMenu);
         sheetBehavior = BottomSheetBehavior.from(userAvatarSettingsMenu);
-
-        String currentPhotoPath;
 
         String userProfileUpdated = "User Profile Updated";
         String userProfileUpdateError = "User Profile Updated";
@@ -286,7 +292,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                         userAvatarTakePhoto.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-
+                                dispatchTakePictureIntent();
                             }
                         });
 
@@ -322,9 +328,30 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         return view;
     }
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createPhotoFile();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(getContext(), "com.example.quizza", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                getActivity().startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                Log.d("finished", "end of dispatch");
+            }
+        }
+    }
+
     public File createPhotoFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir =
+        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }

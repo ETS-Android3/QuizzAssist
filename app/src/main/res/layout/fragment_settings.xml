@@ -11,6 +11,7 @@
     <LinearLayout
         android:id="@+id/linLayout_userAvatarSettingsMenu"
         android:layout_width="300dp"
+        android:elevation="4dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
@@ -18,10 +19,6 @@
         android:background="@drawable/bottom_sheet_style"
         app:behavior_peekHeight="0dp"
         android:orientation="vertical">
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></ListView>
 
         <TextView
             android:id="@+id/tv_userAvatarTakePhoto"

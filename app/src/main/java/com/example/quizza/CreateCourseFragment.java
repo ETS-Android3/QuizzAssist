@@ -12,21 +12,17 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -128,8 +124,10 @@ public class CreateCourseFragment extends Fragment {
                                 if(item_snap.getValue(Course.class).getCourseName().equals(userInputCourseName)){
                                     et_userInputCourseName.setError(courseNameExistsError);
                                     return;
-                                } while (item_snap.getValue(Course.class).getInviteCode().equals(newCourse.getInviteCode())) {
-                                    newCourse.generateNewInviteCode();
+                                } else{
+                                    while (item_snap.getValue(Course.class).getInviteCode().equals(newCourse.getInviteCode())) {
+                                        newCourse.generateNewInviteCode();
+                                    }
                                 }
                             }
                             jReference.child("Courses").push().setValue(newCourse).addOnCompleteListener(new OnCompleteListener<Void>() {

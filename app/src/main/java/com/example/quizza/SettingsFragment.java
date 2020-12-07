@@ -338,6 +338,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             try {
                 File photoFile = new File(getActivity().getExternalFilesDir(null), "TEMP.png");
+                photoFile.mkdirs();
                 photoURI = FileProvider.getUriForFile(getContext(), "com.example.quizza.provider", photoFile);
                 Log.d("finished", "end of dispatch");
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photoURI);

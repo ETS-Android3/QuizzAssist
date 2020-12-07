@@ -45,6 +45,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,9 +69,9 @@ import java.util.Set;
 public class HomeFragment extends Fragment {
 
     Context context;
-    Button bt_addEvent;
-    Button bt_joinedCourses;
-    Button bt_createdCourses;
+//    Button bt_addEvent;
+//    Button bt_joinedCourses;
+//    Button bt_createdCourses;
 
     User currentUser;
     RecyclerView recyclerView;
@@ -81,6 +82,8 @@ public class HomeFragment extends Fragment {
     List<String> classList = new ArrayList<>();
     List<String> eventList = new ArrayList<>();
     Event myEvent;
+
+    TabLayout tabLayout;
 
 
     LinkingInterface mInterface = new LinkingInterface() {
@@ -104,11 +107,15 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
-        bt_joinedCourses = (Button)view.findViewById(R.id.bt_joinedCourses);
-        bt_createdCourses = (Button)view.findViewById(R.id.bt_createdCourses);
-        context = getContext();
+//        bt_addEvent = (Button)view.findViewById(R.id.bt_addEvent);
+//        bt_joinedCourses = (Button)view.findViewById(R.id.bt_joinedCourses);
+//        bt_createdCourses = (Button)view.findViewById(R.id.bt_createdCourses);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+        context = getContext();
+
+        String join = "Joined Courses";
+        String create = "Created Courses";
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -142,113 +149,114 @@ public class HomeFragment extends Fragment {
                                     }
                                 });
                             }
-                            /*for(String className: createdCourses){
-                                eventList.addAll(generateEventList(className));
-                            }*/
-                            Log.d("SizeBeforeCall", Integer.toString(eventList.size()));
-//                            RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, eventList, mInterface);
-//                            recyclerView.setHasFixedSize(true);
-//                            recyclerView.setAdapter(adapter);
-//                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-        bt_joinedCourses.setOnClickListener(new View.OnClickListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View v) {
-                recyclerView.removeAllViews();
-
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot item_snapshot : snapshot.getChildren()){
-                            if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                                currentUser = item_snapshot.getValue(User.class);
-                                enrolledCourses = currentUser.getEnrolledCourses();
-                                classList.clear();
-                                eventList.clear();
-                                classList.addAll(enrolledCourses);
-                                for(String className : classList){
-                                    FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            for(DataSnapshot itemSnap : snapshot.getChildren()){
-                                                if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
-                                                    eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getText().equals(join)){
+                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                                if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                    currentUser = item_snapshot.getValue(User.class);
+                                    enrolledCourses = currentUser.getEnrolledCourses();
+                                    classList.clear();
+                                    eventList.clear();
+                                    classList.addAll(enrolledCourses);
+                                    for(String className : classList){
+                                        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                                                    if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
+                                                        eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                        }
-                                    });
+                                            }
+                                        });
+                                    }
+                                    Log.d("size in Home View", Integer.toString(eventList.size()));
+                                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, mInterface);
+                                    //recyclerView.setHasFixedSize(true);
+                                    recyclerView.setAdapter(adapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                 }
-                                Log.d("size in Home View", Integer.toString(eventList.size()));
-                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, mInterface);
-                                //recyclerView.setHasFixedSize(true);
-                                recyclerView.setAdapter(adapter);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+
+                } else if (tab.getText().equals(create)){
+                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot item_snapshot : snapshot.getChildren()){
+                                if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                    currentUser = item_snapshot.getValue(User.class);
+                                    createdCourses = currentUser.getCreatedCourses();
+                                    eventList.clear();
+                                    classList.clear();
+                                    classList.addAll(createdCourses);
+                                    for(String className : classList){
+                                        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                for(DataSnapshot itemSnap : snapshot.getChildren()){
+                                                    if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
+                                                        eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
+                                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, mInterface);
+                                    //recyclerView.setHasFixedSize(true);
+                                    recyclerView.setAdapter(adapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
             }
-        });
 
-        bt_createdCourses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot item_snapshot : snapshot.getChildren()){
-                            if(item_snapshot.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                                currentUser = item_snapshot.getValue(User.class);
-                                createdCourses = currentUser.getCreatedCourses();
-                                eventList.clear();
-                                classList.clear();
-                                classList.addAll(createdCourses);
-                                for(String className : classList){
-                                    FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            for(DataSnapshot itemSnap : snapshot.getChildren()){
-                                                if (itemSnap.getValue(Course.class).getCourseName().equals(className)){
-                                                    eventList.addAll(itemSnap.getValue(Course.class).getEventLinkID());
-                                                }
-                                            }
-                                        }
+            public void onTabUnselected(TabLayout.Tab tab) {
+                recyclerView.removeAllViews();
+            }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                if(tab.getText().equals(join)){
 
-                                        }
-                                    });
-                                }
-                                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), classList, mInterface);
-                                //recyclerView.setHasFixedSize(true);
-                                recyclerView.setAdapter(adapter);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            }
-                        }
-                    }
+                } else if (tab.getText().equals(create)){
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
+                }
             }
         });
 

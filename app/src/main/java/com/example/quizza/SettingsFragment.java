@@ -1,20 +1,34 @@
 package com.example.quizza;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,11 +39,23 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SettingsFragment extends Fragment {
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static android.os.Environment.DIRECTORY_PICTURES;
+import static android.os.Environment.getExternalStorageDirectory;
+import static android.os.Environment.getExternalStoragePublicDirectory;
+
+public class SettingsFragment extends BottomSheetDialogFragment {
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     TextInputEditText userNameEditProfile;
     TextInputEditText userFirstNameEditProfile;
@@ -44,10 +70,14 @@ public class SettingsFragment extends Fragment {
 
     User currentUser;
 
+    LinearLayout userAvatarSettingsMenu;
+    BottomSheetBehavior sheetBehavior;
+
     FirebaseAuth myFirebaseAuthenticator;
     DatabaseReference myFirebaseReference;
 
     ImageView backToUserProfile;
+    ImageView changeUserAvatar;
 
     FirebaseAuth fAuth;
     DatabaseReference currentDatabaseReference;
@@ -60,6 +90,12 @@ public class SettingsFragment extends Fragment {
     TextView userEmailProfile;
     TextView userStudentNumberProfile;
 
+    TextView userAvatarTakePhoto;
+    TextView userAvatarChooseFromLibrary;
+    TextView userAvatarRemovePhoto;
+    TextView userAvatarCancel;
+
+    String currentPhotoPath;
 
     public SettingsFragment() {}
 
@@ -86,7 +122,16 @@ public class SettingsFragment extends Fragment {
         userEmailProfile = (TextView) view.findViewById(R.id.tv_userEmail);
         userStudentNumberProfile = (TextView) view.findViewById(R.id.tv_userStudentNumber);
 
+        userAvatarTakePhoto = (TextView) view.findViewById(R.id.tv_userAvatarTakePhoto);
+        userAvatarChooseFromLibrary = (TextView) view.findViewById(R.id.tv_userAvatarLibrary);
+        userAvatarRemovePhoto = (TextView) view.findViewById(R.id.tv_userAvatarRemove);
+        userAvatarCancel = (TextView) view.findViewById(R.id.tv_userAvatarCancel);
+
         backToUserProfile = (ImageView) view.findViewById(R.id.iv_backToUserProfile);
+        changeUserAvatar = (ImageView) view.findViewById(R.id.iv_changeUserAvatar);
+
+        userAvatarSettingsMenu = (LinearLayout) view.findViewById(R.id.linLayout_userAvatarSettingsMenu);
+        sheetBehavior = BottomSheetBehavior.from(userAvatarSettingsMenu);
 
         String userProfileUpdated = "User Profile Updated";
         String userProfileUpdateError = "User Profile Updated";
@@ -105,6 +150,7 @@ public class SettingsFragment extends Fragment {
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
         currentDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item_snapshot : snapshot.getChildren()) {
@@ -120,7 +166,7 @@ public class SettingsFragment extends Fragment {
 
 
                         //Set data visible for User Profile Page
-                        if (currentUserMiddleName != null)
+                        if (!currentUserMiddleName.isEmpty())
                             userFullNameProfile.setText(currentUserFirstName + " " + currentUserMiddleName
                                     + " " + currentUserLastName);
                         else
@@ -200,30 +246,24 @@ public class SettingsFragment extends Fragment {
                     currentUser.setUserEmail(userEmailString);
                     currentUser.setUserStudentNumber(userStudentNumberString);
 
-                    saveUserProfileChangesButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Log.d("middleName", userMiddleNameString);
-                            userProfileEditView.setVisibility(View.INVISIBLE);
-                            userProfileView.setVisibility(View.VISIBLE);
-                            FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance()
-                                    .getCurrentUser().getUid()).setValue(currentUser)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(getActivity(), userProfileUpdated,
-                                                        Toast.LENGTH_SHORT).show();
+                    userProfileEditView.setVisibility(View.INVISIBLE);
+                    userProfileView.setVisibility(View.VISIBLE);
+                    FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance()
+                            .getCurrentUser().getUid()).setValue(currentUser)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getActivity(), userProfileUpdated,
+                                                Toast.LENGTH_SHORT).show();
 
-                                            } else {
-                                                Toast.makeText(getActivity(), userProfileUpdateError,
-                                                        Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
+                                    } else {
+                                        Toast.makeText(getActivity(), userProfileUpdateError,
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                         }
-                    });
-                }
             }
         });
 
@@ -245,6 +285,77 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        changeUserAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                    @Override
+                    public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                        userAvatarTakePhoto.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dispatchTakePictureIntent();
+                            }
+                        });
+
+                        userAvatarChooseFromLibrary.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getContext(), "choose photo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        userAvatarRemovePhoto.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getContext(), "remove photo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        userAvatarCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getContext(), "cancel photo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+                    }
+                });
+            }
+        });
         return view;
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            File photoFile = null;
+            try {
+                photoFile = createPhotoFile();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(getContext(), "com.example.quizza.provider", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                getActivity().startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                Log.d("finished", "end of dispatch");
+            }
+        }
+        //goes here
+    }
+
+    public File createPhotoFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalStoragePublicDirectory(DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }

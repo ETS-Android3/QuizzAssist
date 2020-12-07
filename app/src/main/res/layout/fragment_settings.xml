@@ -1,10 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/settingsPage"
     style="@style/MatchParentHeightAndWidth"
     android:background="@color/appBackground"
     tools:context=".SettingsFragment">
+
+
+    <LinearLayout
+        android:id="@+id/linLayout_userAvatarSettingsMenu"
+        android:layout_width="300dp"
+        android:elevation="4dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_hideable="true"
+        android:background="@drawable/bottom_sheet_style"
+        app:behavior_peekHeight="0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_userAvatarTakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/GenericText"
+            android:layout_marginBottom="10dp"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:clickable="true"
+            android:text="@string/settings_userAvatarTakePhoto" />
+
+        <TextView
+            android:id="@+id/tv_userAvatarLibrary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            style="@style/GenericText"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:clickable="true"
+            android:text="@string/settings_userAvatarChooseFromLibrary" />
+
+        <TextView
+            android:id="@+id/tv_userAvatarRemove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/GenericText"
+            android:layout_marginBottom="10dp"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:clickable="true"
+            android:text="@string/settings_userAvatarRemoveCurrentPhoto" />
+
+        <TextView
+            android:id="@+id/tv_userAvatarCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/GenericText"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:clickable="true"
+            android:text="@string/settings_userAvatarCancel" />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rv_userSettings"
@@ -92,7 +151,7 @@
         android:id="@+id/rv_editUserSettingsPage"
         style="@style/MatchParentHeightAndWidth"
         android:layout_margin="20dp"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_backToUserProfile"
@@ -269,9 +328,9 @@
             android:id="@+id/bt_saveUserProfileChanges"
             style="@style/Buttons"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="570dp"
+            android:layout_marginTop="555dp"
             android:text="@string/settings_saveProfileChangesButtonText"/>
 
     </RelativeLayout>
 
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

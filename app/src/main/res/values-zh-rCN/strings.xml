@@ -111,7 +111,7 @@
     <string name="courseInviteCode">邀请码</string>
     <string name="createCourseTitle">创建课程标题</string>
     <!--    Undetermined Portion    -->11
-    <string name="needToImplement">Still implementing this feature</string>
+
     <string name="searchTitle">搜索课程</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- white board-->
@@ -126,5 +126,10 @@
     <string name="confirm_clearing_whiteboard">确认清除全部内容吗？</string>
     <string name="no">否</string>
     <string name="yes">是</string>
+    <string name="number_of_events_in_the_classroom">该教室中的事件数量</string>
+    <string name="course_1">课程 1</string>
+    <string name="event_title">事件标题</string>
+
+    <string name="viewAnswers">查看答案</string>
 
 </resources>

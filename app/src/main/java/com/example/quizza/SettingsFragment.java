@@ -352,8 +352,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
     public File createPhotoFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File storageDir = getExternalStorageDirectory();
+        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
         currentPhotoPath = image.getAbsolutePath();
         return image;

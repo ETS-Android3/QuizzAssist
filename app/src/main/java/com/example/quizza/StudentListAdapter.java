@@ -59,7 +59,8 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("studentUID", studentUID.get(position));
-        holder.studentName.setText(studentUID.get(position));
+        Log.d("questiontitle", questionTitle);
+        holder.studentName.setText(studentsList.get(position));
         holder.studentList.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

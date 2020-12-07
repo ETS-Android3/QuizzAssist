@@ -11,7 +11,7 @@
 package com.example.quizza;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,15 +19,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -37,18 +30,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import android.content.Context;
-import android.media.MediaScannerConnection;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -58,17 +43,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class WhiteBoard extends Activity {
 
@@ -129,9 +107,8 @@ public class WhiteBoard extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
-                    Log.d("POOP1", itemSnap.getKey());
-                    questionKey = itemSnap.getKey();
-                    if (itemSnap.getKey().equals(questionTitle)) {
+                    if (itemSnap.getValue(Question.class).getQuestionTitle().equals(questionTitle)) {
+                        questionKey = itemSnap.getKey();
                         myQuestion = itemSnap.getValue(Question.class);
                         tv_question.setText(myQuestion.getQuestionText());
                     }

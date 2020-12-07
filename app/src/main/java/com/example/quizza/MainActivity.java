@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavBar = findViewById(R.id.navigationBar);
         bottomNavBar.setOnNavigationItemSelectedListener(navBarMethod);
 
-        FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
+        /*FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot itemSnap : snapshot.getChildren()){
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
-        });
+        });*/
 
 
 

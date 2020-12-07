@@ -57,12 +57,6 @@ public class RecyclerViewAdapter_EventList extends RecyclerView.Adapter<Recycler
                     if (itemSnap.getKey().equals(eventList.get(position))) {
                         Event myEvent = itemSnap.getValue(Event.class);
                         holder.EventListTitle.setText(myEvent.getEventTitle());
-                        if(!(myEvent.getEventStarted())){
-                            holder.EventParentLayout.setClickable(false);
-                        }
-                        else {
-                            holder.EventParentLayout.setClickable(true);
-                        }
                     }
                 }
             }

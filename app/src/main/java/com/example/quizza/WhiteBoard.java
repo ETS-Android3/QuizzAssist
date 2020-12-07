@@ -134,33 +134,6 @@ public class WhiteBoard extends Activity {
             }
         });
 
-        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        FirebaseDatabase.getInstance().getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot itemSnap : snapshot.getChildren()){
-                    if(itemSnap.getValue(Course.class).getCourseName().equals(myQuestion.getCourseLink())){
-                        myCourse = itemSnap.getValue(Course.class);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
         FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -232,7 +205,7 @@ public class WhiteBoard extends Activity {
           @Override
           public void onClick(View v) {
                 ll_menuList.setVisibility(View.INVISIBLE);
-                myView.save(myCourse, myEvent);
+                myView.save();
                 im_menuIcon.setVisibility(View.VISIBLE);
           }
       });
@@ -382,7 +355,7 @@ public class WhiteBoard extends Activity {
             savePath.clear();
             deletePath.clear();
         }
-        public void save(Course myCourse, Event myEvent)
+        public void save()
         {
             Bitmap b = ScreenShot.takescreenshotOfRootView(imageView);
 
@@ -392,7 +365,8 @@ public class WhiteBoard extends Activity {
             try {
                 File file = new File(getExternalFilesDir(null), "BigPP" + counter + ".png");
                 Uri myUri = Uri.fromFile(file);
-                StorageReference riversRef = mStorageRef.child(courseName + "/" + eventName + "/" + questionTitle + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + ".png");
+                Log.d("question1", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                StorageReference riversRef = mStorageRef.child(courseName + "/" + eventName + "/" + questionKey + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + ".png");
                 riversRef.putFile(myUri);
                 if (!file.exists())
                     file.createNewFile();

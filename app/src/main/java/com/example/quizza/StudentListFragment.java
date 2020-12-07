@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,10 +34,11 @@ import java.util.List;
 public class StudentListFragment extends Fragment {
 
     RecyclerView studentsListView;
+    List<String> myUsers = new ArrayList<String>();
+    List<String> studentUID = new ArrayList<String>();
     String courseName;
     String eventName;
     String questionTitle;
-    String studentUID;
     List<String> studentList = new ArrayList<String>();
 
     public StudentListFragment(){
@@ -55,26 +57,21 @@ public class StudentListFragment extends Fragment {
         studentsListView = (RecyclerView) view.findViewById(R.id.studentListView);
 
         Log.d("courseName", courseName);
-        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        FirebaseDatabase.getInstance().getReference("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot itemSnap: snapshot.getChildren()){
-                    List<String> enrolledCourses = itemSnap.getValue(User.class).getEnrolledCourses();
-                    for(int i=0; i<enrolledCourses.size(); i++){
-                        Log.d("enrolledCourses", enrolledCourses.get(i));
-                        if(enrolledCourses.get(i).equals(courseName)){
-                            Log.d("WENT", "IN");
-                            studentList.add(itemSnap.getValue(User.class).getUserName());
-                            studentUID = itemSnap.getKey();
-                            Log.i("SIZE", String.valueOf(studentList.size()));
-                        }
+                    if(itemSnap.getKey().equals(eventName)){
+                        studentList.clear();
+                        studentList.addAll(itemSnap.getValue(Event.class).getEnrolledUsers());
+                        studentList.remove("initial");
+                        Log.d("studentList", String.valueOf(studentList));
                     }
-                        StudentListAdapter adapter = new StudentListAdapter(getActivity(),
-                                studentList, courseName, eventName, questionTitle,
-                                studentUID , itemSnap.getValue(User.class).getUserName());
-                        studentsListView.setAdapter(adapter);
-                        studentsListView.setHasFixedSize(true);
-                        studentsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    Log.d("testing", courseName);
+                    Log.d("testing", eventName);
+                    Log.d("testing", questionTitle);
+                    Log.d("testing", String.valueOf(studentUID));
                 }
             }
 
@@ -84,7 +81,29 @@ public class StudentListFragment extends Fragment {
             }
         });
 
-        StorageReference sReference =  FirebaseStorage.getInstance().getReference(courseName + "/" + eventName + "/" + questionTitle);
+        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot itemSnap: snapshot.getChildren()){
+                    if(studentList.contains(itemSnap.getValue(User.class).getUserName())){
+                        studentUID.add(itemSnap.getKey());
+                        StudentListAdapter adapter = new StudentListAdapter(getActivity(),
+                                studentList, courseName, eventName, questionTitle,
+                                studentUID );
+                        studentsListView.setAdapter(adapter);
+                        //studentsListView.setHasFixedSize(true);
+                        studentsListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
         return view;
     }

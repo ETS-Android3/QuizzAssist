@@ -51,6 +51,7 @@ public class ViewPNGAnswers extends Activity {
         Log.d("cc", questionTitle);
         Log.d("cc", studentUID);
         StorageReference riversRef = mStorageRef.child(courseName + "/" + eventName + "/" + questionTitle + "/" + studentUID + ".png");
+        Log.d("question", questionTitle);
         mStorageRef.child(courseName + "/" + eventName + "/" + questionTitle + "/" + studentUID + ".png").
                 getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

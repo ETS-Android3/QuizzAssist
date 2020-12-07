@@ -348,37 +348,29 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         OutputStream fOut = null;
+        Uri photoURI;
 
         if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            File photoFile = null;
             try {
-                photoFile = createPhotoFile();
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getContext(), "com.example.quizza.provider", photoFile);
+                File photoFile = new File(getActivity().getExternalFilesDir(null), "TEMP.png");
+                photoURI = FileProvider.getUriForFile(getContext(), "com.example.quizza.provider", photoFile);
+                Log.d("finished", "end of dispatch");
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photoURI);
                 StorageReference riversRef = mStorageRef.child("Profile Pictures/" +
                         FirebaseAuth.getInstance().getCurrentUser().getUid() + ".png");
                 riversRef.putFile(photoURI);
-
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photoURI);
-                try {
+                if (!photoFile.exists())
+                    photoFile.createNewFile();
+                try{
                     fOut = new FileOutputStream(photoFile);
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-                } catch (Exception e) {
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 getActivity().startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                Log.d("finished", "end of dispatch");
-
-                riversRef = mStorageRef.child("Profile Pictures/" +
-                        FirebaseAuth.getInstance().getCurrentUser().getUid() + ".png");
-                riversRef.putFile(photoURI);
-
+            } catch(IOException e) {
+                e.printStackTrace();
             }
         }
         //goes here

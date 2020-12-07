@@ -163,19 +163,9 @@ public class EventDetailsFragment extends Fragment {
             }
         });
 
-        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot itemSnap : snapshot.getChildren()){
-                    if(itemSnap.getValue(User.class).getCreatedCourses().contains(myCourse.getCourseName())){
-                        FAB.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+        if(myCourse.getCourseOwner().equals(myUser.getUserName())){
+            FAB.setVisibility(View.VISIBLE);
+        }
 
         //Passing the question List to the Recycler View adapter to show on the UI
         FirebaseDatabase.getInstance().getReference("Questions").addListenerForSingleValueEvent(new ValueEventListener() {

@@ -17,7 +17,6 @@
     <string name="logInHeaderText">登录已有账号></string>
     <string name="loginButtonText">登录</string>
     <string name="logOutButtonText">登出</string>
-    <string name="forgotPassword">忘记密码?</string>
 
     <string name="userNameEditTextHint">用户名 (必需)</string>
     <string name="userFirstNameEditTextHint">名 (必需)</string>
@@ -109,7 +108,7 @@
     <string name="eventQuestion"># 问题</string>
 
     <string name="courseInviteCode">邀请码</string>
-    <string name="createCourseTitle">创建课程标题</string>
+    <string name="createCourseTitle">课程标题</string>
     <!--    Undetermined Portion    -->11
 
     <string name="searchTitle">搜索课程</string>
@@ -129,7 +128,15 @@
     <string name="number_of_events_in_the_classroom">该教室中的事件数量</string>
     <string name="course_1">课程 1</string>
     <string name="event_title">事件标题</string>
-
     <string name="viewAnswers">查看答案</string>
 
+    <string name="menuHome">主页</string>
+    <string name="menuAdd">添加</string>
+    <string name="menuSettings">设置</string>
+    <string name="studentName">学生姓名</string>
+    <string name="event_title_answers">事件答案</string>
+    <string name="students">学生</string>
+    <string name="add_event">添加事件</string>
+    <string name="course_name">课程名</string>
+    <string name="number_of_events">事件数量</string>
 </resources>

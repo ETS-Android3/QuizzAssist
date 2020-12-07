@@ -136,5 +136,14 @@
     <string name="event_title">Event title</string>
 
     <string name="viewAnswers">View Answers</string>
+    <string name="menuHome">Home</string>
+    <string name="menuAdd">ADD</string>
+    <string name="menuSettings">Settings</string>
+    <string name="studentName">Student Name</string>
+    <string name="event_title_answers">Event Title Answers</string>
+    <string name="students">Students</string>
+    <string name="add_event">Add Event</string>
+    <string name="course_name">Course Name</string>
+    <string name="number_of_events"># of Events</string>
 
 </resources>

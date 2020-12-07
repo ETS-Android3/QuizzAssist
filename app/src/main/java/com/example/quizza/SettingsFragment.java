@@ -3,6 +3,7 @@ package com.example.quizza;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +37,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,7 +48,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -96,6 +101,10 @@ public class SettingsFragment extends BottomSheetDialogFragment {
     TextView userAvatarCancel;
 
     String currentPhotoPath;
+
+    Bitmap bitmap;
+
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
     public SettingsFragment() {}
 
@@ -166,14 +175,14 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
 
                         //Set data visible for User Profile Page
-                        if (!currentUserMiddleName.isEmpty())
+                       /* if (!currentUserMiddleName.isEmpty())
                             userFullNameProfile.setText(currentUserFirstName + " " + currentUserMiddleName
                                     + " " + currentUserLastName);
                         else
                             userFullNameProfile.setText(currentUserFirstName + " " + currentUserLastName);
                         userNameProfile.setText(currentUserName);
                         userEmailProfile.setText(currentUserEmail);
-                        userStudentNumberProfile.setText(currentUserStudentNumber);
+                        userStudentNumberProfile.setText(currentUserStudentNumber);*/
 
                         //Set data visible for "Edit Profile" page
                         userNameEditProfile.setText(currentUserName);
@@ -295,7 +304,11 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                         userAvatarTakePhoto.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                dispatchTakePictureIntent();
+                                try {
+                                    dispatchTakePictureIntent();
+                                }catch (IOException e){
+
+                                }
                             }
                         });
 
@@ -331,8 +344,11 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         return view;
     }
 
-    private void dispatchTakePictureIntent() {
+    private void dispatchTakePictureIntent() throws IOException {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        OutputStream fOut = null;
+
         if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             File photoFile = null;
             try {
@@ -342,19 +358,36 @@ public class SettingsFragment extends BottomSheetDialogFragment {
             }
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(getContext(), "com.example.quizza.provider", photoFile);
+                StorageReference riversRef = mStorageRef.child("Profile Pictures/" +
+                        FirebaseAuth.getInstance().getCurrentUser().getUid() + ".png");
+                riversRef.putFile(photoURI);
+
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photoURI);
+                try {
+                    fOut = new FileOutputStream(photoFile);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 getActivity().startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 Log.d("finished", "end of dispatch");
+
+                riversRef = mStorageRef.child("Profile Pictures/" +
+                        FirebaseAuth.getInstance().getCurrentUser().getUid() + ".png");
+                riversRef.putFile(photoURI);
+
             }
         }
         //goes here
     }
 
     public File createPhotoFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalStoragePublicDirectory(DIRECTORY_PICTURES);
-        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        File image = File.createTempFile(FirebaseAuth.getInstance().getUid(), ".png", storageDir);
+
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }

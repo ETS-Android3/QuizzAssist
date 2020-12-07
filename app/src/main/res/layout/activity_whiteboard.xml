@@ -110,7 +110,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ll_clearWarning"
-        android:layout_gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:layout_margin="5dp"
         android:orientation="vertical"
         android:background="@color/black"
@@ -119,7 +120,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CONFIRM CLEARING WHITEBOARD"
+            android:text="Would you like to make a Photo Submission?"
+            android:textColor="@color/white"
+            android:textSize="20dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirmClearingWhiteboard"
+            android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="20dp"/>
         <RelativeLayout
@@ -130,13 +140,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bt_warningNo"
-                android:text="NO"
+                android:text="@string/no"
                 android:layout_marginLeft="100dp"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bt_warningYes"
-                android:text="YES"/>
+                android:text="@string/yes"/>
         </RelativeLayout>
 
     </LinearLayout>

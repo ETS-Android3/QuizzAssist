@@ -344,6 +344,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                 Log.d("finished", "end of dispatch");
             }
         }
+        //goes here
     }
 
     public File createPhotoFile() throws IOException {

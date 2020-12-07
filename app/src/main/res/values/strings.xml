@@ -145,5 +145,9 @@
     <string name="add_event">Add Event</string>
     <string name="course_name">Course Name</string>
     <string name="number_of_events"># of Events</string>
+    <string name="please_select_app_language">selectAppLanguage</string>
+    <string name="default_language">English</string>
+    <string name="chinese">Chinese</string>
+    <string name="switch_language">switch language</string>
 
 </resources>

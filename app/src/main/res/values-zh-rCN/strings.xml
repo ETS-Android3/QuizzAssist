@@ -139,4 +139,8 @@
     <string name="add_event">添加事件</string>
     <string name="course_name">课程名</string>
     <string name="number_of_events">事件数量</string>
+    <string name="please_select_app_language">选择语言</string>
+    <string name="default_language">英语</string>
+    <string name="chinese">中文</string>
+    <string name="switch_language">切换语言</string>
 </resources>

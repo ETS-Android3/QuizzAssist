@@ -1,3 +1,11 @@
+/***
+ * JoinCourseFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Fragment that handles retrieving course data from Firebase Database and
+ * displays it onto main home fragment (HomeFragment.java)
+ */
+
 package com.example.quizza;
 
 import android.os.Bundle;

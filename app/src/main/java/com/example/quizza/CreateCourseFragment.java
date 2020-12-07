@@ -1,3 +1,11 @@
+/***
+ * CreateCourseFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * This class handles the course creation XML file (UI) and data transfer to
+ * Firebase Database
+ */
+
 package com.example.quizza;
 
 import android.content.ClipData;

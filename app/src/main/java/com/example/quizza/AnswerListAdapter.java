@@ -1,3 +1,11 @@
+/***
+ * AnswerListAdapter.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * This class retrieves data Firebase Database to create list of answers for
+ * AnswerListFragment
+ */
+
 package com.example.quizza;
 
 import android.os.Bundle;

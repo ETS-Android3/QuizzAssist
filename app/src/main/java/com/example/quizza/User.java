@@ -1,5 +1,5 @@
 /***
- * Course.java
+ * User.java
  * Developers: Brandon Yip, Vatsal Parmar
  * CMPT 276 Team 'ForTheStudents'
  * This class is used to store user information when an account is created from the sign-up page,

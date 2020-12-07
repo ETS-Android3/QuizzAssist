@@ -1,3 +1,12 @@
+/***
+ * AddFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * This class implements the user choice page between creating a course or joining one.
+ * Choice between the two will be displayed and will prompt user for necessary information
+ * depending on their choice (class name for creation, invite code for joining).
+ */
+
 package com.example.quizza;
 
 import android.content.Context;

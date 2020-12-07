@@ -1,3 +1,11 @@
+/***
+ * ScreenShot.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Screenshot that occurs automatically when user submission is made (saved onto
+ * Firebase Database)
+ */
+
 package com.example.quizza;
 
 

@@ -1,3 +1,12 @@
+/***
+ * EventDetailsFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * This class handles the case where once the user clicks on an event, it will
+ * proceed the user to another layout that will display the list of available
+ * questions.
+ */
+
 package com.example.quizza;
 
 import android.os.Bundle;

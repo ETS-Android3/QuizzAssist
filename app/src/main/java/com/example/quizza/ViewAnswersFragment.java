@@ -1,3 +1,11 @@
+/***
+ * ViewAnswersFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Class that displays all questions for an event, along with provided answers
+ * for each provided question
+ */
+
 package com.example.quizza;
 
 import android.os.Bundle;

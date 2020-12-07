@@ -1,3 +1,11 @@
+/***
+ * CreateEventFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar
+ * CMPT 276 Team 'ForTheStudents'
+ * Akin to CreateCourseFragment.java, but for creating events (handles XML linkage,
+ * transfers appropriate data to Firebase Database)
+ */
+
 package com.example.quizza;
 
 import android.app.TimePickerDialog;

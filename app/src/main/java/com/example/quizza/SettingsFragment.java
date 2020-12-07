@@ -1,3 +1,11 @@
+/***
+ * SettingsFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Class that displays and handles user edit profile page where user is prompted
+ * to enter new details about their account (first/middle/last name, username, etc.)
+ */
+
 package com.example.quizza;
 
 import android.content.Intent;

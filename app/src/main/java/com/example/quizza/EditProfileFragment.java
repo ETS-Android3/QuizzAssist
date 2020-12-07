@@ -1,3 +1,11 @@
+/***
+ * EditProfileFragmnet.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * This class is the main profile page of the user and displays a button that
+ * allows user to edit their account settings (name, email, etc.)
+ */
+
 package com.example.quizza;
 
 import android.os.Bundle;

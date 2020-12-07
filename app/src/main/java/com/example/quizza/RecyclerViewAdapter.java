@@ -1,3 +1,12 @@
+/***
+ * RecyclerViewAdapter.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents').
+ * Handles displaying multiple allocations of a specific XML file
+ * In our case, this is used to display the users (potentially) many courses that
+ * they are enrolled in, or are the host of (course bubbles on home page).
+ */
+
 package com.example.quizza;
 
 import android.content.Context;

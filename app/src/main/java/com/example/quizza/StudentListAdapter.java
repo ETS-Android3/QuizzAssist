@@ -1,3 +1,12 @@
+/***
+ * StudentListAdapter.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Class that retrieves list of students enrolled in a given course and
+ * dynamically allocates buttons for each student and become clickable to view
+ * answers
+ */
+
 package com.example.quizza;
 
 import android.content.Intent;

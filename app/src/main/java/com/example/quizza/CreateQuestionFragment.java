@@ -1,3 +1,12 @@
+/***
+ * CreateQuestionFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Akin to CreateCourseFragment.java, but for creating questions
+ * for a given event -- (handles XML linkage,
+ * transfers appropriate data to Firebase Database)
+ */
+
 package com.example.quizza;
 
 import android.os.Bundle;

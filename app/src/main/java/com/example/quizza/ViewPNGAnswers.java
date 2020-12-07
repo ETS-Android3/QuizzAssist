@@ -1,5 +1,12 @@
-package com.example.quizza;
+/***
+ * ViewPNGAnswers.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Class that retrieves answers submitted by students and displays to main page for
+ * course owner evaluation
+ */
 
+package com.example.quizza;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.net.Uri;

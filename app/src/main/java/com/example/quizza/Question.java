@@ -1,8 +1,8 @@
 /***
- * Course.java
- * Developers: Brandon Yip, Vatsal Parmar
+ * Question.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
  * CMPT 276 Team 'ForTheStudents'
- * This class has been newly created to manage the courses that users of application create.
+ * A class that contains question data that exists in an event
  * No known bugs.
  */
 

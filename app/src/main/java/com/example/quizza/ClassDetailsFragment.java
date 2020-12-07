@@ -1,3 +1,11 @@
+/***
+ * ClassDetailsFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * This class displays list of events available for a given course (when user
+ * opts to open said course).
+ */
+
 package com.example.quizza;
 
 import android.content.ClipData;

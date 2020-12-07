@@ -1,3 +1,11 @@
+/***
+ * StudentListFragment.java
+ * Developers: Brandon Yip, Vatsal Parmar, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Class that handles data transfer from StudentListAdapter, and properly displaying
+ * fragment_student_list.xml
+ */
+
 package com.example.quizza;
 
 import android.os.Bundle;

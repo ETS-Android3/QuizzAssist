@@ -1,14 +1,10 @@
 
- /* signUpPage.java
+ /*** signUpPage.java
   * Developers: Brandon Yip, Vatsal Parmar
   * CMPT 276 Team 'ForTheStudents'
   * This class links various buttons and provides functionality for said buttons for the QuizzAssist
   * application sign-up page. New users input various fields of information (username, email, pw)
   * and will have their newly created account stored on the Firebase Database.
-  *
-  * Features to implement: Better checking for user input (more sophisticated passwords,
-  * valid email checking) UI enhancements (back button border improvement, text font improvements)
-  * No known bugs.
   */
 
  //STILL HAVE TO ASSIGN BACK BUTTON WITH LISTENER TO GO BACK TO SIGNUP

@@ -1,3 +1,13 @@
+/***
+ * WhiteBoard.java
+ * Developers: Brandon Yip, Vatsal Parmar, Harry Sun, Andrew Yeon
+ * CMPT 276 Team 'ForTheStudents'
+ * Class that provides user with whiteboard functionality for documenting their
+ * work for given questions in an event, and submission functionality to Firebase
+ * Database storage, which will then later be accessed by other classes for various
+ * purposes
+ */
+
 package com.example.quizza;
 
 import android.app.Activity;

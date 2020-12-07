@@ -115,7 +115,9 @@ public class HomeFragment extends Fragment {
         context = getContext();
 
         String join = "Joined Courses";
+        String joinCh = "加入课程";
         String create = "Created Courses";
+        String createCh = "创建课程";
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -160,7 +162,7 @@ public class HomeFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getText().equals(join)){
+                if(tab.getText().equals(join) || tab.getText().equals(joinCh)){
                     reference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -202,7 +204,7 @@ public class HomeFragment extends Fragment {
                         }
                     });
 
-                } else if (tab.getText().equals(create)){
+                } else if (tab.getText().equals(create) || tab.getText().equals(createCh)){
                     reference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

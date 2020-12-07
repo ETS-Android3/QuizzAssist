@@ -245,14 +245,14 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                         String currentUserLastName = currentUser.getUserLastName();
                         String currentUserEmail = currentUser.getUserEmail();
                         String currentUserStudentNumber = currentUser.getUserStudentNumber();
-
-
+                        
                         //Set data visible for User Profile Page
-                        if (!currentUserMiddleName.isEmpty())
+                        if(currentUserMiddleName == null){
+                            userFullNameProfile.setText(currentUserFirstName + " " + currentUserLastName);
+                        }
+                        else if (!currentUserMiddleName.isEmpty())
                             userFullNameProfile.setText(currentUserFirstName + " " + currentUserMiddleName
                                     + " " + currentUserLastName);
-                        else
-                            userFullNameProfile.setText(currentUserFirstName + " " + currentUserLastName);
                         userNameProfile.setText(currentUserName);
                         userEmailProfile.setText(currentUserEmail);
                         userStudentNumberProfile.setText(currentUserStudentNumber);

@@ -160,14 +160,14 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
 
                         //Set data visible for User Profile Page
-                       /* if (!currentUserMiddleName.isEmpty())
+                        if (!currentUserMiddleName.isEmpty())
                             userFullNameProfile.setText(currentUserFirstName + " " + currentUserMiddleName
                                     + " " + currentUserLastName);
                         else
                             userFullNameProfile.setText(currentUserFirstName + " " + currentUserLastName);
                         userNameProfile.setText(currentUserName);
                         userEmailProfile.setText(currentUserEmail);
-                        userStudentNumberProfile.setText(currentUserStudentNumber);*/
+                        userStudentNumberProfile.setText(currentUserStudentNumber);
 
                         //Set data visible for "Edit Profile" page
                         userNameEditProfile.setText(currentUserName);
@@ -292,7 +292,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                                 try {
                                     dispatchTakePictureIntent();
                                 }catch (IOException e){
-
+                                    e.printStackTrace();
                                 }
                             }
                         });
@@ -314,7 +314,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                         userAvatarCancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Toast.makeText(getContext(), "cancel photo", Toast.LENGTH_SHORT).show();
+                                sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                             }
                         });
                     }

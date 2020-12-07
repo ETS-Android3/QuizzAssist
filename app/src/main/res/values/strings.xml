@@ -129,5 +129,10 @@
 
     <string name="viewAnswers">View Answers</string>
 
+    <string name="settings_userAvatarHelperText"><b><u>Change Profile Photo</u></b></string>
+    <string name="settings_userAvatarRemoveCurrentPhoto">Remove Current Photo</string>
+    <string name="settings_userAvatarTakePhoto">Take Photo</string>
+    <string name="settings_userAvatarChooseFromLibrary">Choose From Library</string>
+    <string name="settings_userAvatarCancel">Cancel</string>
 
 </resources>

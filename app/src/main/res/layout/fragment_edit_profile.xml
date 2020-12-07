@@ -10,23 +10,16 @@
 
 <!--    TODO: Make the theme Material UI and link everything with the JAVA file of the Fragment editProfileFragment
                already implement the Back button for better navigation-->
-
     <RelativeLayout
         android:id="@+id/rv_editUserSettingsPage"
-        style="@style/matchParentHeightAndWidth"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
         android:visibility="visible">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/bt_backEditProfile"
-            app:icon="@drawable/back_icon"
-            app:iconGravity="end"
-            app:iconPadding="2dp"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:elevation="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp" />
+        <ImageView
+            android:id="@+id/iv_backToUserProfile"
+            style="@style/BackViewStandard" />
 
         <TextView
             android:id="@+id/profileSettingsHeaderText"
@@ -199,9 +192,10 @@
             android:id="@+id/bt_saveUserProfileChanges"
             style="@style/Buttons"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="570dp"
+            android:layout_marginTop="555dp"
             android:text="@string/settings_saveProfileChangesButtonText"/>
 
     </RelativeLayout>
+
 
 </FrameLayout>

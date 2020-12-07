@@ -1,5 +1,6 @@
 package com.example.quizza;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +39,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class SettingsFragment extends BottomSheetDialogFragment {
 
     TextInputEditText userNameEditProfile;
@@ -73,6 +79,12 @@ public class SettingsFragment extends BottomSheetDialogFragment {
     TextView userEmailProfile;
     TextView userStudentNumberProfile;
 
+    TextView userAvatarTakePhoto;
+    TextView userAvatarChooseFromLibrary;
+    TextView userAvatarRemovePhoto;
+    TextView userAvatarCancel;
+
+
 
     public SettingsFragment() {}
 
@@ -99,11 +111,18 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         userEmailProfile = (TextView) view.findViewById(R.id.tv_userEmail);
         userStudentNumberProfile = (TextView) view.findViewById(R.id.tv_userStudentNumber);
 
+        userAvatarTakePhoto = (TextView) view.findViewById(R.id.tv_userAvatarTakePhoto);
+        userAvatarChooseFromLibrary = (TextView) view.findViewById(R.id.tv_userAvatarLibrary);
+        userAvatarRemovePhoto = (TextView) view.findViewById(R.id.tv_userAvatarRemove);
+        userAvatarCancel = (TextView) view.findViewById(R.id.tv_userAvatarCancel);
+
         backToUserProfile = (ImageView) view.findViewById(R.id.iv_backToUserProfile);
         changeUserAvatar = (ImageView) view.findViewById(R.id.iv_changeUserAvatar);
 
         userAvatarSettingsMenu = (LinearLayout) view.findViewById(R.id.linLayout_userAvatarSettingsMenu);
         sheetBehavior = BottomSheetBehavior.from(userAvatarSettingsMenu);
+
+        String currentPhotoPath;
 
         String userProfileUpdated = "User Profile Updated";
         String userProfileUpdateError = "User Profile Updated";
@@ -122,6 +141,7 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
         currentDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
         currentDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item_snapshot : snapshot.getChildren()) {
@@ -259,10 +279,37 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         changeUserAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
                     @Override
                     public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                        sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                        userAvatarTakePhoto.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        });
+
+                        userAvatarChooseFromLibrary.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getContext(), "choose photo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        userAvatarRemovePhoto.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getContext(), "remove photo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        userAvatarCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getContext(), "cancel photo", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                     @Override
@@ -270,11 +317,14 @@ public class SettingsFragment extends BottomSheetDialogFragment {
 
                     }
                 });
-//                if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-//
-//                }
             }
         });
         return view;
+    }
+
+    public File createPhotoFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir =
     }
 }

@@ -52,7 +52,6 @@ import java.util.Date;
 import static android.os.Environment.DIRECTORY_PICTURES;
 import static android.os.Environment.getExternalStorageDirectory;
 import static android.os.Environment.getExternalStoragePublicDirectory;
-import static android.os.Environment.getRootDirectory;
 
 public class SettingsFragment extends BottomSheetDialogFragment {
 

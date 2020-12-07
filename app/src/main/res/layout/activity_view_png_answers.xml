@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bt_studentAnswerBack"
-            android:text="back"
+            android:text="@string/whiteboardBack"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 </RelativeLayout>

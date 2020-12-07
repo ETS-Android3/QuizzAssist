@@ -18,7 +18,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Student Name"
+            android:text="@string/studentName"
             android:padding="10dp"
             android:layout_margin="10dp"
             android:id="@+id/tv_studentName"/>

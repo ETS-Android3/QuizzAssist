@@ -58,13 +58,13 @@
     <string name="test_inviteCodeDefault">gfu40giXz</string>
     <string name="test_classNameDefault">Test Class</string>
 
-    <string name="test_userName">testUserName123</string>
-    <string name="test_userFullName">Brandon Middlename Joe</string>
-    <string name="test_userFirstName">Brandon</string>
-    <string name="test_userMiddleName">NoMiddleName</string>
-    <string name="test_userLastName">Yip</string>
-    <string name="test_userEmail">testEmail@gmail.com</string>
-    <string name="test_userStudentNumber">301219683</string>
+    <string name="test_userName" translatable="false">testUserName123</string>
+    <string name="test_userFullName" translatable="false">Brandon Middlename Joe</string>
+    <string name="test_userFirstName" translatable="false">Brandon</string>
+    <string name="test_userMiddleName" translatable="false">NoMiddleName</string>
+    <string name="test_userLastName" translatable="false">Yip</string>
+    <string name="test_userEmail" translatable="false">testEmail@gmail.com</string>
+    <string name="test_userStudentNumber" translatable="false">301219683</string>
 
     <!--    Home Fragment strings   -->
     <string name="homeFtCourseTV">My Courses</string>
@@ -126,8 +126,36 @@
     <!--    Undetermined Portion    -->
     <string name="searchTitle">Search Course</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- white board-->
+    <string name="whiteboardPen">Pen</string>
+    <string name="whiteboardEraser">Eraser</string>
+    <string name="whiteboardUndo">Undo</string>
+    <string name="whiteboardclear">Clear</string>
+    <string name="whiteboardQuestion">question</string>
+    <string name="whiteboardSubmit">Submit</string>
+    <string name="whiteboardBack">back</string>
+    <string name="example_question_going_beyond_the_power_9000_to_check">EXAMPLE QUESTION GOING BEYOND THE POWER 9000 TO CHECK</string>
+    <string name="confirm_clearing_whiteboard">CONFIRM CLEARING WHITEBOARD</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="number_of_events_in_the_classroom">Number of Events in the ClassRoom</string>
+    <string name="course_1">Course 1</string>
+    <string name="event_title">Event title</string>
 
     <string name="viewAnswers">View Answers</string>
+    <string name="menuHome">Home</string>
+    <string name="menuAdd">ADD</string>
+    <string name="menuSettings">Settings</string>
+    <string name="studentName">Student Name</string>
+    <string name="event_title_answers">Event Title Answers</string>
+    <string name="students">Students</string>
+    <string name="add_event">Add Event</string>
+    <string name="course_name">Course Name</string>
+    <string name="number_of_events"># of Events</string>
+    <string name="please_select_app_language">selectAppLanguage</string>
+    <string name="default_language">English</string>
+    <string name="chinese">Chinese</string>
+    <string name="switch_language">switch language</string>
 
 
 </resources>

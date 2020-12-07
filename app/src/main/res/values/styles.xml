@@ -95,4 +95,8 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
 
+    <style name="betSharePopAnim" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/context_menu_right_in</item>
+        <item name="android:windowExitAnimation">@anim/context_menu_right_out</item>
+    </style>
 </resources>

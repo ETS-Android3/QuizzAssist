@@ -125,20 +125,20 @@
                     android:layout_width="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="290dp"
-                    android:text="Add Event"
+                    android:text="@string/add_event"
                     android:visibility="visible"/>
 
                 <TextView
                     android:id="@+id/tv_courseNameDisplay"
                     style="@style/matchParentHeightAndWidth"
-                    android:text="Course Name"
+                    android:text="@string/course_name"
                     android:textColor="#FFFFFF"
                     android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/tv_eventsCountDisplay"
                     style = "@style/matchParentHeightAndWidth"
-                    android:text="# of Events"
+                    android:text="@string/number_of_events"
                     android:textSize="20sp"
                     android:textColor="#FFFFFF"
                     android:layout_below="@id/tv_courseNameDisplay">

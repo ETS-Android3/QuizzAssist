@@ -68,54 +68,15 @@ import java.util.Set;
 public class HomeFragment extends Fragment {
 
     Context context;
-    android.widget.GridLayout GridLayout_home;
-    android.widget.GridLayout GridLayout_classroom;
-    Button button;
     Button bt_addEvent;
     Button bt_joinedCourses;
     Button bt_createdCourses;
-    TextView textview;
-    CardView cardview;
-    ImageView imageview;
-    LinearLayout linear_layout;
-    RelativeLayout relativelayout;
-    LinearLayout.LayoutParams Card_View_Params;
-    LinearLayout.LayoutParams Text_View_Params_Lin;
-    LinearLayout.LayoutParams Image_View_Params;
-    RelativeLayout.LayoutParams Button_Params;
-    RelativeLayout.LayoutParams Text_View_Params_Rel;
-
-    LinearLayout classRoom;
-    LinearLayout classRoom1;
-    RelativeLayout dashboard;
 
     User currentUser;
     RecyclerView recyclerView;
     List<String> enrolledCourses = new ArrayList<>();
     List<String> createdCourses = new ArrayList<>();
 
-    Set<String> questionIDs;
-
-    RelativeLayout eventCreationView;
-    RelativeLayout questionCreationView;
-
-    CardView startDateView;
-    CardView startTimeView;
-    CardView endDateView;
-    CardView endTimeView;
-    TextView startDateText;
-    TextView startTimeText;
-    TextView endDateText;
-    TextView endTimeText;
-    EditText numberOfQuestions;
-    EditText classLinkedEvent;
-    Button startDateButton;
-    Button startTimeButton;
-    Button endDateButton;
-    Button endTimeButton;
-    Button saveEventButton;
-
-    RecyclerView recyclerView;
 
     List<String> classList = new ArrayList<>();
     List<String> eventList = new ArrayList<>();

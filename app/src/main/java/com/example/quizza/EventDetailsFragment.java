@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,17 +64,16 @@ public class EventDetailsFragment extends Fragment {
         Bundle bundle = this.getArguments();
         eventName = bundle.getString("keyValue");
         courseName = bundle.getString("courseName");
-        Log.d("CourseName", courseName);
+        Log.d("FUCK", courseName);
 
         //Setting Current User to myUser Local
         FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap : snapshot.getChildren()){
-                    Log.d("fuck", snap.getKey());
                     if(snap.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                        Log.d("fuck", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         myUser = snap.getValue(User.class);
+                        Log.d("FUCK1", myUser.getUserName());
                     }
                 }
             }
@@ -86,7 +87,6 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap : snapshot.getChildren()){
-                    Log.d("fuck", snap.getKey());
                     if(snap.getValue(Course.class).getCourseName().equals(courseName)){
                         myCourse = snap.getValue(Course.class);
                         if(myCourse.getCourseOwner().equals(myUser.getUserName())){
@@ -188,7 +188,7 @@ public class EventDetailsFragment extends Fragment {
                             if(objQuestion.getEventLink().equals(eventName)){
                                 questionTitleList.add(objQuestion.getQuestionTitle());
                             }
-                            QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionTitleList);
+                            QuestionListAdapter adapter = new QuestionListAdapter(getActivity(), questionTitleList, eventName, courseName);
                             questionListView.setAdapter(adapter);
                             questionListView.setHasFixedSize(true);
                             questionListView.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -13,7 +13,8 @@
         android:id="@+id/bt_createEvent"
         android:src="@drawable/add_icon"
         android:layout_margin="16dp"
-        android:layout_gravity="bottom|right"/>
+        android:layout_gravity="bottom|right"
+        android:visibility="invisible"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

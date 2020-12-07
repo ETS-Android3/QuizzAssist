@@ -5,31 +5,26 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.FileProvider;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -40,22 +35,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static android.os.Environment.DIRECTORY_PICTURES;
-import static android.os.Environment.getExternalStorageDirectory;
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class SettingsFragment extends BottomSheetDialogFragment {
@@ -132,8 +117,8 @@ public class SettingsFragment extends BottomSheetDialogFragment {
         userStudentNumberProfile = (TextView) view.findViewById(R.id.tv_userStudentNumber);
 
         userAvatarTakePhoto = (TextView) view.findViewById(R.id.tv_userAvatarTakePhoto);
-        userAvatarChooseFromLibrary = (TextView) view.findViewById(R.id.tv_userAvatarLibrary);
-        userAvatarRemovePhoto = (TextView) view.findViewById(R.id.tv_userAvatarRemove);
+        //userAvatarChooseFromLibrary = (TextView) view.findViewById(R.id.tv_userAvatarLibrary);
+        //userAvatarRemovePhoto = (TextView) view.findViewById(R.id.tv_userAvatarRemove);
         userAvatarCancel = (TextView) view.findViewById(R.id.tv_userAvatarCancel);
 
         backToUserProfile = (ImageView) view.findViewById(R.id.iv_backToUserProfile);
@@ -312,19 +297,19 @@ public class SettingsFragment extends BottomSheetDialogFragment {
                             }
                         });
 
-                        userAvatarChooseFromLibrary.setOnClickListener(new View.OnClickListener() {
+                        /*userAvatarChooseFromLibrary.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Toast.makeText(getContext(), "choose photo", Toast.LENGTH_SHORT).show();
                             }
-                        });
+                        });*/
 
-                        userAvatarRemovePhoto.setOnClickListener(new View.OnClickListener() {
+                        /*userAvatarRemovePhoto.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Toast.makeText(getContext(), "remove photo", Toast.LENGTH_SHORT).show();
                             }
-                        });
+                        });*/
 
                         userAvatarCancel.setOnClickListener(new View.OnClickListener() {
                             @Override

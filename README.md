@@ -22,6 +22,11 @@ An application that will assist instructors in moderating in-class participation
 
 ## Running the project
 
+- Download Zip Folder
+- Open Project in Android Studio
+- Run an Android Simulator to launch the application
+- Finally Build the Application using Android Studio
+
 ## Stack in use
 - Java : Basic Language used to Build Android Applications.
 - FireBase: Google powered Backend for all our user Data storage

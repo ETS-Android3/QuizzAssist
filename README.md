@@ -10,7 +10,6 @@
 - [Running the project](#running-the-project)
 - [Stack in use](#stack-in-use)
 - [Future scope](#future-scope)
-- [Demo video](#demo-video)
 
 
 
